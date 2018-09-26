@@ -2,19 +2,19 @@
   "array_banner": [
     {
       "imageurl":"http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/banner/banner_1.png",
-      "image_update_datetime":"2018-9-26 12:02"
+      "image_update_datetime":"2018-09-26 12:02"
     },
     {
       "imageurl":"http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/banner/banner_2.png",
-      "image_update_datetime":"2018-9-26 12:00"
+      "image_update_datetime":"2018-09-26 12:00"
     },
     {
       "imageurl":"http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/banner/banner_3.png",
-      "image_update_datetime":"2018-9-26 12:00"
+      "image_update_datetime":"2018-09-26 12:00"
     },
     {
       "imageurl":"http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/banner/banner_4.png",
-      "image_update_datetime":"2018-9-26 12:00"
+      "image_update_datetime":"2018-09-26 12:00"
     }
   ],
   "array_solution": [
@@ -24,11 +24,11 @@
       "imageurl": "",
       "image_update_datetime":"",
       "imageurl_left": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/solution/sort/solution_sort_one_left.png",
-      "image_left_update_datetime":"2018-9-26 12:00",
+      "image_left_update_datetime":"2018-09-26 18:55",
       "imageurl_right": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/solution/sort/solution_sort_one_right.png",
-      "image_right_update_datetime":"2018-9-26 12:00",
+      "image_right_update_datetime":"2018-09-26 12:00",
       "gifurl": "",
-      "gif_update_datetime":"2018-9-26 12:00"
+      "gif_update_datetime":"2018-09-26 12:00"
     },
     {
       "title": "健康构筑",
@@ -36,9 +36,9 @@
       "imageurl": "",
       "image_update_datetime":"",
       "imageurl_left": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/solution/sort/solution_sort_two_left.png",
-      "image_left_update_datetime":"2018-9-26 12:00",
+      "image_left_update_datetime":"2018-09-26 12:00",
       "imageurl_right": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/solution/sort/solution_sort_two_right.png",
-      "image_right_update_datetime":"2018-9-26 12:00",
+      "image_right_update_datetime":"2018-09-26 12:00",
       "gifurl": "",
       "gif_update_datetime":""
     },
@@ -48,9 +48,9 @@
       "imageurl": "",
       "image_update_datetime":"",
       "imageurl_left": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/solution/sort/solution_sort_three_left.png",
-      "image_left_update_datetime":"2018-9-26 12:00",
+      "image_left_update_datetime":"2018-09-26 12:00",
       "imageurl_right": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/solution/sort/solution_sort_three_right.png",
-      "image_right_update_datetime":"2018-9-26 12:00",
+      "image_right_update_datetime":"2018-09-26 12:00",
       "gifurl": "",
       "gif_update_datetime":""
     },
@@ -60,9 +60,9 @@
       "imageurl": "",
       "image_update_datetime":"",
       "imageurl_left": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/solution/sort/solution_sort_four_left.png",
-      "image_left_update_datetime":"2018-9-26 12:00",
+      "image_left_update_datetime":"2018-09-26 12:00",
       "imageurl_right": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/solution/sort/solution_sort_four_right.png",
-      "image_right_update_datetime":"2018-9-26 12:00",
+      "image_right_update_datetime":"2018-09-26 12:00",
       "gifurl": "",
       "gif_update_datetime":""
     },
@@ -76,13 +76,13 @@
       "imageurl_right": "",
       "image_right_update_datetime":"",
       "gifurl": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/solution/subject/solution_subject_one.gif",
-      "gif_update_datetime":"2018-9-26 12:00"
+      "gif_update_datetime":"2018-09-26 12:00"
     },
     {
       "title": "大肚子消除",
       "summary": "专业消除大肚子",
       "imageurl": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/solution/item/solution_one.png",
-      "image_update_datetime":"2018-9-26 12:00",
+      "image_update_datetime":"2018-09-26 12:00",
       "imageurl_left": "",
       "image_left_update_datetime":"",
       "imageurl_right": "",
@@ -94,7 +94,7 @@
       "title": "上课打瞌睡",
       "summary": "叫你如何满血上课",
       "imageurl": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/solution/item/solution_two.png",
-      "image_update_datetime":"2018-9-26 12:00",
+      "image_update_datetime":"2018-09-26 12:00",
       "imageurl_left": "",
       "image_left_update_datetime":"",
       "imageurl_right": "",
@@ -106,7 +106,7 @@
       "title": "厕所异味",
       "summary": "厕所清洁方案",
       "imageurl": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/solution/item/solution_three.png",
-      "image_update_datetime":"2018-9-26 12:00",
+      "image_update_datetime":"2018-09-26 12:00",
       "imageurl_left": "",
       "image_left_update_datetime":"",
       "imageurl_right": "",
@@ -118,7 +118,7 @@
       "title": "夏季汽车降温",
       "summary": "1分钟车内降温",
       "imageurl": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/solution/item/solution_four.png",
-      "image_update_datetime":"2018-9-26 12:00",
+      "image_update_datetime":"2018-09-26 12:00",
       "imageurl_left": "",
       "image_left_update_datetime":"",
       "imageurl_right": "",
@@ -168,7 +168,7 @@
       "title": "虾米音乐探乐行动",
       "summary": "奔赴一场音乐探险",
       "gifurl": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/action/subject/action_subject_one.gif",
-      "gif_update_datetime":"2018-9-26 12:00"
+      "gif_update_datetime":"2018-09-26 12:00"
     }
   ],
   "array_action_list": [
@@ -179,7 +179,7 @@
       "site": "国家会展中心（上海）",
       "summary": "信息与通信技术应用展（ICTS），作为中国国际工业博览会旗下专业展之一，以信息和通信技术（ICT）在工业和商业领域中的创新融合与应用为主要内容，始终致力于打造国家级的国际性展览和会议交流平台。",
       "imageurl": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/action/list/action_one.png",
-      "image_update_datetime":"2018-9-26 12:00"
+      "image_update_datetime":"2018-09-26 12:00"
     },
     {
       "title": "2019国际软件产品博览会",
@@ -188,7 +188,7 @@
       "site": "中国·北京亦创国际会展中心",
       "summary": "软件产业具有集聚创新资源与要素的特征，仍是当前全球创新最活跃、带动性最强、渗透性最广的领域。新一代软件技术正在步入加速成长期，带动产业格局深刻变革。",
       "imageurl": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/action/list/action_two.png",
-      "image_update_datetime":"2018-9-26 12:00"
+      "image_update_datetime":"2018-09-26 12:00"
     },
     {
       "title": "2019第四届中国国际大数据产业博览会",
@@ -197,7 +197,7 @@
       "site": "北京亦创国际会展中心",
       "summary": "国家副总理在全国人大二次会议上作政府工作报告时说，要设立新兴产业创业创新平台，在新一代移动通信、大数据、云计算、新能源等方面赶超先进，引领未来产业发展。",
       "imageurl": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/action/list/action_three.png",
-      "image_update_datetime":"2018-9-26 12:00"
+      "image_update_datetime":"2018-09-26 12:00"
     },
     {
       "title": "2018上海国际智慧停车设备展览会",
@@ -206,7 +206,7 @@
       "site": "上海世博展览馆",
       "summary": "一份来自通用汽车的调查显示，目前，在北、上、广、深等超大型城市，30%的石油浪费在寻找停车位的过程中，造成车主每月多支出336元，七成车主每天至少碰到一次停车困难。",
       "imageurl": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/action/list/action_four.png",
-      "image_update_datetime":"2018-9-26 12:00"
+      "image_update_datetime":"2018-09-26 12:00"
     }
   ],
   "array_product": [
@@ -214,7 +214,7 @@
       "title": "矿物质净水器",
       "summary": "家用直饮无罐大通量厨房过滤",
       "imageurl": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/product/item/product_one.png",
-      "image_update_datetime":"2018-9-26 12:00",
+      "image_update_datetime":"2018-09-26 12:00",
       "imageurl_left": "",
       "image_left_update_datetime":"",
       "imageurl_right": "",
@@ -226,9 +226,9 @@
       "imageurl": "",
       "image_update_datetime":"",
       "imageurl_left": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/product/sort/product_sort_one_left.png",
-      "image_left_update_datetime":"2018-9-26 12:00",
+      "image_left_update_datetime":"2018-09-26 12:00",
       "imageurl_right": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/product/sort/product_sort_one_right.png",
-      "image_right_update_datetime":"2018-9-26 12:00"
+      "image_right_update_datetime":"2018-09-26 12:00"
     },
     {
       "title": "真正好物",
@@ -236,9 +236,9 @@
       "imageurl": "",
       "image_update_datetime":"",
       "imageurl_left": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/product/sort/product_sort_two_left.png",
-      "image_left_update_datetime":"2018-9-26 12:00",
+      "image_left_update_datetime":"2018-09-26 12:00",
       "imageurl_right": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/product/sort/product_sort_two_right.png",
-      "image_right_update_datetime":"2018-9-26 12:00"
+      "image_right_update_datetime":"2018-09-26 12:00"
     },
     {
       "title": "MacBook Pro 2018",
@@ -246,9 +246,9 @@
       "imageurl": "",
       "image_update_datetime":"",
       "imageurl_left": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/product/sort/product_sort_three_left.png",
-      "image_left_update_datetime":"2018-9-26 12:00",
+      "image_left_update_datetime":"2018-09-26 12:00",
       "imageurl_right": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/product/sort/product_sort_three_right.png",
-      "image_right_update_datetime":"2018-9-26 12:00"
+      "image_right_update_datetime":"2018-09-26 12:00"
     },
     {
       "title": "震撼大疆",
@@ -256,15 +256,15 @@
       "imageurl": "",
       "image_update_datetime":"",
       "imageurl_left": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/product/sort/product_sort_four_left.png",
-      "image_left_update_datetime":"2018-9-26 12:00",
+      "image_left_update_datetime":"2018-09-26 12:00",
       "imageurl_right": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/product/sort/product_sort_four_right.png",
-      "image_right_update_datetime":"2018-9-26 12:00"
+      "image_right_update_datetime":"2018-09-26 12:00"
     },
     {
       "title": "智能插线板",
       "summary": "",
       "imageurl": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/product/item/product_two.png",
-      "image_update_datetime":"2018-9-26 12:00",
+      "image_update_datetime":"2018-09-26 12:00",
       "imageurl_left": "",
       "image_left_update_datetime":"",
       "imageurl_right": "",
@@ -274,7 +274,7 @@
       "title": "3D触控数位板",
       "summary": "",
       "imageurl": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/product/item/product_three.png",
-      "image_update_datetime":"2018-9-26 12:00",
+      "image_update_datetime":"2018-09-26 12:00",
       "imageurl_left": "",
       "image_left_update_datetime":"",
       "imageurl_right": "",
@@ -284,7 +284,7 @@
       "title": "iWatch",
       "summary": "",
       "imageurl": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/product/item/product_four.png",
-      "image_update_datetime":"2018-9-26 12:00",
+      "image_update_datetime":"2018-09-26 12:00",
       "imageurl_left": "",
       "image_left_update_datetime":"",
       "imageurl_right": "",
@@ -294,7 +294,7 @@
       "title": "山地自行车",
       "summary": "",
       "imageurl": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/product/item/product_five.png",
-      "image_update_datetime":"2018-9-26 12:00",
+      "image_update_datetime":"2018-09-26 12:00",
       "imageurl_left": "",
       "image_left_update_datetime":"",
       "imageurl_right": "",
@@ -307,35 +307,35 @@
       "summary": "风冷无霜 电脑控温 AAT养鲜 魔幻空间（典雅银）BCD-480WEPZ50",
       "supportnum": "2785",
       "imageurl": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/interest/interest_one.png",
-      "image_update_datetime":"2018-9-26 12:00"
+      "image_update_datetime":"2018-09-26 12:00"
     },
     {
       "title": "腾讯听听 9420 智能音箱/音响",
       "summary": "AI音箱/音响 声控音箱 蓝牙WIFI音响 礼品便携音箱 语音助手 微信互联 白色",
       "supportnum": "30491",
       "imageurl": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/interest/interest_two.png",
-      "image_update_datetime":"2018-9-26 12:00"
+      "image_update_datetime":"2018-09-26 12:00"
     },
     {
       "title": "索爱（soaiy）S-52 蓝牙音箱",
       "summary": "炫彩床头灯 手机便携插卡电脑迷你小音响 重低音炮户外无线智能小音箱 酷睿黑",
       "supportnum": "65535",
       "imageurl": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/interest/interest_three.png",
-      "image_update_datetime":"2018-9-26 12:00"
+      "image_update_datetime":"2018-09-26 12:00"
     },
     {
       "title": "公牛（BULL）无线门铃",
       "summary": "家用 电子遥控开关插座远距离自发电不用电池别墅门铃 智能老人呼叫器",
       "supportnum": "7184",
       "imageurl": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/interest/interest_four.png",
-      "image_update_datetime":"2018-9-26 12:00"
+      "image_update_datetime":"2018-09-26 12:00"
     },
     {
       "title": "PHONETOU充电宝",
       "summary": "超薄自带线移动电源聚合物快充自带线迷你便携type-c安卓苹果华为小米手机通用 5000毫安快充自带线★全黑色★",
       "supportnum": "84256",
       "imageurl": "http://www.itc.ink/data/explorefuture_assert/app/recommend/handpick/interest/interest_five.png",
-      "image_update_datetime":"2018-9-26 12:00"
+      "image_update_datetime":"2018-09-26 12:00"
     }
   ]
 }

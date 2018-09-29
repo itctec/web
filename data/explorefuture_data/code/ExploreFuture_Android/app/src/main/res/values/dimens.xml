@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--GuideActivity-->
+    <dimen name="app_common_btn_text_size">16dp</dimen>
+    <dimen name="app_refresh_btn_text_size">14dp</dimen>
+
+    <!--Navigation-->
+    <dimen name="app_navigation_bg_line_width">1px</dimen>
+    <dimen name="app_bottom_navigation_text_size">12dp</dimen>
+
+    <dimen name="recommend_fragment_top_navigation_indicator_line_height">4px</dimen>
+    <dimen name="recommend_fragment_top_navigation_text_size">15dp</dimen>
+
+    <!--Content Title Length-->
+    <item name="content_item_title_text_one_slash_four_max_length" type="dimen" format="integer">7</item>
+    <item name="content_item_title_text_one_slash_three_max_length" type="dimen" format="integer">10</item>
+    <item name="content_item_title_text_one_slash_two_max_length" type="dimen" format="integer">12</item>
+    <item name="content_item_title_text_two_slash_three_max_length" type="dimen" format="integer">16</item>
+    <item name="content_item_title_text_one_slash_one_max_length" type="dimen" format="integer">24</item>
+
+    <!--Content Summary Length-->
+    <item name="content_item_summary_text_one_slash_four_max_length" type="dimen" format="integer">8</item>
+    <item name="content_item_summary_text_one_slash_three_max_length" type="dimen" format="integer">11</item>
+    <item name="content_item_summary_text_one_slash_two_max_length" type="dimen" format="integer">16</item>
+    <item name="content_item_summary_text_two_slash_three_short_max_length" type="dimen" format="integer">18</item>
+    <item name="content_item_summary_text_two_slash_three_max_length" type="dimen" format="integer">22</item>
+    <item name="content_item_summary_text_one_slash_one_max_length" type="dimen" format="integer">32</item>
+    <item name="content_item_summary_text_two_slash_three_more_line_max_length" type="dimen" format="integer">45</item>
+
+    <!--Content TextSize-->
+    <dimen name="content_item_title_text_size">13dp</dimen>
+    <dimen name="content_item_summary_one_text_size">12dp</dimen>
+    <dimen name="content_item_summary_two_text_size">10dp</dimen>
+
+    <!--Content Bg Line-->
+    <dimen name="content_item_bg_line_width">1px</dimen>
+
+    <!--Header TextSize-->
+    <dimen name="header_divider_title_text_size">15dp</dimen>
+    <dimen name="header_divider_summary_text_size">12dp</dimen>
+    <dimen name="header_tip_text_size">11dp</dimen>
+
+    <!--People TextSize-->
+    <dimen name="people_name_text_size">12dp</dimen>
+    <dimen name="people_domain_text_size">10dp</dimen>
+
+    <!--Mind Text-->
+    <item name="mind_content_item_text_max_length" type="dimen" format="integer">120</item>
+
+</resources>

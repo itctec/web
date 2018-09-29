@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<!--Action Header-->
+    <TextView
+        android:id="@+id/recommend_Handpick_Action_Header_Divider_Title"
+        android:text="@string/recommend_handpick_action_header_divider_title_text"
+        android:textSize="@dimen/header_divider_title_text_size"
+        android:textColor="@color/header_divider_title_text_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+    <TextView
+        android:id="@+id/recommend_Handpick_Action_Header_Divider_RecommendTop"
+        android:text="@string/recommend_handpick_header_divider_recommend_top_text"
+        android:textSize="@dimen/header_divider_summary_text_size"
+        android:textColor="@color/header_divider_summary_text_color"
+        android:drawableRight="@drawable/vector_drawable_more"
+        android:drawablePadding="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        app:layout_constraintBottom_toBottomOf="@id/recommend_Handpick_Action_Header_Divider_Title"
+        app:layout_constraintRight_toRightOf="parent"/>
+<!--Action Line-->
+    <android.support.constraint.Guideline
+        android:id="@+id/recommend_Handpick_Action_Horizontal_Guideline_One"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="30dp" />
+    <!--<android.support.constraint.Guideline
+        android:id="@+id/recommend_Handpick_Action_Horizontal_Guideline_Two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="150dp" />-->
+<!--Action Subject-->    
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/recommend_Handpick_Action_Subject_One_Layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/recommend_Handpick_Action_Horizontal_Guideline_One"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+        <ImageView
+            android:id="@+id/recommend_Handpick_Action_Subject_One_Gif"
+            android:src="@drawable/picture_place_image"
+            android:scaleType="centerCrop"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintDimensionRatio="5:2" />
+        <TextView
+            android:id="@+id/recommend_Handpick_Action_Subject_One_Title"
+            android:text="专题活动名称"
+            android:textSize="@dimen/content_item_title_text_size"
+            android:textColor="@color/content_common_item_title_text_color_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintBottom_toTopOf="@id/recommend_Handpick_Action_Subject_One_Summary"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+        <TextView
+            android:id="@+id/recommend_Handpick_Action_Subject_One_Summary"
+            android:text="专题活动描述"
+            android:textSize="@dimen/content_item_summary_two_text_size"
+            android:textColor="@color/content_common_item_summary_text_color_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/recommend_Handpick_Action_Subject_One_Gif"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.constraint.ConstraintLayout>

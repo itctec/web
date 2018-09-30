@@ -22,6 +22,7 @@
 
 #--------------------------1.实体类---------------------------------
 -keep class itc.ink.explorefuture_android.recommend.handpick_fragment.mode.** { *; }
+-keep class itc.ink.explorefuture_android.recommend.attention_fragment.mode.** { *; }
 
 #--------------------------2.第三方包-------------------------------
 -keep class org.xmlpull.v1.** { *;}

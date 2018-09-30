@@ -21,7 +21,7 @@
     <string name="recommend_handpick_interest_header_divider_title_text">Interest  Recommend╱INTEREST</string>
     <string name="recommend_handpick_header_divider_recommend_top_text">Recommend Top</string>
 
-    <string name="recommend_attention_recommend_header_text">May you want attention them</string>
+    <string name="recommend_attention_recommend_header_tip_text">May you want attention them</string>
     <string name="recommend_attention_recommend_header_update_text">update them</string>
 
     <string name="recommend_attention_content_empty_text">He is Lazy,Say Nothing</string>

@@ -1,17 +1,29 @@
 package itc.ink.explorefuture_android.recommend.attention_fragment.adapter;
 
 import android.content.Context;
+import android.support.constraint.ConstraintLayout;
+import android.support.constraint.ConstraintSet;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import itc.ink.explorefuture_android.R;
+import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.recommend.attention_fragment.mode.mode_attention.AttentionListDataMode;
 import itc.ink.explorefuture_android.recommend.attention_fragment.mode.mode_recommend.RecommendListDataMode;
@@ -26,6 +38,7 @@ public class AttentionDataAdapter extends RecyclerView.Adapter<AttentionDataAdap
 
     private ArrayList<RecommendListDataMode> mRecommendListData;
     private ArrayList<AttentionListDataMode> mAttentionListData;
+
 
     public AttentionDataAdapter(Context mContext, ArrayList<RecommendListDataMode> mRecommendListData, ArrayList<AttentionListDataMode> mAttentionListData) {
         this.mContext = mContext;
@@ -46,13 +59,99 @@ public class AttentionDataAdapter extends RecyclerView.Adapter<AttentionDataAdap
 
     @Override
     public void onBindViewHolder(VH holder, final int position) {
-
         if (position == 0) {
-
+            if (holder.recommendRecyclerView.getAdapter() == null) {
+                RecommendDataAdapter contentRvAdapter = new RecommendDataAdapter(mContext, mRecommendListData);
+                holder.recommendRecyclerView.setAdapter(contentRvAdapter);
+                RecyclerView.LayoutManager contentRvLayoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false);
+                holder.recommendRecyclerView.setLayoutManager(contentRvLayoutManager);
+            }
         } else {
-            //AttentionListDataMode attentionListDataItem = mAttentionListData.get(position-1);
+            AttentionListDataMode attentionListDataItem = mAttentionListData.get(position - 1);
+
+            RequestOptions options = new RequestOptions()
+                    .signature(new ObjectKeyCanNull(attentionListDataItem.getHead_portrait_image_update_datetime()).getObject())
+                    .circleCrop();
+            Glide.with(mContext).load(attentionListDataItem.getHead_portrait_image_url()).apply(options).into(holder.attentionItemHeadPortrait);
+            holder.attentionItemName.setText(attentionListDataItem.getName());
+            holder.attentionItemDatetime.setText(attentionListDataItem.getDatetime());
+            if (attentionListDataItem.getContent_text().trim().equals("")) {
+                holder.attentionItemContentText.setText(R.string.recommend_attention_content_empty_text);
+            } else {
+                holder.attentionItemContentText.setText(attentionListDataItem.getContent_text());
+            }
+
+            holder.attentionItemContentMediaLayout.removeAllViews();
+            Log.d(LOG_TAG,"第"+position+"个图片个数->"+attentionListDataItem.getImage_url_list().size());
+            if(attentionListDataItem.getImage_url_list().size()>0&&attentionListDataItem.getImage_url_list().size()<=9){
+                addPicToLayout(holder, attentionListDataItem.getImage_url_list());
+                Log.d(LOG_TAG,"第"+position+"RecyclerView被设置");
+            }else if(attentionListDataItem.getImage_url_list().size()>9){
+                addPicToLayout(holder, attentionListDataItem.getImage_url_list().subList(0,9));
+            }
+
+            if(!(attentionListDataItem.getVideo_url()==null||attentionListDataItem.getVideo_url().trim().equals(""))){
+                addVideoToLayout(holder,attentionListDataItem.getVideo_url());
+            }
+
+            holder.attentionItemAcceptNumText.setText(attentionListDataItem.getAccept_num());
+            holder.attentionItemCommentNumText.setText(attentionListDataItem.getComment_num());
+            holder.attentionItemRetransmissionNumText.setText(attentionListDataItem.getRetransmission_num());
+
+            if(position==mAttentionListData.size()){
+                holder.attentionItemDividerLine.setVisibility(View.GONE);
+            }
         }
 
+    }
+
+    private void addPicToLayout(VH holder, List<String> imageUrlList) {
+        RecyclerView imageRecyclerView=new RecyclerView(mContext);
+        imageRecyclerView.setId(R.id.recommend_Attention_ListItem_Content_Media_Image_RecyclerView);
+        AttentionItemImageDataAdapter contentRvAdapter = new AttentionItemImageDataAdapter(mContext, imageUrlList);
+        imageRecyclerView.setAdapter(contentRvAdapter);
+        RecyclerView.LayoutManager contentRvLayoutManager = new GridLayoutManager(mContext,3);
+        imageRecyclerView.setLayoutManager(contentRvLayoutManager);
+        imageRecyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+
+        DividerItemDecoration dividerItemDecorationOne=new DividerItemDecoration(mContext,DividerItemDecoration.VERTICAL);
+        dividerItemDecorationOne.setDrawable( ContextCompat.getDrawable(mContext,R.drawable.mind_image_divider_horizontal));
+        imageRecyclerView.addItemDecoration(dividerItemDecorationOne);
+        DividerItemDecoration dividerItemDecorationTwo=new DividerItemDecoration(mContext,DividerItemDecoration.HORIZONTAL);
+        dividerItemDecorationTwo.setDrawable( ContextCompat.getDrawable(mContext,R.drawable.mind_image_divider_vertical));
+        imageRecyclerView.addItemDecoration(dividerItemDecorationTwo);
+        holder.attentionItemContentMediaLayout.addView(imageRecyclerView);
+
+        ConstraintSet constraintSet = new ConstraintSet();
+        constraintSet.constrainWidth(imageRecyclerView.getId(), ConstraintSet.MATCH_CONSTRAINT);
+        constraintSet.constrainHeight(imageRecyclerView.getId(), ConstraintSet.WRAP_CONTENT);
+        constraintSet.connect(imageRecyclerView.getId(), ConstraintSet.TOP, holder.attentionItemContentText.getId(), ConstraintSet.BOTTOM);
+        constraintSet.connect(imageRecyclerView.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT);
+        constraintSet.connect(imageRecyclerView.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT);
+
+        constraintSet.applyTo(holder.attentionItemContentMediaLayout);
+    }
+
+    private void addVideoToLayout(VH holder, String videoUrl) {
+        View rootView = LayoutInflater.from(mContext).inflate(R.layout.recommend_attention_fragment_attention_list_item_video_gif_list_item, null, false);
+        rootView.setId(R.id.recommend_Attention_ListItem_Content_Media_Video_Gif);
+        ImageView videoGifView=rootView.findViewById(R.id.recommend_Attention_ListItem_Video_Gif_Item);
+        Glide.with(mContext).load(videoUrl.replace(".mp4",".gif")).into(videoGifView);
+
+        ConstraintSet constraintSet = new ConstraintSet();
+        constraintSet.constrainWidth(rootView.getId(), ConstraintSet.MATCH_CONSTRAINT);
+        constraintSet.constrainHeight(rootView.getId(), ConstraintSet.WRAP_CONTENT);
+        constraintSet.connect(rootView.getId(), ConstraintSet.TOP, holder.attentionItemContentText.getId(), ConstraintSet.BOTTOM);
+        constraintSet.connect(rootView.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT);
+        constraintSet.connect(rootView.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT);
+
+        holder.attentionItemContentMediaLayout.addView(rootView);
+        constraintSet.applyTo(holder.attentionItemContentMediaLayout);
+    }
+
+    public int dpToPx(int dp) {
+        DisplayMetrics displayMetrics = mContext.getResources().getDisplayMetrics();
+        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 
     @Override
@@ -70,16 +169,36 @@ public class AttentionDataAdapter extends RecyclerView.Adapter<AttentionDataAdap
     }
 
     public class VH extends RecyclerView.ViewHolder {
+        /*Header Recommend Sub RecyclerView*/
         public RecyclerView recommendRecyclerView;
+
+        /*Attention Item*/
+        private ImageView attentionItemHeadPortrait;
+        private TextView attentionItemName;
+        private TextView attentionItemDatetime;
+        private TextView attentionItemContentText;
+        private ConstraintLayout attentionItemContentMediaLayout;
+        private TextView attentionItemAcceptNumText;
+        private TextView attentionItemCommentNumText;
+        private TextView attentionItemRetransmissionNumText;
+        private View attentionItemDividerLine;
+
 
         public VH(View view, ITEM_TYPE item_type) {
             super(view);
             if (item_type == ITEM_TYPE.RECOMMEND_LIST) {
                 recommendRecyclerView = view.findViewById(R.id.recommend_Attention_Recommend_RecyclerView);
-                RecommendDataAdapter contentRvAdapter = new RecommendDataAdapter(mContext, mRecommendListData);
-                recommendRecyclerView.setAdapter(contentRvAdapter);
-                RecyclerView.LayoutManager contentRvLayoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false);
-                recommendRecyclerView.setLayoutManager(contentRvLayoutManager);
+
+            } else {
+                attentionItemHeadPortrait = view.findViewById(R.id.recommend_Attention_ListItem_HeadPortrait);
+                attentionItemName = view.findViewById(R.id.recommend_Attention_ListItem_Name);
+                attentionItemDatetime = view.findViewById(R.id.recommend_Attention_ListItem_Datetime);
+                attentionItemContentText = view.findViewById(R.id.recommend_Attention_ListItem_Content_Text);
+                attentionItemContentMediaLayout=view.findViewById(R.id.recommend_Attention_ListItem_Content_Media_Layout);
+                attentionItemAcceptNumText = view.findViewById(R.id.recommend_Attention_ListItem_Accept_Num);
+                attentionItemCommentNumText = view.findViewById(R.id.recommend_Attention_ListItem_Comment_Num);
+                attentionItemRetransmissionNumText = view.findViewById(R.id.recommend_Attention_ListItem_Retransmission_Num);
+                attentionItemDividerLine = view.findViewById(R.id.recommend_Attention_ListItem_Divider_Line);
             }
         }
     }

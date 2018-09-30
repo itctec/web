@@ -41,10 +41,12 @@
     <dimen name="header_tip_text_size">11dp</dimen>
 
     <!--People TextSize-->
-    <dimen name="people_name_text_size">12dp</dimen>
-    <dimen name="people_domain_text_size">10dp</dimen>
+    <dimen name="people_name_text_size">13dp</dimen>
+    <dimen name="people_domain_text_size">11dp</dimen>
 
     <!--Mind Text-->
+    <dimen name="mind_content_item_text_size">14dp</dimen>
     <item name="mind_content_item_text_max_length" type="dimen" format="integer">120</item>
+    <dimen name="mind_content_content_item_divider_line_width">8dp</dimen>
 
 </resources>

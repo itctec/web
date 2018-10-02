@@ -74,13 +74,13 @@
   "array_attention":[
     {
       "id":"0000000007_1",
-      "name":"探路未来",
+      "name":"Itc_01",
       "datetime":"2018-09-26 12:00",
       "content_text":"【互惠互利的捎带】很多时候大家是不是不想出门买东西，这个时候如果有个人能够把你想买的东西帮你捎带过来就好了，所以我们的生活其实是可以建立在一种互相帮助的互动方式上的，你可以发需求，也可以接需求，互惠互利！",
       "accept_num":"61894",
       "comment_num":"21800",
       "retransmission_num":"1358",
-      "head_portrait_image_url":"http://www.itc.ink/data/explorefuture_data/account/0000000001/information/head_portrait.png",
+      "head_portrait_image_url":"http://www.itc.ink/data/explorefuture_data/account/0000000007/information/head_portrait.png",
       "head_portrait_image_update_datetime":"2018-09-30 08:00",
       "image_url_list":[
         "http://www.itc.ink/data/explorefuture_data/account/0000000007/mind/1/image/1.png",
@@ -93,18 +93,19 @@
       "video_url":""
     },
     {
-      "id":"0000000007_1",
+      "id":"0000000002_1",
       "name":"华为",
       "datetime":"2018-09-26 12:00",
-      "content_text":"【互惠互利的捎带】很多时候大家是不是不想出门买东西，这个时候如果有个人能够把你想买的东西帮你捎带过来就好了，所以我们的生活其实是可以建立在一种互相帮助的互动方式上的，你可以发需求，也可以接需求，互惠互利！",
+      "content_text":"【【购机三重礼：① 领券立减100元 ② 享6期免息 ③ 赠华为移动电源，赠品有限，赠完即止】 易烊千玺代言，2400万海报级自拍，GPU Turbo 稳定高帧率游戏体验，6.3英寸全面屏3D炫彩机身",
       "accept_num":"61894",
       "comment_num":"21800",
       "retransmission_num":"1358",
-      "head_portrait_image_url":"http://www.itc.ink/data/explorefuture_data/account/0000000003/information/head_portrait.png",
+      "head_portrait_image_url":"http://www.itc.ink/data/explorefuture_data/account/0000000002/information/head_portrait.png",
       "head_portrait_image_update_datetime":"2018-09-30 08:00",
       "image_url_list":[
-        "http://www.itc.ink/data/explorefuture_data/account/0000000007/mind/1/image/1.png",
-        "http://www.itc.ink/data/explorefuture_data/account/0000000007/mind/1/image/2.png"
+        "http://www.itc.ink/data/explorefuture_data/account/0000000002/mind/1/image/1.png",
+        "http://www.itc.ink/data/explorefuture_data/account/0000000002/mind/1/image/2.png",
+        "http://www.itc.ink/data/explorefuture_data/account/0000000002/mind/1/image/3.png"
       ],
       "video_url":""
     },

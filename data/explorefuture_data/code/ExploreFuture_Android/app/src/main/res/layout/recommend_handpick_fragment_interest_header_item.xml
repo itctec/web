@@ -7,8 +7,8 @@
     <TextView
         android:id="@+id/recommend_Handpick_Interest_Header_Divider_Title"
         android:text="@string/recommend_handpick_interest_header_divider_title_text"
-        android:textSize="@dimen/header_divider_title_text_size"
-        android:textColor="@color/header_divider_title_text_color"
+        android:textSize="@dimen/handpick_header_title_text_size"
+        android:textColor="@color/handpick_header_title_text_color"
         android:gravity="center"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

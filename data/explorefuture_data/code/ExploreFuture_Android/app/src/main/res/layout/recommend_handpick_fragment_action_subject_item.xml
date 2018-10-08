@@ -7,8 +7,8 @@
     <TextView
         android:id="@+id/recommend_Handpick_Action_Header_Divider_Title"
         android:text="@string/recommend_handpick_action_header_divider_title_text"
-        android:textSize="@dimen/header_divider_title_text_size"
-        android:textColor="@color/header_divider_title_text_color"
+        android:textSize="@dimen/handpick_header_title_text_size"
+        android:textColor="@color/handpick_header_title_text_color"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -18,8 +18,8 @@
     <TextView
         android:id="@+id/recommend_Handpick_Action_Header_Divider_RecommendTop"
         android:text="@string/recommend_handpick_header_divider_recommend_top_text"
-        android:textSize="@dimen/header_divider_summary_text_size"
-        android:textColor="@color/header_divider_summary_text_color"
+        android:textSize="@dimen/handpick_header_summary_text_size"
+        android:textColor="@color/handpick_header_summary_text_color"
         android:drawableRight="@drawable/vector_drawable_more"
         android:drawablePadding="4dp"
         android:layout_width="wrap_content"
@@ -62,8 +62,8 @@
         <TextView
             android:id="@+id/recommend_Handpick_Action_Subject_One_Title"
             android:text="专题活动名称"
-            android:textSize="@dimen/content_item_title_text_size"
-            android:textColor="@color/content_common_item_title_text_color_light"
+            android:textSize="@dimen/handpick_item_title_text_size"
+            android:textColor="@color/handpick_common_item_title_text_color_light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -72,8 +72,8 @@
         <TextView
             android:id="@+id/recommend_Handpick_Action_Subject_One_Summary"
             android:text="专题活动描述"
-            android:textSize="@dimen/content_item_summary_two_text_size"
-            android:textColor="@color/content_common_item_summary_text_color_light"
+            android:textSize="@dimen/handpick_item_summary_two_text_size"
+            android:textColor="@color/handpick_common_item_summary_text_color_light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"

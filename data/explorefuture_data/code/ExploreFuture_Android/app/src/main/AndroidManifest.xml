@@ -46,6 +46,10 @@
             android:name=".app.app_level.image_view.ImageViewerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ViewerActivityTheme" />
+        <activity
+            android:name=".app.app_level.video_view.VideoViewerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ViewerActivityTheme" />
 
         <!--Tencent Bugly Update-->
         <activity

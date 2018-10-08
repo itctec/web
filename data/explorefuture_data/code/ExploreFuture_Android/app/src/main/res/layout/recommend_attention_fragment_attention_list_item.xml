@@ -29,9 +29,9 @@
         <TextView
             android:id="@+id/recommend_Attention_ListItem_Name"
             android:text="昵称"
-            android:textColor="@color/content_common_item_title_text_color_dark"
-            android:textSize="@dimen/people_name_text_size"
-            android:maxLength="@dimen/content_item_title_text_one_slash_four_max_length"
+            android:textColor="@color/app_item_name_color_dark"
+            android:textSize="@dimen/attention_person_name_text_size"
+            android:maxLength="@dimen/attention_item_name_text_one_slash_four_max_length"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -41,9 +41,9 @@
         <TextView
             android:id="@+id/recommend_Attention_ListItem_Datetime"
             android:text="XXXX年XX月XX日 XX:XX"
-            android:textColor="@color/content_common_item_summary_text_color_dark"
-            android:textSize="@dimen/people_domain_text_size"
-            android:maxLength="@dimen/content_item_summary_text_two_slash_three_short_max_length"
+            android:textColor="@color/app_item_name_summary_color_dark"
+            android:textSize="@dimen/attention_person_domain_text_size"
+            android:maxLength="@dimen/attention_item_datetime_text_two_slash_three_short_max_length"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
@@ -56,9 +56,9 @@
     <TextView
         android:id="@+id/recommend_Attention_ListItem_Content_Text"
         android:text="@string/recommend_attention_content_empty_text"
-        android:textColor="@color/mind_content_item_text_color"
-        android:textSize="@dimen/mind_content_item_text_size"
-        android:maxLength="@dimen/mind_content_item_text_max_length"
+        android:textColor="@color/app_mind_content_item_text_color"
+        android:textSize="@dimen/app_mind_content_item_text_size"
+        android:maxLength="@dimen/app_mind_content_item_text_max_length"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -79,9 +79,9 @@
         app:layout_constraintRight_toRightOf="parent"/>
     <View
         android:id="@+id/recommend_Attention_ListItem_Content_Bg_Line"
-        android:background="@color/content_common_item_divider_line_color"
+        android:background="@color/attention_common_item_divider_line_color"
         android:layout_width="0dp"
-        android:layout_height="@dimen/content_item_bg_line_width"
+        android:layout_height="@dimen/attention_item_bg_line_width"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -91,8 +91,8 @@
     <TextView
         android:id="@+id/recommend_Attention_ListItem_Accept_Num"
         android:text="认可数量"
-        android:textSize="@dimen/content_item_summary_two_text_size"
-        android:textColor="@color/content_common_item_summary_text_color_dark"
+        android:textSize="@dimen/attention_item_footer_text_size"
+        android:textColor="@color/app_item_footer_color_dark"
         android:drawableLeft="@drawable/vector_drawable_accept"
         android:drawablePadding="2dp"
         android:paddingBottom="10dp"
@@ -105,8 +105,8 @@
     <TextView
         android:id="@+id/recommend_Attention_ListItem_Comment_Num"
         android:text="评论数量"
-        android:textSize="@dimen/content_item_summary_two_text_size"
-        android:textColor="@color/content_common_item_summary_text_color_dark"
+        android:textSize="@dimen/attention_item_footer_text_size"
+        android:textColor="@color/app_item_footer_color_dark"
         android:drawableLeft="@drawable/vector_drawable_comment"
         android:drawablePadding="2dp"
         android:paddingBottom="10dp"
@@ -119,8 +119,8 @@
     <TextView
         android:id="@+id/recommend_Attention_ListItem_Retransmission_Num"
         android:text="转发数量"
-        android:textSize="@dimen/content_item_summary_two_text_size"
-        android:textColor="@color/content_common_item_summary_text_color_dark"
+        android:textSize="@dimen/attention_item_footer_text_size"
+        android:textColor="@color/app_item_footer_color_dark"
         android:drawableLeft="@drawable/vector_drawable_retransmission"
         android:drawablePadding="2dp"
         android:paddingBottom="10dp"
@@ -132,9 +132,9 @@
         app:layout_constraintRight_toRightOf="parent"/>
     <View
         android:id="@+id/recommend_Attention_ListItem_Divider_Line"
-        android:background="@color/mind_content_item_divider_line_color"
+        android:background="@color/app_mind_content_item_divider_line_color"
         android:layout_width="0dp"
-        android:layout_height="@dimen/mind_content_content_item_divider_line_width"
+        android:layout_height="@dimen/app_mind_content_content_item_divider_line_width"
         app:layout_constraintTop_toBottomOf="@id/recommend_Attention_ListItem_Retransmission_Num"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>

@@ -6,7 +6,7 @@
 
     <View
         android:id="@+id/bottom_Navigation_Top_Line"
-        android:background="@color/app_bottom_navigation_bg_line_color"
+        android:background="@color/app_navigation_bg_line_color"
         android:layout_width="0dp"
         android:layout_height="@dimen/app_navigation_bg_line_width"
         app:layout_constraintTop_toTopOf="parent"

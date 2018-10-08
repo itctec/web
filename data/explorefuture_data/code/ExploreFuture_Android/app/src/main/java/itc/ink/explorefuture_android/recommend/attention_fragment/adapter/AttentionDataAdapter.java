@@ -1,6 +1,7 @@
 package itc.ink.explorefuture_android.recommend.attention_fragment.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.v4.content.ContextCompat;
@@ -24,6 +25,7 @@ import java.util.List;
 
 import itc.ink.explorefuture_android.R;
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
+import itc.ink.explorefuture_android.app.app_level.video_view.VideoViewerActivity;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.recommend.attention_fragment.adapter.implement.RecommendDelegateImplement;
 import itc.ink.explorefuture_android.recommend.attention_fragment.mode.mode_attention.AttentionListDataMode;
@@ -96,7 +98,7 @@ public class AttentionDataAdapter extends RecyclerView.Adapter<AttentionDataAdap
             } else if (attentionListDataItem.getImage_url_list().size() > 9) {
                 addPicToLayout(holder, attentionListDataItem.getImage_url_list().subList(0, 9), attentionListDataItem.getContent_text());
             } else if (!(attentionListDataItem.getVideo_url() == null || attentionListDataItem.getVideo_url().trim().equals(""))) {
-                addVideoToLayout(holder, attentionListDataItem.getVideo_url());
+                addVideoToLayout(holder, attentionListDataItem.getVideo_url(), attentionListDataItem.getContent_text());
             }
 
             holder.attentionItemAcceptNumText.setText(attentionListDataItem.getAccept_num());
@@ -141,11 +143,11 @@ public class AttentionDataAdapter extends RecyclerView.Adapter<AttentionDataAdap
         constraintSet.applyTo(holder.attentionItemContentMediaLayout);
     }
 
-    private void addVideoToLayout(VH holder, String videoUrl) {
+    private void addVideoToLayout(VH holder, String videoUrl, String contentText) {
         View rootView = LayoutInflater.from(mContext).inflate(R.layout.recommend_attention_fragment_attention_list_item_video_gif_list_item, null, false);
         rootView.setId(R.id.recommend_Attention_ListItem_Content_Media_Video_Gif);
         ImageView videoGifView = rootView.findViewById(R.id.recommend_Attention_ListItem_Video_Gif_Item);
-        videoGifView.setOnClickListener(new VideoGifViewClickListener(videoUrl));
+        videoGifView.setOnClickListener(new VideoGifViewClickListener(videoUrl, contentText));
         Glide.with(mContext).load(videoUrl.replace(".mp4", ".gif")).into(videoGifView);
 
         ConstraintSet constraintSet = new ConstraintSet();
@@ -249,14 +251,20 @@ public class AttentionDataAdapter extends RecyclerView.Adapter<AttentionDataAdap
 
     class VideoGifViewClickListener implements View.OnClickListener {
         private String videoUrl = "";
+        private String contentText = "";
 
-        public VideoGifViewClickListener(String videoUrl) {
+        public VideoGifViewClickListener(String videoUrl, String contentText) {
             this.videoUrl = videoUrl;
+            this.contentText = contentText;
         }
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext, "视频内容被点击，URL->" + videoUrl, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(mContext, "视频内容被点击，URL->" + videoUrl, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(mContext, VideoViewerActivity.class);
+            intent.putExtra(VideoViewerActivity.KEY_VIDEO_URL, videoUrl);
+            intent.putExtra(VideoViewerActivity.KEY_CONTENT_TEXT, contentText);
+            mContext.startActivity(intent);
         }
     }
 

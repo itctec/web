@@ -19,7 +19,7 @@
     <style name="ViewerActivityTheme">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
-        <item name="android:windowBackground">@color/app_def_theme_activity_bg</item>
+        <item name="android:windowBackground">@color/viewer_activity_bg</item>
         <item name="android:windowAnimationStyle">@style/ActivitySwitch_Def_Animation</item>
     </style>
 

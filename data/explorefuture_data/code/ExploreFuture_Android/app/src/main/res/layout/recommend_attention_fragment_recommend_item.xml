@@ -7,8 +7,8 @@
     <TextView
         android:id="@+id/recommend_Attention_Recommend_Header_Tip_Text"
         android:text="@string/recommend_attention_recommend_header_tip_text"
-        android:textColor="@color/header_divider_title_text_color"
-        android:textSize="@dimen/header_tip_text_size"
+        android:textColor="@color/attention_recommend_header_tip_text_color"
+        android:textSize="@dimen/attention_recommend_header_tip_text_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
@@ -18,8 +18,8 @@
     <TextView
         android:id="@+id/recommend_Attention_Recommend_Header_Update_Text"
         android:text="@string/recommend_attention_recommend_header_update_text"
-        android:textColor="@color/header_update_text_color"
-        android:textSize="@dimen/header_tip_text_size"
+        android:textColor="@color/attention_recommend_header_update_text_color"
+        android:textSize="@dimen/attention_recommend_header_tip_text_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -39,9 +39,9 @@
         app:layout_constraintDimensionRatio="5:1"/>
 
     <View
-        android:background="@color/app_top_navigation_bg_line_color"
+        android:background="@color/app_navigation_bg_line_color"
         android:layout_width="0dp"
-        android:layout_height="@dimen/content_item_bg_line_width"
+        android:layout_height="@dimen/attention_item_bg_line_width"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"

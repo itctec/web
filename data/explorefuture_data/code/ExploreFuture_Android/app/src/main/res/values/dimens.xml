@@ -4,6 +4,10 @@
     <dimen name="app_common_btn_text_size">16dp</dimen>
     <dimen name="app_refresh_btn_text_size">14dp</dimen>
 
+    <!--ViewerActivity-->
+    <dimen name="viewer_count_text_size">16dp</dimen>
+    <dimen name="viewer_content_text_size">12dp</dimen>
+
     <!--Navigation-->
     <dimen name="app_navigation_bg_line_width">1px</dimen>
     <dimen name="app_bottom_navigation_text_size">12dp</dimen>
@@ -46,7 +50,7 @@
 
     <!--Mind Text-->
     <dimen name="mind_content_item_text_size">14dp</dimen>
-    <item name="mind_content_item_text_max_length" type="dimen" format="integer">120</item>
+    <item name="mind_content_item_text_max_length" type="dimen" format="integer">180</item>
     <dimen name="mind_content_content_item_divider_line_width">8dp</dimen>
 
 </resources>

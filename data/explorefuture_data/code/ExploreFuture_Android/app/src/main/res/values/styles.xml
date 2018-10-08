@@ -16,6 +16,13 @@
         <item name="android:windowAnimationStyle">@style/ActivitySwitch_Def_Animation</item>
     </style>
 
+    <style name="ViewerActivityTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@color/app_def_theme_activity_bg</item>
+        <item name="android:windowAnimationStyle">@style/ActivitySwitch_Def_Animation</item>
+    </style>
+
     <style name="ActivitySwitch_Def_Animation" mce_bogus="1" parent="@android:style/Animation.Activity">
         <item name="android:activityOpenEnterAnimation">@anim/activity_anim_alpha_up_in</item>
         <item name="android:activityOpenExitAnimation">@anim/activity_anim_alpha_down_out</item>

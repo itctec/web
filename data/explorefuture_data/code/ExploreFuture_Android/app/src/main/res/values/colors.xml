@@ -3,6 +3,10 @@
     <!--App Def Bg-->
     <color name="app_def_theme_activity_bg">#FFFFFF</color>
 
+    <!--App Viewer-->
+    <color name="app_viewer_activity_bg">#000000</color>
+    <color name="app_viewer_text_bg">#FFFFFF</color>
+
     <!--Indicator-->
     <color name="app_guide_indicator_color">#BBBBBB</color>
 

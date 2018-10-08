@@ -19,8 +19,8 @@ import itc.ink.explorefuture_android.app.utils.StatusBarUtil;
 
 public class LaunchActivity extends Activity {
     private final String LOG_TAG = ExploreFutureApplication.LOG_TAG + "LaunchActivity";
-    private final int MSG_FINISH_LAUNCHACTIVITY = 0x01;
-    private final int LAUNCHACTIVITY_STAY_TIME = 1000;
+    private final int MSG_FINISH_ACTIVITY = 0x01;
+    private final int ACTIVITY_STAY_TIME = 1000;
 
     private boolean firstExec = true;
 
@@ -43,14 +43,14 @@ public class LaunchActivity extends Activity {
         if (firstExec) {
             long appAttachTime = SharedPreferenceUtil.getLong("application_attach_time");
             long diffTime = System.currentTimeMillis() - appAttachTime;
-            mHandler.sendEmptyMessageDelayed(MSG_FINISH_LAUNCHACTIVITY, LAUNCHACTIVITY_STAY_TIME - diffTime);
+            mHandler.sendEmptyMessageDelayed(MSG_FINISH_ACTIVITY, ACTIVITY_STAY_TIME - diffTime);
             firstExec = false;
         }
     }
 
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
-            if (msg.what == MSG_FINISH_LAUNCHACTIVITY) {
+            if (msg.what == MSG_FINISH_ACTIVITY) {
                 boolean isFirstLaunch = SharedPreferenceUtil.getBoolean("app_first_launch", true);
                 Intent intent;
                 if (isFirstLaunch) {

@@ -1,13 +1,16 @@
 package itc.ink.explorefuture_android.recommend.attention_fragment.adapter;
 
 import android.content.Context;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -42,14 +45,18 @@ public class RecommendDataAdapter extends RecyclerView.Adapter<RecommendDataAdap
     @Override
     public void onBindViewHolder(VH holder, final int position) {
         final RecommendListDataMode recommendListDataItem = mData.get(position);
-        holder.recommendItemName.setText(recommendListDataItem.getName());
-        holder.recommendItemDomain.setText(recommendListDataItem.getSummary());
+
+        holder.recommendItemLayout.setOnClickListener(new RecommendItemLayoutClickListener(recommendListDataItem.getId()));
 
         RequestOptions options = new RequestOptions()
                 .signature(new ObjectKeyCanNull(recommendListDataItem.getImage_update_datetime()).getObject())
                 .circleCrop();
-
         Glide.with(mContext).load(recommendListDataItem.getImage_url()).apply(options).into(holder.recommendItemHeadPortrait);
+
+        holder.recommendItemName.setText(recommendListDataItem.getName());
+        holder.recommendItemDomain.setText(recommendListDataItem.getSummary());
+        holder.recommendItemAddAttentionBtn.setOnClickListener(new RecommendItemAddAttentionBtnClickListener(recommendListDataItem.getId()));
+
 
         if(position==mData.size()-1){
             holder.itemDividerLine.setVisibility(View.GONE);
@@ -63,17 +70,47 @@ public class RecommendDataAdapter extends RecyclerView.Adapter<RecommendDataAdap
 
 
     public static class VH extends RecyclerView.ViewHolder {
+        private ConstraintLayout recommendItemLayout;
         private ImageView recommendItemHeadPortrait;
         private TextView recommendItemName;
         private TextView recommendItemDomain;
+        private Button recommendItemAddAttentionBtn;
         private View itemDividerLine;
 
         public VH(View view) {
             super(view);
+            recommendItemLayout=view.findViewById(R.id.recommend_Attention_Recommend_ListItem_Layout);
             recommendItemHeadPortrait = view.findViewById(R.id.recommend_Attention_Recommend_ListItem_HeadPortrait);
             recommendItemName=view.findViewById(R.id.recommend_Attention_Recommend_ListItem_Name);
             recommendItemDomain=view.findViewById(R.id.recommend_Attention_Recommend_ListItem_Domain);
+            recommendItemAddAttentionBtn=view.findViewById(R.id.recommend_Attention_Recommend_ListItem_Add_Attention_Btn);
             itemDividerLine=view.findViewById(R.id.recommend_Attention_Recommend_ListItem_Vertical_Line_One);
+        }
+    }
+
+    class RecommendItemLayoutClickListener implements View.OnClickListener{
+        private String ID="";
+
+        public RecommendItemLayoutClickListener(String ID) {
+            this.ID = ID;
+        }
+
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(mContext,ID+"被点击",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    class RecommendItemAddAttentionBtnClickListener implements View.OnClickListener{
+        private String ID="";
+
+        public RecommendItemAddAttentionBtnClickListener(String ID) {
+            this.ID = ID;
+        }
+
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(mContext,"关注"+ID+"被点击",Toast.LENGTH_SHORT).show();
         }
     }
 }

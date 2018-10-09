@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import itc.ink.explorefuture_android.R;
+import itc.ink.explorefuture_android.app.activity.MainActivity;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateMode;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateUtil;
@@ -69,7 +70,7 @@ public class NoDataFragment extends Fragment {
                     false);
             dataUpdateList.add(recommend_Mind_Data_UpdateMode);
 
-            DataUpdateUtil dataUpdateUtil=new DataUpdateUtil(getActivity(),dataUpdateList);
+            DataUpdateUtil dataUpdateUtil=new DataUpdateUtil(getActivity(),dataUpdateList, MainActivity.mHandler);
             dataUpdateUtil.updateData();
         }
     }

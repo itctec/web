@@ -3,18 +3,18 @@ package itc.ink.explorefuture_android.recommend.attention_fragment.adapter.imple
 import android.content.Context;
 import android.view.View;
 import android.widget.Toast;
-import com.youth.banner.listener.OnBannerListener;
-import itc.ink.explorefuture_android.recommend.attention_fragment.adapter.AttentionDataAdapter;
+
+import itc.ink.explorefuture_android.recommend.attention_fragment.adapter.AttentionWrapAdapter;
 
 /**
  * Created by yangwenjiang on 2018/9/14.
  */
 
-public class RecommendDelegateImplement implements AttentionDataAdapter.DelegateInterface {
+public class RecommendDelegateImplement implements AttentionWrapAdapter.DelegateInterface {
     private Context mContext;
 
     @Override
-    public void handleTransaction(Context mContext, AttentionDataAdapter.VH mHolder) {
+    public void handleTransaction(Context mContext, AttentionWrapAdapter.WrapperVH mHolder) {
         this.mContext = mContext;
 
         mHolder.recommendUpdateThemBtn.setOnClickListener(new RecommendUpdateThemBtnClickListener());

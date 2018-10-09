@@ -67,6 +67,10 @@
 
     <color name="attention_common_item_divider_line_color">#DDDDDD</color>
     <!--Attention End-->
+    <!--Mind Start-->
+    <color name="mind_topic_current_discuss_text_color">#5555FF</color>
+    <color name="mind_topic_current_discuss_text_shadow_color">#FFFFFF</color>
+    <!--Mind End-->
     <!--Recommend End-->
 
     <!--Viewer Start-->

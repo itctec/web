@@ -13,9 +13,9 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import itc.ink.explorefuture_android.R;
-import itc.ink.explorefuture_android.recommend.attention_fragment.adapter.AttentionDataAdapter;
+import itc.ink.explorefuture_android.recommend.attention_fragment.adapter.AttentionWrapAdapter;
 import itc.ink.explorefuture_android.recommend.attention_fragment.mode.DataLoad;
-import itc.ink.explorefuture_android.recommend.attention_fragment.mode.mode_attention.AttentionListDataMode;
+import itc.ink.explorefuture_android.app.app_level.mind_recyclerview.mode.MindListDataMode;
 import itc.ink.explorefuture_android.recommend.attention_fragment.mode.mode_recommend.RecommendListDataMode;
 
 /**
@@ -25,11 +25,11 @@ import itc.ink.explorefuture_android.recommend.attention_fragment.mode.mode_reco
 public class AttentionFragment extends Fragment {
     private RecyclerView contentRecyclerView;
     private RecyclerView.LayoutManager contentRvLayoutManager;
-    private AttentionDataAdapter mAttentionDataAdapter;
+    private AttentionWrapAdapter mAttentionDataAdapter;
 
     private DataLoad mDataLoad;
     private ArrayList<RecommendListDataMode> mRecommendListData;
-    private ArrayList<AttentionListDataMode> mAttentionListData;
+    private ArrayList<MindListDataMode> mMindListData;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,11 +39,11 @@ public class AttentionFragment extends Fragment {
         //Judge Data Prepare
         if (mDataLoad.outService.prepareData(getActivity())) {
             mRecommendListData = (ArrayList<RecommendListDataMode>) mDataLoad.outService.loadRecommendData(getActivity());
-            mAttentionListData = (ArrayList<AttentionListDataMode>) mDataLoad.outService.loadAttentionData(getActivity());
+            mMindListData = (ArrayList<MindListDataMode>) mDataLoad.outService.loadAttentionData(getActivity());
             //Judge Data Count
             if (mRecommendListData.size() >= 0 &&
-                    mAttentionListData.size() >= 0) {
-                mAttentionDataAdapter = new AttentionDataAdapter(getActivity(),mRecommendListData, mAttentionListData);
+                    mMindListData.size() >= 0) {
+                mAttentionDataAdapter = new AttentionWrapAdapter(getActivity(),mRecommendListData, mMindListData);
             }
         }
     }

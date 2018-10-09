@@ -67,7 +67,7 @@ public class ExploreFutureApplication extends Application {
                 false);
         dataUpdateList.add(recommend_Mind_Data_UpdateMode);
 
-        DataUpdateUtil dataUpdateUtil = new DataUpdateUtil(this, dataUpdateList);
+        DataUpdateUtil dataUpdateUtil = new DataUpdateUtil(this, dataUpdateList,null);
         dataUpdateUtil.updateData();
     }
 

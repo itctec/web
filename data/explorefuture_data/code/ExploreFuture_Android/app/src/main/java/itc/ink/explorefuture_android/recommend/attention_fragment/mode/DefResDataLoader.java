@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateMode;
-import itc.ink.explorefuture_android.recommend.attention_fragment.mode.mode_attention.AttentionListDataMode;
+import itc.ink.explorefuture_android.app.app_level.mind_recyclerview.mode.MindListDataMode;
 import itc.ink.explorefuture_android.recommend.attention_fragment.mode.mode_recommend.RecommendListDataMode;
 
 
@@ -80,7 +80,7 @@ public class DefResDataLoader implements DataLoad.OutService {
 
     @Override
     public Object loadAttentionData(Context mContext) {
-        ArrayList<AttentionListDataMode> attentionDataArray = new ArrayList<>();
+        ArrayList<MindListDataMode> attentionDataArray = new ArrayList<>();
 
         JsonReader jsonReader = new JsonReader(new StringReader(mRecommendAttentionDataJSONStr));
         jsonReader.setLenient(true);
@@ -89,7 +89,7 @@ public class DefResDataLoader implements DataLoad.OutService {
         JsonObject rootObj = jsonElement.getAsJsonObject();
         JsonArray attentionDataJsonArray = rootObj.getAsJsonArray(JSON_DATA_KEY_ATTENTION);
         Gson gson = new Gson();
-        attentionDataArray = gson.fromJson(attentionDataJsonArray, new TypeToken<List<AttentionListDataMode>>() {
+        attentionDataArray = gson.fromJson(attentionDataJsonArray, new TypeToken<List<MindListDataMode>>() {
         }.getType());
 
         return attentionDataArray;

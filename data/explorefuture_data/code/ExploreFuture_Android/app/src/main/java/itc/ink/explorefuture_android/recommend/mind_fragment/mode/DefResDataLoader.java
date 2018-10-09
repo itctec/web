@@ -21,9 +21,9 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import itc.ink.explorefuture_android.app.app_level.mind_recyclerview.mode.MindListDataMode;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateMode;
-import itc.ink.explorefuture_android.recommend.mind_fragment.mode.mode_mind.MindListDataMode;
 import itc.ink.explorefuture_android.recommend.mind_fragment.mode.mode_topic.TopicListDataMode;
 
 

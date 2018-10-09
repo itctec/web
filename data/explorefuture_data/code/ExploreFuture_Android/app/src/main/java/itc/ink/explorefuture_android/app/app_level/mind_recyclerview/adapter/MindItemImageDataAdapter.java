@@ -1,4 +1,4 @@
-package itc.ink.explorefuture_android.recommend.attention_fragment.adapter;
+package itc.ink.explorefuture_android.app.app_level.mind_recyclerview.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -21,13 +21,13 @@ import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
  * Created by yangwenjiang on 2018/9/14.
  */
 
-public class AttentionItemImageDataAdapter extends RecyclerView.Adapter<AttentionItemImageDataAdapter.VH> {
+public class MindItemImageDataAdapter extends RecyclerView.Adapter<MindItemImageDataAdapter.VH> {
     private final static String LOG_TAG = ExploreFutureApplication.LOG_TAG + "Adapter";
     private Context mContext;
     private List<String> mData;
     private String mContentText;
 
-    public AttentionItemImageDataAdapter(Context mContext, List<String> mData, String mContentText) {
+    public MindItemImageDataAdapter(Context mContext, List<String> mData, String mContentText) {
         this.mContext = mContext;
         this.mData = mData;
         this.mContentText = mContentText;

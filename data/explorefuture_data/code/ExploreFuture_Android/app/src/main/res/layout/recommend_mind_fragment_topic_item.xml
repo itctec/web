@@ -10,15 +10,23 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:image_scale_type="center_crop"
-        app:delay_time="3000"
-        app:indicator_drawable_selected="@drawable/app_banner_indicator_selected"
-        app:indicator_drawable_unselected="@drawable/app_banner_indicator_unselected"
-        app:indicator_height="2dp"
-        app:indicator_margin="3dp"
-        app:indicator_width="12dp"
+        app:delay_time="5000"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintDimensionRatio="3:1"/>
+    <TextView
+        android:text="@string/recommend_mind_topic_current_discuss_text"
+        android:textStyle="bold"
+        android:textColor="@color/mind_topic_current_discuss_text_color"
+        android:textSize="@dimen/mind_topic_current_discuss_text_size"
+        android:shadowColor="@color/mind_topic_current_discuss_text_shadow_color"
+        android:shadowRadius="15"
+        android:padding="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>

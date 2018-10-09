@@ -4,17 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/mind_ListItem_Video_Gif_Item"
-        android:src="@drawable/picture_place_image"
-        android:scaleType="centerCrop"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recommend_Attention_Mind_RecyclerView"
+        android:overScrollMode="never"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginRight="2dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintDimensionRatio="5:2"/>
+        app:layout_constraintRight_toRightOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>

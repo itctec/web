@@ -1,6 +1,7 @@
 package itc.ink.explorefuture_android.app.utils.dataupdate;
 
 import android.content.Context;
+import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
@@ -36,15 +37,19 @@ import itc.ink.explorefuture_android.app.utils.SharedPreferenceUtil;
 
 public class DataUpdateUtil {
     private final String LOG_TAG = ExploreFutureApplication.LOG_TAG + "DataUpdateUtil";
+    public static final int UPDATE_DATA_FINISH_MSG = 0x01;
 
     private Context mContext;
     private List<DataUpdateMode> dataUpdateList;
 
     private ExecutorService threadPool;
 
-    public DataUpdateUtil(Context mContext, List<DataUpdateMode> dataUpdateList) {
+    private Handler mHandler;
+
+    public DataUpdateUtil(Context mContext, List<DataUpdateMode> dataUpdateList,Handler mHandler) {
         this.mContext = mContext;
         this.dataUpdateList = dataUpdateList;
+        this.mHandler=mHandler;
     }
 
     public void updateData() {
@@ -206,13 +211,13 @@ public class DataUpdateUtil {
                     Log.d(LOG_TAG,"数据更新已完成");
 
                     //Add Notify At Here
-                    if (mContext instanceof MainActivity){
-                        Log.d(LOG_TAG,"mContext is MainActivity");
-                        MainActivity mainActivity=(MainActivity) mContext;
-                        Message msg=mainActivity.mHandler.obtainMessage();
-                        msg.what=mainActivity.UPDATE_DATA_FINISH_MSG;
-                        mainActivity.mHandler.dispatchMessage(msg);
+                    if(mHandler!=null){
+                        Message msg=mHandler.obtainMessage();
+                        msg.what=UPDATE_DATA_FINISH_MSG;
+                        mHandler.dispatchMessage(msg);
+                        mHandler=null;
                     }
+
                     break;
                 }
 

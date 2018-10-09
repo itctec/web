@@ -1,4 +1,4 @@
-package itc.ink.explorefuture_android.recommend.mind_fragment.mode.mode_mind;
+package itc.ink.explorefuture_android.app.app_level.mind_recyclerview.mode;
 
 import java.util.ArrayList;
 import java.util.List;

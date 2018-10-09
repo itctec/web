@@ -24,5 +24,9 @@
     <string name="recommend_attention_recommend_header_tip_text">May you want attention them</string>
     <string name="recommend_attention_recommend_header_update_text">update them</string>
 
-    <string name="recommend_attention_content_empty_text">He is Lazy,Say Nothing</string>
+    <string name="recommend_mind_topic_current_discuss_text">Discussing</string>
+    <string name="recommend_mind_content_empty_text">He is Lazy,Say Nothing</string>
+
+    <string name="recommend_mind_top_mind_navigation_hottest_btn_text">HOTTEST</string>
+    <string name="recommend_mind_top_mind_navigation_newest_btn_text">NEWEST</string>
 </resources>

@@ -61,6 +61,12 @@
 
     <dimen name="attention_item_bg_line_width">1px</dimen>
     <!--Attention End-->
+    <!--Mind Start-->
+    <dimen name="mind_topic_current_discuss_text_size">14dp</dimen>
+
+    <dimen name="mind_fragment_mind_sort_top_navigation_indicator_line_height">2px</dimen>
+    <dimen name="mind_fragment_mind_sort_top_navigation_text_size">13dp</dimen>
+    <!--Mind End-->
     <!--Recommend End-->
 
 </resources>

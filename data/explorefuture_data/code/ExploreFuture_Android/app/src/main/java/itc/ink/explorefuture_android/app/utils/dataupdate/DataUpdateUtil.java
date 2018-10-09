@@ -36,10 +36,6 @@ import itc.ink.explorefuture_android.app.utils.SharedPreferenceUtil;
 
 public class DataUpdateUtil {
     private final String LOG_TAG = ExploreFutureApplication.LOG_TAG + "DataUpdateUtil";
-    private final String UPDATE_DATETIME_FILE_URL = "http://www.itc.ink/data/explorefuture_data/app/data_newest_update_date_time.json";
-    private final String RECOMMEND_HANDPICK_DATA_FILE_URL = "http://www.itc.ink/data/explorefuture_data/app/recommend/recommend_handpick_data.json";
-    private final String SP_KEY_RECOMMEND_HANDPICK_DATA_NEWEST_UPDATE_DATE_TIME = "recommend_handpick_data_newest_update_date_time";
-    private final String RECOMMEND_HANDPICK_DATA_FILE_NAME = "recommend_handpick_data.json";
 
     private Context mContext;
     private List<DataUpdateMode> dataUpdateList;
@@ -174,7 +170,7 @@ public class DataUpdateUtil {
                 while ((hasRead = inputStream.read(buffer)) > 0) {
                     outputStream.write(buffer, 0, hasRead);
                 }
-                Log.d(LOG_TAG,"数据保存成功！");
+                Log.d(LOG_TAG,localDataFileName+"数据保存成功！");
                 inputStream.close();
                 outputStream.close();
             } catch (Exception e) {

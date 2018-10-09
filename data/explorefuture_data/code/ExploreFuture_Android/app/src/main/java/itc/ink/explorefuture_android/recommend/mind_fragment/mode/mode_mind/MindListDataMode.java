@@ -1,4 +1,4 @@
-package itc.ink.explorefuture_android.recommend.attention_fragment.mode.mode_attention;
+package itc.ink.explorefuture_android.recommend.mind_fragment.mode.mode_mind;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import java.util.List;
  * Created by yangwenjiang on 2018/9/28.
  */
 
-public class AttentionListDataMode {
+public class MindListDataMode {
     private String id="";
     private String name="昵称";
     private String datetime="";
@@ -20,10 +20,10 @@ public class AttentionListDataMode {
     private List<String> image_url_list=new ArrayList<>();
     private String video_url="";
 
-    public AttentionListDataMode() {
+    public MindListDataMode() {
     }
 
-    public AttentionListDataMode(String id, String name, String datetime, String content_text, String accept_num, String comment_num, String retransmission_num, String head_portrait_image_url, String head_portrait_image_update_datetime, List<String> image_url_list, String video_url) {
+    public MindListDataMode(String id, String name, String datetime, String content_text, String accept_num, String comment_num, String retransmission_num, String head_portrait_image_url, String head_portrait_image_update_datetime, List<String> image_url_list, String video_url) {
         this.id = id;
         this.name = name;
         this.datetime = datetime;

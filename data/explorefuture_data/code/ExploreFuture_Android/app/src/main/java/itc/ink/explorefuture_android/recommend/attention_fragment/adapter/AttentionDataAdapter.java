@@ -56,7 +56,7 @@ public class AttentionDataAdapter extends RecyclerView.Adapter<AttentionDataAdap
             View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recommend_attention_fragment_recommend_item, parent, false);
             return new VH(rootView, ITEM_TYPE.RECOMMEND_LIST);
         } else {
-            View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recommend_attention_fragment_attention_list_item, parent, false);
+            View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.app_level_mind_list_item, parent, false);
             return new VH(rootView, ITEM_TYPE.ATTENTION_LIST);
         }
     }
@@ -144,7 +144,7 @@ public class AttentionDataAdapter extends RecyclerView.Adapter<AttentionDataAdap
     }
 
     private void addVideoToLayout(VH holder, String videoUrl, String contentText) {
-        View rootView = LayoutInflater.from(mContext).inflate(R.layout.recommend_attention_fragment_attention_list_item_video_gif_list_item, null, false);
+        View rootView = LayoutInflater.from(mContext).inflate(R.layout.app_level_mind_list_item_video_gif_list_item, null, false);
         rootView.setId(R.id.recommend_Attention_ListItem_Content_Media_Video_Gif);
         ImageView videoGifView = rootView.findViewById(R.id.recommend_Attention_ListItem_Video_Gif_Item);
         videoGifView.setOnClickListener(new VideoGifViewClickListener(videoUrl, contentText));

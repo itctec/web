@@ -2,18 +2,21 @@ package itc.ink.explorefuture_android.app.app_level.video_view;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
 
 import itc.ink.explorefuture_android.R;
+import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.app.utils.StatusBarUtil;
 
 /**
@@ -21,8 +24,11 @@ import itc.ink.explorefuture_android.app.utils.StatusBarUtil;
  */
 
 public class VideoViewerActivity extends Activity {
+    private final String LOG_TAG = ExploreFutureApplication.LOG_TAG + "ViewerActivity";
     public static final String KEY_VIDEO_URL = "content_video_url";
     public static final String KEY_CONTENT_TEXT = "content_text";
+    private final int MSG_LOADED_FIRST_FRAME = 0x01;
+    private Bitmap firstFrame;
 
     private VideoView videoViewerVideoView;
     private ImageView loadingImage;
@@ -48,17 +54,28 @@ public class VideoViewerActivity extends Activity {
         videoViewerVideoView.setVideoPath(videoUrl);
         videoViewerVideoView.requestFocus();
         videoViewerVideoView.start();
+        videoViewerVideoView.setOnTouchListener(new VideoViewerVideoViewTouchListener());
         videoViewerVideoView.setOnPreparedListener(new VideoViewerVideoViewPreparedListener());
-        videoViewerVideoView.setOnClickListener(new VideoViewerVideoViewClickListener());
 
         loadingImage = findViewById(R.id.video_Viewer_Loading_Image);
-        Glide.with(VideoViewerActivity.this).load(R.drawable.video_loading_one).into(loadingImage);
 
         closeBtn = findViewById(R.id.video_Viewer_Close_Btn);
         closeBtn.setOnClickListener(new CloseBtnClickListener());
 
         contentTextView = findViewById(R.id.video_Viewer_Content_Text);
         contentTextView.setText(contentText);
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        Glide.with(VideoViewerActivity.this).load(R.drawable.video_loading).into(loadingImage);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        loadingImage.setVisibility(View.GONE);
     }
 
     class VideoViewerVideoViewPreparedListener implements MediaPlayer.OnPreparedListener {
@@ -69,15 +86,19 @@ public class VideoViewerActivity extends Activity {
         }
     }
 
-    class VideoViewerVideoViewClickListener implements View.OnClickListener {
+    class VideoViewerVideoViewTouchListener implements View.OnTouchListener{
         @Override
-        public void onClick(View view) {
-            //Toast.makeText(VideoViewerActivity.this,"视频被点击",Toast.LENGTH_SHORT).show();
-            if (videoViewerVideoView.isPlaying()) {
-                videoViewerVideoView.pause();
-            } else {
-                videoViewerVideoView.start();
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            Log.d(LOG_TAG,"Action->"+motionEvent.getAction());
+            if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
+                Log.d(LOG_TAG,"Action->"+motionEvent.getAction());
+                if (videoViewerVideoView.isPlaying()) {
+                    videoViewerVideoView.pause();
+                } else {
+                    videoViewerVideoView.start();
+                }
             }
+            return false;
         }
     }
 

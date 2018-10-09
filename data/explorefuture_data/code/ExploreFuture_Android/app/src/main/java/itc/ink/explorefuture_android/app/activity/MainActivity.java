@@ -85,7 +85,8 @@ public class MainActivity extends FragmentActivity {
         navigationMineBtn.setOnClickListener(new NavigationMineBtnClickListener());
 
         boolean prepareDataOk=dataCheck(DataUpdateMode.RECOMMEND_HANDPICK_LOCAL_DATA_FILE_NAME)&&
-                dataCheck(DataUpdateMode.RECOMMEND_ATTENTION_LOCAL_DATA_FILE_NAME);
+                dataCheck(DataUpdateMode.RECOMMEND_ATTENTION_LOCAL_DATA_FILE_NAME)&&
+                dataCheck(DataUpdateMode.RECOMMEND_MIND_LOCAL_DATA_FILE_NAME);
         if(prepareDataOk){
             RecommendFragment recommendFragment=new RecommendFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container,recommendFragment).commit();
@@ -105,6 +106,12 @@ public class MainActivity extends FragmentActivity {
                     DataUpdateMode.RECOMMEND_ATTENTION_LOCAL_DATA_FILE_NAME,
                     false);
             dataUpdateList.add(recommend_Attention_Data_UpdateMode);
+            DataUpdateMode recommend_Mind_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
+                    DataUpdateMode.RECOMMEND_MIND_DATA_FILE_URL,
+                    DataUpdateMode.RECOMMEND_MIND_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
+                    DataUpdateMode.RECOMMEND_MIND_LOCAL_DATA_FILE_NAME,
+                    false);
+            dataUpdateList.add(recommend_Mind_Data_UpdateMode);
 
             DataUpdateUtil dataUpdateUtil=new DataUpdateUtil(MainActivity.this,dataUpdateList);
             dataUpdateUtil.updateData();
@@ -272,7 +279,8 @@ public class MainActivity extends FragmentActivity {
                     case 0:
                         fragment= new RecommendFragment();
                         prepareDataOk=dataCheck(DataUpdateMode.RECOMMEND_HANDPICK_LOCAL_DATA_FILE_NAME)&&
-                                dataCheck(DataUpdateMode.RECOMMEND_ATTENTION_LOCAL_DATA_FILE_NAME);
+                                dataCheck(DataUpdateMode.RECOMMEND_ATTENTION_LOCAL_DATA_FILE_NAME)&&
+                                dataCheck(DataUpdateMode.RECOMMEND_MIND_LOCAL_DATA_FILE_NAME);
                         break;
                     case 1:
                         fragment= new SortFragment();

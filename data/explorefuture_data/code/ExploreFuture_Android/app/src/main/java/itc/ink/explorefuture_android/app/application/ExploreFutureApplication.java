@@ -18,7 +18,7 @@ import itc.ink.explorefuture_android.app.utils.SharedPreferenceUtil;
 
 public class ExploreFutureApplication extends Application {
     public static final String LOG_TAG = "ItcApp";
-    public static final String TEMP_ACCOUNT="0000000001";
+    public static final String TEMP_ACCOUNT = "0000000001";
 
     public static Context applicationContext;
 
@@ -46,22 +46,28 @@ public class ExploreFutureApplication extends Application {
         screenWidth = displayMetrics.widthPixels;
     }
 
-    private void updateData(){
-        List<DataUpdateMode> dataUpdateList=new ArrayList<>();
-        DataUpdateMode recommend_Handpick_Data_UpdateMode=new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
+    private void updateData() {
+        List<DataUpdateMode> dataUpdateList = new ArrayList<>();
+        DataUpdateMode recommend_Handpick_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
                 DataUpdateMode.RECOMMEND_HANDPICK_DATA_FILE_URL,
                 DataUpdateMode.RECOMMEND_HANDPICK_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
                 DataUpdateMode.RECOMMEND_HANDPICK_LOCAL_DATA_FILE_NAME,
                 false);
         dataUpdateList.add(recommend_Handpick_Data_UpdateMode);
-        DataUpdateMode recommend_Attention_Data_UpdateMode=new DataUpdateMode(DataUpdateMode.ACCOUNT_UPDATE_DATETIME_FILE_URL.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE,TEMP_ACCOUNT),
-                DataUpdateMode.ACCOUNT_ATTENTION_DATA_FILE_URL.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE,TEMP_ACCOUNT),
+        DataUpdateMode recommend_Attention_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.ACCOUNT_UPDATE_DATETIME_FILE_URL.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE, TEMP_ACCOUNT),
+                DataUpdateMode.ACCOUNT_ATTENTION_DATA_FILE_URL.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE, TEMP_ACCOUNT),
                 DataUpdateMode.ACCOUNT_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
                 DataUpdateMode.RECOMMEND_ATTENTION_LOCAL_DATA_FILE_NAME,
                 false);
         dataUpdateList.add(recommend_Attention_Data_UpdateMode);
+        DataUpdateMode recommend_Mind_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
+                DataUpdateMode.RECOMMEND_MIND_DATA_FILE_URL,
+                DataUpdateMode.RECOMMEND_MIND_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
+                DataUpdateMode.RECOMMEND_MIND_LOCAL_DATA_FILE_NAME,
+                false);
+        dataUpdateList.add(recommend_Mind_Data_UpdateMode);
 
-        DataUpdateUtil dataUpdateUtil=new DataUpdateUtil(this,dataUpdateList);
+        DataUpdateUtil dataUpdateUtil = new DataUpdateUtil(this, dataUpdateList);
         dataUpdateUtil.updateData();
     }
 

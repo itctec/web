@@ -22,6 +22,23 @@
     }
   ],
   "array_mind":[
+    {
+      "id":"0000000002_1",
+      "name":"华为",
+      "datetime":"2018-09-26 12:00",
+      "content_text":"【购机三重礼：① 领券立减100元 ② 享6期免息 ③ 赠华为移动电源，赠品有限，赠完即止】 易烊千玺代言，2400万海报级自拍，GPU Turbo 稳定高帧率游戏体验，6.3英寸全面屏3D炫彩机身",
+      "accept_num":"61894",
+      "comment_num":"21800",
+      "retransmission_num":"1358",
+      "head_portrait_image_url":"http://www.itc.ink/data/explorefuture_data/account/0000000002/information/head_portrait.png",
+      "head_portrait_image_update_datetime":"2018-09-30 08:00",
+      "image_url_list":[
+        "http://www.itc.ink/data/explorefuture_data/account/0000000002/mind/1/image/1.png",
+        "http://www.itc.ink/data/explorefuture_data/account/0000000002/mind/1/image/2.png",
+        "http://www.itc.ink/data/explorefuture_data/account/0000000002/mind/1/image/3.png"
+      ],
+      "video_url":""
+    },
   	{
       "id":"0000000006_1",
       "name":"Apple",

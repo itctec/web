@@ -23,6 +23,20 @@
   ],
   "array_mind":[
     {
+      "id":"0000000006_1",
+      "name":"Apple",
+      "datetime":"2018-09-26 12:00",
+      "content_text":"苹果在8月31日凌晨向全球媒体发送了邀请函，宣布将于当地时间9月12日上午10点(北京时间13日凌晨1点)举办新品发布会，而苹果官网也在不久之后泄露了新iPhone以及AppleWatch定妆照，确认新iPhone将命名为iPhone XS。",
+      "accept_num":"61894",
+      "comment_num":"21800",
+      "retransmission_num":"1358",
+      "head_portrait_image_url":"http://www.itc.ink/data/explorefuture_data/account/0000000006/information/head_portrait.png",
+      "head_portrait_image_update_datetime":"2018-09-30 08:00",
+      "image_url_list":[
+      ],
+      "video_url":""
+    },
+    {
       "id":"0000000008_1",
       "name":"Sueduo",
       "datetime":"2018-09-26 12:00",

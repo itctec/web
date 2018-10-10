@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.tencent.bugly.Bugly;
 
 import java.io.File;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class MainActivity extends FragmentActivity {
     private final String LOG_TAG = ExploreFutureApplication.LOG_TAG + "MainActivity";
     private final String TENCENT_BUGLY_APPID = "267157272d";
 
-    public static Handler mHandler;
+    public static MyHandler mHandler;
 
     private DynamicPermission dynamicPermission;
     private String[] permissionsNeeded = null;
@@ -49,7 +50,7 @@ public class MainActivity extends FragmentActivity {
     private TextView navigationFindBtn;
     private TextView navigationMineBtn;
 
-    private int currentFragment = 0;
+    private static int currentFragment = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,7 @@ public class MainActivity extends FragmentActivity {
         //StatusBar Text And Icon Style
         StatusBarUtil.setAndroidNativeLightStatusBar(this, true);
 
-        initHandler();
+        mHandler = new MyHandler(this);
 
         //Dynamic Apply Permission
         permissionsNeeded = new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.READ_PHONE_STATE};
@@ -86,14 +87,13 @@ public class MainActivity extends FragmentActivity {
         navigationMineBtn = findViewById(R.id.bottom_Navigation_Mine_Btn);
         navigationMineBtn.setOnClickListener(new NavigationMineBtnClickListener());
 
-        boolean prepareDataOk = dataCheck(DataUpdateMode.RECOMMEND_HANDPICK_LOCAL_DATA_FILE_NAME) &&
-                dataCheck(DataUpdateMode.RECOMMEND_ATTENTION_LOCAL_DATA_FILE_NAME) &&
-                dataCheck(DataUpdateMode.RECOMMEND_MIND_LOCAL_DATA_FILE_NAME);
-        if (prepareDataOk) {
-            RecommendFragment recommendFragment = new RecommendFragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, recommendFragment).commit();
-            currentFragment = 0;
-        } else {
+
+        boolean prepareDataFail = (DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR == null || DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR.trim().equals("")) ||
+                (DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR == null || DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR.trim().equals("")) ||
+                (DataUpdateMode.RECOMMEND_MIND_HOTTEST_JSON_DATA_STR == null || DataUpdateMode.RECOMMEND_MIND_HOTTEST_JSON_DATA_STR.trim().equals("")) ||
+                (DataUpdateMode.RECOMMEND_MIND_NEWEST_JSON_DATA_STR == null || DataUpdateMode.RECOMMEND_MIND_NEWEST_JSON_DATA_STR.trim().equals(""));
+
+        if (prepareDataFail) {
             //Update Data
             List<DataUpdateMode> dataUpdateList = new ArrayList<>();
             DataUpdateMode recommend_Handpick_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
@@ -108,64 +108,27 @@ public class MainActivity extends FragmentActivity {
                     DataUpdateMode.RECOMMEND_ATTENTION_LOCAL_DATA_FILE_NAME,
                     false);
             dataUpdateList.add(recommend_Attention_Data_UpdateMode);
-            DataUpdateMode recommend_Mind_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
-                    DataUpdateMode.RECOMMEND_MIND_DATA_FILE_URL,
-                    DataUpdateMode.RECOMMEND_MIND_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
-                    DataUpdateMode.RECOMMEND_MIND_LOCAL_DATA_FILE_NAME,
+            DataUpdateMode recommend_Mind_Hottest_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
+                    DataUpdateMode.RECOMMEND_MIND_HOTTEST_DATA_FILE_URL,
+                    DataUpdateMode.RECOMMEND_MIND_HOTTEST_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
+                    DataUpdateMode.RECOMMEND_MIND_HOTTEST_LOCAL_DATA_FILE_NAME,
                     false);
-            dataUpdateList.add(recommend_Mind_Data_UpdateMode);
+            dataUpdateList.add(recommend_Mind_Hottest_Data_UpdateMode);
+            DataUpdateMode recommend_Mind_Newest_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
+                    DataUpdateMode.RECOMMEND_MIND_NEWEST_DATA_FILE_URL,
+                    DataUpdateMode.RECOMMEND_MIND_NEWEST_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
+                    DataUpdateMode.RECOMMEND_MIND_NEWEST_LOCAL_DATA_FILE_NAME,
+                    false);
+            dataUpdateList.add(recommend_Mind_Newest_Data_UpdateMode);
 
             DataUpdateUtil dataUpdateUtil = new DataUpdateUtil(MainActivity.this, dataUpdateList, mHandler);
             dataUpdateUtil.updateData();
+        } else {
+            RecommendFragment recommendFragment = new RecommendFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, recommendFragment).commit();
+            currentFragment = 0;
         }
 
-    }
-
-    private void initHandler(){
-        mHandler = new Handler() {
-            public void handleMessage(Message msg) {
-                if (msg.what == DataUpdateUtil.UPDATE_DATA_FINISH_MSG) {
-                    Log.d(LOG_TAG, "UPDATE_DATA_FINISH_MSG");
-                    Fragment fragment = null;
-                    String dataFileName;
-                    boolean prepareDataOk = false;
-                    switch (currentFragment) {
-                        case 0:
-                            fragment = new RecommendFragment();
-                            prepareDataOk = dataCheck(DataUpdateMode.RECOMMEND_HANDPICK_LOCAL_DATA_FILE_NAME) &&
-                                    dataCheck(DataUpdateMode.RECOMMEND_ATTENTION_LOCAL_DATA_FILE_NAME) &&
-                                    dataCheck(DataUpdateMode.RECOMMEND_MIND_LOCAL_DATA_FILE_NAME);
-                            break;
-                        case 1:
-                            fragment = new SortFragment();
-                            dataFileName = DataUpdateMode.SORT_LOCAL_DATA_FILE_NAME;
-                            prepareDataOk = dataCheck(dataFileName);
-                            break;
-                        case 2:
-                            fragment = new MindFragment();
-                            dataFileName = DataUpdateMode.MIND_LOCAL_DATA_FILE_NAME;
-                            prepareDataOk = dataCheck(dataFileName);
-                            break;
-                        case 3:
-                            fragment = new FindFragment();
-                            dataFileName = DataUpdateMode.FIND_LOCAL_DATA_FILE_NAME;
-                            prepareDataOk = dataCheck(dataFileName);
-                            break;
-                        case 4:
-                            fragment = new MineFragment();
-                            dataFileName = DataUpdateMode.MINE_LOCAL_DATA_FILE_NAME;
-                            prepareDataOk = dataCheck(dataFileName);
-                            break;
-                    }
-
-                    if (prepareDataOk == false) {
-                        fragment = new NoDataFragment();
-
-                    }
-                    getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, fragment).commit();
-                }
-            }
-        };
     }
 
     @Override
@@ -201,15 +164,6 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
-    //Data Check
-    private boolean dataCheck(String fileName) {
-        File dataFile = new File(getFilesDir(), fileName);
-        if (dataFile.exists()) {
-            return true;
-        }
-        return false;
-    }
-
     //Update Test
     private void updateCheck() {
         if (obtainAllPermissionSuccess == false && deniedPermissionList.contains(Manifest.permission.READ_EXTERNAL_STORAGE)) {
@@ -238,13 +192,17 @@ public class MainActivity extends FragmentActivity {
     class NavigationRecommendBtnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            boolean prepareDataOk = dataCheck(DataUpdateMode.RECOMMEND_HANDPICK_LOCAL_DATA_FILE_NAME);
-            if (prepareDataOk) {
-                RecommendFragment recommendFragment = new RecommendFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, recommendFragment).commit();
-            } else {
+            boolean prepareDataFail = (DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR == null || DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR.trim().equals("")) ||
+                    (DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR == null || DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR.trim().equals("")) ||
+                    (DataUpdateMode.RECOMMEND_MIND_HOTTEST_JSON_DATA_STR == null || DataUpdateMode.RECOMMEND_MIND_HOTTEST_JSON_DATA_STR.trim().equals("") ||
+                            (DataUpdateMode.RECOMMEND_MIND_NEWEST_JSON_DATA_STR == null || DataUpdateMode.RECOMMEND_MIND_NEWEST_JSON_DATA_STR.trim().equals("")));
+
+            if (prepareDataFail) {
                 NoDataFragment noDataFragment = new NoDataFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, noDataFragment).commit();
+            } else {
+                RecommendFragment recommendFragment = new RecommendFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, recommendFragment).commit();
             }
             currentFragment = 0;
             updateBtnState(view);
@@ -254,13 +212,13 @@ public class MainActivity extends FragmentActivity {
     class NavigationSortBtnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            boolean prepareDataOk = dataCheck(DataUpdateMode.SORT_LOCAL_DATA_FILE_NAME);
-            if (prepareDataOk) {
-                SortFragment sortFragment = new SortFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, sortFragment).commit();
-            } else {
+            boolean prepareDataFail = (DataUpdateMode.SORT_JSON_DATA_STR == null || DataUpdateMode.SORT_JSON_DATA_STR.trim().equals(""));
+            if (prepareDataFail) {
                 NoDataFragment noDataFragment = new NoDataFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, noDataFragment).commit();
+            } else {
+                SortFragment sortFragment = new SortFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, sortFragment).commit();
             }
             currentFragment = 1;
             updateBtnState(view);
@@ -270,13 +228,13 @@ public class MainActivity extends FragmentActivity {
     class NavigationMindBtnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            boolean prepareDataOk = dataCheck(DataUpdateMode.MIND_LOCAL_DATA_FILE_NAME);
-            if (prepareDataOk) {
-                MindFragment mindFragment = new MindFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, mindFragment).commit();
-            } else {
+            boolean prepareDataFail = (DataUpdateMode.MIND_JSON_DATA_STR == null || DataUpdateMode.MIND_JSON_DATA_STR.trim().equals(""));
+            if (prepareDataFail) {
                 NoDataFragment noDataFragment = new NoDataFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, noDataFragment).commit();
+            } else {
+                MindFragment mindFragment = new MindFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, mindFragment).commit();
             }
             currentFragment = 2;
             updateBtnState(view);
@@ -286,13 +244,13 @@ public class MainActivity extends FragmentActivity {
     class NavigationFindBtnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            boolean prepareDataOk = dataCheck(DataUpdateMode.FIND_LOCAL_DATA_FILE_NAME);
-            if (prepareDataOk) {
-                FindFragment findFragment = new FindFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, findFragment).commit();
-            } else {
+            boolean prepareDataFail = (DataUpdateMode.FIND_JSON_DATA_STR == null || DataUpdateMode.FIND_JSON_DATA_STR.trim().equals(""));
+            if (prepareDataFail) {
                 NoDataFragment noDataFragment = new NoDataFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, noDataFragment).commit();
+            } else {
+                FindFragment findFragment = new FindFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, findFragment).commit();
             }
             currentFragment = 3;
             updateBtnState(view);
@@ -302,18 +260,74 @@ public class MainActivity extends FragmentActivity {
     class NavigationMineBtnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            boolean prepareDataOk = dataCheck(DataUpdateMode.MINE_LOCAL_DATA_FILE_NAME);
-            if (prepareDataOk) {
-                MineFragment mineFragment = new MineFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, mineFragment).commit();
-            } else {
+            boolean prepareDataFail = (DataUpdateMode.MINE_JSON_DATA_STR == null || DataUpdateMode.MINE_JSON_DATA_STR.trim().equals(""));
+            if (prepareDataFail) {
                 NoDataFragment noDataFragment = new NoDataFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, noDataFragment).commit();
+            } else {
+                MineFragment mineFragment = new MineFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, mineFragment).commit();
             }
             currentFragment = 4;
             updateBtnState(view);
         }
     }
+
+    static class MyHandler extends Handler {
+        WeakReference<MainActivity> mActivity;
+
+        MyHandler(MainActivity activity) {
+            mActivity = new WeakReference<MainActivity>(activity);
+        }
+
+        public void handleMessage(Message msg) {
+            MainActivity theActivity = mActivity.get();
+
+            if (msg.what == DataUpdateUtil.UPDATE_DATA_FINISH_MSG) {
+                Fragment fragment = null;
+                boolean prepareDataFail = true;
+                switch (currentFragment) {
+                    case 0:
+                        fragment = new RecommendFragment();
+                        Log.d("ITC","1->"+DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR);
+                        Log.d("ITC","2->"+DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR);
+                        Log.d("ITC","3->"+DataUpdateMode.RECOMMEND_MIND_HOTTEST_JSON_DATA_STR);
+                        Log.d("ITC","4->"+DataUpdateMode.RECOMMEND_MIND_NEWEST_JSON_DATA_STR);
+
+                        prepareDataFail = (DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR == null || DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR.trim().equals("")) ||
+                                (DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR == null || DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR.trim().equals("")) ||
+                                (DataUpdateMode.RECOMMEND_MIND_HOTTEST_JSON_DATA_STR == null || DataUpdateMode.RECOMMEND_MIND_HOTTEST_JSON_DATA_STR.trim().equals("")) ||
+                                (DataUpdateMode.RECOMMEND_MIND_NEWEST_JSON_DATA_STR == null || DataUpdateMode.RECOMMEND_MIND_NEWEST_JSON_DATA_STR.trim().equals(""));
+                        break;
+                    case 1:
+                        fragment = new SortFragment();
+                        prepareDataFail = (DataUpdateMode.SORT_JSON_DATA_STR == null || DataUpdateMode.SORT_JSON_DATA_STR.trim().equals(""));
+                        break;
+                    case 2:
+                        fragment = new MindFragment();
+                        prepareDataFail = (DataUpdateMode.MIND_JSON_DATA_STR == null || DataUpdateMode.MIND_JSON_DATA_STR.trim().equals(""));
+                        break;
+                    case 3:
+                        fragment = new FindFragment();
+                        prepareDataFail = (DataUpdateMode.FIND_JSON_DATA_STR == null || DataUpdateMode.FIND_JSON_DATA_STR.trim().equals(""));
+                        break;
+                    case 4:
+                        fragment = new MineFragment();
+                        prepareDataFail = (DataUpdateMode.MINE_JSON_DATA_STR == null || DataUpdateMode.MINE_JSON_DATA_STR.trim().equals(""));
+                        break;
+                }
+
+
+                if (prepareDataFail) {
+                    fragment = new NoDataFragment();
+                }
+
+                theActivity.getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, fragment).commit();
+            }
+        }
+    }
+
+    ;
 
 
 }

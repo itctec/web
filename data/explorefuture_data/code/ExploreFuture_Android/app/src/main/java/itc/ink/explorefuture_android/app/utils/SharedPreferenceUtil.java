@@ -51,7 +51,7 @@ public class SharedPreferenceUtil {
      * @return
      */
     public static String getString(String key) {
-        return getPreferneces().getString(key, null);
+        return getPreferneces().getString(key, "");
 
     }
 

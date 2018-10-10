@@ -45,41 +45,21 @@ public class DefResDataLoader implements DataLoad.OutService {
     private final String JSON_DATA_KEY_ACTION_LIST="array_action_list";
     private final String JSON_DATA_KEY_PRODUCT="array_product";
     private final String JSON_DATA_KEY_INTEREST_LIST="array_interest_list";
-    
-    private String mRecommendHandpickDataJSONStr = "";
 
     @Override
     public boolean prepareData(Context mContext) {
-        StringBuilder stringBuilder = new StringBuilder();
-        File dataFile = new File(mContext.getFilesDir(), DataUpdateMode.RECOMMEND_HANDPICK_LOCAL_DATA_FILE_NAME);
-        BufferedReader bufferedReader;
-
-        try {
-            InputStream inputStream = new FileInputStream(dataFile);
-            bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-
-            String catchStr;
-            while ((catchStr = bufferedReader.readLine()) != null) {
-                stringBuilder.append(catchStr);
-            }
-
-            mRecommendHandpickDataJSONStr = stringBuilder.toString();
-
-            inputStream.close();
-            bufferedReader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR==null||DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR.trim().equals("")){
             return false;
+        }else {
+            return true;
         }
-
-        return true;
     }
 
     @Override
     public Object loadBannerData(Context mContext) {
         ArrayList<BannerDataMode> bannerDataArray = new ArrayList<>();
 
-        JsonReader jsonReader = new JsonReader(new StringReader(mRecommendHandpickDataJSONStr));
+        JsonReader jsonReader = new JsonReader(new StringReader(DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR));
         jsonReader.setLenient(true);
         JsonParser jsonParser = new JsonParser();
         JsonElement jsonElement = jsonParser.parse(jsonReader);
@@ -96,7 +76,7 @@ public class DefResDataLoader implements DataLoad.OutService {
     public Object loadSolutionData(Context mContext) {
         ArrayList<SolutionDataMode> solutionDataArray = new ArrayList<>();
 
-        JsonReader jsonReader = new JsonReader(new StringReader(mRecommendHandpickDataJSONStr));
+        JsonReader jsonReader = new JsonReader(new StringReader(DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR));
         jsonReader.setLenient(true);
         JsonParser jsonParser = new JsonParser();
         JsonElement jsonElement = jsonParser.parse(jsonReader);
@@ -113,7 +93,7 @@ public class DefResDataLoader implements DataLoad.OutService {
     public Object loadActionSubjectData(Context mContext) {
         ArrayList<ActionSubjectDataMode> actionSubjectDataArray = new ArrayList<>();
 
-        JsonReader jsonReader = new JsonReader(new StringReader(mRecommendHandpickDataJSONStr));
+        JsonReader jsonReader = new JsonReader(new StringReader(DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR));
         jsonReader.setLenient(true);
         JsonParser jsonParser = new JsonParser();
         JsonElement jsonElement = jsonParser.parse(jsonReader);
@@ -130,7 +110,7 @@ public class DefResDataLoader implements DataLoad.OutService {
     public Object loadActionListData(Context mContext) {
         ArrayList<ActionListDataModel> actionListDataArray = new ArrayList<>();
 
-        JsonReader jsonReader = new JsonReader(new StringReader(mRecommendHandpickDataJSONStr));
+        JsonReader jsonReader = new JsonReader(new StringReader(DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR));
         jsonReader.setLenient(true);
         JsonParser jsonParser = new JsonParser();
         JsonElement jsonElement = jsonParser.parse(jsonReader);
@@ -147,7 +127,7 @@ public class DefResDataLoader implements DataLoad.OutService {
     public Object loadProductData(Context mContext) {
         ArrayList<ProductDataMode> productDataArray = new ArrayList<>();
 
-        JsonReader jsonReader = new JsonReader(new StringReader(mRecommendHandpickDataJSONStr));
+        JsonReader jsonReader = new JsonReader(new StringReader(DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR));
         jsonReader.setLenient(true);
         JsonParser jsonParser = new JsonParser();
         JsonElement jsonElement = jsonParser.parse(jsonReader);
@@ -164,7 +144,7 @@ public class DefResDataLoader implements DataLoad.OutService {
         ArrayList<InterestDataModel> interestDataArray = new ArrayList<>();
         ArrayList<InterestDataModel> interestDataArrays = new ArrayList<>();
 
-        JsonReader jsonReader = new JsonReader(new StringReader(mRecommendHandpickDataJSONStr));
+        JsonReader jsonReader = new JsonReader(new StringReader(DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR));
         jsonReader.setLenient(true);
         JsonParser jsonParser = new JsonParser();
         JsonElement jsonElement = jsonParser.parse(jsonReader);

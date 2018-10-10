@@ -32,40 +32,21 @@ public class DefResDataLoader implements DataLoad.OutService {
     private static final String LOG_TAG = ExploreFutureApplication.LOG_TAG + "DefResDataLoader";
     private final String JSON_DATA_KEY_RECOMMEND="array_recommend";
     private final String JSON_DATA_KEY_ATTENTION="array_attention";
-    private String mRecommendAttentionDataJSONStr = "";
 
     @Override
     public boolean prepareData(Context mContext) {
-        StringBuilder stringBuilder = new StringBuilder();
-        File dataFile = new File(mContext.getFilesDir(), DataUpdateMode.RECOMMEND_ATTENTION_LOCAL_DATA_FILE_NAME);
-        BufferedReader bufferedReader;
-
-        try {
-            InputStream inputStream = new FileInputStream(dataFile);
-            bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-
-            String catchStr;
-            while ((catchStr = bufferedReader.readLine()) != null) {
-                stringBuilder.append(catchStr);
-            }
-
-            mRecommendAttentionDataJSONStr = stringBuilder.toString();
-
-            inputStream.close();
-            bufferedReader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR==null||DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR.trim().equals("")){
             return false;
+        }else {
+            return true;
         }
-
-        return true;
     }
 
     @Override
     public Object loadRecommendData(Context mContext) {
         ArrayList<RecommendListDataMode> recommendDataArray = new ArrayList<>();
 
-        JsonReader jsonReader = new JsonReader(new StringReader(mRecommendAttentionDataJSONStr));
+        JsonReader jsonReader = new JsonReader(new StringReader(DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR));
         jsonReader.setLenient(true);
         JsonParser jsonParser = new JsonParser();
         JsonElement jsonElement = jsonParser.parse(jsonReader);
@@ -82,7 +63,7 @@ public class DefResDataLoader implements DataLoad.OutService {
     public Object loadAttentionData(Context mContext) {
         ArrayList<MindListDataMode> attentionDataArray = new ArrayList<>();
 
-        JsonReader jsonReader = new JsonReader(new StringReader(mRecommendAttentionDataJSONStr));
+        JsonReader jsonReader = new JsonReader(new StringReader(DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR));
         jsonReader.setLenient(true);
         JsonParser jsonParser = new JsonParser();
         JsonElement jsonElement = jsonParser.parse(jsonReader);

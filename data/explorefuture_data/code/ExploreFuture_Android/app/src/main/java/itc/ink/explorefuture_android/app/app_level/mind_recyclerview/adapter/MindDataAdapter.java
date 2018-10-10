@@ -65,6 +65,7 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
             holder.mindItemContentText.setText(mindListDataItem.getContent_text());
         }
         holder.mindItemContentText.setOnClickListener(new AttentionItemContentTextClickListener(mindListDataItem.getId()));
+        holder.mindItemContentText.setFocusableInTouchMode(true);
 
         holder.mindItemContentMediaLayout.removeAllViews();
         if (mindListDataItem.getImage_url_list().size() > 0 && mindListDataItem.getImage_url_list().size() <= 9) {

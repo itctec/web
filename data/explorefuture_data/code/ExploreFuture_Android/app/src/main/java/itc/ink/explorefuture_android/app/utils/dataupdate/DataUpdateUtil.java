@@ -12,11 +12,15 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.stream.JsonReader;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -36,26 +40,33 @@ import itc.ink.explorefuture_android.app.utils.SharedPreferenceUtil;
  */
 
 public class DataUpdateUtil {
-    private final String LOG_TAG = ExploreFutureApplication.LOG_TAG + "DataUpdateUtil";
+    private static final String LOG_TAG = ExploreFutureApplication.LOG_TAG + "DataUpdateUtil";
     public static final int UPDATE_DATA_FINISH_MSG = 0x01;
 
-    private Context mContext;
+    public static final String UPDATE_RESULT_FAILED = "UPDATE_FAILED";
+    public static final String UPDATE_RESULT_NEWEST_ALREADY = "NEWEST_ALREADY";
+
+    private static Context mContext;
     private List<DataUpdateMode> dataUpdateList;
 
     private ExecutorService threadPool;
 
     private Handler mHandler;
 
-    public DataUpdateUtil(Context mContext, List<DataUpdateMode> dataUpdateList,Handler mHandler) {
+    public DataUpdateUtil(Context mContext, List<DataUpdateMode> dataUpdateList, Handler mHandler) {
         this.mContext = mContext;
         this.dataUpdateList = dataUpdateList;
-        this.mHandler=mHandler;
+        this.mHandler = mHandler;
     }
 
     public void updateData() {
         threadPool = Executors.newFixedThreadPool(dataUpdateList.size());
 
-        for (int i=0;i<dataUpdateList.size();i++){
+        //Prepare Local Data
+        threadPool.submit(new PrepareLocalDataToCatch());
+
+        //Get Server Data
+        for (int i = 0; i < dataUpdateList.size(); i++) {
             threadPool.submit(new GetUpdateRunnable(dataUpdateList.get(i)));
         }
 
@@ -65,7 +76,151 @@ public class DataUpdateUtil {
         threadPool.shutdown();
     }
 
-    private class GetUpdateRunnable implements Runnable{
+    public static String updateData(DataUpdateMode dataUpdateMode) {
+        return handleUpdate(dataUpdateMode);
+    }
+
+    private static String handleUpdate(DataUpdateMode dataUpdateMode) {
+        String resultStr = null;
+
+        //Get Update DateTime File From Server
+        String updateDateTimeStr = getUpdateStrFromServer(dataUpdateMode.getUpdateDatetimeFileUrl());
+        if (updateDateTimeStr == null) {
+            dataUpdateMode.setCheckUpdateFinish(true);
+            Log.d(LOG_TAG, "服务器数据获取失败！");
+            resultStr = UPDATE_RESULT_FAILED;
+            return resultStr;
+        }
+
+        //Json Phrase DateTime Str
+        JsonReader jsonReader = new JsonReader(new StringReader(updateDateTimeStr));
+        jsonReader.setLenient(true);
+        JsonParser parser = new JsonParser();
+        JsonElement element = parser.parse(jsonReader);
+        JsonObject rootObj = element.getAsJsonObject();
+        JsonPrimitive serverUpdateDateTime = rootObj.getAsJsonPrimitive(dataUpdateMode.getDataNewestUpdateDateTimeKey());
+        String serverDateTimeStr = serverUpdateDateTime.getAsString();
+        String localDateTimeStr = SharedPreferenceUtil.getString(dataUpdateMode.getDataNewestUpdateDateTimeKey());
+
+        if (serverDateTimeStr != null && !serverDateTimeStr.isEmpty() && localDateTimeStr != null && !localDateTimeStr.isEmpty()) {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            int compareResult = DataTimeUtil.dateTimeCompare(serverDateTimeStr, localDateTimeStr, simpleDateFormat);
+            switch (compareResult) {
+                case 1:
+                    SharedPreferenceUtil.putString(dataUpdateMode.getDataNewestUpdateDateTimeKey(), serverDateTimeStr);
+                    //Update Data File
+                    resultStr = getRemoteData(dataUpdateMode);
+                    Log.d(LOG_TAG, "通过比较时间更新数据!");
+                    break;
+                default:
+                    resultStr = UPDATE_RESULT_NEWEST_ALREADY;
+                    dataUpdateMode.setCheckUpdateFinish(true);
+                    Log.d(LOG_TAG, "当前已是最新数据!");
+            }
+        } else if (serverDateTimeStr != null && (localDateTimeStr == null||localDateTimeStr.isEmpty())) {
+            SharedPreferenceUtil.putString(dataUpdateMode.getDataNewestUpdateDateTimeKey(), serverDateTimeStr);
+            //Update Data File
+            resultStr = getRemoteData(dataUpdateMode);
+            Log.d(LOG_TAG, "首次更新数据!");
+        } else {
+            resultStr = UPDATE_RESULT_FAILED;
+            dataUpdateMode.setCheckUpdateFinish(true);
+            Log.d(LOG_TAG, "获取数据失败!");
+        }
+        return resultStr;
+    }
+
+    private static String getUpdateStrFromServer(String updateDatetimeFileUrl) {
+        StringBuilder stringBuilder = new StringBuilder();
+        HttpURLConnection urlConnection = null;
+        try {
+            URL updateFileUrl = new URL(updateDatetimeFileUrl);
+            urlConnection = (HttpURLConnection) updateFileUrl.openConnection();
+            urlConnection.setConnectTimeout(3 * 1000);
+            urlConnection.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
+            InputStream inputStream = urlConnection.getInputStream();
+
+            if (!urlConnection.getContentType().contains("json")) {
+                Log.d(LOG_TAG, "网络已被重定向，需确保网络通畅");
+                inputStream.close();
+                urlConnection.disconnect();
+                return null;
+            }
+
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            String lineStr;
+            while ((lineStr = bufferedReader.readLine()) != null) {
+                stringBuilder.append(lineStr);
+            }
+            inputStream.close();
+            bufferedReader.close();
+            return stringBuilder.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
+        }
+        return null;
+    }
+
+    private static String getRemoteData(DataUpdateMode dataUpdateMode) {
+        HttpURLConnection urlConnection = null;
+        StringBuilder stringBuilder = new StringBuilder();
+        try {
+            URL dataFileUrl = new URL(dataUpdateMode.getRemoteDataFileUrl());
+            File saveFile = new File(mContext.getFilesDir(), dataUpdateMode.getLocalDataFileName());
+
+            urlConnection = (HttpURLConnection) dataFileUrl.openConnection();
+            urlConnection.setConnectTimeout(3 * 1000);
+            urlConnection.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
+            InputStream inputStream = urlConnection.getInputStream();
+            OutputStream outputStream = new FileOutputStream(saveFile);
+
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream));
+            String catchStr;
+            while ((catchStr = bufferedReader.readLine()) != null) {
+                stringBuilder.append(catchStr);
+                bufferedWriter.write(catchStr);
+            }
+            bufferedWriter.flush();
+            updateDataCatch(dataUpdateMode.getLocalDataFileName(), stringBuilder.toString());
+            Log.d(LOG_TAG, dataUpdateMode.getLocalDataFileName() + "数据保存成功！");
+
+            bufferedReader.close();
+            inputStream.close();
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
+        }
+        dataUpdateMode.setCheckUpdateFinish(true);
+        return stringBuilder.toString();
+    }
+
+    private static void updateDataCatch(String localDataFileName, String dataStr) {
+        switch (localDataFileName) {
+            case DataUpdateMode.RECOMMEND_HANDPICK_LOCAL_DATA_FILE_NAME:
+                DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR = dataStr;
+                break;
+            case DataUpdateMode.RECOMMEND_ATTENTION_LOCAL_DATA_FILE_NAME:
+                DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR = dataStr;
+                break;
+            case DataUpdateMode.RECOMMEND_MIND_HOTTEST_LOCAL_DATA_FILE_NAME:
+                DataUpdateMode.RECOMMEND_MIND_HOTTEST_JSON_DATA_STR = dataStr;
+                break;
+            case DataUpdateMode.RECOMMEND_MIND_NEWEST_LOCAL_DATA_FILE_NAME:
+                DataUpdateMode.RECOMMEND_MIND_NEWEST_JSON_DATA_STR = dataStr;
+                break;
+        }
+    }
+
+    private class GetUpdateRunnable implements Runnable {
         private DataUpdateMode dataUpdateMode;
 
         public GetUpdateRunnable(DataUpdateMode dataUpdateMode) {
@@ -75,147 +230,40 @@ public class DataUpdateUtil {
         @Override
         public void run() {
             //Get Update DateTime File From Server
-            handleUpdate();
+            handleUpdate(dataUpdateMode);
         }
 
-        private void handleUpdate() {
-            //Get Update DateTime File From Server
-            String updateDateTimeStr = getUpdateStrFromServer(dataUpdateMode.getUpdateDatetimeFileUrl());
-            Log.d(LOG_TAG, "来自服务器的数据->"+updateDateTimeStr);
-            if (updateDateTimeStr == null) {
-                dataUpdateMode.setCheckUpdateFinish(true);
-                Log.d(LOG_TAG, "服务器数据获取失败！");
-                return;
-            }
 
-            //Json Phrase DateTime Str
-            JsonReader jsonReader = new JsonReader(new StringReader(updateDateTimeStr));
-            jsonReader.setLenient(true);
-            JsonParser parser = new JsonParser();
-            JsonElement element = parser.parse(jsonReader);
-            JsonObject rootObj = element.getAsJsonObject();
-            JsonPrimitive serverUpdateDateTime = rootObj.getAsJsonPrimitive(dataUpdateMode.getDataNewestUpdateDateTimeKey());
-            String serverDateTimeStr = serverUpdateDateTime.getAsString();
-            String localDateTimeStr = SharedPreferenceUtil.getString(dataUpdateMode.getDataNewestUpdateDateTimeKey());
-
-            if (serverDateTimeStr != null && localDateTimeStr != null) {
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-                int compareResult = DataTimeUtil.dateTimeCompare(serverDateTimeStr, localDateTimeStr, simpleDateFormat);
-                switch (compareResult) {
-                    case 1:
-                        SharedPreferenceUtil.putString(dataUpdateMode.getDataNewestUpdateDateTimeKey(), serverDateTimeStr);
-                        //Update Data File
-                        getDataFile(dataUpdateMode.getRemoteDataFileUrl(), dataUpdateMode.getLocalDataFileName());
-                        Log.d(LOG_TAG, "通过比较更新时间!");
-                        break;
-                    default:
-                        dataUpdateMode.setCheckUpdateFinish(true);
-                        Log.d(LOG_TAG, "当前已是最新数据!");
-                }
-            } else if (serverDateTimeStr != null && localDateTimeStr == null) {
-                SharedPreferenceUtil.putString(dataUpdateMode.getDataNewestUpdateDateTimeKey(), serverDateTimeStr);
-                //Update Data File
-                getDataFile(dataUpdateMode.getRemoteDataFileUrl(), dataUpdateMode.getLocalDataFileName());
-                Log.d(LOG_TAG, "首次更新时间!");
-            } else {
-                dataUpdateMode.setCheckUpdateFinish(true);
-                Log.d(LOG_TAG, "获取更新时间失败!");
-            }
-        }
-
-        private String getUpdateStrFromServer(String updateDatetimeFileUrl) {
-            StringBuilder stringBuilder = new StringBuilder();
-            HttpURLConnection urlConnection = null;
-            try {
-                URL updateFileUrl = new URL(updateDatetimeFileUrl);
-                urlConnection = (HttpURLConnection) updateFileUrl.openConnection();
-                urlConnection.setConnectTimeout(3 * 1000);
-                urlConnection.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
-                InputStream inputStream = urlConnection.getInputStream();
-
-                if (!urlConnection.getContentType().contains("json")) {
-                    Log.d(LOG_TAG, "网络已被重定向，需确保网络通畅");
-                    inputStream.close();
-                    urlConnection.disconnect();
-                    return null;
-                }
-
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                String lineStr;
-                while ((lineStr = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(lineStr);
-                }
-                inputStream.close();
-                bufferedReader.close();
-                return stringBuilder.toString();
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                if (urlConnection != null) {
-                    urlConnection.disconnect();
-                }
-            }
-            return null;
-        }
-
-        private void getDataFile(String remoteDataFileUrl, String localDataFileName){
-            HttpURLConnection urlConnection = null;
-            try {
-                URL dataFileUrl = new URL(remoteDataFileUrl);
-                File saveFile = new File(mContext.getFilesDir(), localDataFileName);
-
-                urlConnection = (HttpURLConnection) dataFileUrl.openConnection();
-                urlConnection.setConnectTimeout(3 * 1000);
-                urlConnection.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
-                InputStream inputStream = urlConnection.getInputStream();
-                OutputStream outputStream = new FileOutputStream(saveFile);
-
-                byte[] buffer = new byte[32];
-                int hasRead = 0;
-                while ((hasRead = inputStream.read(buffer)) > 0) {
-                    outputStream.write(buffer, 0, hasRead);
-                }
-                Log.d(LOG_TAG,localDataFileName+"数据保存成功！");
-                inputStream.close();
-                outputStream.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                if (urlConnection != null) {
-                    urlConnection.disconnect();
-                }
-            }
-            dataUpdateMode.setCheckUpdateFinish(true);
-        }
     }
 
 
-    private class CheckUpdateState implements Runnable{
-        private boolean allCheckUpdateFinished=true;
+    private class CheckUpdateState implements Runnable {
+        private boolean allCheckUpdateFinished = true;
+
         public CheckUpdateState() {
         }
 
         @Override
         public void run() {
-            while(true){
-                Log.d(LOG_TAG,"循环检测任务完成情况");
+            while (true) {
+                Log.d(LOG_TAG, "循环检测任务完成情况");
 
-                allCheckUpdateFinished=true;
-                for (int i=0;i<dataUpdateList.size();i++){
-                    if (dataUpdateList.get(i).isCheckUpdateFinish()==false){
-                        allCheckUpdateFinished=false;
+                allCheckUpdateFinished = true;
+                for (int i = 0; i < dataUpdateList.size(); i++) {
+                    if (dataUpdateList.get(i).isCheckUpdateFinish() == false) {
+                        allCheckUpdateFinished = false;
                     }
                 }
 
-                if(allCheckUpdateFinished){
-                    Log.d(LOG_TAG,"数据更新已完成");
+                if (allCheckUpdateFinished) {
+                    Log.d(LOG_TAG, "数据更新已完成");
 
                     //Add Notify At Here
-                    if(mHandler!=null){
-                        Message msg=mHandler.obtainMessage();
-                        msg.what=UPDATE_DATA_FINISH_MSG;
+                    if (mHandler != null) {
+                        Message msg = mHandler.obtainMessage();
+                        msg.what = UPDATE_DATA_FINISH_MSG;
                         mHandler.dispatchMessage(msg);
-                        mHandler=null;
+                        mHandler = null;
                     }
 
                     break;
@@ -224,4 +272,37 @@ public class DataUpdateUtil {
             }
         }
     }
+
+    private class PrepareLocalDataToCatch implements Runnable {
+        @Override
+        public void run() {
+            StringBuilder stringBuilder = new StringBuilder();
+
+            for (int i = 0; i < dataUpdateList.size(); i++) {
+                stringBuilder.delete(0, stringBuilder.length());
+                DataUpdateMode dataUpdateMode = dataUpdateList.get(i);
+                File localDataFile = new File(mContext.getFilesDir(), dataUpdateMode.getLocalDataFileName());
+                BufferedReader bufferedReader;
+
+                try {
+                    InputStream inputStream = new FileInputStream(localDataFile);
+                    bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+                    String catchStr;
+                    while ((catchStr = bufferedReader.readLine()) != null) {
+                        stringBuilder.append(catchStr);
+                    }
+
+                    updateDataCatch(dataUpdateMode.getLocalDataFileName(), stringBuilder.toString());
+
+                    inputStream.close();
+                    bufferedReader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
 }

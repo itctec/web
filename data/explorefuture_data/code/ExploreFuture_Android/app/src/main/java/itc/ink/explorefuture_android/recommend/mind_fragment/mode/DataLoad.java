@@ -41,11 +41,14 @@ public class DataLoad {
         Object loadTopicData(Context mContext);
 
         /**
-         * 加载Mind数据
+         * 加载Mind Hottest数据
          */
-        Object loadMindData(Context mContext);
+        Object loadMindHottestData(Context mContext);
 
-
+        /**
+         * 加载Mind Newest数据
+         */
+        Object loadMindNewestData(Context mContext);
 
     }
 }

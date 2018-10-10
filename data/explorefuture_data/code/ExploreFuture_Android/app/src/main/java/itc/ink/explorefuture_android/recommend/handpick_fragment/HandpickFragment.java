@@ -31,7 +31,7 @@ public class HandpickFragment extends Fragment {
     private HandPickWrapperAdapter contentRvWrapperAdapter;
 
     private DataLoad mDataLoad;
-    private ArrayList<BannerDataMode> mBannerData;
+    private ArrayList<BannerDataMode> mBannerData=new ArrayList();
     private ArrayList<SolutionDataMode> mSolutionData;
     private ArrayList<ActionSubjectDataMode> mActionSubjectData;
     private ArrayList<ActionListDataModel> mActionListData;

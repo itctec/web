@@ -1,6 +1,7 @@
 package itc.ink.explorefuture_android.recommend.mind_fragment.adapter;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.FileObserver;
 import android.os.Handler;
 import android.os.Message;
@@ -12,10 +13,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 import com.youth.banner.Banner;
 
 import java.io.File;
+import java.io.StringReader;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +35,7 @@ import itc.ink.explorefuture_android.app.activity.MainActivity;
 import itc.ink.explorefuture_android.app.app_level.mind_recyclerview.adapter.MindDataAdapter;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.app.app_level.mind_recyclerview.mode.MindListDataMode;
+import itc.ink.explorefuture_android.app.utils.SharedPreferenceUtil;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateMode;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateUtil;
 import itc.ink.explorefuture_android.recommend.mind_fragment.MindFragment;
@@ -37,18 +49,18 @@ import itc.ink.explorefuture_android.recommend.mind_fragment.mode.mode_topic.Top
 
 public class MindWrapAdapter extends RecyclerView.Adapter<MindWrapAdapter.WrapperVH> {
     private final String LOG_TAG = ExploreFutureApplication.LOG_TAG + "MindWrapAdapter";
+    public static final String RECOMMEND_MIND_TAB_KEY = "recommend_mind_current_tab";
+    public static final String RECOMMEND_MIND_VALUE_HOTTEST = "hottest";
+    public static final String RECOMMEND_MIND_VALUE_NEWEST = "newest";
     private Context mContext;
 
-    public static Handler mHandler;
-
     private ArrayList<TopicListDataMode> mTopicData;
-    private ArrayList<MindListDataMode> mMindListData;
-    private MindDataAdapter mMindDataAdapter;
+    private static ArrayList<MindListDataMode> mMindListData;
+    private static MindDataAdapter mMindDataAdapter;
 
     private DelegateInterface mDelegateInterface;
 
     public MindWrapAdapter(Context mContext, ArrayList<TopicListDataMode> mTopicData, ArrayList<MindListDataMode> mMindListData) {
-        initHandler();
         this.mContext = mContext;
         this.mTopicData = mTopicData;
         this.mMindListData = mMindListData;
@@ -77,6 +89,11 @@ public class MindWrapAdapter extends RecyclerView.Adapter<MindWrapAdapter.Wrappe
         } else if (position == 1) {
             holder.hottestBtn.setOnClickListener(new HottestBtnClickListener(holder));
             holder.newestBtn.setOnClickListener(new NewestBtnClickListener(holder));
+            if (SharedPreferenceUtil.getString(RECOMMEND_MIND_TAB_KEY).equals(RECOMMEND_MIND_VALUE_NEWEST)) {
+                updateNavigationTopBtnState(holder, holder.newestBtn);
+            } else {
+                updateNavigationTopBtnState(holder, holder.hottestBtn);
+            }
         } else {
             if (holder.mindRecyclerView.getAdapter() == null) {
                 holder.mindRecyclerView.setAdapter(mMindDataAdapter);
@@ -86,7 +103,6 @@ public class MindWrapAdapter extends RecyclerView.Adapter<MindWrapAdapter.Wrappe
         }
 
     }
-
 
     @Override
     public int getItemCount() {
@@ -147,26 +163,10 @@ public class MindWrapAdapter extends RecyclerView.Adapter<MindWrapAdapter.Wrappe
         public void onClick(View view) {
             updateNavigationTopBtnState(holder, view);
 
-            List<DataUpdateMode> dataUpdateList = new ArrayList<>();
-            DataUpdateMode recommend_Mind_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
-                    DataUpdateMode.RECOMMEND_MIND_DATA_FILE_URL,
-                    DataUpdateMode.RECOMMEND_MIND_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
-                    DataUpdateMode.RECOMMEND_MIND_LOCAL_DATA_FILE_NAME,
-                    false);
-            dataUpdateList.add(recommend_Mind_Data_UpdateMode);
+            SharedPreferenceUtil.putString(RECOMMEND_MIND_TAB_KEY, RECOMMEND_MIND_VALUE_HOTTEST);
 
-            DataUpdateUtil dataUpdateUtil = new DataUpdateUtil(mContext, dataUpdateList, mHandler);
-            dataUpdateUtil.updateData();
-
-            //Bug Point
-            DataLoad mDataLoad = new DataLoad(mContext);
-            if (mDataLoad.outService.prepareData(mContext)) {
-                mMindListData.clear();
-                for (MindListDataMode mindListDataMode : (ArrayList<MindListDataMode>) mDataLoad.outService.loadMindData(mContext)) {
-                    mMindListData.add(mindListDataMode);
-                }
-            }
-            mMindDataAdapter.notifyDataSetChanged();
+            UpdateAsyncTask updateAsyncTask = new UpdateAsyncTask(mContext);
+            updateAsyncTask.execute();
         }
     }
 
@@ -181,26 +181,10 @@ public class MindWrapAdapter extends RecyclerView.Adapter<MindWrapAdapter.Wrappe
         public void onClick(View view) {
             updateNavigationTopBtnState(holder, view);
 
-            List<DataUpdateMode> dataUpdateList = new ArrayList<>();
-            DataUpdateMode recommend_Mind_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
-                    DataUpdateMode.RECOMMEND_MIND_DATA_FILE_URL,
-                    DataUpdateMode.RECOMMEND_MIND_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
-                    DataUpdateMode.RECOMMEND_MIND_LOCAL_DATA_FILE_NAME,
-                    false);
-            dataUpdateList.add(recommend_Mind_Data_UpdateMode);
+            SharedPreferenceUtil.putString(RECOMMEND_MIND_TAB_KEY, RECOMMEND_MIND_VALUE_NEWEST);
 
-            DataUpdateUtil dataUpdateUtil = new DataUpdateUtil(mContext, dataUpdateList, mHandler);
-            dataUpdateUtil.updateData();
-
-            //Bug Point
-            DataLoad mDataLoad = new DataLoad(mContext);
-            if (mDataLoad.outService.prepareData(mContext)) {
-                mMindListData.clear();
-                for (MindListDataMode mindListDataMode : (ArrayList<MindListDataMode>) mDataLoad.outService.loadMindData(mContext)) {
-                    mMindListData.add(mindListDataMode);
-                }
-            }
-            mMindDataAdapter.notifyDataSetChanged();
+            UpdateAsyncTask updateAsyncTask = new UpdateAsyncTask(mContext);
+            updateAsyncTask.execute();
         }
     }
 
@@ -225,15 +209,82 @@ public class MindWrapAdapter extends RecyclerView.Adapter<MindWrapAdapter.Wrappe
         void handleTransaction(Context mContext, WrapperVH mHolder, Object mData);
     }
 
-    private void initHandler() {
-        mHandler = new Handler() {
-            public void handleMessage(Message msg) {
-                if (msg.what == DataUpdateUtil.UPDATE_DATA_FINISH_MSG) {
+    static class UpdateAsyncTask extends AsyncTask<Void, Void, String> {
+        WeakReference<Context> mContext;
 
-                }
+
+        UpdateAsyncTask(Context context) {
+            mContext = new WeakReference<Context>(context);
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            DataUpdateMode recommendMindDataUpdateMode = null;
+            if (SharedPreferenceUtil.getString(RECOMMEND_MIND_TAB_KEY).equals(RECOMMEND_MIND_VALUE_NEWEST)) {
+                recommendMindDataUpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
+                        DataUpdateMode.RECOMMEND_MIND_NEWEST_DATA_FILE_URL,
+                        DataUpdateMode.RECOMMEND_MIND_NEWEST_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
+                        DataUpdateMode.RECOMMEND_MIND_NEWEST_LOCAL_DATA_FILE_NAME,
+                        false);
+            } else {
+                recommendMindDataUpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
+                        DataUpdateMode.RECOMMEND_MIND_HOTTEST_DATA_FILE_URL,
+                        DataUpdateMode.RECOMMEND_MIND_HOTTEST_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
+                        DataUpdateMode.RECOMMEND_MIND_HOTTEST_LOCAL_DATA_FILE_NAME,
+                        false);
             }
-        };
+
+            String resultStr = DataUpdateUtil.updateData(recommendMindDataUpdateMode);
+            return resultStr;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            Context context = mContext.get();
+            if (s != null && !s.isEmpty()) {
+                String showDataStr = "";
+                switch (s) {
+                    case DataUpdateUtil.UPDATE_RESULT_NEWEST_ALREADY:
+                        Toast.makeText(context, "暂无更新", Toast.LENGTH_SHORT).show();
+                        if (SharedPreferenceUtil.getString(RECOMMEND_MIND_TAB_KEY).equals(RECOMMEND_MIND_VALUE_NEWEST)) {
+                            showDataStr = DataUpdateMode.RECOMMEND_MIND_NEWEST_JSON_DATA_STR;
+                        } else {
+                            showDataStr = DataUpdateMode.RECOMMEND_MIND_HOTTEST_JSON_DATA_STR;
+                        }
+                        break;
+                    case DataUpdateUtil.UPDATE_RESULT_FAILED:
+                        if (SharedPreferenceUtil.getString(RECOMMEND_MIND_TAB_KEY).equals(RECOMMEND_MIND_VALUE_NEWEST)) {
+                            showDataStr = DataUpdateMode.RECOMMEND_MIND_NEWEST_JSON_DATA_STR;
+                        } else {
+                            showDataStr = DataUpdateMode.RECOMMEND_MIND_HOTTEST_JSON_DATA_STR;
+                        }
+                        Toast.makeText(context, "更新数据失败", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        showDataStr = s;
+                        Toast.makeText(context, "数据已更新", Toast.LENGTH_SHORT).show();
+                }
+
+                ArrayList<MindListDataMode> mindDataArray;
+                JsonReader jsonReader = new JsonReader(new StringReader(showDataStr));
+                jsonReader.setLenient(true);
+                JsonParser jsonParser = new JsonParser();
+                JsonElement jsonElement = jsonParser.parse(jsonReader);
+                JsonObject rootObj = jsonElement.getAsJsonObject();
+                JsonArray mindDataJsonArray = rootObj.getAsJsonArray("array_mind");
+                Gson gson = new Gson();
+                mindDataArray = gson.fromJson(mindDataJsonArray, new TypeToken<List<MindListDataMode>>() {
+                }.getType());
+
+                mMindListData.clear();
+                for (MindListDataMode mindListDataMode : mindDataArray) {
+                    mMindListData.add(mindListDataMode);
+                }
+                mMindDataAdapter.notifyDataSetChanged();
+            }
+        }
     }
 
+    ;
 
 }

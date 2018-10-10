@@ -23,6 +23,20 @@
   ],
   "array_mind":[
     {
+      "id":"0000000010_1",
+      "name":"大疆",
+      "datetime":"2018-09-26 12:00",
+      "content_text":"【哈苏相机】源于对技术和影像质量的不懈追求与共同主张，大疆创新携手高端中画幅相机制造商哈苏，历时两年共同研发设计出 L1D-20c 相机。曾记录过人类首次登月的哈苏，此次在镜头定义，图像处理引擎开发，图像效果优化等多个方面与大疆展开合作，共同打造出全新航拍旗舰产品“御”Mavic 2 专业版，结合能带来逼真色彩的哈苏自然色彩解决方案(HNCS)[3]，将航拍影像提升至全新高度。",
+      "accept_num":"61894",
+      "comment_num":"21800",
+      "retransmission_num":"1358",
+      "head_portrait_image_url":"http://www.itc.ink/data/explorefuture_data/account/0000000010/information/head_portrait.png",
+      "head_portrait_image_update_datetime":"2018-09-30 08:00",
+      "image_url_list":[
+      ],
+      "video_url":"http://www.itc.ink/data/explorefuture_data/account/0000000010/mind/1/video/1.mp4"
+    },
+    {
       "id":"0000000002_1",
       "name":"华为",
       "datetime":"2018-09-26 12:00",

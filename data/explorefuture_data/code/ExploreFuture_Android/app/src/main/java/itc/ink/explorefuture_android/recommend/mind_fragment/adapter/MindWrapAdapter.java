@@ -95,6 +95,7 @@ public class MindWrapAdapter extends RecyclerView.Adapter<MindWrapAdapter.Wrappe
                 updateNavigationTopBtnState(holder, holder.hottestBtn);
             }
         } else {
+            holder.mindRecyclerView.setFocusableInTouchMode(false);
             if (holder.mindRecyclerView.getAdapter() == null) {
                 holder.mindRecyclerView.setAdapter(mMindDataAdapter);
                 RecyclerView.LayoutManager contentRvLayoutManager = new LinearLayoutManager(mContext);

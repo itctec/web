@@ -52,6 +52,7 @@ public class RecommendFragment extends Fragment {
         recommendContentViewPager = rootView.findViewById(R.id.recommend_Content_ViewPager);
         mFragmentList=initFragmentList();
         recommendContentViewPager.setAdapter(new RecommendFragmentViewPagerAdapter(getChildFragmentManager(),mFragmentList));
+        recommendContentViewPager.setOffscreenPageLimit(3);
         recommendContentViewPager.addOnPageChangeListener(new RecommendContentViewPagerChangeListener());
 
         return rootView;

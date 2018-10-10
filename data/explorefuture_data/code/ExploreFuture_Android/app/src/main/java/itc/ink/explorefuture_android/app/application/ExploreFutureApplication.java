@@ -5,6 +5,8 @@ import android.content.Context;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
+import com.squareup.leakcanary.LeakCanary;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +29,8 @@ public class ExploreFutureApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        LeakCanary.install(this);
 
         //Update Data
         updateData();

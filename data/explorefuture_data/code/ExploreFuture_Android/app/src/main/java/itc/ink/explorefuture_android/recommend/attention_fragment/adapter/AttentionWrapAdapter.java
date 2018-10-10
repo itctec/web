@@ -60,6 +60,7 @@ public class AttentionWrapAdapter extends RecyclerView.Adapter<AttentionWrapAdap
                 holder.recommendRecyclerView.setLayoutManager(contentRvLayoutManager);
             }
         } else {
+            holder.mindRecyclerView.setFocusableInTouchMode(false);
             if (holder.mindRecyclerView.getAdapter() == null) {
                 holder.mindRecyclerView.setAdapter(mMindDataAdapter);
                 RecyclerView.LayoutManager contentRvLayoutManager = new LinearLayoutManager(mContext);

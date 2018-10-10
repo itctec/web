@@ -65,7 +65,6 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
             holder.mindItemContentText.setText(mindListDataItem.getContent_text());
         }
         holder.mindItemContentText.setOnClickListener(new AttentionItemContentTextClickListener(mindListDataItem.getId()));
-        holder.mindItemContentText.setFocusableInTouchMode(true);
 
         holder.mindItemContentMediaLayout.removeAllViews();
         if (mindListDataItem.getImage_url_list().size() > 0 && mindListDataItem.getImage_url_list().size() <= 9) {
@@ -97,6 +96,7 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
         RecyclerView.LayoutManager contentRvLayoutManager = new GridLayoutManager(mContext, 3);
         imageRecyclerView.setLayoutManager(contentRvLayoutManager);
         imageRecyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        imageRecyclerView.setFocusableInTouchMode(false);
 
         DividerItemDecoration dividerItemDecorationOne = new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL);
         dividerItemDecorationOne.setDrawable(ContextCompat.getDrawable(mContext, R.drawable.mind_image_divider_horizontal));

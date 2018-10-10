@@ -22,6 +22,23 @@
     }
   ],
   "array_mind":[
+    {
+      "id":"0000000008_1",
+      "name":"Sueduo",
+      "datetime":"2018-09-26 12:00",
+      "content_text":"【大漠孤烟直，长河落日圆】新疆，我来啦！再来一次说走就走的旅行，也许是最后一次任性了。不是我多有钱，我也知道风景不会跑，以后还可以去，但以后肯定不同于现在的心境！我是一个以梦为马的人，年华虚度，空有一身疲倦，但愿阅尽千帆，不负昭华，归来，仍是少年🙏🙏🙏 ​​​",
+      "accept_num":"61894",
+      "comment_num":"21800",
+      "retransmission_num":"1358",
+      "head_portrait_image_url":"http://www.itc.ink/data/explorefuture_data/account/0000000008/information/head_portrait.png",
+      "head_portrait_image_update_datetime":"2018-09-30 08:00",
+      "image_url_list":[
+        "http://www.itc.ink/data/explorefuture_data/account/0000000008/mind/1/image/1.png",
+        "http://www.itc.ink/data/explorefuture_data/account/0000000008/mind/1/image/2.png",
+        "http://www.itc.ink/data/explorefuture_data/account/0000000008/mind/1/image/3.png"
+      ],
+      "video_url":""
+    },
   	{
       "id":"0000000006_1",
       "name":"Apple",

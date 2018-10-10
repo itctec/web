@@ -23,6 +23,22 @@
   ],
   "array_mind":[
     {
+      "id":"0000000003_1",
+      "name":"腾讯",
+      "datetime":"2018-09-26 12:00",
+      "content_text":"与电竞合作真的那么难吗？与赛事合作应该关注哪些？要怎么通过与选手/俱乐部/直播平台互动实现共赢？想知道电竞用户到底关注产业中的哪些环节么？",
+      "accept_num":"61894",
+      "comment_num":"21800",
+      "retransmission_num":"1358",
+      "head_portrait_image_url":"http://www.itc.ink/data/explorefuture_data/account/0000000003/information/head_portrait.png",
+      "head_portrait_image_update_datetime":"2018-09-30 08:00",
+      "image_url_list":[
+        "http://www.itc.ink/data/explorefuture_data/account/0000000003/mind/1/image/1.png",
+        "http://www.itc.ink/data/explorefuture_data/account/0000000003/mind/1/image/1.png"
+      ],
+      "video_url":""
+    },
+    {
       "id":"0000000010_1",
       "name":"大疆",
       "datetime":"2018-09-26 12:00",

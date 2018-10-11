@@ -225,42 +225,6 @@
           "left_image_update_datetime": "2018-09-26 18:56",
           "right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
           "right_image_update_datetime": "2018-09-26 18:56"
-        },
-        {
-          "sort_id": "C_S_05",
-          "sort_title": "沟通",
-          "sort_summary": "学会沟通可以让生活更简单",
-          "left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
-          "left_image_update_datetime": "2018-09-26 18:56",
-          "right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
-          "right_image_update_datetime": "2018-09-26 18:56"
-        },
-        {
-          "sort_id": "C_S_06",
-          "sort_title": "沟通",
-          "sort_summary": "学会沟通可以让生活更简单",
-          "left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
-          "left_image_update_datetime": "2018-09-26 18:56",
-          "right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
-          "right_image_update_datetime": "2018-09-26 18:56"
-        },
-        {
-          "sort_id": "C_S_07",
-          "sort_title": "沟通",
-          "sort_summary": "学会沟通可以让生活更简单",
-          "left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
-          "left_image_update_datetime": "2018-09-26 18:56",
-          "right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
-          "right_image_update_datetime": "2018-09-26 18:56"
-        },
-        {
-          "sort_id": "C_S_08",
-          "sort_title": "沟通",
-          "sort_summary": "学会沟通可以让生活更简单",
-          "left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
-          "left_image_update_datetime": "2018-09-26 18:56",
-          "right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
-          "right_image_update_datetime": "2018-09-26 18:56"
         }
       ]
     },
@@ -331,9 +295,26 @@
           "left_image_update_datetime": "2018-09-26 18:56",
           "right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
           "right_image_update_datetime": "2018-09-26 18:56"
-        },
+        }
+      ]
+    }
+    ,
+    {
+      "sort_id":"E",
+      "sort_title": "环境",
+      "product_left_id": "E_P_01_00001",
+      "product_left_title": "戴森吸尘器",
+      "product_left_summary": "超大功率 吸走你看不见的微生物",
+      "product_left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
+      "product_left_image_update_datetime": "2018-09-26 18:56",
+      "product_right_id": "E_S_01_00001",
+      "product_right_title": "家装去甲醛",
+      "product_right_summary": "简单、低成本去除甲醛",
+      "product_right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
+      "product_right_image_update_datetime": "2018-09-26 18:56",
+      "array_sub_sort":[
         {
-          "sort_id": "D_S_07",
+          "sort_id": "E_S_01",
           "sort_title": "沟通",
           "sort_summary": "学会沟通可以让生活更简单",
           "left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
@@ -342,7 +323,238 @@
           "right_image_update_datetime": "2018-09-26 18:56"
         },
         {
-          "sort_id": "D_S_08",
+          "sort_id": "E_S_02",
+          "sort_title": "沟通",
+          "sort_summary": "学会沟通可以让生活更简单",
+          "left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
+          "left_image_update_datetime": "2018-09-26 18:56",
+          "right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
+          "right_image_update_datetime": "2018-09-26 18:56"
+        },
+        {
+          "sort_id": "E_S_03",
+          "sort_title": "沟通",
+          "sort_summary": "学会沟通可以让生活更简单",
+          "left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
+          "left_image_update_datetime": "2018-09-26 18:56",
+          "right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
+          "right_image_update_datetime": "2018-09-26 18:56"
+        },
+        {
+          "sort_id": "E_S_04",
+          "sort_title": "沟通",
+          "sort_summary": "学会沟通可以让生活更简单",
+          "left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
+          "left_image_update_datetime": "2018-09-26 18:56",
+          "right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
+          "right_image_update_datetime": "2018-09-26 18:56"
+        }
+      ]
+    }
+    ,
+    {
+      "sort_id":"F",
+      "sort_title": "环境",
+      "product_left_id": "F_P_01_00001",
+      "product_left_title": "戴森吸尘器",
+      "product_left_summary": "超大功率 吸走你看不见的微生物",
+      "product_left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
+      "product_left_image_update_datetime": "2018-09-26 18:56",
+      "product_right_id": "F_S_01_00001",
+      "product_right_title": "家装去甲醛",
+      "product_right_summary": "简单、低成本去除甲醛",
+      "product_right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
+      "product_right_image_update_datetime": "2018-09-26 18:56",
+      "array_sub_sort":[
+        {
+          "sort_id": "F_S_01",
+          "sort_title": "沟通",
+          "sort_summary": "学会沟通可以让生活更简单",
+          "left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
+          "left_image_update_datetime": "2018-09-26 18:56",
+          "right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
+          "right_image_update_datetime": "2018-09-26 18:56"
+        },
+        {
+          "sort_id": "F_S_02",
+          "sort_title": "沟通",
+          "sort_summary": "学会沟通可以让生活更简单",
+          "left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
+          "left_image_update_datetime": "2018-09-26 18:56",
+          "right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
+          "right_image_update_datetime": "2018-09-26 18:56"
+        },
+        {
+          "sort_id": "F_S_03",
+          "sort_title": "沟通",
+          "sort_summary": "学会沟通可以让生活更简单",
+          "left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
+          "left_image_update_datetime": "2018-09-26 18:56",
+          "right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
+          "right_image_update_datetime": "2018-09-26 18:56"
+        },
+        {
+          "sort_id": "F_S_04",
+          "sort_title": "沟通",
+          "sort_summary": "学会沟通可以让生活更简单",
+          "left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
+          "left_image_update_datetime": "2018-09-26 18:56",
+          "right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
+          "right_image_update_datetime": "2018-09-26 18:56"
+        },
+        {
+          "sort_id": "F_S_05",
+          "sort_title": "沟通",
+          "sort_summary": "学会沟通可以让生活更简单",
+          "left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
+          "left_image_update_datetime": "2018-09-26 18:56",
+          "right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
+          "right_image_update_datetime": "2018-09-26 18:56"
+        },
+        {
+          "sort_id": "F_S_06",
+          "sort_title": "沟通",
+          "sort_summary": "学会沟通可以让生活更简单",
+          "left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
+          "left_image_update_datetime": "2018-09-26 18:56",
+          "right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
+          "right_image_update_datetime": "2018-09-26 18:56"
+        },
+        {
+          "sort_id": "F_S_07",
+          "sort_title": "沟通",
+          "sort_summary": "学会沟通可以让生活更简单",
+          "left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
+          "left_image_update_datetime": "2018-09-26 18:56",
+          "right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
+          "right_image_update_datetime": "2018-09-26 18:56"
+        },
+        {
+          "sort_id": "F_S_08",
+          "sort_title": "沟通",
+          "sort_summary": "学会沟通可以让生活更简单",
+          "left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
+          "left_image_update_datetime": "2018-09-26 18:56",
+          "right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
+          "right_image_update_datetime": "2018-09-26 18:56"
+        }
+      ]
+    }
+    ,
+    {
+      "sort_id":"G",
+      "sort_title": "环境",
+      "product_left_id": "G_P_01_00001",
+      "product_left_title": "戴森吸尘器",
+      "product_left_summary": "超大功率 吸走你看不见的微生物",
+      "product_left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
+      "product_left_image_update_datetime": "2018-09-26 18:56",
+      "product_right_id": "G_S_01_00001",
+      "product_right_title": "家装去甲醛",
+      "product_right_summary": "简单、低成本去除甲醛",
+      "product_right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
+      "product_right_image_update_datetime": "2018-09-26 18:56",
+      "array_sub_sort":[
+        {
+          "sort_id": "G_S_01",
+          "sort_title": "沟通",
+          "sort_summary": "学会沟通可以让生活更简单",
+          "left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
+          "left_image_update_datetime": "2018-09-26 18:56",
+          "right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
+          "right_image_update_datetime": "2018-09-26 18:56"
+        },
+        {
+          "sort_id": "G_S_02",
+          "sort_title": "沟通",
+          "sort_summary": "学会沟通可以让生活更简单",
+          "left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
+          "left_image_update_datetime": "2018-09-26 18:56",
+          "right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
+          "right_image_update_datetime": "2018-09-26 18:56"
+        },
+        {
+          "sort_id": "G_S_03",
+          "sort_title": "沟通",
+          "sort_summary": "学会沟通可以让生活更简单",
+          "left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
+          "left_image_update_datetime": "2018-09-26 18:56",
+          "right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
+          "right_image_update_datetime": "2018-09-26 18:56"
+        },
+        {
+          "sort_id": "G_S_04",
+          "sort_title": "沟通",
+          "sort_summary": "学会沟通可以让生活更简单",
+          "left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
+          "left_image_update_datetime": "2018-09-26 18:56",
+          "right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
+          "right_image_update_datetime": "2018-09-26 18:56"
+        },
+        {
+          "sort_id": "G_S_05",
+          "sort_title": "沟通",
+          "sort_summary": "学会沟通可以让生活更简单",
+          "left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
+          "left_image_update_datetime": "2018-09-26 18:56",
+          "right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
+          "right_image_update_datetime": "2018-09-26 18:56"
+        },
+        {
+          "sort_id": "G_S_06",
+          "sort_title": "沟通",
+          "sort_summary": "学会沟通可以让生活更简单",
+          "left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
+          "left_image_update_datetime": "2018-09-26 18:56",
+          "right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
+          "right_image_update_datetime": "2018-09-26 18:56"
+        }
+      ]
+    }
+    ,
+    {
+      "sort_id":"H",
+      "sort_title": "环境",
+      "product_left_id": "H_P_01_00001",
+      "product_left_title": "戴森吸尘器",
+      "product_left_summary": "超大功率 吸走你看不见的微生物",
+      "product_left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
+      "product_left_image_update_datetime": "2018-09-26 18:56",
+      "product_right_id": "H_S_01_00001",
+      "product_right_title": "家装去甲醛",
+      "product_right_summary": "简单、低成本去除甲醛",
+      "product_right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
+      "product_right_image_update_datetime": "2018-09-26 18:56",
+      "array_sub_sort":[
+        {
+          "sort_id": "H_S_01",
+          "sort_title": "沟通",
+          "sort_summary": "学会沟通可以让生活更简单",
+          "left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
+          "left_image_update_datetime": "2018-09-26 18:56",
+          "right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
+          "right_image_update_datetime": "2018-09-26 18:56"
+        },
+        {
+          "sort_id": "H_S_02",
+          "sort_title": "沟通",
+          "sort_summary": "学会沟通可以让生活更简单",
+          "left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
+          "left_image_update_datetime": "2018-09-26 18:56",
+          "right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
+          "right_image_update_datetime": "2018-09-26 18:56"
+        },
+        {
+          "sort_id": "H_S_03",
+          "sort_title": "沟通",
+          "sort_summary": "学会沟通可以让生活更简单",
+          "left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",
+          "left_image_update_datetime": "2018-09-26 18:56",
+          "right_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_right.png",
+          "right_image_update_datetime": "2018-09-26 18:56"
+        },
+        {
+          "sort_id": "H_S_04",
           "sort_title": "沟通",
           "sort_summary": "学会沟通可以让生活更简单",
           "left_image_url": "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/product/sort/product_sort_one_left.png",

@@ -301,7 +301,7 @@
     ,
     {
       "sort_id":"E",
-      "sort_title": "环境",
+      "sort_title": "医疗",
       "product_left_id": "E_P_01_00001",
       "product_left_title": "戴森吸尘器",
       "product_left_summary": "超大功率 吸走你看不见的微生物",
@@ -354,7 +354,7 @@
     ,
     {
       "sort_id":"F",
-      "sort_title": "环境",
+      "sort_title": "材料",
       "product_left_id": "F_P_01_00001",
       "product_left_title": "戴森吸尘器",
       "product_left_summary": "超大功率 吸走你看不见的微生物",
@@ -443,7 +443,7 @@
     ,
     {
       "sort_id":"G",
-      "sort_title": "环境",
+      "sort_title": "能源",
       "product_left_id": "G_P_01_00001",
       "product_left_title": "戴森吸尘器",
       "product_left_summary": "超大功率 吸走你看不见的微生物",
@@ -514,7 +514,7 @@
     ,
     {
       "sort_id":"H",
-      "sort_title": "环境",
+      "sort_title": "交通",
       "product_left_id": "H_P_01_00001",
       "product_left_title": "戴森吸尘器",
       "product_left_summary": "超大功率 吸走你看不见的微生物",

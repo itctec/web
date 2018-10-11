@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="itc.ink.explorefuture_android.app.app_level.image_view.ImageViewerActivity">
+    tools:context=".common_unit.image_view.ImageViewerActivity">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/image_Viewer_ViewPager"

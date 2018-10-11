@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.View;
 import android.widget.Toast;
 
+import java.lang.ref.WeakReference;
+
 import itc.ink.explorefuture_android.recommend.attention_fragment.adapter.AttentionWrapAdapter;
 
 /**
@@ -11,11 +13,18 @@ import itc.ink.explorefuture_android.recommend.attention_fragment.adapter.Attent
  */
 
 public class RecommendDelegateImplement implements AttentionWrapAdapter.DelegateInterface {
-    private Context mContext;
+    private WeakReference<Context> mWeakContextReference;
+
+    private Context getContext() {
+        if(mWeakContextReference.get() != null){
+            return mWeakContextReference.get();
+        }
+        return null;
+    }
 
     @Override
     public void handleTransaction(Context mContext, AttentionWrapAdapter.WrapperVH mHolder) {
-        this.mContext = mContext;
+        this.mWeakContextReference = new WeakReference<>(mContext);
 
         mHolder.recommendUpdateThemBtn.setOnClickListener(new RecommendUpdateThemBtnClickListener());
     }
@@ -24,7 +33,7 @@ public class RecommendDelegateImplement implements AttentionWrapAdapter.Delegate
     class RecommendUpdateThemBtnClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext,"换一批被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"换一批被点击",Toast.LENGTH_SHORT).show();
         }
     }
 }

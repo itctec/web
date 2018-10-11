@@ -1,4 +1,4 @@
-package itc.ink.explorefuture_android.app.app_level.image_view;
+package itc.ink.explorefuture_android.common_unit.image_view;
 
 import android.content.Context;
 import android.os.Message;
@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import itc.ink.explorefuture_android.R;
@@ -20,12 +21,19 @@ import itc.ink.explorefuture_android.R;
  */
 
 public class ImageViewerActivityViewPagerAdapter extends PagerAdapter {
-    private Context mContext;
+    private WeakReference<Context> mWeakContextReference;
     private ArrayList<String> mContentData;
 
     public ImageViewerActivityViewPagerAdapter(Context mContext, Object mContentData) {
-        this.mContext = mContext;
+        this.mWeakContextReference = new WeakReference<>(mContext);
         this.mContentData = (ArrayList<String>) mContentData;
+    }
+
+    private Context getContext() {
+        if(mWeakContextReference.get() != null){
+            return mWeakContextReference.get();
+        }
+        return null;
     }
 
     @Override
@@ -36,10 +44,10 @@ public class ImageViewerActivityViewPagerAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        View rootView = View.inflate(mContext, R.layout.app_level_image_view_viewpager_item, null);
+        View rootView = View.inflate(getContext(), R.layout.common_unit_image_view_viewpager_item, null);
         ImageView contentImage = rootView.findViewById(R.id.image_Viewer_Item_ImageView);
         contentImage.setOnClickListener(new ContentImageClickListener());
-        Glide.with(mContext).load(mContentData.get(position)).into(contentImage);
+        Glide.with(getContext()).load(mContentData.get(position)).into(contentImage);
         container.addView(rootView);
         return rootView;
     }

@@ -42,15 +42,15 @@ public class HandpickFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mDataLoad = new DataLoad(getActivity());
+        mDataLoad = new DataLoad();
         //Judge Data Prepare
-        if(mDataLoad.outService.prepareData(getActivity())){
-            mBannerData = (ArrayList<BannerDataMode>) mDataLoad.outService.loadBannerData(getActivity());
-            mSolutionData = (ArrayList<SolutionDataMode>) mDataLoad.outService.loadSolutionData(getActivity());
-            mActionSubjectData = (ArrayList<ActionSubjectDataMode>) mDataLoad.outService.loadActionSubjectData(getActivity());
-            mActionListData = (ArrayList<ActionListDataModel>) mDataLoad.outService.loadActionListData(getActivity());
-            mProductData = (ArrayList<ProductDataMode>) mDataLoad.outService.loadProductData(getActivity());
-            mInterestListData = (ArrayList<InterestDataModel>) mDataLoad.outService.loadInterestData(getActivity());
+        if(mDataLoad.outService.prepareData()){
+            mBannerData = (ArrayList<BannerDataMode>) mDataLoad.outService.loadBannerData();
+            mSolutionData = (ArrayList<SolutionDataMode>) mDataLoad.outService.loadSolutionData();
+            mActionSubjectData = (ArrayList<ActionSubjectDataMode>) mDataLoad.outService.loadActionSubjectData();
+            mActionListData = (ArrayList<ActionListDataModel>) mDataLoad.outService.loadActionListData();
+            mProductData = (ArrayList<ProductDataMode>) mDataLoad.outService.loadProductData();
+            mInterestListData = (ArrayList<InterestDataModel>) mDataLoad.outService.loadInterestData();
             //Judge Data Count
             if(mBannerData.size()>=1&&
                     mSolutionData.size()>=12&&

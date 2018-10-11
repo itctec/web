@@ -1,4 +1,4 @@
-package itc.ink.explorefuture_android.app.app_level.video_view;
+package itc.ink.explorefuture_android.common_unit.video_view;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -48,7 +48,7 @@ public class VideoViewerActivity extends Activity {
         String videoUrl = intent.getStringExtra(KEY_VIDEO_URL);
         String contentText = intent.getStringExtra(KEY_CONTENT_TEXT);
 
-        setContentView(R.layout.app_level_video_view_activity);
+        setContentView(R.layout.common_unit_video_view_activity);
 
         videoViewerVideoView = findViewById(R.id.video_Viewer_VideoView);
         videoViewerVideoView.setVideoPath(videoUrl);

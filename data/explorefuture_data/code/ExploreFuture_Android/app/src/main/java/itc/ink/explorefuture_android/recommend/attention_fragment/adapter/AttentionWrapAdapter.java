@@ -8,14 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import itc.ink.explorefuture_android.R;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
-import itc.ink.explorefuture_android.app.app_level.mind_recyclerview.adapter.MindDataAdapter;
+import itc.ink.explorefuture_android.common_unit.mind_recyclerview.adapter.MindDataAdapter;
 import itc.ink.explorefuture_android.recommend.attention_fragment.adapter.adapter_recommend.RecommendDataAdapter;
 import itc.ink.explorefuture_android.recommend.attention_fragment.adapter.implement.RecommendDelegateImplement;
-import itc.ink.explorefuture_android.app.app_level.mind_recyclerview.mode.MindListDataMode;
+import itc.ink.explorefuture_android.common_unit.mind_recyclerview.mode.MindListDataMode;
 import itc.ink.explorefuture_android.recommend.attention_fragment.mode.mode_recommend.RecommendListDataMode;
 
 /**
@@ -24,7 +25,7 @@ import itc.ink.explorefuture_android.recommend.attention_fragment.mode.mode_reco
 
 public class AttentionWrapAdapter extends RecyclerView.Adapter<AttentionWrapAdapter.WrapperVH> {
     private final String LOG_TAG = ExploreFutureApplication.LOG_TAG + "MindWrapAdapter";
-    private Context mContext;
+    private WeakReference<Context> mWeakContextReference;
 
     private RecommendDataAdapter mRecommendDataAdapter;
     private MindDataAdapter mMindDataAdapter;
@@ -32,9 +33,16 @@ public class AttentionWrapAdapter extends RecyclerView.Adapter<AttentionWrapAdap
     private DelegateInterface mDelegateInterface;
 
     public AttentionWrapAdapter(Context mContext, ArrayList<RecommendListDataMode> mRecommendListData, ArrayList<MindListDataMode> mMindListData) {
-        this.mContext = mContext;
+        this.mWeakContextReference = new WeakReference<>(mContext);
         this.mRecommendDataAdapter=new RecommendDataAdapter(mContext, mRecommendListData);
         this.mMindDataAdapter=new MindDataAdapter(mContext,mMindListData);
+    }
+
+    private Context getContext() {
+        if(mWeakContextReference.get() != null){
+            return mWeakContextReference.get();
+        }
+        return null;
     }
 
     @Override
@@ -52,18 +60,18 @@ public class AttentionWrapAdapter extends RecyclerView.Adapter<AttentionWrapAdap
     public void onBindViewHolder(WrapperVH holder, final int position) {
         if (position == 0) {
             mDelegateInterface = new RecommendDelegateImplement();
-            mDelegateInterface.handleTransaction(mContext, holder);
+            mDelegateInterface.handleTransaction(getContext(), holder);
 
             if (holder.recommendRecyclerView.getAdapter() == null) {
                 holder.recommendRecyclerView.setAdapter(mRecommendDataAdapter);
-                RecyclerView.LayoutManager contentRvLayoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false);
+                RecyclerView.LayoutManager contentRvLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
                 holder.recommendRecyclerView.setLayoutManager(contentRvLayoutManager);
             }
         } else {
             holder.mindRecyclerView.setFocusableInTouchMode(false);
             if (holder.mindRecyclerView.getAdapter() == null) {
                 holder.mindRecyclerView.setAdapter(mMindDataAdapter);
-                RecyclerView.LayoutManager contentRvLayoutManager = new LinearLayoutManager(mContext);
+                RecyclerView.LayoutManager contentRvLayoutManager = new LinearLayoutManager(getContext());
                 holder.mindRecyclerView.setLayoutManager(contentRvLayoutManager);
             }
         }

@@ -13,15 +13,15 @@ public class DataLoad {
 
     public OutService outService = null;
 
-    public DataLoad(Context mContext) {
-        setServiceInterfaceImplement(mContext, IMPLEMENT_NET_RESOURCE);
+    public DataLoad() {
+        setServiceInterfaceImplement(IMPLEMENT_NET_RESOURCE);
     }
 
-    public DataLoad(Context mContext, int mImplementCode) {
-        setServiceInterfaceImplement(mContext, mImplementCode);
+    public DataLoad(int mImplementCode) {
+        setServiceInterfaceImplement(mImplementCode);
     }
 
-    private void setServiceInterfaceImplement(Context mContext, int mImplementCode) {
+    private void setServiceInterfaceImplement(int mImplementCode) {
         switch (mImplementCode) {
             case IMPLEMENT_NET_RESOURCE:
                 outService = new DefResDataLoader();
@@ -35,17 +35,17 @@ public class DataLoad {
         /**
          * 准备数据数据
          */
-        boolean prepareData(Context mContext);
+        boolean prepareData();
 
         /**
          * 加载Recommend数据
          */
-        Object loadRecommendData(Context mContext);
+        Object loadRecommendData();
 
         /**
          * 加载Attention数据
          */
-        Object loadAttentionData(Context mContext);
+        Object loadAttentionData();
 
 
 

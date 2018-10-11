@@ -75,6 +75,12 @@ public class NoDataFragment extends Fragment {
                     DataUpdateMode.RECOMMEND_MIND_NEWEST_LOCAL_DATA_FILE_NAME,
                     false);
             dataUpdateList.add(recommend_Mind_Newest_Data_UpdateMode);
+            DataUpdateMode sort_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
+                    DataUpdateMode.SORT_DATA_FILE_URL,
+                    DataUpdateMode.SORT_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
+                    DataUpdateMode.SORT_LOCAL_DATA_FILE_NAME,
+                    false);
+            dataUpdateList.add(sort_Data_UpdateMode);
 
             DataUpdateUtil dataUpdateUtil=new DataUpdateUtil(getActivity(),dataUpdateList, MainActivity.mHandler);
             dataUpdateUtil.updateData();

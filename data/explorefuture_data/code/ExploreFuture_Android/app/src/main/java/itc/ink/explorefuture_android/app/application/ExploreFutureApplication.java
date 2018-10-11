@@ -5,8 +5,6 @@ import android.content.Context;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
-import com.squareup.leakcanary.LeakCanary;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,13 +22,12 @@ public class ExploreFutureApplication extends Application {
 
     public static Context applicationContext;
 
+
     public static int screenWidth = 0;
 
     @Override
     public void onCreate() {
         super.onCreate();
-
-        LeakCanary.install(this);
 
         //Update Data
         updateData();
@@ -76,8 +73,14 @@ public class ExploreFutureApplication extends Application {
                 DataUpdateMode.RECOMMEND_MIND_NEWEST_LOCAL_DATA_FILE_NAME,
                 false);
         dataUpdateList.add(recommend_Mind_Newest_Data_UpdateMode);
+        DataUpdateMode sort_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
+                DataUpdateMode.SORT_DATA_FILE_URL,
+                DataUpdateMode.SORT_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
+                DataUpdateMode.SORT_LOCAL_DATA_FILE_NAME,
+                false);
+        dataUpdateList.add(sort_Data_UpdateMode);
 
-        DataUpdateUtil dataUpdateUtil = new DataUpdateUtil(this, dataUpdateList,null);
+        DataUpdateUtil dataUpdateUtil = new DataUpdateUtil(this, dataUpdateList, null);
         dataUpdateUtil.updateData();
     }
 

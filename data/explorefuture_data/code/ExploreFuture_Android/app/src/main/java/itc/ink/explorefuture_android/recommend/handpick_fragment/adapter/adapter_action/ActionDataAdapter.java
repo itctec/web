@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 import itc.ink.explorefuture_android.R;
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
@@ -23,12 +24,19 @@ import itc.ink.explorefuture_android.recommend.handpick_fragment.mode.mode_actio
  */
 
 public class ActionDataAdapter extends RecyclerView.Adapter<ActionDataAdapter.VH>{
-    private Context mContext;
+    private WeakReference<Context> mWeakContextReference;
     private List<ActionListDataModel> mData;
 
     public ActionDataAdapter(Context mContext, List<ActionListDataModel> mData) {
-        this.mContext=mContext;
+        this.mWeakContextReference = new WeakReference<>(mContext);
         this.mData = mData;
+    }
+
+    private Context getContext() {
+        if(mWeakContextReference.get() != null){
+            return mWeakContextReference.get();
+        }
+        return null;
     }
 
     @Override
@@ -47,11 +55,11 @@ public class ActionDataAdapter extends RecyclerView.Adapter<ActionDataAdapter.VH
         holder.actionSummaryTextView.setText(actionDataItem.getSummary());
         RequestOptions options = new RequestOptions()
                 .signature(new ObjectKeyCanNull(actionDataItem.getImage_update_datetime()).getObject());
-        Glide.with(mContext).load(actionDataItem.getImageurl()).apply(options).into(holder.actionImageImageView);
+        Glide.with(getContext()).load(actionDataItem.getImageurl()).apply(options).into(holder.actionImageImageView);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext,actionDataItem.getTitle()+"被点击",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),actionDataItem.getTitle()+"被点击",Toast.LENGTH_SHORT).show();
             }
         });
     }

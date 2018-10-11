@@ -12,6 +12,7 @@ import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,10 +27,18 @@ import itc.ink.explorefuture_android.recommend.handpick_fragment.mode.mode_produ
  */
 
 public class ProductDelegateImplement implements HandPickWrapperAdapter.DelegateInterface {
-    private Context mContext;
+    private WeakReference<Context> mWeakContextReference;
+
+    private Context getContext() {
+        if(mWeakContextReference.get() != null){
+            return mWeakContextReference.get();
+        }
+        return null;
+    }
+
     @Override
     public void handleTransaction(Context mContext, HandPickWrapperAdapter.WrapperVH mHolder, Object mData) {
-        this.mContext=mContext;
+        this.mWeakContextReference = new WeakReference<>(mContext);
 
         final ArrayList<ProductDataMode> productData=(ArrayList<ProductDataMode>)mData;
 
@@ -118,70 +127,70 @@ public class ProductDelegateImplement implements HandPickWrapperAdapter.Delegate
     class ProductRecommendTopTextViewClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext,"产品推荐榜单被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"产品推荐榜单被点击",Toast.LENGTH_SHORT).show();
         }
     }
 
     class ProductLevelALayoutClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext,"A级产品被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"A级产品被点击",Toast.LENGTH_SHORT).show();
         }
     }
 
     class ProductSubjectSortOneLayoutClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext,"产品专题1被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"产品专题1被点击",Toast.LENGTH_SHORT).show();
         }
     }
 
     class ProductSubjectSortTwoLayoutClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext,"产品专题2被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"产品专题2被点击",Toast.LENGTH_SHORT).show();
         }
     }
 
     class ProductSubjectBannerOneLayoutClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext,"产品专题Banner1被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"产品专题Banner1被点击",Toast.LENGTH_SHORT).show();
         }
     }
 
     class ProductSubjectBannerTwoLayoutClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext,"产品专题Banner2被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"产品专题Banner2被点击",Toast.LENGTH_SHORT).show();
         }
     }
 
     class ProductLevelBOneLayoutClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext,"B级产品1被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"B级产品1被点击",Toast.LENGTH_SHORT).show();
         }
     }
 
     class ProductLevelBTwoLayoutClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext,"B级产品2被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"B级产品2被点击",Toast.LENGTH_SHORT).show();
         }
     }
 
     class ProductLevelBThreeLayoutClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext,"B级产品3被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"B级产品3被点击",Toast.LENGTH_SHORT).show();
         }
     }
 
     class ProductLevelBFourLayoutClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext,"B级产品4被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"B级产品4被点击",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -189,7 +198,7 @@ public class ProductDelegateImplement implements HandPickWrapperAdapter.Delegate
 
         @Override
         public void OnBannerClick(int position) {
-            Toast.makeText(mContext, "ProductBannerOne" + position + "被点击", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "ProductBannerOne" + position + "被点击", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -197,7 +206,7 @@ public class ProductDelegateImplement implements HandPickWrapperAdapter.Delegate
 
         @Override
         public void OnBannerClick(int position) {
-            Toast.makeText(mContext, "ProductBannerTwo" + position + "被点击", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "ProductBannerTwo" + position + "被点击", Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="itc.ink.explorefuture_android.app.app_level.video_view.VideoViewerActivity">
+    tools:context=".common_unit.video_view.VideoViewerActivity">
 
     <VideoView
         android:id="@+id/video_Viewer_VideoView"

@@ -24,7 +24,7 @@
 -keep class itc.ink.explorefuture_android.recommend.handpick_fragment.mode.** { *; }
 -keep class itc.ink.explorefuture_android.recommend.attention_fragment.mode.** { *; }
 -keep class itc.ink.explorefuture_android.recommend.mind_fragment.mode** { *; }
--keep class itc.ink.explorefuture_android.app.app_level.mind_recyclerview.mode** { *; }
+-keep class itc.ink.explorefuture_android.common_unit.mind_recyclerview.mode** { *; }
 
 #--------------------------2.第三方包-------------------------------
 -keep class org.xmlpull.v1.** { *;}

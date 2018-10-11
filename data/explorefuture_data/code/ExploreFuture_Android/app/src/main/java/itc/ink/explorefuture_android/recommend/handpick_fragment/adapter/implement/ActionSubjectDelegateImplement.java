@@ -9,6 +9,7 @@ import android.widget.VideoView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
@@ -20,10 +21,18 @@ import itc.ink.explorefuture_android.recommend.handpick_fragment.mode.mode_actio
  */
 
 public class ActionSubjectDelegateImplement implements HandPickWrapperAdapter.DelegateInterface {
-    private Context mContext;
+    private WeakReference<Context> mWeakContextReference;
+
+    private Context getContext() {
+        if(mWeakContextReference.get() != null){
+            return mWeakContextReference.get();
+        }
+        return null;
+    }
+
     @Override
     public void handleTransaction(Context mContext, HandPickWrapperAdapter.WrapperVH mHolder, Object mData) {
-        this.mContext=mContext;
+        this.mWeakContextReference = new WeakReference<>(mContext);
 
         ArrayList<ActionSubjectDataMode> actionData=(ArrayList<ActionSubjectDataMode>)mData;
 
@@ -40,14 +49,14 @@ public class ActionSubjectDelegateImplement implements HandPickWrapperAdapter.De
     class ActionRecommendTopTextViewClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext,"活动推荐榜单被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"活动推荐榜单被点击",Toast.LENGTH_SHORT).show();
         }
     }
 
     class ActionSubjectOneLayoutClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext,"活动专题被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"活动专题被点击",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -60,7 +69,7 @@ public class ActionSubjectDelegateImplement implements HandPickWrapperAdapter.De
         @Override
         public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
             mVideoView.stopPlayback();
-            Toast.makeText(mContext,"活动专题视频无法播放",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"活动专题视频无法播放",Toast.LENGTH_SHORT).show();
             return true;
         }
     }

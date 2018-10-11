@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.youth.banner.Banner;
+
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import itc.ink.explorefuture_android.R;
 import itc.ink.explorefuture_android.recommend.handpick_fragment.adapter.adapter_action.ActionDataAdapter;
@@ -29,8 +31,7 @@ import itc.ink.explorefuture_android.recommend.handpick_fragment.mode.mode_solut
  */
 
 public class HandPickWrapperAdapter extends RecyclerView.Adapter<HandPickWrapperAdapter.WrapperVH> {
-
-    private Context mContext;
+    private WeakReference<Context> mWeakContextReference;
     private ArrayList<BannerDataMode> mBannerData;
     private ArrayList<SolutionDataMode> mSolutionData;
     private ArrayList<ActionSubjectDataMode> mActionSubjectData;
@@ -46,13 +47,20 @@ public class HandPickWrapperAdapter extends RecyclerView.Adapter<HandPickWrapper
                                   ArrayList<ActionListDataModel> mActionListData,
                                   ArrayList<ProductDataMode> mProductData,
                                   ArrayList<InterestDataModel> mInterestListData) {
-        this.mContext = mContext;
+        this.mWeakContextReference = new WeakReference<>(mContext);
         this.mBannerData = mBannerData;
         this.mSolutionData = mSolutionData;
         this.mActionSubjectData = mActionSubjectData;
-        this.mActionDataAdapter = new ActionDataAdapter(mContext, mActionListData);
+        this.mActionDataAdapter = new ActionDataAdapter(getContext(), mActionListData);
         this.mProductData = mProductData;
-        this.mInterestDataAdapter = new InterestDataAdapter(mContext, mInterestListData);
+        this.mInterestDataAdapter = new InterestDataAdapter(getContext(), mInterestListData);
+    }
+
+    private Context getContext() {
+        if(mWeakContextReference.get() != null){
+            return mWeakContextReference.get();
+        }
+        return null;
     }
 
     @Override
@@ -88,21 +96,21 @@ public class HandPickWrapperAdapter extends RecyclerView.Adapter<HandPickWrapper
     public void onBindViewHolder(HandPickWrapperAdapter.WrapperVH holder, int position) {
         if (position == 0) {
             mDelegateInterface = new BannerDelegateImplement();
-            mDelegateInterface.handleTransaction(mContext, holder, mBannerData);
+            mDelegateInterface.handleTransaction(getContext(), holder, mBannerData);
             return;
         } else if (position == 1) {
             mDelegateInterface = new SolutionDelegateImplement();
-            mDelegateInterface.handleTransaction(mContext, holder, mSolutionData);
+            mDelegateInterface.handleTransaction(getContext(), holder, mSolutionData);
             return;
         } else if (position == 2) {
             mDelegateInterface = new ActionSubjectDelegateImplement();
-            mDelegateInterface.handleTransaction(mContext, holder, mActionSubjectData);
+            mDelegateInterface.handleTransaction(getContext(), holder, mActionSubjectData);
             return;
         } else if (position > 2 && position < (mActionDataAdapter.getItemCount() + 3)) {
             mActionDataAdapter.onBindViewHolder(((ActionDataAdapter.VH) holder), position - 3);
         } else if (position == (mActionDataAdapter.getItemCount() + 3)) {
             mDelegateInterface = new ProductDelegateImplement();
-            mDelegateInterface.handleTransaction(mContext, holder, mProductData);
+            mDelegateInterface.handleTransaction(getContext(), holder, mProductData);
             return;
         } else if (position == (mActionDataAdapter.getItemCount() + 4)) {
             return;

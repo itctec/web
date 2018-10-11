@@ -24,7 +24,7 @@ public class RecommendListDataMode {
 
     @Override
     public String toString() {
-        return "RecommendListDataMode{" +
+        return "SortListDataMode{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", summary='" + summary + '\'' +

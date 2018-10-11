@@ -1,4 +1,4 @@
-package itc.ink.explorefuture_android.app.app_level.mind_recyclerview.mode;
+package itc.ink.explorefuture_android.common_unit.mind_recyclerview.mode;
 
 import java.util.ArrayList;
 import java.util.List;

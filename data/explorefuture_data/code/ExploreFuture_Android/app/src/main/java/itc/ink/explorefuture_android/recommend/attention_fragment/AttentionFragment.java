@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import itc.ink.explorefuture_android.R;
 import itc.ink.explorefuture_android.recommend.attention_fragment.adapter.AttentionWrapAdapter;
 import itc.ink.explorefuture_android.recommend.attention_fragment.mode.DataLoad;
-import itc.ink.explorefuture_android.app.app_level.mind_recyclerview.mode.MindListDataMode;
+import itc.ink.explorefuture_android.common_unit.mind_recyclerview.mode.MindListDataMode;
 import itc.ink.explorefuture_android.recommend.attention_fragment.mode.mode_recommend.RecommendListDataMode;
 
 /**
@@ -35,11 +35,11 @@ public class AttentionFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mDataLoad = new DataLoad(getActivity());
+        mDataLoad = new DataLoad();
         //Judge Data Prepare
-        if (mDataLoad.outService.prepareData(getActivity())) {
-            mRecommendListData = (ArrayList<RecommendListDataMode>) mDataLoad.outService.loadRecommendData(getActivity());
-            mMindListData = (ArrayList<MindListDataMode>) mDataLoad.outService.loadAttentionData(getActivity());
+        if (mDataLoad.outService.prepareData()) {
+            mRecommendListData = (ArrayList<RecommendListDataMode>) mDataLoad.outService.loadRecommendData();
+            mMindListData = (ArrayList<MindListDataMode>) mDataLoad.outService.loadAttentionData();
             //Judge Data Count
             if (mRecommendListData.size() >= 0 &&
                     mMindListData.size() >= 0) {

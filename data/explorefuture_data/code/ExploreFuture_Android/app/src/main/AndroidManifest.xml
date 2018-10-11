@@ -43,11 +43,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/DefActivityTheme" />
         <activity
-            android:name=".app.app_level.image_view.ImageViewerActivity"
+            android:name=".common_unit.image_view.ImageViewerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ViewerActivityTheme" />
         <activity
-            android:name=".app.app_level.video_view.VideoViewerActivity"
+            android:name=".common_unit.video_view.VideoViewerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ViewerActivityTheme" />
 

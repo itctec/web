@@ -47,7 +47,7 @@ public class DefResDataLoader implements DataLoad.OutService {
     private final String JSON_DATA_KEY_INTEREST_LIST="array_interest_list";
 
     @Override
-    public boolean prepareData(Context mContext) {
+    public boolean prepareData() {
         if(DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR==null||DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR.trim().equals("")){
             return false;
         }else {
@@ -56,8 +56,8 @@ public class DefResDataLoader implements DataLoad.OutService {
     }
 
     @Override
-    public Object loadBannerData(Context mContext) {
-        ArrayList<BannerDataMode> bannerDataArray = new ArrayList<>();
+    public Object loadBannerData() {
+        ArrayList<BannerDataMode> bannerDataArray;
 
         JsonReader jsonReader = new JsonReader(new StringReader(DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR));
         jsonReader.setLenient(true);
@@ -73,8 +73,8 @@ public class DefResDataLoader implements DataLoad.OutService {
     }
 
     @Override
-    public Object loadSolutionData(Context mContext) {
-        ArrayList<SolutionDataMode> solutionDataArray = new ArrayList<>();
+    public Object loadSolutionData() {
+        ArrayList<SolutionDataMode> solutionDataArray;
 
         JsonReader jsonReader = new JsonReader(new StringReader(DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR));
         jsonReader.setLenient(true);
@@ -90,8 +90,8 @@ public class DefResDataLoader implements DataLoad.OutService {
     }
 
     @Override
-    public Object loadActionSubjectData(Context mContext) {
-        ArrayList<ActionSubjectDataMode> actionSubjectDataArray = new ArrayList<>();
+    public Object loadActionSubjectData() {
+        ArrayList<ActionSubjectDataMode> actionSubjectDataArray;
 
         JsonReader jsonReader = new JsonReader(new StringReader(DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR));
         jsonReader.setLenient(true);
@@ -107,8 +107,8 @@ public class DefResDataLoader implements DataLoad.OutService {
     }
 
     @Override
-    public Object loadActionListData(Context mContext) {
-        ArrayList<ActionListDataModel> actionListDataArray = new ArrayList<>();
+    public Object loadActionListData() {
+        ArrayList<ActionListDataModel> actionListDataArray;
 
         JsonReader jsonReader = new JsonReader(new StringReader(DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR));
         jsonReader.setLenient(true);
@@ -124,8 +124,8 @@ public class DefResDataLoader implements DataLoad.OutService {
     }
 
     @Override
-    public Object loadProductData(Context mContext) {
-        ArrayList<ProductDataMode> productDataArray = new ArrayList<>();
+    public Object loadProductData() {
+        ArrayList<ProductDataMode> productDataArray;
 
         JsonReader jsonReader = new JsonReader(new StringReader(DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR));
         jsonReader.setLenient(true);
@@ -140,8 +140,8 @@ public class DefResDataLoader implements DataLoad.OutService {
     }
 
     @Override
-    public Object loadInterestData(Context mContext) {
-        ArrayList<InterestDataModel> interestDataArray = new ArrayList<>();
+    public Object loadInterestData() {
+        ArrayList<InterestDataModel> interestDataArray;
         ArrayList<InterestDataModel> interestDataArrays = new ArrayList<>();
 
         JsonReader jsonReader = new JsonReader(new StringReader(DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR));

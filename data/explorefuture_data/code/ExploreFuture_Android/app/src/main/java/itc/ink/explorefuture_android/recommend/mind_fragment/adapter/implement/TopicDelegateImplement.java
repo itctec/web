@@ -12,6 +12,7 @@ import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
@@ -24,11 +25,18 @@ import itc.ink.explorefuture_android.recommend.mind_fragment.mode.mode_topic.Top
  */
 
 public class TopicDelegateImplement implements MindWrapAdapter.DelegateInterface {
-    private Context mContext;
+    private WeakReference<Context> mWeakContextReference;
+
+    private Context getContext() {
+        if(mWeakContextReference.get() != null){
+            return mWeakContextReference.get();
+        }
+        return null;
+    }
 
     @Override
     public void handleTransaction(Context mContext, MindWrapAdapter.WrapperVH mHolder,Object mData) {
-        this.mContext = mContext;
+        this.mWeakContextReference = new WeakReference<>(mContext);
 
         mHolder.topicBanner.setBannerStyle(BannerConfig.NOT_INDICATOR);
         mHolder.topicBanner.setImageLoader(new MyLoader());
@@ -42,7 +50,7 @@ public class TopicDelegateImplement implements MindWrapAdapter.DelegateInterface
     class TopicBannerClickListener implements OnBannerListener {
         @Override
         public void OnBannerClick(int position) {
-            Toast.makeText(mContext, "TopicBanner" + position + "被点击", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "TopicBanner" + position + "被点击", Toast.LENGTH_SHORT).show();
         }
     }
 

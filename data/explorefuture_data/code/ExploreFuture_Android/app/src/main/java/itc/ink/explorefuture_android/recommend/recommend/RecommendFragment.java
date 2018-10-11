@@ -63,6 +63,7 @@ public class RecommendFragment extends Fragment {
         super.onPause();
     }
 
+
     private List<Fragment> initFragmentList(){
         List<Fragment> mFragmentList = new ArrayList<>();
         HandpickFragment choicenessFragment=new HandpickFragment();

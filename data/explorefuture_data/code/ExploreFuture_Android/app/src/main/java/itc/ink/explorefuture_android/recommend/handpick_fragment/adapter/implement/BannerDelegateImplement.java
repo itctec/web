@@ -11,6 +11,7 @@ import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
@@ -22,11 +23,18 @@ import itc.ink.explorefuture_android.recommend.handpick_fragment.mode.mode_banne
  */
 
 public class BannerDelegateImplement implements HandPickWrapperAdapter.DelegateInterface {
-    private Context mContext;
+    private WeakReference<Context> mWeakContextReference;
+
+    private Context getContext() {
+        if(mWeakContextReference.get() != null){
+            return mWeakContextReference.get();
+        }
+        return null;
+    }
 
     @Override
     public void handleTransaction(Context mContext, HandPickWrapperAdapter.WrapperVH mHolder, Object mData) {
-        this.mContext = mContext;
+        this.mWeakContextReference = new WeakReference<>(mContext);
 
         mHolder.handpickBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         mHolder.handpickBanner.setImageLoader(new MyLoader());
@@ -41,7 +49,7 @@ public class BannerDelegateImplement implements HandPickWrapperAdapter.DelegateI
 
         @Override
         public void OnBannerClick(int position) {
-            Toast.makeText(mContext, "HandpickBanner" + position + "被点击", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "HandpickBanner" + position + "被点击", Toast.LENGTH_SHORT).show();
         }
 
 

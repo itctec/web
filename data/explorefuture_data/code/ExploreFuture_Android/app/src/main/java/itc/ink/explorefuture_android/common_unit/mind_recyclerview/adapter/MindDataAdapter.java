@@ -1,4 +1,4 @@
-package itc.ink.explorefuture_android.app.app_level.mind_recyclerview.adapter;
+package itc.ink.explorefuture_android.common_unit.mind_recyclerview.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +8,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +16,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import itc.ink.explorefuture_android.R;
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
-import itc.ink.explorefuture_android.app.app_level.video_view.VideoViewerActivity;
+import itc.ink.explorefuture_android.common_unit.video_view.VideoViewerActivity;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
-import itc.ink.explorefuture_android.app.app_level.mind_recyclerview.mode.MindListDataMode;
+import itc.ink.explorefuture_android.common_unit.mind_recyclerview.mode.MindListDataMode;
 
 /**
  * Created by yangwenjiang on 2018/9/14.
@@ -31,18 +32,25 @@ import itc.ink.explorefuture_android.app.app_level.mind_recyclerview.mode.MindLi
 
 public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
     private final String LOG_TAG = ExploreFutureApplication.LOG_TAG + "AttentionAdapter";
-    private Context mContext;
+    private WeakReference<Context> mWeakContextReference;
 
     private ArrayList<MindListDataMode> mMindListData;
 
     public MindDataAdapter(Context mContext, ArrayList<MindListDataMode> mMindListData) {
-        this.mContext = mContext;
+        this.mWeakContextReference = new WeakReference<>(mContext);
         this.mMindListData = mMindListData;
+    }
+
+    private Context getContext() {
+        if(mWeakContextReference.get() != null){
+            return mWeakContextReference.get();
+        }
+        return null;
     }
 
     @Override
     public VH onCreateViewHolder(ViewGroup parent, int viewType) {
-        View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.app_level_mind_list_item, parent, false);
+        View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.common_unit_mind_list_item, parent, false);
         return new VH(rootView);
     }
 
@@ -56,7 +64,7 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
         RequestOptions options = new RequestOptions()
                 .signature(new ObjectKeyCanNull(mindListDataItem.getHead_portrait_image_update_datetime()).getObject())
                 .circleCrop();
-        Glide.with(mContext).load(mindListDataItem.getHead_portrait_image_url()).apply(options).into(holder.mindItemHeadPortrait);
+        Glide.with(getContext()).load(mindListDataItem.getHead_portrait_image_url()).apply(options).into(holder.mindItemHeadPortrait);
         holder.mindItemName.setText(mindListDataItem.getName());
         holder.mindItemDatetime.setText(mindListDataItem.getDatetime());
         if (mindListDataItem.getContent_text().trim().equals("")) {
@@ -89,20 +97,20 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
     }
 
     private void addPicToLayout(VH holder, List<String> imageUrlList, String contentText) {
-        RecyclerView imageRecyclerView = new RecyclerView(mContext);
+        RecyclerView imageRecyclerView = new RecyclerView(getContext());
         imageRecyclerView.setId(R.id.mind_ListItem_Content_Media_Image_RecyclerView);
-        MindItemImageDataAdapter contentRvAdapter = new MindItemImageDataAdapter(mContext, imageUrlList, contentText);
+        MindItemImageDataAdapter contentRvAdapter = new MindItemImageDataAdapter(getContext(), imageUrlList, contentText);
         imageRecyclerView.setAdapter(contentRvAdapter);
-        RecyclerView.LayoutManager contentRvLayoutManager = new GridLayoutManager(mContext, 3);
+        RecyclerView.LayoutManager contentRvLayoutManager = new GridLayoutManager(getContext(), 3);
         imageRecyclerView.setLayoutManager(contentRvLayoutManager);
         imageRecyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
         imageRecyclerView.setFocusableInTouchMode(false);
 
-        DividerItemDecoration dividerItemDecorationOne = new DividerItemDecoration(mContext, DividerItemDecoration.VERTICAL);
-        dividerItemDecorationOne.setDrawable(ContextCompat.getDrawable(mContext, R.drawable.mind_image_divider_horizontal));
+        DividerItemDecoration dividerItemDecorationOne = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+        dividerItemDecorationOne.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.mind_image_divider_horizontal));
         imageRecyclerView.addItemDecoration(dividerItemDecorationOne);
-        DividerItemDecoration dividerItemDecorationTwo = new DividerItemDecoration(mContext, DividerItemDecoration.HORIZONTAL);
-        dividerItemDecorationTwo.setDrawable(ContextCompat.getDrawable(mContext, R.drawable.mind_image_divider_vertical));
+        DividerItemDecoration dividerItemDecorationTwo = new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL);
+        dividerItemDecorationTwo.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.mind_image_divider_vertical));
         imageRecyclerView.addItemDecoration(dividerItemDecorationTwo);
         holder.mindItemContentMediaLayout.addView(imageRecyclerView);
 
@@ -117,11 +125,11 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
     }
 
     private void addVideoToLayout(VH holder, String videoUrl, String contentText) {
-        View rootView = LayoutInflater.from(mContext).inflate(R.layout.app_level_mind_list_item_video_gif_list_item, null, false);
+        View rootView = LayoutInflater.from(getContext()).inflate(R.layout.common_unit_mind_list_item_video_gif_list_item, null, false);
         rootView.setId(R.id.mind_ListItem_Content_Media_Video_Gif);
         ImageView videoGifView = rootView.findViewById(R.id.mind_ListItem_Video_Gif_Item);
         videoGifView.setOnClickListener(new VideoGifViewClickListener(videoUrl, contentText));
-        Glide.with(mContext).load(videoUrl.replace(".mp4", ".gif")).into(videoGifView);
+        Glide.with(getContext()).load(videoUrl.replace(".mp4", ".gif")).into(videoGifView);
 
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.constrainWidth(rootView.getId(), ConstraintSet.MATCH_CONSTRAINT);
@@ -175,7 +183,7 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext, PersonId + "被点击", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), PersonId + "被点击", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -188,7 +196,7 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext, ID + "文本内容被点击", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), ID + "文本内容被点击", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -204,10 +212,10 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
         @Override
         public void onClick(View view) {
             //Toast.makeText(mContext, "视频内容被点击，URL->" + videoUrl, Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(mContext, VideoViewerActivity.class);
+            Intent intent = new Intent(getContext(), VideoViewerActivity.class);
             intent.putExtra(VideoViewerActivity.KEY_VIDEO_URL, videoUrl);
             intent.putExtra(VideoViewerActivity.KEY_CONTENT_TEXT, contentText);
-            mContext.startActivity(intent);
+            getContext().startActivity(intent);
         }
     }
 
@@ -220,7 +228,7 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext, ID + "赞被点击", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), ID + "赞被点击", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -233,7 +241,7 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext, ID + "评论被点击", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), ID + "评论被点击", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -246,7 +254,7 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext, ID + "转发被点击", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), ID + "转发被点击", Toast.LENGTH_SHORT).show();
         }
     }
 

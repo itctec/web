@@ -66,7 +66,10 @@
             android:textColor="@color/handpick_common_item_title_text_color_light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:shadowColor="@color/app_text_shadow_color_dark"
+            android:shadowRadius="15"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             app:layout_constraintBottom_toTopOf="@id/recommend_Handpick_Action_Subject_One_Summary"
             app:layout_constraintLeft_toLeftOf="parent"/>
         <TextView
@@ -76,7 +79,10 @@
             android:textColor="@color/handpick_common_item_summary_text_color_light"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:shadowColor="@color/app_text_shadow_color_dark"
+            android:shadowRadius="15"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toBottomOf="@id/recommend_Handpick_Action_Subject_One_Gif"
             app:layout_constraintLeft_toLeftOf="parent"/>

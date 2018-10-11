@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 import itc.ink.explorefuture_android.R;
@@ -27,12 +28,19 @@ import itc.ink.explorefuture_android.recommend.attention_fragment.mode.mode_reco
 
 public class RecommendDataAdapter extends RecyclerView.Adapter<RecommendDataAdapter.VH>{
     private final static String LOG_TAG = ExploreFutureApplication.LOG_TAG + "Adapter";
-    private Context mContext;
+    private WeakReference<Context> mWeakContextReference;
     private List<RecommendListDataMode> mData;
 
     public RecommendDataAdapter(Context mContext, List<RecommendListDataMode> mData) {
-        this.mContext=mContext;
+        this.mWeakContextReference = new WeakReference<>(mContext);
         this.mData = mData;
+    }
+
+    private Context getContext() {
+        if(mWeakContextReference.get() != null){
+            return mWeakContextReference.get();
+        }
+        return null;
     }
 
     @Override
@@ -50,7 +58,7 @@ public class RecommendDataAdapter extends RecyclerView.Adapter<RecommendDataAdap
         RequestOptions options = new RequestOptions()
                 .signature(new ObjectKeyCanNull(recommendListDataItem.getImage_update_datetime()).getObject())
                 .circleCrop();
-        Glide.with(mContext).load(recommendListDataItem.getImage_url()).apply(options).into(holder.recommendItemHeadPortrait);
+        Glide.with(getContext()).load(recommendListDataItem.getImage_url()).apply(options).into(holder.recommendItemHeadPortrait);
 
         holder.recommendItemName.setText(recommendListDataItem.getName());
         holder.recommendItemDomain.setText(recommendListDataItem.getSummary());
@@ -96,7 +104,7 @@ public class RecommendDataAdapter extends RecyclerView.Adapter<RecommendDataAdap
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext,ID+"被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),ID+"被点击",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -109,7 +117,7 @@ public class RecommendDataAdapter extends RecyclerView.Adapter<RecommendDataAdap
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext,"关注"+ID+"被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"关注"+ID+"被点击",Toast.LENGTH_SHORT).show();
         }
     }
 }

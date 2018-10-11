@@ -217,6 +217,9 @@ public class DataUpdateUtil {
             case DataUpdateMode.RECOMMEND_MIND_NEWEST_LOCAL_DATA_FILE_NAME:
                 DataUpdateMode.RECOMMEND_MIND_NEWEST_JSON_DATA_STR = dataStr;
                 break;
+            case DataUpdateMode.SORT_LOCAL_DATA_FILE_NAME:
+                DataUpdateMode.SORT_JSON_DATA_STR = dataStr;
+                break;
         }
     }
 

@@ -1,4 +1,4 @@
-package itc.ink.explorefuture_android.app.app_level.image_view;
+package itc.ink.explorefuture_android.common_unit.image_view;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -55,7 +55,7 @@ public class ImageViewerActivity extends Activity {
         int position=intent.getIntExtra(KEY_CURRENT_IMAGE_POSITION,0);
         String contentText=intent.getStringExtra(KEY_CONTENT_TEXT);
 
-        setContentView(R.layout.app_level_image_view_activity);
+        setContentView(R.layout.common_unit_image_view_activity);
 
         imageViewerViewPager=findViewById(R.id.image_Viewer_ViewPager);
         imageViewerViewPager.setAdapter(new ImageViewerActivityViewPagerAdapter(ImageViewerActivity.this,contentImageUrlList));

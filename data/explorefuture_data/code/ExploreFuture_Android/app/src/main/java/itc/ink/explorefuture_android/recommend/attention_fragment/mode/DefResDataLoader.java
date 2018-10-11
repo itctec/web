@@ -9,18 +9,13 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateMode;
-import itc.ink.explorefuture_android.app.app_level.mind_recyclerview.mode.MindListDataMode;
+import itc.ink.explorefuture_android.common_unit.mind_recyclerview.mode.MindListDataMode;
 import itc.ink.explorefuture_android.recommend.attention_fragment.mode.mode_recommend.RecommendListDataMode;
 
 
@@ -34,7 +29,7 @@ public class DefResDataLoader implements DataLoad.OutService {
     private final String JSON_DATA_KEY_ATTENTION="array_attention";
 
     @Override
-    public boolean prepareData(Context mContext) {
+    public boolean prepareData() {
         if(DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR==null||DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR.trim().equals("")){
             return false;
         }else {
@@ -43,8 +38,8 @@ public class DefResDataLoader implements DataLoad.OutService {
     }
 
     @Override
-    public Object loadRecommendData(Context mContext) {
-        ArrayList<RecommendListDataMode> recommendDataArray = new ArrayList<>();
+    public Object loadRecommendData() {
+        ArrayList<RecommendListDataMode> recommendDataArray;
 
         JsonReader jsonReader = new JsonReader(new StringReader(DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR));
         jsonReader.setLenient(true);
@@ -60,8 +55,8 @@ public class DefResDataLoader implements DataLoad.OutService {
     }
 
     @Override
-    public Object loadAttentionData(Context mContext) {
-        ArrayList<MindListDataMode> attentionDataArray = new ArrayList<>();
+    public Object loadAttentionData() {
+        ArrayList<MindListDataMode> attentionDataArray;
 
         JsonReader jsonReader = new JsonReader(new StringReader(DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR));
         jsonReader.setLenient(true);

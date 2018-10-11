@@ -20,7 +20,7 @@
         android:textStyle="bold"
         android:textColor="@color/mind_topic_current_discuss_text_color"
         android:textSize="@dimen/mind_topic_current_discuss_text_size"
-        android:shadowColor="@color/mind_topic_current_discuss_text_shadow_color"
+        android:shadowColor="@color/app_text_shadow_color_light"
         android:shadowRadius="15"
         android:padding="5dp"
         android:layout_width="wrap_content"

@@ -9,6 +9,7 @@ import android.widget.VideoView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
@@ -20,10 +21,18 @@ import itc.ink.explorefuture_android.recommend.handpick_fragment.mode.mode_solut
  */
 
 public class SolutionDelegateImplement implements HandPickWrapperAdapter.DelegateInterface {
-    private Context mContext;
+    private WeakReference<Context> mWeakContextReference;
+
+    private Context getContext() {
+        if(mWeakContextReference.get() != null){
+            return mWeakContextReference.get();
+        }
+        return null;
+    }
+
     @Override
     public void handleTransaction(Context mContext, HandPickWrapperAdapter.WrapperVH mHolder, Object mData) {
-        this.mContext=mContext;
+        this.mWeakContextReference = new WeakReference<>(mContext);
 
         ArrayList<SolutionDataMode> solutionData=(ArrayList<SolutionDataMode>)mData;
 
@@ -108,42 +117,42 @@ public class SolutionDelegateImplement implements HandPickWrapperAdapter.Delegat
     class SolutionRecommendTopTextViewClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext,"方案推荐榜单被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"方案推荐榜单被点击",Toast.LENGTH_SHORT).show();
         }
     }
 
     class SolutionSortOneLayoutClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext,"方案类别1被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"方案类别1被点击",Toast.LENGTH_SHORT).show();
         }
     }
 
     class SolutionSortTwoLayoutClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext,"方案类别2被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"方案类别2被点击",Toast.LENGTH_SHORT).show();
         }
     }
 
     class SolutionSortThreeLayoutClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext,"方案类别3被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"方案类别3被点击",Toast.LENGTH_SHORT).show();
         }
     }
 
     class SolutionSortFourLayoutClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext,"方案类别4被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"方案类别4被点击",Toast.LENGTH_SHORT).show();
         }
     }
 
     class SolutionSubjectOneLayoutClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext,"专题方案被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"专题方案被点击",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -156,7 +165,7 @@ public class SolutionDelegateImplement implements HandPickWrapperAdapter.Delegat
         @Override
         public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
             mVideoView.stopPlayback();
-            Toast.makeText(mContext,"方案专题视频无法播放",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"方案专题视频无法播放",Toast.LENGTH_SHORT).show();
             return true;
         }
     }
@@ -172,49 +181,49 @@ public class SolutionDelegateImplement implements HandPickWrapperAdapter.Delegat
     class SolutionOneLayoutClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext,"方案1被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"方案1被点击",Toast.LENGTH_SHORT).show();
         }
     }
 
     class SolutionTwoLayoutClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext,"方案2被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"方案2被点击",Toast.LENGTH_SHORT).show();
         }
     }
 
     class SolutionThreeLayoutClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext,"方案3被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"方案3被点击",Toast.LENGTH_SHORT).show();
         }
     }
 
     class SolutionFourLayoutClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext,"方案4被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"方案4被点击",Toast.LENGTH_SHORT).show();
         }
     }
 
     class SolutionSimpleOneLayoutClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext,"方案5被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"方案5被点击",Toast.LENGTH_SHORT).show();
         }
     }
 
     class SolutionSimpleTwoLayoutClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext,"方案6被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"方案6被点击",Toast.LENGTH_SHORT).show();
         }
     }
 
     class SolutionSimpleThreeLayoutClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(mContext,"方案7被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"方案7被点击",Toast.LENGTH_SHORT).show();
         }
     }
 }

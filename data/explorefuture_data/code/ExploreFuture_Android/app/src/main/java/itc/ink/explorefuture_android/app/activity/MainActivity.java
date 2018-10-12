@@ -68,7 +68,7 @@ public class MainActivity extends FragmentActivity {
         dynamicPermission = new DynamicPermission();
         obtainAllPermissionSuccess = dynamicPermission.outService.requestPermissions(MainActivity.this, PERMISSION_REQUEST_CODE, permissionsNeeded);
         if (obtainAllPermissionSuccess) {
-            System.out.println("本页面已无权限需求限制！");
+            Log.d(LOG_TAG,"本页面已无权限需求限制");
         }
 
         //Tencent Bugly Self Update Check
@@ -99,26 +99,22 @@ public class MainActivity extends FragmentActivity {
             DataUpdateMode recommend_Handpick_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
                     DataUpdateMode.RECOMMEND_HANDPICK_DATA_FILE_URL,
                     DataUpdateMode.RECOMMEND_HANDPICK_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
-                    DataUpdateMode.RECOMMEND_HANDPICK_LOCAL_DATA_FILE_NAME,
-                    false);
+                    DataUpdateMode.RECOMMEND_HANDPICK_LOCAL_DATA_FILE_NAME);
             dataUpdateList.add(recommend_Handpick_Data_UpdateMode);
             DataUpdateMode recommend_Attention_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.ACCOUNT_UPDATE_DATETIME_FILE_URL.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE, ExploreFutureApplication.TEMP_ACCOUNT),
                     DataUpdateMode.ACCOUNT_ATTENTION_DATA_FILE_URL.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE, ExploreFutureApplication.TEMP_ACCOUNT),
                     DataUpdateMode.ACCOUNT_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
-                    DataUpdateMode.RECOMMEND_ATTENTION_LOCAL_DATA_FILE_NAME,
-                    false);
+                    DataUpdateMode.RECOMMEND_ATTENTION_LOCAL_DATA_FILE_NAME);
             dataUpdateList.add(recommend_Attention_Data_UpdateMode);
             DataUpdateMode recommend_Mind_Hottest_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
                     DataUpdateMode.RECOMMEND_MIND_HOTTEST_DATA_FILE_URL,
                     DataUpdateMode.RECOMMEND_MIND_HOTTEST_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
-                    DataUpdateMode.RECOMMEND_MIND_HOTTEST_LOCAL_DATA_FILE_NAME,
-                    false);
+                    DataUpdateMode.RECOMMEND_MIND_HOTTEST_LOCAL_DATA_FILE_NAME);
             dataUpdateList.add(recommend_Mind_Hottest_Data_UpdateMode);
             DataUpdateMode recommend_Mind_Newest_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
                     DataUpdateMode.RECOMMEND_MIND_NEWEST_DATA_FILE_URL,
                     DataUpdateMode.RECOMMEND_MIND_NEWEST_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
-                    DataUpdateMode.RECOMMEND_MIND_NEWEST_LOCAL_DATA_FILE_NAME,
-                    false);
+                    DataUpdateMode.RECOMMEND_MIND_NEWEST_LOCAL_DATA_FILE_NAME);
             dataUpdateList.add(recommend_Mind_Newest_Data_UpdateMode);
 
             DataUpdateUtil dataUpdateUtil = new DataUpdateUtil(MainActivity.this, dataUpdateList, mHandler);
@@ -157,9 +153,9 @@ public class MainActivity extends FragmentActivity {
             }
 
             if (obtainAllPermissionSuccess) {
-                System.out.println("已动态获取所有权限");
+                Log.d(LOG_TAG,"已动态获取所有权限");
             } else {
-                System.out.println("以下权限获取失败：\n" + deniedPermissionList.toString());
+                Log.d(LOG_TAG,"以下权限获取失败：\n" + deniedPermissionList.toString());
             }
         }
     }
@@ -175,7 +171,7 @@ public class MainActivity extends FragmentActivity {
         } else {
             //Tencent Bugly Self Update Check
             Bugly.init(MainActivity.this, TENCENT_BUGLY_APPID, false);
-            System.out.println("执行升级检测");
+            Log.d(LOG_TAG,"执行升级检测");
         }
     }
 
@@ -212,7 +208,7 @@ public class MainActivity extends FragmentActivity {
     class NavigationSortBtnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            boolean prepareDataFail = (DataUpdateMode.SORT_JSON_DATA_STR == null || DataUpdateMode.SORT_JSON_DATA_STR.trim().equals(""));
+            boolean prepareDataFail = (DataUpdateMode.SORT_ALL_JSON_DATA_STR == null || DataUpdateMode.SORT_ALL_JSON_DATA_STR.trim().equals(""));
             if (prepareDataFail) {
                 NoDataFragment noDataFragment = new NoDataFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, noDataFragment).commit();
@@ -289,11 +285,6 @@ public class MainActivity extends FragmentActivity {
                 switch (currentFragment) {
                     case 0:
                         fragment = new RecommendFragment();
-                        Log.d("ITC","1->"+DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR);
-                        Log.d("ITC","2->"+DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR);
-                        Log.d("ITC","3->"+DataUpdateMode.RECOMMEND_MIND_HOTTEST_JSON_DATA_STR);
-                        Log.d("ITC","4->"+DataUpdateMode.RECOMMEND_MIND_NEWEST_JSON_DATA_STR);
-
                         prepareDataFail = (DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR == null || DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR.trim().equals("")) ||
                                 (DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR == null || DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR.trim().equals("")) ||
                                 (DataUpdateMode.RECOMMEND_MIND_HOTTEST_JSON_DATA_STR == null || DataUpdateMode.RECOMMEND_MIND_HOTTEST_JSON_DATA_STR.trim().equals("")) ||
@@ -301,7 +292,7 @@ public class MainActivity extends FragmentActivity {
                         break;
                     case 1:
                         fragment = new SortFragment();
-                        prepareDataFail = (DataUpdateMode.SORT_JSON_DATA_STR == null || DataUpdateMode.SORT_JSON_DATA_STR.trim().equals(""));
+                        prepareDataFail = (DataUpdateMode.SORT_ALL_JSON_DATA_STR == null || DataUpdateMode.SORT_ALL_JSON_DATA_STR.trim().equals(""));
                         break;
                     case 2:
                         fragment = new MindFragment();

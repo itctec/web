@@ -1,12 +1,15 @@
 package itc.ink.explorefuture_android.sort.adapter;
 
 import android.content.Context;
+import android.os.AsyncTask;
+import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,32 +20,60 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+import com.google.gson.stream.JsonReader;
 
+import java.io.StringReader;
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 
 import itc.ink.explorefuture_android.R;
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
+import itc.ink.explorefuture_android.app.utils.SharedPreferenceUtil;
+import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateMode;
+import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateUtil;
+import itc.ink.explorefuture_android.common_unit.mind_recyclerview.mode.MindListDataMode;
 import itc.ink.explorefuture_android.recommend.attention_fragment.mode.mode_recommend.RecommendListDataMode;
 import itc.ink.explorefuture_android.sort.mode.mode_sort.SortListDataMode;
+import itc.ink.explorefuture_android.sort.mode.mode_sort.SubSortListDataMode;
 
 /**
  * Created by yangwenjiang on 2018/9/14.
  */
 
-public class SortDataAdapter extends RecyclerView.Adapter<SortDataAdapter.VH>{
+public class SortDataAdapter extends RecyclerView.Adapter<SortDataAdapter.VH> {
     private final static String LOG_TAG = ExploreFutureApplication.LOG_TAG + "Adapter";
     private WeakReference<Context> mWeakContextReference;
     private List<SortListDataMode> mData;
 
+
+    private RecyclerView.AdapterDataObserver mObserver = new RecyclerView.AdapterDataObserver() {
+
+        @Override
+        public void onChanged() {
+            super.onChanged();
+            Log.d(LOG_TAG, "数据改变！");
+        }
+
+    };
+
+
     public SortDataAdapter(Context mContext, List<SortListDataMode> mData) {
         this.mWeakContextReference = new WeakReference<>(mContext);
         this.mData = mData;
+
+        registerAdapterDataObserver(mObserver);
     }
 
     private Context getContext() {
-        if(mWeakContextReference.get() != null){
+        if (mWeakContextReference.get() != null) {
             return mWeakContextReference.get();
         }
         return null;
@@ -75,19 +106,16 @@ public class SortDataAdapter extends RecyclerView.Adapter<SortDataAdapter.VH>{
         holder.sortRecommendRightProductTitleTextView.setText(sortListDataItem.getProduct_right_title());
         holder.sortRecommendRightProductSummaryTextView.setText(sortListDataItem.getProduct_right_summary());
 
-
-        if (holder.sortSubRecyclerView.getAdapter() == null) {
-            SubSortDataAdapter subSortDataAdapter=new SubSortDataAdapter(getContext(),sortListDataItem.getArray_sub_sort());
-            holder.sortSubRecyclerView.setAdapter(subSortDataAdapter);
-            RecyclerView.LayoutManager contentRvLayoutManager = new GridLayoutManager(getContext(), 2);
-            holder.sortSubRecyclerView.setLayoutManager(contentRvLayoutManager);
-            DividerItemDecoration dividerItemDecorationOne = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-            dividerItemDecorationOne.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.sort_divider_horizontal));
-            holder.sortSubRecyclerView.addItemDecoration(dividerItemDecorationOne);
-            DividerItemDecoration dividerItemDecorationTwo = new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL);
-            dividerItemDecorationTwo.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.sort_divider_vertical));
-            holder.sortSubRecyclerView.addItemDecoration(dividerItemDecorationTwo);
-        }
+        SubSortDataAdapter subSortDataAdapter = new SubSortDataAdapter(getContext(), sortListDataItem.getArray_sub_sort());
+        holder.sortSubRecyclerView.setAdapter(subSortDataAdapter);
+        RecyclerView.LayoutManager contentRvLayoutManager = new GridLayoutManager(getContext(), 3);
+        holder.sortSubRecyclerView.setLayoutManager(contentRvLayoutManager);
+        DividerItemDecoration dividerItemDecorationOne = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+        dividerItemDecorationOne.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.sort_divider_horizontal));
+        holder.sortSubRecyclerView.addItemDecoration(dividerItemDecorationOne);
+        DividerItemDecoration dividerItemDecorationTwo = new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL);
+        dividerItemDecorationTwo.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.sort_divider_vertical));
+        holder.sortSubRecyclerView.addItemDecoration(dividerItemDecorationTwo);
     }
 
     @Override
@@ -95,8 +123,13 @@ public class SortDataAdapter extends RecyclerView.Adapter<SortDataAdapter.VH>{
         return mData.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
 
-    public static class VH extends RecyclerView.ViewHolder {
+
+    public class VH extends RecyclerView.ViewHolder {
         private TextView sortLevelTitleTextView;
         private TextView sortLevelTitleMoreTextView;
 
@@ -110,26 +143,28 @@ public class SortDataAdapter extends RecyclerView.Adapter<SortDataAdapter.VH>{
         private TextView sortRecommendRightProductSummaryTextView;
 
         private RecyclerView sortSubRecyclerView;
+
         public VH(View view) {
             super(view);
-            sortLevelTitleTextView=view.findViewById(R.id.sort_Level_One_Title_Text);
-            sortLevelTitleMoreTextView=view.findViewById(R.id.sort_Level_One_Title_More_Text);
+            sortLevelTitleTextView = view.findViewById(R.id.sort_Level_One_Title_Text);
+            sortLevelTitleMoreTextView = view.findViewById(R.id.sort_Level_One_Title_More_Text);
 
-            sortRecommendLeftProductLayout=view.findViewById(R.id.sort_Recommend_Left_Product_Layout);
-            sortRecommendLeftProductImageImageView=view.findViewById(R.id.sort_Recommend_Left_Product_Image);
-            sortRecommendLeftProductTitleTextView=view.findViewById(R.id.sort_Recommend_Left_Product_Title);
-            sortRecommendLeftProductSummaryTextView=view.findViewById(R.id.sort_Recommend_Left_Product_Summary);
-            sortRecommendRightProductLayout=view.findViewById(R.id.sort_Recommend_Right_Product_Layout);
-            sortRecommendRightProductImageImageView=view.findViewById(R.id.sort_Recommend_Right_Product_Image);
-            sortRecommendRightProductTitleTextView=view.findViewById(R.id.sort_Recommend_Right_Product_Title);
-            sortRecommendRightProductSummaryTextView=view.findViewById(R.id.sort_Recommend_Right_Product_Summary);
+            sortRecommendLeftProductLayout = view.findViewById(R.id.sort_Recommend_Left_Product_Layout);
+            sortRecommendLeftProductImageImageView = view.findViewById(R.id.sort_Recommend_Left_Product_Image);
+            sortRecommendLeftProductTitleTextView = view.findViewById(R.id.sort_Recommend_Left_Product_Title);
+            sortRecommendLeftProductSummaryTextView = view.findViewById(R.id.sort_Recommend_Left_Product_Summary);
+            sortRecommendRightProductLayout = view.findViewById(R.id.sort_Recommend_Right_Product_Layout);
+            sortRecommendRightProductImageImageView = view.findViewById(R.id.sort_Recommend_Right_Product_Image);
+            sortRecommendRightProductTitleTextView = view.findViewById(R.id.sort_Recommend_Right_Product_Title);
+            sortRecommendRightProductSummaryTextView = view.findViewById(R.id.sort_Recommend_Right_Product_Summary);
 
-            sortSubRecyclerView=view.findViewById(R.id.sort_Sub_RecyclerView);
+            sortSubRecyclerView = view.findViewById(R.id.sort_Sub_RecyclerView);
+
         }
     }
 
-    class SortLevelTitleMoreTextViewClickListener implements View.OnClickListener{
-        private String sort_id="";
+    class SortLevelTitleMoreTextViewClickListener implements View.OnClickListener {
+        private String sort_id = "";
 
         public SortLevelTitleMoreTextViewClickListener(String sort_id) {
             this.sort_id = sort_id;
@@ -137,11 +172,11 @@ public class SortDataAdapter extends RecyclerView.Adapter<SortDataAdapter.VH>{
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(getContext(),sort_id+"更多被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), sort_id + "更多被点击", Toast.LENGTH_SHORT).show();
         }
     }
 
-    class SortRecommendLeftProductLayoutClickListener implements View.OnClickListener{
+    class SortRecommendLeftProductLayoutClickListener implements View.OnClickListener {
         private String product_left_id;
 
         public SortRecommendLeftProductLayoutClickListener(String product_left_id) {
@@ -150,11 +185,11 @@ public class SortDataAdapter extends RecyclerView.Adapter<SortDataAdapter.VH>{
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(getContext(),product_left_id+"被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), product_left_id + "被点击", Toast.LENGTH_SHORT).show();
         }
     }
 
-    class SortRecommendRightProductLayoutClickListener implements View.OnClickListener{
+    class SortRecommendRightProductLayoutClickListener implements View.OnClickListener {
         private String product_right_id;
 
         public SortRecommendRightProductLayoutClickListener(String product_right_id) {
@@ -163,7 +198,7 @@ public class SortDataAdapter extends RecyclerView.Adapter<SortDataAdapter.VH>{
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(getContext(),product_right_id+"被点击",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), product_right_id + "被点击", Toast.LENGTH_SHORT).show();
         }
     }
 

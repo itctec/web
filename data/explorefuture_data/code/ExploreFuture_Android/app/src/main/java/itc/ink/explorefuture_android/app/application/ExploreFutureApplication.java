@@ -52,32 +52,27 @@ public class ExploreFutureApplication extends Application {
         DataUpdateMode recommend_Handpick_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
                 DataUpdateMode.RECOMMEND_HANDPICK_DATA_FILE_URL,
                 DataUpdateMode.RECOMMEND_HANDPICK_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
-                DataUpdateMode.RECOMMEND_HANDPICK_LOCAL_DATA_FILE_NAME,
-                false);
+                DataUpdateMode.RECOMMEND_HANDPICK_LOCAL_DATA_FILE_NAME);
         dataUpdateList.add(recommend_Handpick_Data_UpdateMode);
         DataUpdateMode recommend_Attention_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.ACCOUNT_UPDATE_DATETIME_FILE_URL.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE, TEMP_ACCOUNT),
                 DataUpdateMode.ACCOUNT_ATTENTION_DATA_FILE_URL.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE, TEMP_ACCOUNT),
                 DataUpdateMode.ACCOUNT_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
-                DataUpdateMode.RECOMMEND_ATTENTION_LOCAL_DATA_FILE_NAME,
-                false);
+                DataUpdateMode.RECOMMEND_ATTENTION_LOCAL_DATA_FILE_NAME);
         dataUpdateList.add(recommend_Attention_Data_UpdateMode);
         DataUpdateMode recommend_Mind_Hottest_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
                 DataUpdateMode.RECOMMEND_MIND_HOTTEST_DATA_FILE_URL,
                 DataUpdateMode.RECOMMEND_MIND_HOTTEST_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
-                DataUpdateMode.RECOMMEND_MIND_HOTTEST_LOCAL_DATA_FILE_NAME,
-                false);
+                DataUpdateMode.RECOMMEND_MIND_HOTTEST_LOCAL_DATA_FILE_NAME);
         dataUpdateList.add(recommend_Mind_Hottest_Data_UpdateMode);
         DataUpdateMode recommend_Mind_Newest_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
                 DataUpdateMode.RECOMMEND_MIND_NEWEST_DATA_FILE_URL,
                 DataUpdateMode.RECOMMEND_MIND_NEWEST_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
-                DataUpdateMode.RECOMMEND_MIND_NEWEST_LOCAL_DATA_FILE_NAME,
-                false);
+                DataUpdateMode.RECOMMEND_MIND_NEWEST_LOCAL_DATA_FILE_NAME);
         dataUpdateList.add(recommend_Mind_Newest_Data_UpdateMode);
         DataUpdateMode sort_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
-                DataUpdateMode.SORT_DATA_FILE_URL,
-                DataUpdateMode.SORT_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
-                DataUpdateMode.SORT_LOCAL_DATA_FILE_NAME,
-                false);
+                DataUpdateMode.SORT_ALL_DATA_FILE_URL,
+                DataUpdateMode.SORT_ALL_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
+                DataUpdateMode.SORT_ALL_LOCAL_DATA_FILE_NAME);
         dataUpdateList.add(sort_Data_UpdateMode);
 
         DataUpdateUtil dataUpdateUtil = new DataUpdateUtil(this, dataUpdateList, null);

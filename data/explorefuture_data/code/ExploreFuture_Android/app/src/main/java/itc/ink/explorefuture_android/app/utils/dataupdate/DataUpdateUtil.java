@@ -85,6 +85,7 @@ public class DataUpdateUtil {
 
         //Get Update DateTime File From Server
         String updateDateTimeStr = getUpdateStrFromServer(dataUpdateMode.getUpdateDatetimeFileUrl());
+
         if (updateDateTimeStr == null) {
             dataUpdateMode.setCheckUpdateFinish(true);
             Log.d(LOG_TAG, "服务器数据获取失败！");
@@ -99,7 +100,12 @@ public class DataUpdateUtil {
         JsonElement element = parser.parse(jsonReader);
         JsonObject rootObj = element.getAsJsonObject();
         JsonPrimitive serverUpdateDateTime = rootObj.getAsJsonPrimitive(dataUpdateMode.getDataNewestUpdateDateTimeKey());
-        String serverDateTimeStr = serverUpdateDateTime.getAsString();
+        String serverDateTimeStr =null;
+        if(serverUpdateDateTime!=null){
+            serverDateTimeStr = serverUpdateDateTime.getAsString();
+        }else{
+            serverDateTimeStr =null;
+        }
         String localDateTimeStr = SharedPreferenceUtil.getString(dataUpdateMode.getDataNewestUpdateDateTimeKey());
 
         if (serverDateTimeStr != null && !serverDateTimeStr.isEmpty() && localDateTimeStr != null && !localDateTimeStr.isEmpty()) {
@@ -217,8 +223,8 @@ public class DataUpdateUtil {
             case DataUpdateMode.RECOMMEND_MIND_NEWEST_LOCAL_DATA_FILE_NAME:
                 DataUpdateMode.RECOMMEND_MIND_NEWEST_JSON_DATA_STR = dataStr;
                 break;
-            case DataUpdateMode.SORT_LOCAL_DATA_FILE_NAME:
-                DataUpdateMode.SORT_JSON_DATA_STR = dataStr;
+            case DataUpdateMode.SORT_ALL_LOCAL_DATA_FILE_NAME:
+                DataUpdateMode.SORT_ALL_JSON_DATA_STR = dataStr;
                 break;
         }
     }
@@ -249,8 +255,6 @@ public class DataUpdateUtil {
         @Override
         public void run() {
             while (true) {
-                Log.d(LOG_TAG, "循环检测任务完成情况");
-
                 allCheckUpdateFinished = true;
                 for (int i = 0; i < dataUpdateList.size(); i++) {
                     if (dataUpdateList.get(i).isCheckUpdateFinish() == false) {
@@ -286,22 +290,23 @@ public class DataUpdateUtil {
                 DataUpdateMode dataUpdateMode = dataUpdateList.get(i);
                 File localDataFile = new File(mContext.getFilesDir(), dataUpdateMode.getLocalDataFileName());
                 BufferedReader bufferedReader;
+                if(localDataFile.exists()){
+                    try {
+                        InputStream inputStream = new FileInputStream(localDataFile);
+                        bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
-                try {
-                    InputStream inputStream = new FileInputStream(localDataFile);
-                    bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                        String catchStr;
+                        while ((catchStr = bufferedReader.readLine()) != null) {
+                            stringBuilder.append(catchStr);
+                        }
 
-                    String catchStr;
-                    while ((catchStr = bufferedReader.readLine()) != null) {
-                        stringBuilder.append(catchStr);
+                        updateDataCatch(dataUpdateMode.getLocalDataFileName(), stringBuilder.toString());
+
+                        inputStream.close();
+                        bufferedReader.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-
-                    updateDataCatch(dataUpdateMode.getLocalDataFileName(), stringBuilder.toString());
-
-                    inputStream.close();
-                    bufferedReader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
         }

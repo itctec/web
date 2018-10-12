@@ -60,11 +60,8 @@ public class SubSortDataAdapter extends RecyclerView.Adapter<SubSortDataAdapter.
         holder.subSortSummaryTextView.setText(subSortListDataMode.getSort_summary());
 
         RequestOptions options = new RequestOptions();
-        options.signature(new ObjectKeyCanNull(subSortListDataMode.getLeft_image_update_datetime()).getObject());
-        Glide.with(getContext()).load(subSortListDataMode.getLeft_image_url()).apply(options).into(holder.subSortLeftImageView);
-
-        options.signature(new ObjectKeyCanNull(subSortListDataMode.getRight_image_update_datetime()).getObject());
-        Glide.with(getContext()).load(subSortListDataMode.getRight_image_url()).apply(options).into(holder.subSortRightImageView);
+        options.signature(new ObjectKeyCanNull(subSortListDataMode.getImage_update_datetime()).getObject());
+        Glide.with(getContext()).load(subSortListDataMode.getImage_url()).apply(options).into(holder.subSortImageView);
     }
 
     @Override
@@ -72,13 +69,17 @@ public class SubSortDataAdapter extends RecyclerView.Adapter<SubSortDataAdapter.
         return mData.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
 
     public static class VH extends RecyclerView.ViewHolder {
         private ConstraintLayout subSortLayout;
         private TextView subSortTitleTextView;
         private TextView subSortSummaryTextView;
-        private ImageView subSortLeftImageView;
-        private ImageView subSortRightImageView;
+        private ImageView subSortImageView;
 
 
         public VH(View view) {
@@ -86,8 +87,7 @@ public class SubSortDataAdapter extends RecyclerView.Adapter<SubSortDataAdapter.
             subSortLayout = view.findViewById(R.id.sort_Sub_Sort_Layout);
             subSortTitleTextView = view.findViewById(R.id.sort_Sub_Sort_Title);
             subSortSummaryTextView = view.findViewById(R.id.sort_Sub_Sort_Summary);
-            subSortLeftImageView = view.findViewById(R.id.sort_Sub_Sort_Left_Image);
-            subSortRightImageView = view.findViewById(R.id.sort_Sub_Sort_Right_Image);
+            subSortImageView = view.findViewById(R.id.sort_Sub_Sort_Image);
         }
     }
 

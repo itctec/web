@@ -30,5 +30,6 @@
     <string name="recommend_mind_top_mind_navigation_hottest_btn_text">最热</string>
     <string name="recommend_mind_top_mind_navigation_newest_btn_text">最新</string>
 
+    <string name="sort_navigation_all_text">全部</string>
     <string name="sort_level_one_title_more_text">更多</string>
 </resources>

@@ -28,7 +28,7 @@ public class DefResDataLoader implements DataLoad.OutService {
 
     @Override
     public boolean prepareData() {
-        if(DataUpdateMode.SORT_JSON_DATA_STR==null||DataUpdateMode.SORT_JSON_DATA_STR.trim().equals("")){
+        if(DataUpdateMode.SORT_ALL_JSON_DATA_STR==null||DataUpdateMode.SORT_ALL_JSON_DATA_STR.trim().equals("")){
             return false;
         }else {
             return true;
@@ -39,7 +39,7 @@ public class DefResDataLoader implements DataLoad.OutService {
     public Object loadSortData() {
         ArrayList<SortListDataMode> sortDataArray;
 
-        JsonReader jsonReader = new JsonReader(new StringReader(DataUpdateMode.SORT_JSON_DATA_STR));
+        JsonReader jsonReader = new JsonReader(new StringReader(DataUpdateMode.SORT_ALL_JSON_DATA_STR));
         jsonReader.setLenient(true);
         JsonParser jsonParser = new JsonParser();
         JsonElement jsonElement = jsonParser.parse(jsonReader);

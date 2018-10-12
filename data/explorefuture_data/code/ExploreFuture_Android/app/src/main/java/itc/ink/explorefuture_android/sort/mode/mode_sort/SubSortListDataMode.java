@@ -8,22 +8,18 @@ public class SubSortListDataMode {
     private String sort_id="";
     private String sort_title="";
     private String sort_summary="";
-    private String left_image_url = "";
-    private String left_image_update_datetime="";
-    private String right_image_url="";
-    private String right_image_update_datetime="";
+    private String image_url = "";
+    private String image_update_datetime="";
 
     public SubSortListDataMode() {
     }
 
-    public SubSortListDataMode(String sort_id, String sort_title, String sort_summary, String left_image_url, String left_image_update_datetime, String right_image_url, String right_image_update_datetime) {
+    public SubSortListDataMode(String sort_id, String sort_title, String sort_summary, String image_url, String image_update_datetime) {
         this.sort_id = sort_id;
         this.sort_title = sort_title;
         this.sort_summary = sort_summary;
-        this.left_image_url = left_image_url;
-        this.left_image_update_datetime = left_image_update_datetime;
-        this.right_image_url = right_image_url;
-        this.right_image_update_datetime = right_image_update_datetime;
+        this.image_url = image_url;
+        this.image_update_datetime = image_update_datetime;
     }
 
     @Override
@@ -32,10 +28,8 @@ public class SubSortListDataMode {
                 "sort_id='" + sort_id + '\'' +
                 ", sort_title='" + sort_title + '\'' +
                 ", sort_summary='" + sort_summary + '\'' +
-                ", left_image_url='" + left_image_url + '\'' +
-                ", left_image_update_datetime='" + left_image_update_datetime + '\'' +
-                ", right_image_url='" + right_image_url + '\'' +
-                ", right_image_update_datetime='" + right_image_update_datetime + '\'' +
+                ", image_url='" + image_url + '\'' +
+                ", image_update_datetime='" + image_update_datetime + '\'' +
                 '}';
     }
 
@@ -63,35 +57,19 @@ public class SubSortListDataMode {
         this.sort_summary = sort_summary;
     }
 
-    public String getLeft_image_url() {
-        return left_image_url;
+    public String getImage_url() {
+        return image_url;
     }
 
-    public void setLeft_image_url(String left_image_url) {
-        this.left_image_url = left_image_url;
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
     }
 
-    public String getLeft_image_update_datetime() {
-        return left_image_update_datetime;
+    public String getImage_update_datetime() {
+        return image_update_datetime;
     }
 
-    public void setLeft_image_update_datetime(String left_image_update_datetime) {
-        this.left_image_update_datetime = left_image_update_datetime;
-    }
-
-    public String getRight_image_url() {
-        return right_image_url;
-    }
-
-    public void setRight_image_url(String right_image_url) {
-        this.right_image_url = right_image_url;
-    }
-
-    public String getRight_image_update_datetime() {
-        return right_image_update_datetime;
-    }
-
-    public void setRight_image_update_datetime(String right_image_update_datetime) {
-        this.right_image_update_datetime = right_image_update_datetime;
+    public void setImage_update_datetime(String image_update_datetime) {
+        this.image_update_datetime = image_update_datetime;
     }
 }

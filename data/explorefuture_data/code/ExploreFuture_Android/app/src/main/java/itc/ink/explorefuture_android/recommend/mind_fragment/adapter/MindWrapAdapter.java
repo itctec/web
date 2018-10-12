@@ -229,14 +229,12 @@ public class MindWrapAdapter extends RecyclerView.Adapter<MindWrapAdapter.Wrappe
                 recommendMindDataUpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
                         DataUpdateMode.RECOMMEND_MIND_NEWEST_DATA_FILE_URL,
                         DataUpdateMode.RECOMMEND_MIND_NEWEST_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
-                        DataUpdateMode.RECOMMEND_MIND_NEWEST_LOCAL_DATA_FILE_NAME,
-                        false);
+                        DataUpdateMode.RECOMMEND_MIND_NEWEST_LOCAL_DATA_FILE_NAME);
             } else {
                 recommendMindDataUpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
                         DataUpdateMode.RECOMMEND_MIND_HOTTEST_DATA_FILE_URL,
                         DataUpdateMode.RECOMMEND_MIND_HOTTEST_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
-                        DataUpdateMode.RECOMMEND_MIND_HOTTEST_LOCAL_DATA_FILE_NAME,
-                        false);
+                        DataUpdateMode.RECOMMEND_MIND_HOTTEST_LOCAL_DATA_FILE_NAME);
             }
 
             String resultStr = DataUpdateUtil.updateData(recommendMindDataUpdateMode);
@@ -288,7 +286,5 @@ public class MindWrapAdapter extends RecyclerView.Adapter<MindWrapAdapter.Wrappe
             }
         }
     }
-
-    ;
 
 }

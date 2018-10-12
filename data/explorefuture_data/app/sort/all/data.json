@@ -374,5 +374,43 @@
         }
       ]
     }
+    ,
+    {
+      "sort_id":"g",
+      "sort_title": "建筑",
+      "product_left_id": "g_01_01_p_00001",
+      "product_left_title": "戴森吸尘器",
+      "product_left_summary": "超大功率 吸走你看不见的微生物",
+      "product_left_image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/a/01/01/p/00001/image/01.png",
+      "product_left_image_update_datetime": "2018-09-26 18:56",
+      "product_right_id": "g_01_01_s_00001",
+      "product_right_title": "家装去甲醛",
+      "product_right_summary": "简单、低成本去除甲醛",
+      "product_right_image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/a/01/01/s/00001/image/01.png",
+      "product_right_image_update_datetime": "2018-09-26 18:56",
+      "array_sub_sort":[
+        {
+          "sort_id": "g_01_01",
+          "sort_title": "你好",
+          "sort_summary": "设计我们的未来生活",
+          "image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/a/01/01/p/00002/image/01.png",
+          "image_update_datetime": "2018-09-26 18:56"
+        },
+        {
+          "sort_id": "g_01_02",
+          "sort_title": "Hello",
+          "sort_summary": "设计我们的未来生活",
+          "image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/a/01/01/p/00002/image/01.png",
+          "image_update_datetime": "2018-09-26 18:56"
+        },
+        {
+          "sort_id": "g_01_03",
+          "sort_title": "Hi",
+          "sort_summary": "设计我们的未来生活",
+          "image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/a/01/01/p/00002/image/01.png",
+          "image_update_datetime": "2018-09-26 18:56"
+        }
+      ]
+    }
   ]
 }

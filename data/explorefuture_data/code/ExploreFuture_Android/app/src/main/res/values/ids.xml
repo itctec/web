@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="mind_ListItem_Content_Media_Image_RecyclerView" type="id"/>
+    <item name="mind_ListItem_Content_Media_Video_Gif" type="id"/>
+</resources>

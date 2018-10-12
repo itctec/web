@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--App Start-->
+    <color name="app_def_theme_activity_bg">#FFFFFF</color>
+
+    <color name="app_data_empty_color">#AAAAAA</color>
+    <color name="app_refresh_btn_text_bg_normal_color">#FF5555</color>
+    <color name="app_refresh_btn_text_bg_pressed_color">#77FF5555</color>
+    <color name="app_refresh_btn_normal_color">#FF5555</color>
+    <color name="app_refresh_btn_pressed_color">#77FF5555</color>
+
+    <color name="app_navigation_bg_line_color">#AAAAAA</color>
+    <color name="app_bottom_navigation_text_selected_color">#222222</color>
+    <color name="app_top_navigation_text_selected_color">#222222</color>
+    <color name="app_top_navigation_indicator_line_color">#555555</color>
+
+    <color name="app_search_box_bg_color">#EEEEEE</color>
+
+    <color name="app_picture_place_image_bg">#22AAAAAA</color>
+
+    <color name="app_mind_content_item_text_color">#555555</color>
+    <color name="app_mind_content_item_divider_line_color">#77EEEEEE</color>
+
+    <color name="app_item_footer_color_dark">#888888</color>
+
+    <color name="app_item_name_color_dark">#333333</color>
+    <color name="app_item_name_summary_color_dark">#888888</color>
+
+    <color name="app_common_btn_text_color_light">#FFFFFF</color>
+    <color name="app_common_btn_text_color_dark">#555555</color>
+    <color name="app_common_btn_bg_normal_color">#5555FF</color>
+    <color name="app_common_btn_bg_pressed_color">#775555FF</color>
+
+    <color name="app_attention_btn_text_bg_normal_color">#5555FF</color>
+    <color name="app_attention_btn_text_bg_pressed_color">#775555FF</color>
+    <color name="app_attention_btn_bg_normal_color">#BBBBBB</color>
+    <color name="app_attention_btn_bg_pressed_color">#77BBBBBB</color>
+
+    <color name="app_text_shadow_color_light">#FFFFFF</color>
+    <color name="app_text_shadow_color_dark">#555555</color>
+    <!--App End-->
+
+    <!--Guide Start-->
+    <color name="guide_indicator_color">#BBBBBB</color>
+    <!--Guide End-->
+
+    <!--Recommend Start-->
+    <!--Handpick Start-->
+    <color name="handpick_header_title_text_color">#333333</color>
+    <color name="handpick_header_summary_text_color">#333333</color>
+
+    <color name="handpick_banner_indicator_selected_color">#FFFFFF</color>
+    <color name="handpick_banner_indicator_unselected_color">#AAAAAA</color>
+
+    <color name="handpick_solution_sort_item_one_title_text_color">#FFDB47</color>
+    <color name="handpick_solution_sort_item_two_title_text_color">#00BAAD</color>
+    <color name="handpick_solution_sort_item_three_title_text_color">#FF5733</color>
+    <color name="handpick_solution_sort_item_four_title_text_color">#2A82E4</color>
+
+    <color name="handpick_common_item_title_text_color_light">#FFFFFF</color>
+    <color name="handpick_common_item_title_text_color_dark">#333333</color>
+    <color name="handpick_common_item_title_second_text_color_dark">#555555</color>
+    <color name="handpick_common_item_summary_text_color_light">#FFFFFF</color>
+    <color name="handpick_common_item_summary_text_color_dark">#888888</color>
+
+    <color name="handpick_common_item_divider_line_color">#DDDDDD</color>
+    <!--Handpick End-->
+
+    <!--Attention Start-->
+    <color name="attention_recommend_header_tip_text_color">#333333</color>
+    <color name="attention_recommend_header_update_text_color">#33DD33</color>
+
+    <color name="attention_common_item_divider_line_color">#DDDDDD</color>
+    <!--Attention End-->
+    <!--Mind Start-->
+    <color name="mind_topic_current_discuss_text_color">#5555FF</color>
+    <!--Mind End-->
+    <!--Recommend End-->
+    <!--Sort Start-->
+    <color name="sort_top_navigation_text_selected_color">#222222</color>
+    <color name="sort_top_navigation_text_unselected_color">#7F222222</color>
+
+    <color name="sort_level_one_title_text_color">#333333</color>
+    <color name="sort_level_one_title_more_text_color">#333333</color>
+
+    <color name="sort_level_two_title_text_color">#333333</color>
+    <color name="sort_level_two_summary_text_color">#888888</color>
+
+    <color name="sort_item_divider_line_color">#DDDDDD</color>
+    <!--Sort End-->
+
+    <!--Viewer Start-->
+    <color name="viewer_activity_bg">#000000</color>
+    <color name="viewer_text_bg">#FFFFFF</color>
+    <!--Viewer End-->
+
+</resources>

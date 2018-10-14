@@ -3,16 +3,16 @@
     {
       "sort_id":"a",
       "sort_title": "消遣",
-      "product_left_id": "a_01_01_p_00001",
+      "product_left_id": "a_01_01_s_00001",
       "product_left_title": "澳洲旅行攻略",
       "product_left_summary": "去澳洲，带你见识不一样的精彩",
       "product_left_image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/a/01/01/p/00001/image/01.png",
-      "product_left_image_update_datetime": "2018-09-26 18:56",
-      "product_right_id": "a_01_01_s_00001",
+      "product_left_image_update_datetime": "2018-09-26 18:57",
+      "product_right_id": "a_01_01_s_00002",
       "product_right_title": "公司团建",
       "product_right_summary": "伤透了人事的脑筋！",
       "product_right_image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/a/01/01/s/00001/image/01.png",
-      "product_right_image_update_datetime": "2018-09-26 18:56",
+      "product_right_image_update_datetime": "2018-09-26 18:57",
       "array_sub_sort":[
         {
           "sort_id": "a_01_01",

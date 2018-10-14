@@ -22,62 +22,56 @@
           "image_update_datetime": "2018-09-26 18:56"
         },
         {
-          "sort_id": "a_02_01",
+          "sort_id": "a_01_02",
           "sort_title": "一定要有的体验",
           "sort_summary": "体验过 才知道没有白活",
           "image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/a/01/02/image/show.png",
           "image_update_datetime": "2018-09-26 18:56"
         },
         {
-          "sort_id": "a_01_02",
+          "sort_id": "a_01_03",
           "sort_title": "不枉此生的旅行",
           "sort_summary": "跋山涉水 也一定要去的地方",
           "image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/a/01/03/image/show.png",
           "image_update_datetime": "2018-09-26 18:56"
-        }
-        ,
+        },
         {
-          "sort_id": "a_03_01",
+          "sort_id": "a_01_04",
           "sort_title": "释放你的压力",
           "sort_summary": "总绷着弦 不会放松可不行",
           "image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/a/01/04/image/show.png",
           "image_update_datetime": "2018-09-26 18:56"
-        }
-        ,
+        },
         {
-          "sort_id": "a_04_01",
+          "sort_id": "a_01_05",
           "sort_title": "消遣还可以收获",
           "sort_summary": "玩 也不要错过提高的机会",
           "image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/a/01/05/image/show.png",
           "image_update_datetime": "2018-09-26 18:56"
-        }
-        ,
+        },
         {
-          "sort_id": "a_05_01",
+          "sort_id": "a_01_06",
           "sort_title": "来些集体的玩法",
           "sort_summary": "组队带你玩",
           "image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/a/01/06/image/show.png",
           "image_update_datetime": "2018-09-26 18:56"
-        }
-        ,
+        },
         {
-          "sort_id": "a_06_01",
+          "sort_id": "a_01_07",
           "sort_title": "两人为伴",
           "sort_summary": "给不了她新鲜感？戳这里",
           "image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/a/01/07/image/show.png",
           "image_update_datetime": "2018-09-26 18:56"
-        }
-        ,
+        },
         {
-          "sort_id": "a_07_01",
+          "sort_id": "a_01_08",
           "sort_title": "没钱一样可以嗨",
           "sort_summary": "消遣 不是金钱的专属",
           "image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/a/01/08/image/show.png",
           "image_update_datetime": "2018-09-26 18:56"
-        }
-        ,
+        },
         {
-          "sort_id": "a_08_01",
+          "sort_id": "a_01_09",
           "sort_title": "让你酷的酣畅",
           "sort_summary": "活得精彩 心才够畅快",
           "image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/a/01/09/image/show.png",
@@ -88,36 +82,57 @@
     {
       "sort_id":"b",
       "sort_title": "生活",
-      "product_left_id": "b_01_01_p_00001",
-      "product_left_title": "戴森吸尘器",
-      "product_left_summary": "超大功率 吸走你看不见的微生物",
-      "product_left_image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/a/01/01/p/00001/image/01.png",
-      "product_left_image_update_datetime": "2018-09-26 18:56",
-      "product_right_id": "b_01_01_s_00001",
-      "product_right_title": "家装去甲醛",
-      "product_right_summary": "简单、低成本去除甲醛",
-      "product_right_image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/a/01/01/s/00001/image/01.png",
-      "product_right_image_update_datetime": "2018-09-26 18:56",
+      "product_left_id": "b_01_01_s_00001",
+      "product_left_title": "澳洲旅行攻略",
+      "product_left_summary": "去澳洲，带你见识不一样的精彩",
+      "product_left_image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/b/01/01/s/00001/image/show.png",
+      "product_left_image_update_datetime": "2018-09-26 18:57",
+      "product_right_id": "b_01_01_s_00002",
+      "product_right_title": "公司团建",
+      "product_right_summary": "伤透了人事的脑筋！",
+      "product_right_image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/b/01/01/s/00002/image/show.png",
+      "product_right_image_update_datetime": "2018-09-26 18:57",
       "array_sub_sort":[
         {
           "sort_id": "b_01_01",
-          "sort_title": "沟通",
-          "sort_summary": "设计我们的未来生活",
-          "image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/a/01/01/p/00002/image/01.png",
+          "sort_title": "你的各种假期",
+          "sort_summary": "长有长的去处 短有短的玩法",
+          "image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/b/01/01/image/show.png",
           "image_update_datetime": "2018-09-26 18:56"
         },
         {
           "sort_id": "b_01_02",
-          "sort_title": "沟通",
-          "sort_summary": "设计我们的未来生活",
-          "image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/a/01/01/p/00002/image/01.png",
+          "sort_title": "一定要有的体验",
+          "sort_summary": "体验过 才知道没有白活",
+          "image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/b/01/02/image/show.png",
           "image_update_datetime": "2018-09-26 18:56"
         },
         {
-          "sort_id": "b_01_03",
-          "sort_title": "沟通",
-          "sort_summary": "设计我们的未来生活",
-          "image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/a/01/01/p/00002/image/01.png",
+          "sort_id": "a_01_03",
+          "sort_title": "不枉此生的旅行",
+          "sort_summary": "跋山涉水 也一定要去的地方",
+          "image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/b/01/03/image/show.png",
+          "image_update_datetime": "2018-09-26 18:56"
+        },
+        {
+          "sort_id": "a_01_04",
+          "sort_title": "消遣还可以收获",
+          "sort_summary": "玩 也不要错过提高的机会",
+          "image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/b/01/05/image/show.png",
+          "image_update_datetime": "2018-09-26 18:56"
+        },
+        {
+          "sort_id": "a_01_05",
+          "sort_title": "来些集体的玩法",
+          "sort_summary": "组队带你玩",
+          "image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/b/01/06/image/show.png",
+          "image_update_datetime": "2018-09-26 18:56"
+        },
+        {
+          "sort_id": "a_01_06",
+          "sort_title": "释放你的压力",
+          "sort_summary": "总绷着弦 不会放松可不行",
+          "image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/b/01/04/image/show.png",
           "image_update_datetime": "2018-09-26 18:56"
         }
       ]

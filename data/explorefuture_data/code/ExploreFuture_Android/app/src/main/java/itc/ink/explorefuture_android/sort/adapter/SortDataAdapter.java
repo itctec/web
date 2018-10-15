@@ -108,7 +108,7 @@ public class SortDataAdapter extends RecyclerView.Adapter<SortDataAdapter.VH> {
 
         SubSortDataAdapter subSortDataAdapter = new SubSortDataAdapter(getContext(), sortListDataItem.getArray_sub_sort());
         holder.sortSubRecyclerView.setAdapter(subSortDataAdapter);
-        RecyclerView.LayoutManager contentRvLayoutManager = new GridLayoutManager(getContext(), 3);
+        RecyclerView.LayoutManager contentRvLayoutManager = new GridLayoutManager(getContext(), 2);
         holder.sortSubRecyclerView.setLayoutManager(contentRvLayoutManager);
         DividerItemDecoration dividerItemDecorationOne = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         dividerItemDecorationOne.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.sort_divider_horizontal));

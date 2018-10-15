@@ -41,7 +41,8 @@
         <activity
             android:name=".app.activity.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/DefActivityTheme" />
+            android:theme="@style/DefActivityTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
             android:name=".common_unit.image_view.ImageViewerActivity"
             android:screenOrientation="portrait"

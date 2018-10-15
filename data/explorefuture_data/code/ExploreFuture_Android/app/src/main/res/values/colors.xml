@@ -83,10 +83,17 @@
     <color name="sort_level_one_title_text_color">#FF5500</color>
     <color name="sort_level_one_title_more_text_color">#333333</color>
 
-    <color name="sort_level_two_title_text_color">#333333</color>
-    <color name="sort_level_two_summary_text_color">#FFFFFF</color>
+    <color name="sort_level_two_title_text_color_dark">#333333</color>
+    <color name="sort_level_two_title_text_color_light">#FFFFFF</color>
+    <color name="sort_level_two_summary_text_color_dark">#888888</color>
+    <color name="sort_level_two_summary_text_color_light">#FFFFFF</color>
 
     <color name="sort_item_divider_line_color">#DDDDDD</color>
+
+    <color name="sort_top_search_bar_cancel_btn_text_color">#333333</color>
+    <color name="sort_top_search_bar_edit_text_color">#888888</color>
+    <color name="sort_top_search_bar_edit_icon_color">#AA888888</color>
+    <color name="sort_search_history_text_color">#555555</color>
     <!--Sort End-->
 
     <!--Viewer Start-->

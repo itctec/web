@@ -46,7 +46,7 @@ public class ScrollableNavigationBar extends ConstraintLayout {
 
     public void setDataAndCallBack(Context context, ArrayList<NavigationBarDataMode> mSortTitleData, OutCallBack mOutCallBack) {
         for (int i = 0; i < mSortTitleData.size(); i++) {
-            NavigationBarDataMode navigationBarDataMode=mSortTitleData.get(i);
+            NavigationBarDataMode navigationBarDataMode = mSortTitleData.get(i);
             TextView titleItemTextView = new TextView(context);
             titleItemTextView.setTag(navigationBarDataMode.getId());
             titleItemTextView.setText(navigationBarDataMode.getTitle());
@@ -69,6 +69,25 @@ public class ScrollableNavigationBar extends ConstraintLayout {
         this.mOutCallBack = mOutCallBack;
     }
 
+    public void setCurrentFocusItem(View view, int position) {
+        for (int i = 0; i < sortNavigationBarLayout.getChildCount(); i++) {
+            TextView titleItemTextView = (TextView) sortNavigationBarLayout.getChildAt(i);
+            titleItemTextView.setTextColor(getContext().getColor(R.color.sort_top_navigation_text_unselected_color));
+            titleItemTextView.setBackgroundResource(R.drawable.app_scorllar_navigation_item_bg_empty);
+            titleItemTextView.setPadding(30, 0, 30, 0);
+        }
+        TextView titleItemTextView;
+        if (view != null) {
+            titleItemTextView = (TextView) view;
+        }else{
+            titleItemTextView = (TextView) sortNavigationBarLayout.getChildAt(position);
+        }
+
+        titleItemTextView.setTextColor(getContext().getColor(R.color.sort_top_navigation_text_selected_color));
+        titleItemTextView.setBackgroundResource(R.drawable.app_scorllar_navigation_item_bg);
+        titleItemTextView.setPadding(30, 0, 30, 0);
+    }
+
     class titleItemTextViewClickListener implements OnClickListener {
         WeakReference<Context> mWeakContextReference;
 
@@ -77,7 +96,7 @@ public class ScrollableNavigationBar extends ConstraintLayout {
         }
 
         private Context getContext() {
-            if(mWeakContextReference.get() != null){
+            if (mWeakContextReference.get() != null) {
                 return mWeakContextReference.get();
             }
             return null;
@@ -85,18 +104,9 @@ public class ScrollableNavigationBar extends ConstraintLayout {
 
         @Override
         public void onClick(View view) {
-            for (int i = 0; i < sortNavigationBarLayout.getChildCount(); i++) {
-                TextView titleItemTextView = (TextView) sortNavigationBarLayout.getChildAt(i);
-                titleItemTextView.setTextColor(getContext().getColor(R.color.sort_top_navigation_text_unselected_color));
-                titleItemTextView.setBackgroundResource(R.drawable.app_scorllar_navigation_item_bg_empty);
-                titleItemTextView.setPadding(30, 0, 30, 0);
-            }
-            TextView titleItemTextView = (TextView) view;
-            titleItemTextView.setTextColor(getContext().getColor(R.color.sort_top_navigation_text_selected_color));
-            titleItemTextView.setBackgroundResource(R.drawable.app_scorllar_navigation_item_bg);
-            titleItemTextView.setPadding(30, 0, 30, 0);
+            setCurrentFocusItem(view,0);
 
-            mOutCallBack.onTitleClick((String)view.getTag());
+            mOutCallBack.onTitleClick((String) view.getTag());
         }
     }
 

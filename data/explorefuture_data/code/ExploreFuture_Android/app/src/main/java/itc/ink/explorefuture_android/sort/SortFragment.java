@@ -66,6 +66,7 @@ import itc.ink.explorefuture_android.sort.mode.mode_sort.SortListDataMode;
  */
 
 public class SortFragment extends Fragment {
+    public static boolean allTabNow=true;
     private ConstraintLayout searchBarLayout;
     private EditText searchBarEdit;
     private ImageView searchBarClearBtn;
@@ -95,7 +96,7 @@ public class SortFragment extends Fragment {
         if (mDataLoad.outService.prepareData()) {
             mSortListData = (ArrayList<SortListDataMode>) mDataLoad.outService.loadSortData();
             if (mSortListData.size() >= 0) {
-                mSortDataAdapter = new SortDataAdapter(getActivity(), mSortListData);
+                mSortDataAdapter = new SortDataAdapter(getActivity(), mSortListData,new ContentItemMoreClickCallBack());
             }
         }
     }
@@ -291,8 +292,35 @@ public class SortFragment extends Fragment {
     class NavigationBarItemClickCallBack implements ScrollableNavigationBar.OutCallBack {
         @Override
         public void onTitleClick(String id) {
+            if(id.equals("all")){
+                allTabNow=true;
+            }else{
+                allTabNow=false;
+            }
+
             UpdateAsyncTask updateAsyncTask = new UpdateAsyncTask(getContext(), id);
             updateAsyncTask.execute();
+        }
+    }
+
+    class ContentItemMoreClickCallBack implements SortDataAdapter.OutCallBack {
+        @Override
+        public void onItemClick(String id) {
+            if(id.equals("all")){
+                allTabNow=true;
+            }else{
+                allTabNow=false;
+            }
+
+            UpdateAsyncTask updateAsyncTask = new UpdateAsyncTask(getContext(), id);
+            updateAsyncTask.execute();
+            int i;
+            for(i=0;i<mSortTitleListData.size();i++){
+                if(mSortTitleListData.get(i).getId().equals(id)){
+                    break;
+                }
+            }
+            scrollableNavigationBar.setCurrentFocusItem(null,i);
 
         }
     }

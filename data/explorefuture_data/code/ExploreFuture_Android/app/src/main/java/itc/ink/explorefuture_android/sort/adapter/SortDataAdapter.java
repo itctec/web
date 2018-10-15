@@ -41,6 +41,7 @@ import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateMode;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateUtil;
 import itc.ink.explorefuture_android.common_unit.mind_recyclerview.mode.MindListDataMode;
 import itc.ink.explorefuture_android.recommend.attention_fragment.mode.mode_recommend.RecommendListDataMode;
+import itc.ink.explorefuture_android.sort.SortFragment;
 import itc.ink.explorefuture_android.sort.mode.mode_sort.SortListDataMode;
 import itc.ink.explorefuture_android.sort.mode.mode_sort.SubSortListDataMode;
 
@@ -53,23 +54,14 @@ public class SortDataAdapter extends RecyclerView.Adapter<SortDataAdapter.VH> {
     private WeakReference<Context> mWeakContextReference;
     private List<SortListDataMode> mData;
 
-
-    private RecyclerView.AdapterDataObserver mObserver = new RecyclerView.AdapterDataObserver() {
-
-        @Override
-        public void onChanged() {
-            super.onChanged();
-            Log.d(LOG_TAG, "数据改变！");
-        }
-
-    };
+    private OutCallBack mOutCallBack;
 
 
-    public SortDataAdapter(Context mContext, List<SortListDataMode> mData) {
+    public SortDataAdapter(Context mContext, List<SortListDataMode> mData, OutCallBack mOutCallBack) {
         this.mWeakContextReference = new WeakReference<>(mContext);
         this.mData = mData;
 
-        registerAdapterDataObserver(mObserver);
+        this.mOutCallBack = mOutCallBack;
     }
 
     private Context getContext() {
@@ -92,7 +84,12 @@ public class SortDataAdapter extends RecyclerView.Adapter<SortDataAdapter.VH> {
         RequestOptions options = new RequestOptions();
 
         holder.sortLevelTitleTextView.setText(sortListDataItem.getSort_title());
-        holder.sortLevelTitleMoreTextView.setOnClickListener(new SortLevelTitleMoreTextViewClickListener(sortListDataItem.getSort_id()));
+        if(SortFragment.allTabNow){
+            holder.sortLevelTitleMoreTextView.setVisibility(View.VISIBLE);
+            holder.sortLevelTitleMoreTextView.setOnClickListener(new SortLevelTitleMoreTextViewClickListener(sortListDataItem.getSort_id()));
+        }else {
+            holder.sortLevelTitleMoreTextView.setVisibility(View.GONE);
+        }
 
         holder.sortRecommendLeftProductLayout.setOnClickListener(new SortRecommendLeftProductLayoutClickListener(sortListDataItem.getProduct_left_id()));
         options.signature(new ObjectKeyCanNull(sortListDataItem.getProduct_left_image_update_datetime()).getObject());
@@ -173,6 +170,7 @@ public class SortDataAdapter extends RecyclerView.Adapter<SortDataAdapter.VH> {
         @Override
         public void onClick(View view) {
             Toast.makeText(getContext(), sort_id + "更多被点击", Toast.LENGTH_SHORT).show();
+            mOutCallBack.onItemClick(sort_id);
         }
     }
 
@@ -202,5 +200,8 @@ public class SortDataAdapter extends RecyclerView.Adapter<SortDataAdapter.VH> {
         }
     }
 
+    public interface OutCallBack {
+        void onItemClick(String id);
+    }
 
 }

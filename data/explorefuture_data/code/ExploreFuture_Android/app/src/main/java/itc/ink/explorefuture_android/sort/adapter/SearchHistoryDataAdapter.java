@@ -15,11 +15,13 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.lang.ref.WeakReference;
+import java.util.Date;
 import java.util.List;
 
 import itc.ink.explorefuture_android.R;
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
+import itc.ink.explorefuture_android.app.utils.SQLiteDBHelper;
 import itc.ink.explorefuture_android.sort.mode.mode_sort.SubSortListDataMode;
 
 /**
@@ -53,6 +55,8 @@ public class SearchHistoryDataAdapter extends RecyclerView.Adapter<SearchHistory
     public void onBindViewHolder(VH holder, final int position) {
         holder.searchHistoryText.setText(mData.get(position));
         holder.itemView.setOnClickListener(new ItemClickListener(mData.get(position)));
+        holder.searchHistoryIcon.setImageResource(R.drawable.vector_drawable_history_icon);
+        holder.searchHistoryDividerLine.setVisibility(View.VISIBLE);
         if(position==(mData.size()-1)){
             holder.searchHistoryIcon.setImageResource(R.drawable.vector_drawable_garbage_icon);
             holder.searchHistoryDividerLine.setVisibility(View.GONE);
@@ -102,7 +106,12 @@ public class SearchHistoryDataAdapter extends RecyclerView.Adapter<SearchHistory
     class CleanHistoryClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(getContext(),"清除搜索历史",Toast.LENGTH_SHORT).show();
+            SQLiteDBHelper sqLiteDBHelper=new SQLiteDBHelper(getContext(),SQLiteDBHelper.DATABASE_FILE_NAME,SQLiteDBHelper.DATABASE_VERSION);
+            String sqlStr="delete from tb_search_history";
+            sqLiteDBHelper.getReadableDatabase().execSQL(sqlStr,new String[]{});
+            sqLiteDBHelper.close();
+            mData.clear();
+            notifyDataSetChanged();
         }
     }
 

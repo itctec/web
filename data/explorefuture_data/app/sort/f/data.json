@@ -1,10 +1,10 @@
 {
   "array_base_sort": [
     {
-      "sort_id":"a",
+      "sort_id":"f_01",
       "sort_title": "消遣",
       "product_left_id": "a_01_01_s_00001",
-      "product_left_title": "澳洲旅行攻略",
+      "product_left_title": "购物了",
       "product_left_summary": "去澳洲，带你见识不一样的精彩",
       "product_left_image_url": "http://www.itc.ink/data/explorefuture_data/app/sort/a/01/01/s/00001/image/show.png",
       "product_left_image_update_datetime": "2018-09-26 18:57",

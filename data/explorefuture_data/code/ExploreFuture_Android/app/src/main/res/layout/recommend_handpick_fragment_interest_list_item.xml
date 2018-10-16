@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/recommend_Handpick_Interest_ListItem_Vertical_Guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.3333" />
+    <ImageView
+        android:id="@+id/recommend_Handpick_Interest_ListItem_Image"
+        android:src="@drawable/picture_place_image"
+        android:scaleType="centerCrop"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/recommend_Handpick_Interest_ListItem_Vertical_Guideline"
+        app:layout_constraintDimensionRatio="5:4"/>
+    <TextView
+        android:id="@+id/recommend_Handpick_Interest_ListItem_Title"
+        android:text="产品/方案名称"
+        android:textSize="@dimen/handpick_item_title_text_size"
+        android:maxLength="@dimen/handpick_item_title_text_two_slash_three_max_length"
+        android:textColor="@color/handpick_common_item_title_text_color_dark"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/recommend_Handpick_Interest_ListItem_Vertical_Guideline"
+        app:layout_constraintRight_toRightOf="parent"/>
+    <TextView
+        android:id="@+id/recommend_Handpick_Interest_ListItem_Summary"
+        android:text="产品方/案描述"
+        android:textSize="@dimen/handpick_item_summary_one_text_size"
+        android:maxLength="@dimen/handpick_item_summary_text_two_slash_three_more_line_max_length"
+        android:textColor="@color/handpick_common_item_summary_text_color_dark"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="5dp"
+        app:layout_constraintTop_toBottomOf="@id/recommend_Handpick_Interest_ListItem_Title"
+        app:layout_constraintLeft_toRightOf="@id/recommend_Handpick_Interest_ListItem_Vertical_Guideline"
+        app:layout_constraintRight_toRightOf="parent"/>
+    <TextView
+        android:id="@+id/recommend_Handpick_Interest_ListItem_SupportNum"
+        android:text=" 支持票数"
+        android:textSize="@dimen/handpick_item_footer_text_size"
+        android:maxLength="@dimen/handpick_item_summary_text_one_slash_four_max_length"
+        android:textColor="@color/handpick_common_item_summary_text_color_dark"
+        android:drawableLeft="@drawable/vector_drawable_accept"
+        android:drawablePadding="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        app:layout_constraintBottom_toBottomOf="@id/recommend_Handpick_Interest_ListItem_Image"
+        app:layout_constraintRight_toRightOf="parent"/>
+    <View
+        android:id="@+id/recommend_Handpick_Interest_ListItem_Horizontal_Line"
+        android:background="@color/handpick_common_item_divider_line_color"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/handpick_item_bg_line_width"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/recommend_Handpick_Interest_ListItem_Image"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>

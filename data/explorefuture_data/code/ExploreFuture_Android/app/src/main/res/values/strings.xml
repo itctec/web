@@ -5,6 +5,9 @@
     <string name="app_no_data_text">Can not get data,Please Wait a minute!</string>
     <string name="app_add_attention_text">+ Attention</string>
 
+    <string name="app_update_need_access_sdcard_permission_text">APP need the permission access SDCard for self update,please give the permission leave for settings!</string>
+    <string name="app_update_need_access_phone_state_permission_text">APP need the permission access Phone State for self update,please give the permission leave for settings!</string>
+
     <string name="app_bottom_navigation_recommend_btn_text">Recommend</string>
     <string name="app_bottom_navigation_sort_btn_text">Sort</string>
     <string name="app_bottom_navigation_mind_btn_text">Mind</string>
@@ -30,6 +33,7 @@
     <string name="recommend_mind_top_mind_navigation_hottest_btn_text">HOTTEST</string>
     <string name="recommend_mind_top_mind_navigation_newest_btn_text">NEWEST</string>
 
+    <string name="sort_top_search_hint_text">Search product or solution what you want</string>
     <string name="sort_top_search_bar_cancel_btn_text">Cancel</string>
     <string name="sort_top_search_bar_keyboard_enter_text">Search</string>
     <string name="sort_clear_history_text">Clean Search History</string>
@@ -40,4 +44,9 @@
     <string name="mind_no_data_text">Absolutely Empty\nStart your first mind of the future!</string>
     <string name="mind_no_data_start_mind_btn_text">Create Mind</string>
     <string name="mind_list_item_release_btn_text">Release</string>
+    <string name="mind_edit_top_navigation_title_text">Create Mind</string>
+    <string name="mind_edit_top_navigation_save_btn_text">Save</string>
+    <string name="mind_edit_top_navigation_release_btn_text">Release</string>
+    <string name="mind_edit_hint_text">Write your mind here</string>
+    <string name="mind_edit_need_access_sdcard_permission_text">APP need the permission access SDCard for self get the image on your pone,please give the permission leave for settings!</string>
 </resources>

@@ -64,7 +64,7 @@ public class MindItemImageDataAdapter extends RecyclerView.Adapter<MindItemImage
 
         public VH(View view) {
             super(view);
-            listItemImageItem = view.findViewById(R.id.recommend_Attention_ListItem_ImageItem);
+            listItemImageItem = view.findViewById(R.id.mind_ListItem_Image_Item);
         }
     }
 

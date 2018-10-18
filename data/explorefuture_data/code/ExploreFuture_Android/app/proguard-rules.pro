@@ -29,6 +29,9 @@
 -keep class itc.ink.explorefuture_android.common_unit.mind_recyclerview.mode** { *; }
 
 #--------------------------2.第三方包-------------------------------
+#glide
+-dontwarn com.bumptech.glide.**
+
 -keep class org.xmlpull.v1.** { *;}
 -dontwarn org.xmlpull.v1.**
 

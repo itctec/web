@@ -51,6 +51,11 @@
             android:name=".common_unit.video_view.VideoViewerActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ViewerActivityTheme" />
+        <activity
+            android:name=".mind.edit_activity.MindEditActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DefActivityTheme"
+            android:windowSoftInputMode="adjustResize"/>
 
         <!--Tencent Bugly Update-->
         <activity
@@ -66,7 +71,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths"/>
         </provider>
-
     </application>
 
 </manifest>

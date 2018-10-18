@@ -29,7 +29,7 @@
             app:layout_constraintLeft_toLeftOf="parent"/>
         <EditText
             android:id="@+id/sort_Top_Search_Bar_Edit"
-            android:hint="如何办一场上档次的婚宴酒席"
+            android:hint="@string/sort_top_search_hint_text"
             android:textColorHint="@color/sort_top_search_bar_edit_text_color"
             android:textSize="@dimen/sort_top_search_bar_edit_text_size"
             android:textColor="@color/sort_top_search_bar_edit_text_color"

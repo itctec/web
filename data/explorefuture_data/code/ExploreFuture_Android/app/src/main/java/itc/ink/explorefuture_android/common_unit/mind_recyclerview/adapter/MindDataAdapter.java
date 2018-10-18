@@ -249,7 +249,6 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
 
         @Override
         public void onClick(View view) {
-            //Toast.makeText(mContext, "视频内容被点击，URL->" + videoUrl, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getContext(), VideoViewerActivity.class);
             intent.putExtra(VideoViewerActivity.KEY_VIDEO_URL, videoUrl);
             intent.putExtra(VideoViewerActivity.KEY_CONTENT_TEXT, contentText);

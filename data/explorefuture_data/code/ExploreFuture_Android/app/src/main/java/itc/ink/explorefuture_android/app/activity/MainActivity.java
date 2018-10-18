@@ -162,11 +162,9 @@ public class MainActivity extends FragmentActivity {
     //Update Test
     private void updateCheck() {
         if (obtainAllPermissionSuccess == false && deniedPermissionList.contains(Manifest.permission.READ_EXTERNAL_STORAGE)) {
-            String dialogMsg = "APP升级需要申请访问SD卡权限，请前往设置授予相应权限";
-            dynamicPermission.outService.showMissingPermissionDialog(MainActivity.this, dialogMsg);
+            dynamicPermission.outService.showMissingPermissionDialog(MainActivity.this, getString(R.string.app_update_need_access_sdcard_permission_text));
         } else if (obtainAllPermissionSuccess == false && deniedPermissionList.contains(Manifest.permission.READ_PHONE_STATE)) {
-            String dialogMsg = "APP升级需要读取手机状态权限，请前往设置授予相应权限";
-            dynamicPermission.outService.showMissingPermissionDialog(MainActivity.this, dialogMsg);
+            dynamicPermission.outService.showMissingPermissionDialog(MainActivity.this, getString(R.string.app_update_need_access_phone_state_permission_text));
         } else {
             //Tencent Bugly Self Update Check
             Bugly.init(MainActivity.this, TENCENT_BUGLY_APPID, false);

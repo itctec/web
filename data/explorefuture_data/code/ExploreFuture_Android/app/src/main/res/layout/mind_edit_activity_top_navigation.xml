@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/mind_Edit_Top_Navigation_Close_Btn"
+        android:src="@drawable/vector_drawable_close_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/mind_Edit_Top_Navigation_BottomLine"
+        app:layout_constraintLeft_toLeftOf="parent" />
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/mind_edit_top_navigation_title_text"
+        android:textColor="@color/app_top_navigation_text_selected_color"
+        android:textSize="@dimen/mind_fragment_top_navigation_text_size"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/mind_Edit_Top_Navigation_BottomLine"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+    <TextView
+        android:id="@+id/mind_Edit_Top_Navigation_Save_Btn"
+        android:text="@string/mind_edit_top_navigation_save_btn_text"
+        android:textColor="#444444"
+        android:textSize="@dimen/mind_edit_top_navigation_text_size"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/mind_Edit_Top_Navigation_BottomLine"
+        app:layout_constraintRight_toLeftOf="@+id/mind_Edit_Top_Navigation_Release_Btn" />
+    <TextView
+        android:id="@+id/mind_Edit_Top_Navigation_Release_Btn"
+        android:text="@string/mind_edit_top_navigation_release_btn_text"
+        android:textColor="#FF5500"
+        android:textSize="@dimen/mind_edit_top_navigation_text_size"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/mind_Edit_Top_Navigation_BottomLine"
+        app:layout_constraintRight_toRightOf="parent" />
+    <View
+        android:id="@+id/mind_Edit_Top_Navigation_BottomLine"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/app_navigation_bg_line_width"
+        android:background="@color/app_navigation_bg_line_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

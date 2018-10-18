@@ -4,9 +4,10 @@
     <dimen name="app_common_btn_text_size">16dp</dimen>
 
     <dimen name="app_mind_content_item_text_size">14dp</dimen>
-    <item name="app_mind_content_item_text_max_length" type="dimen" format="integer">180</item>
+    <item name="app_mind_content_item_text_max_length" type="dimen" format="integer">280</item>
     <dimen name="app_mind_content_content_item_divider_line_width">8dp</dimen>
 
+    <dimen name="app_top_navigation_height">48dp</dimen>
     <dimen name="app_navigation_bg_line_width">1px</dimen>
     <dimen name="app_bottom_navigation_text_size">12dp</dimen>
     <!--App End-->
@@ -94,6 +95,7 @@
     <!--Sort End-->
     <!--Mind Start-->
     <dimen name="mind_fragment_top_navigation_text_size">15dp</dimen>
+    <dimen name="mind_edit_top_navigation_text_size">13dp</dimen>
     <dimen name="mind_fragment_release_btn_text_size">12dp</dimen>
     <!--Mind Start-->
 

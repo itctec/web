@@ -98,6 +98,7 @@
     <!--Mind Start-->
     <color name="mind_list_item_release_btn_bg_normal_color">#FF5500</color>
     <color name="mind_list_item_release_btn_bg_pressed_color">#77FF5500</color>
+    <color name="mind_bottom_tools_bar_icon_color">#888888</color>
     <!--Mind End-->
 
     <!--Viewer Start-->

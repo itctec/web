@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/mind_ListItem_Image_Item"
+        android:id="@+id/mind_Edit_ListItem_Image_Item"
         android:src="@drawable/picture_place_image"
         android:scaleType="centerCrop"
         android:layout_width="0dp"
@@ -15,5 +15,13 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintDimensionRatio="1:1"/>
+    <ImageView
+        android:id="@+id/mind_Edit_ListItem_Image_Item_Delete_Btn"
+        android:src="@drawable/vector_drawable_item_delete"
+        android:padding="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>

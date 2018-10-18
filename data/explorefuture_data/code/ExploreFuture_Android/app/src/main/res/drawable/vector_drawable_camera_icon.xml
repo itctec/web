@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android" android:viewportWidth="1024"
+    android:viewportHeight="1024" android:width="20dp" android:height="20dp">
+    <path android:fillColor="@color/mind_bottom_tools_bar_icon_color"
+        android:pathData="M820.8 368m-36.8 0a36.8 36.8 0 1 0 73.6 0 36.8 36.8 0 1 0-73.6 0Z" />
+    <path android:fillColor="@color/mind_bottom_tools_bar_icon_color"
+        android:pathData="M299.2 548.8c0 120 97.6 219.2 219.2 219.2S736 670.4 736 548.8s-97.6-219.2-219.2-219.2-217.6 99.2-217.6 219.2z m219.2-169.6c94.4 0 169.6 76.8 169.6 169.6S611.2 720 518.4 720s-169.6-76.8-169.6-169.6 75.2-171.2 169.6-171.2zM299.2 160h145.6c12.8 0 24-11.2 24-24S457.6 112 444.8 112h-145.6c-12.8 0-24 11.2-24 24 0 14.4 11.2 24 24 24z" />
+    <path android:fillColor="@color/mind_bottom_tools_bar_icon_color"
+        android:pathData="M881.6 185.6H492.8c-12.8 0-24 11.2-24 24s11.2 24 24 24h388.8c40 0 73.6 32 73.6 73.6v486.4c0 40-32 73.6-73.6 73.6H153.6c-40 0-73.6-32-73.6-73.6V307.2c0-40 32-73.6 73.6-73.6h97.6c12.8 0 24-11.2 24-24s-11.2-24-24-24H153.6C86.4 185.6 32 240 32 307.2v486.4c0 67.2 54.4 121.6 121.6 121.6h728c67.2 0 121.6-54.4 121.6-121.6V307.2c0-67.2-54.4-121.6-121.6-121.6z" />
+</vector>

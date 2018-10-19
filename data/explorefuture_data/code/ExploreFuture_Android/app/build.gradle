@@ -45,4 +45,5 @@ dependencies {
     implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'
 
     implementation 'com.zhihu.android:matisse:0.5.1-beta1'
+    implementation 'com.leon:lfilepickerlibrary:1.7.0';
 }

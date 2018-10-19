@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:context="itc.ink.explorefuture_android.app.activity.MainActivity">
 
     <android.support.constraint.ConstraintLayout
@@ -32,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.92" />
+        app:layout_constraintGuide_percent="0.925" />
     <include
         android:id="@+id/app_Bottom_Navigation_Navigation"
         layout="@layout/app_main_activity_bottom_navigation"

@@ -17,8 +17,9 @@
         app:layout_constraintDimensionRatio="1:1"/>
     <ImageView
         android:id="@+id/mind_Edit_ListItem_Image_Item_Delete_Btn"
-        android:src="@drawable/vector_drawable_item_delete"
-        android:padding="5dp"
+        android:src="@drawable/vector_drawable_right_top_close"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"

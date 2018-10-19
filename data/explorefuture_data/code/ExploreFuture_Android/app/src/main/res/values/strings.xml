@@ -49,4 +49,18 @@
     <string name="mind_edit_top_navigation_release_btn_text">Release</string>
     <string name="mind_edit_hint_text">Write your mind here</string>
     <string name="mind_edit_need_access_sdcard_permission_text">APP need the permission access SDCard for self get the image on your pone,please give the permission leave for settings!</string>
+    <string name="mind_edit_choose_file_title_text">Select File</string>
+    <string name="mind_edit_release_dialog_title_text">Release Tip</string>
+    <string name="mind_edit_release_dialog_content_text">After Release,the content will can not modify\nAre you sure release?</string>
+    <string name="mind_edit_release_dialog_positive_btn_text">Release</string>
+    <string name="mind_edit_tip_full_dialog_content_text">Currently, the upper limit of uploaded images has been reached. If you want to add, please delete the pictures you added before</string>
+    <string name="mind_edit_tip_full_dialog_positive_btn_text">I Know</string>
+    <string name="mind_edit_tip_add_video_confirm_dialog_content_text">Pictures and video cannot be added at the same time. If you add video, all added pictures will be removed. Do you add video?</string>
+    <string name="mind_edit_tip_add_picture_confirm_dialog_content_text">Pictures and video cannot be added at the same time. If you add picture, added video will be removed. Do you add picture?</string>
+    <string name="mind_edit_tip_close_dialog_content_text">Your idea has not been saved yet. Do you need to save it?</string>
+
+    <string name="dialog_title_tip_text">Tip</string>
+    <string name="dialog_positive_btn_text">Sure</string>
+    <string name="dialog_positive_save_btn_text">Save</string>
+    <string name="dialog_negative_btn_text">Cancel</string>
 </resources>

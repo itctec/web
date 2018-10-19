@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+    android:layout_marginTop="@dimen/app_status_bar_height"
     tools:context=".mind.edit_activity.MindEditActivity">
 
     <include
@@ -94,6 +94,7 @@
         android:id="@+id/mind_Edit_Attachment"
         android:text="设计文稿"
         android:textSize="11dp"
+        android:maxLength="20"
         android:textColor="#888888"
         android:drawableLeft="@drawable/vector_drawable_file_icon"
         android:drawablePadding="2dp"
@@ -102,8 +103,20 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/mind_Edit_Bottom_Tools_Bar"
         app:layout_constraintLeft_toLeftOf="parent"/>
+    <ImageView
+        android:id="@+id/mind_Edit_Attachment_Delete_Btn"
+        android:src="@drawable/vector_drawable_right_close"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/mind_Edit_Attachment"
+        app:layout_constraintBottom_toBottomOf="@id/mind_Edit_Attachment"
+        app:layout_constraintLeft_toRightOf="@id/mind_Edit_Attachment"/>
     <TextView
         android:id="@+id/mind_Edit_Char_Count_Text"
         android:text="27/280"

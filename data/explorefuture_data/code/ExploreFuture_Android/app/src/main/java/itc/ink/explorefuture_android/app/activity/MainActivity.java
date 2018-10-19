@@ -1,6 +1,7 @@
 package itc.ink.explorefuture_android.app.activity;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -24,8 +26,10 @@ import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateMode;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateUtil;
 import itc.ink.explorefuture_android.app.utils.StatusBarUtil;
 import itc.ink.explorefuture_android.app.utils.permission.DynamicPermission;
+import itc.ink.explorefuture_android.common_unit.common_dialog.CommonDialog;
 import itc.ink.explorefuture_android.find.FindFragment;
 import itc.ink.explorefuture_android.mind.MindFragment;
+import itc.ink.explorefuture_android.mind.edit_activity.MindEditActivity;
 import itc.ink.explorefuture_android.mine.MineFragment;
 import itc.ink.explorefuture_android.nodata.NoDataFragment;
 import itc.ink.explorefuture_android.recommend.recommend.RecommendFragment;

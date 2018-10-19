@@ -106,4 +106,12 @@
     <color name="viewer_text_bg">#FFFFFF</color>
     <!--Viewer End-->
 
+    <!--Common Dialog Start-->
+    <color name="dialog_bg_line_color">#AAAAAA</color>
+    <color name="dialog_title_text_color">#222222</color>
+    <color name="dialog_content_text_color">#555555</color>
+    <color name="dialog_cancel_button_text_color">#888888</color>
+    <color name="dialog_sure_button_text_color">#222288</color>
+    <!--Common Dialog End-->
+
 </resources>

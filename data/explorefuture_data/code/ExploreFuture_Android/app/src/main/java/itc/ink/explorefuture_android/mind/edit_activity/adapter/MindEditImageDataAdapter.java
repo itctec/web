@@ -36,6 +36,7 @@ public class MindEditImageDataAdapter extends RecyclerView.Adapter<MindEditImage
         this.mData = mData;
         this.mContentText = mContentText;
         this.mOutCallBack = mOutCallBack;
+
     }
 
     private Context getContext() {
@@ -54,14 +55,20 @@ public class MindEditImageDataAdapter extends RecyclerView.Adapter<MindEditImage
     @Override
     public void onBindViewHolder(VH holder, final int position) {
         MindEditImageListDataMode mindEditImageListDataItem = mData.get(position);
-        if(mindEditImageListDataItem.isImage()){
+        if (mindEditImageListDataItem.isImage()) {
+            holder.listItemImageItem.setVisibility(View.VISIBLE);
             Glide.with(getContext()).load(mindEditImageListDataItem.getImage_url()).into(holder.listItemImageItem);
             holder.listItemImageItem.setOnClickListener(new ListItemImageItemClickListener(position));
             holder.listItemImageItemDeleteBtn.setVisibility(View.VISIBLE);
             holder.listItemImageItemDeleteBtn.setOnClickListener(new ListItemImageItemDeleteBtnClickListener(position));
-        }else{
-            Glide.with(getContext()).load(R.drawable.add_picture_btn_bg).into(holder.listItemImageItem);
-            holder.listItemImageItem.setOnClickListener(new MindEditImageListDataAddBtnItemClickListener());
+        } else {
+            if(position<9){
+                holder.listItemImageItem.setVisibility(View.VISIBLE);
+                Glide.with(getContext()).load(R.drawable.add_picture_btn_bg).into(holder.listItemImageItem);
+                holder.listItemImageItem.setOnClickListener(new MindEditImageListDataAddBtnItemClickListener());
+            }else{
+                holder.listItemImageItem.setVisibility(View.GONE);
+            }
             holder.listItemImageItemDeleteBtn.setVisibility(View.GONE);
         }
 
@@ -107,15 +114,15 @@ public class MindEditImageDataAdapter extends RecyclerView.Adapter<MindEditImage
         }
     }
 
-    class MindEditImageListDataAddBtnItemClickListener implements View.OnClickListener{
+    class MindEditImageListDataAddBtnItemClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             mOutCallBack.onAddClick();
         }
     }
 
-    class ListItemImageItemDeleteBtnClickListener implements View.OnClickListener{
-        private int position=0;
+    class ListItemImageItemDeleteBtnClickListener implements View.OnClickListener {
+        private int position = 0;
 
         public ListItemImageItemDeleteBtnClickListener(int position) {
             this.position = position;
@@ -125,9 +132,7 @@ public class MindEditImageDataAdapter extends RecyclerView.Adapter<MindEditImage
         public void onClick(View view) {
             mData.remove(position);
             notifyItemRemoved(position);
-            if(position!=mData.size()){
-                notifyItemRangeChanged(position,mData.size()-position);
-            }
+            notifyItemRangeChanged(0, mData.size());
         }
     }
 

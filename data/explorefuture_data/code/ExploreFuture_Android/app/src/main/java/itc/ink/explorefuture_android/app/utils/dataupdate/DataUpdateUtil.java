@@ -229,6 +229,9 @@ public class DataUpdateUtil {
             case DataUpdateMode.MIND_LOCAL_DATA_FILE_NAME:
                 DataUpdateMode.MIND_JSON_DATA_STR = dataStr;
                 break;
+            case DataUpdateMode.FIND_LOCAL_DATA_FILE_NAME:
+                DataUpdateMode.FIND_JSON_DATA_STR = dataStr;
+                break;
         }
     }
 

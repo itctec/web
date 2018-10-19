@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--App Start-->
+    <dimen name="app_status_bar_height">24dp</dimen>
     <dimen name="app_common_btn_text_size">16dp</dimen>
 
     <dimen name="app_mind_content_item_text_size">14dp</dimen>
@@ -98,5 +99,13 @@
     <dimen name="mind_edit_top_navigation_text_size">13dp</dimen>
     <dimen name="mind_fragment_release_btn_text_size">12dp</dimen>
     <!--Mind Start-->
+
+    <!--Common Dialog Start-->
+    <dimen name="dialog_width">1px</dimen>
+    <dimen name="dialog_bg_line_width">1px</dimen>
+    <dimen name="dialog_title_text_size">15dp</dimen>
+    <dimen name="dialog_content_text_size">13dp</dimen>
+    <dimen name="dialog_button_text_size">14dp</dimen>
+    <!--Common Dialog End-->
 
 </resources>

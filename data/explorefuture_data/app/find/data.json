@@ -1,0 +1,40 @@
+{
+  "array_banner": [
+    {
+      "id":"",
+      "imageurl":"http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/banner/banner_1.png",
+      "image_update_datetime":"2018-09-26 12:02"
+    },
+    {
+      "id":"",
+      "imageurl":"http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/banner/banner_2.png",
+      "image_update_datetime":"2018-09-26 12:00"
+    },
+    {
+      "id":"",
+      "imageurl":"http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/banner/banner_3.png",
+      "image_update_datetime":"2018-09-26 12:00"
+    },
+    {
+      "id":"",
+      "imageurl":"http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/banner/banner_4.png",
+      "image_update_datetime":"2018-09-26 12:00"
+    }
+  ],
+  "array_hot_search": [
+    "宴请北方人的餐桌礼仪",
+    "无线互联",
+    "最适合周末的消遣方式",
+    "南方梅雨防霉",
+    "穿越新疆旅行攻略",
+    "小学生暑假安排完美方案",
+    "夜间开远光灯",
+    "春节放假交通拥堵",
+    "工作生活安排混乱",
+    "如何与邻居和谐相处",
+    "儿女忙事业，当下老人如何幸福安度晚年",
+    "大学教育如何培养出真正适应社会的人才",
+    "自然光液晶屏解决方案",
+    "3D虚拟现实方案"
+  ]
+}

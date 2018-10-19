@@ -33,10 +33,11 @@
     <string name="recommend_mind_top_mind_navigation_hottest_btn_text">HOTTEST</string>
     <string name="recommend_mind_top_mind_navigation_newest_btn_text">NEWEST</string>
 
-    <string name="sort_top_search_hint_text">Search product or solution what you want</string>
-    <string name="sort_top_search_bar_cancel_btn_text">Cancel</string>
-    <string name="sort_top_search_bar_keyboard_enter_text">Search</string>
-    <string name="sort_clear_history_text">Clean Search History</string>
+    <string name="search_hint_text">Search product or solution what you want</string>
+    <string name="search_bar_cancel_btn_text">Cancel</string>
+    <string name="search_bar_keyboard_enter_text">Search</string>
+    <string name="search_clear_history_text">Clean Search History</string>
+
     <string name="sort_navigation_all_text">All</string>
     <string name="sort_level_one_title_more_text">more</string>
 

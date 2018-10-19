@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 import itc.ink.explorefuture_android.R;
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
+import itc.ink.explorefuture_android.common_unit.search_bar.SearchBar;
 import itc.ink.explorefuture_android.find.mode.DataLoad;
 import itc.ink.explorefuture_android.find.mode.mode_banner.BannerDataMode;
 
@@ -32,6 +33,9 @@ import itc.ink.explorefuture_android.find.mode.mode_banner.BannerDataMode;
  */
 
 public class FindFragment extends Fragment {
+    private SearchBar searchBar;
+    private Banner findBanner;
+
     private DataLoad mDataLoad;
     private ArrayList<BannerDataMode> mBannerListData;
 
@@ -50,7 +54,10 @@ public class FindFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView=inflater.inflate(R.layout.find_fragment,container,false);
-        Banner findBanner=rootView.findViewById(R.id.find_Banner);
+        searchBar=rootView.findViewById(R.id.find_Top_Search_Bar);
+        searchBar.setOutCallBack(new SearchBarCallBack());
+
+        findBanner=rootView.findViewById(R.id.find_Banner);
         if(mBannerListData.size() >= 0){
             findBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
             findBanner.setImageLoader(new MyLoader());
@@ -86,6 +93,17 @@ public class FindFragment extends Fragment {
         @Override
         public void OnBannerClick(int position) {
             Toast.makeText(getContext(), "FindBanner" + position + "被点击", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    class SearchBarCallBack implements SearchBar.OutCallBack{
+        @Override
+        public void onSearchFocusChange(boolean focused) {
+            if (focused){
+                findBanner.setVisibility(View.GONE);
+            }else{
+                findBanner.setVisibility(View.VISIBLE);
+            }
         }
     }
 }

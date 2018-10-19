@@ -19,4 +19,10 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintDimensionRatio="3:1"/>
+
+    <itc.ink.explorefuture_android.common_unit.search_bar.SearchBar
+        android:id="@+id/find_Top_Search_Bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/app_status_bar_height"/>
 </android.support.constraint.ConstraintLayout>

@@ -14,7 +14,7 @@
     <color name="app_top_navigation_text_selected_color">#222222</color>
     <color name="app_top_navigation_indicator_line_color">#555555</color>
 
-    <color name="app_search_box_bg_color">#EEEEEE</color>
+
 
     <color name="app_picture_place_image_bg">#22AAAAAA</color>
 
@@ -88,11 +88,6 @@
     <color name="sort_level_two_summary_text_color_light">#FFFFFF</color>
 
     <color name="sort_item_divider_line_color">#DDDDDD</color>
-
-    <color name="sort_top_search_bar_cancel_btn_text_color">#333333</color>
-    <color name="sort_top_search_bar_edit_text_color">#888888</color>
-    <color name="sort_top_search_bar_edit_icon_color">#AA888888</color>
-    <color name="sort_search_history_text_color">#555555</color>
     <!--Sort End-->
     <!--Recommend End-->
     <!--Mind Start-->
@@ -100,7 +95,13 @@
     <color name="mind_list_item_release_btn_bg_pressed_color">#77FF5500</color>
     <color name="mind_bottom_tools_bar_icon_color">#888888</color>
     <!--Mind End-->
-
+    <!--Search Bar Start-->
+    <color name="search_bar_bg_color">#EEEEEE</color>
+    <color name="search_bar_cancel_btn_text_color">#333333</color>
+    <color name="search_bar_edit_text_color">#888888</color>
+    <color name="search_bar_edit_icon_color">#AA888888</color>
+    <color name="search_history_text_color">#555555</color>
+    <!--Search Bar End-->
     <!--Viewer Start-->
     <color name="viewer_activity_bg">#000000</color>
     <color name="viewer_text_bg">#FFFFFF</color>

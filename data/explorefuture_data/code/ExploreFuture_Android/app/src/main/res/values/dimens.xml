@@ -87,11 +87,6 @@
 
     <dimen name="sort_item_title_text_size">13dp</dimen>
     <dimen name="sort_item_summary_text_size">10dp</dimen>
-
-    <dimen name="sort_top_search_bar_cancel_btn_text_size">14dp</dimen>
-    <dimen name="sort_top_search_bar_edit_text_size">13dp</dimen>
-    <item name="sort_top_search_bar_edit_text_max_length" type="dimen" format="integer">25</item>
-    <dimen name="sort_search_history_text_size">15dp</dimen>
     <dimen name="sort_item_bg_line_width">1px</dimen>
     <!--Sort End-->
     <!--Mind Start-->
@@ -99,7 +94,12 @@
     <dimen name="mind_edit_top_navigation_text_size">13dp</dimen>
     <dimen name="mind_fragment_release_btn_text_size">12dp</dimen>
     <!--Mind Start-->
-
+    <!--Search Bar Start-->
+    <dimen name="search_bar_cancel_btn_text_size">14dp</dimen>
+    <dimen name="search_bar_edit_text_size">13dp</dimen>
+    <item name="search_bar_edit_text_max_length" type="dimen" format="integer">25</item>
+    <dimen name="search_history_text_size">15dp</dimen>
+    <!--Search Bar End-->
     <!--Common Dialog Start-->
     <dimen name="dialog_width">1px</dimen>
     <dimen name="dialog_bg_line_width">1px</dimen>

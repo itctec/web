@@ -1,8 +1,6 @@
 package itc.ink.explorefuture_android.sort.adapter;
 
 import android.content.Context;
-import android.media.Image;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,18 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-
 import java.lang.ref.WeakReference;
-import java.util.Date;
 import java.util.List;
 
 import itc.ink.explorefuture_android.R;
-import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.app.utils.SQLiteDBHelper;
-import itc.ink.explorefuture_android.sort.mode.mode_sort.SubSortListDataMode;
 
 /**
  * Created by yangwenjiang on 2018/9/14.
@@ -47,7 +39,7 @@ public class SearchHistoryDataAdapter extends RecyclerView.Adapter<SearchHistory
 
     @Override
     public VH onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.sort_fragment_search_history_list_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.common_unit_search_history_list_item, parent, false);
         return new VH(view);
     }
 
@@ -84,9 +76,9 @@ public class SearchHistoryDataAdapter extends RecyclerView.Adapter<SearchHistory
 
         public VH(View view) {
             super(view);
-            searchHistoryIcon = view.findViewById(R.id.sort_Search_History_Icon);
+            searchHistoryIcon = view.findViewById(R.id.search_History_Icon);
             searchHistoryText = view.findViewById(R.id.sort_Search_History_Text);
-            searchHistoryDividerLine = view.findViewById(R.id.sort_Search_History_Divider_Line);
+            searchHistoryDividerLine = view.findViewById(R.id.search_History_Divider_Line);
         }
     }
 

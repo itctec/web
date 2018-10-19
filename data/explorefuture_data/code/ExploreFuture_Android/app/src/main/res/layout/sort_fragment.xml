@@ -4,74 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="@dimen/app_status_bar_height">
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/sort_Top_Search_Bar_Layout"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:background="@drawable/app_search_box_bg_shape"
+    <itc.ink.explorefuture_android.common_unit.search_bar.SearchBar
+        android:id="@+id/sort_Top_Search_Bar"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/sort_Top_Search_Bar_Bottom_Horizontal_Guideline"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
-        <ImageView
-            android:id="@+id/sort_Top_Search_Bar_Search_Icon"
-            android:src="@drawable/vector_drawable_search_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"/>
-        <EditText
-            android:id="@+id/sort_Top_Search_Bar_Edit"
-            android:hint="@string/sort_top_search_hint_text"
-            android:textColorHint="@color/sort_top_search_bar_edit_text_color"
-            android:textSize="@dimen/sort_top_search_bar_edit_text_size"
-            android:textColor="@color/sort_top_search_bar_edit_text_color"
-            android:lines="1"
-            android:inputType="text"
-            android:maxLength="@dimen/sort_top_search_bar_edit_text_max_length"
-            android:textCursorDrawable="@drawable/app_search_box_edit_cursor"
-            android:background="@null"
-            android:imeActionLabel="@string/sort_top_search_bar_keyboard_enter_text"
-            android:imeOptions="actionSearch"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/sort_Top_Search_Bar_Search_Icon"
-            app:layout_constraintRight_toLeftOf="@+id/sort_Top_Search_Bar_Clear_Btn"/>
-        <ImageView
-            android:id="@+id/sort_Top_Search_Bar_Clear_Btn"
-            android:src="@drawable/vector_drawable_clear_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:visibility="gone"/>
-
-    </android.support.constraint.ConstraintLayout>
-    <TextView
-        android:id="@+id/sort_Top_Search_Bar_Cancel_Btn"
-        android:text="@string/sort_top_search_bar_cancel_btn_text"
-        android:textColor="@color/sort_top_search_bar_cancel_btn_text_color"
-        android:textSize="@dimen/sort_top_search_bar_cancel_btn_text_size"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/sort_Top_Search_Bar_Layout"
-        app:layout_constraintBottom_toBottomOf="@id/sort_Top_Search_Bar_Layout"
-        app:layout_constraintLeft_toRightOf="parent"/>
-
+        android:layout_height="match_parent"/>
     <android.support.constraint.Guideline
-        android:id="@+id/sort_Top_Search_Bar_Bottom_Horizontal_Guideline"
+        android:id="@+id/sort_Top_Bar_Bottom_Horizontal_Guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -81,7 +19,7 @@
         android:id="@+id/sort_Top_Navigation_Bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/sort_Top_Search_Bar_Bottom_Horizontal_Guideline"
+        app:layout_constraintTop_toBottomOf="@id/sort_Top_Bar_Bottom_Horizontal_Guideline"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
@@ -95,26 +33,4 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/sort_Search_History_Layout"
-        android:background="@color/app_def_theme_activity_bg"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/sort_Top_Search_Bar_Bottom_Horizontal_Guideline"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/sort_Search_History_RecyclerView"
-            android:overScrollMode="never"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
-    </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

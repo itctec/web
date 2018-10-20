@@ -94,11 +94,14 @@
     <dimen name="mind_edit_top_navigation_text_size">13dp</dimen>
     <dimen name="mind_fragment_release_btn_text_size">12dp</dimen>
     <!--Mind Start-->
+    <!--Find Start-->
+    <dimen name="find_content_title_text_size">16dp</dimen>
+    <!--Find End-->
     <!--Search Bar Start-->
     <dimen name="search_bar_cancel_btn_text_size">14dp</dimen>
     <dimen name="search_bar_edit_text_size">13dp</dimen>
     <item name="search_bar_edit_text_max_length" type="dimen" format="integer">25</item>
-    <dimen name="search_history_text_size">15dp</dimen>
+    <dimen name="search_history_text_size">12dp</dimen>
     <!--Search Bar End-->
     <!--Common Dialog Start-->
     <dimen name="dialog_width">1px</dimen>

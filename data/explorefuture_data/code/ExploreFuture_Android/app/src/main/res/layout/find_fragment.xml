@@ -18,11 +18,67 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintDimensionRatio="3:1"/>
+        app:layout_constraintDimensionRatio="8:3"/>
 
     <itc.ink.explorefuture_android.common_unit.search_bar.SearchBar
         android:id="@+id/find_Top_Search_Bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/app_status_bar_height"/>
+    <TextView
+        android:id="@+id/find_Hot_Search_Title"
+        android:text="@string/find_hot_search_title_text"
+        android:textColor="@color/find_content_title_text_color"
+        android:textSize="@dimen/find_content_title_text_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        app:layout_constraintTop_toBottomOf="@id/find_Banner"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/find_Hot_Search_RecyclerView"
+        android:overScrollMode="never"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        app:layout_constraintTop_toBottomOf="@id/find_Hot_Search_Title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+    <TextView
+        android:id="@+id/find_Hot_Search_More_Btn"
+        android:text="@string/find_hot_search_more_text"
+        android:textColor="#FF2222"
+        android:textSize="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="7dp"
+        app:layout_constraintTop_toBottomOf="@id/find_Hot_Search_RecyclerView"
+        app:layout_constraintRight_toRightOf="parent"/>
+    <TextView
+        android:id="@+id/find_Search_History_Title"
+        android:text="@string/find_hot_search_history_title_text"
+        android:textColor="@color/find_content_title_text_color"
+        android:textSize="@dimen/find_content_title_text_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        app:layout_constraintTop_toBottomOf="@id/find_Hot_Search_More_Btn"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/find_search_History_RecyclerView"
+        android:overScrollMode="never"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        app:layout_constraintTop_toBottomOf="@id/find_Search_History_Title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 </android.support.constraint.ConstraintLayout>

@@ -95,6 +95,9 @@
     <color name="mind_list_item_release_btn_bg_pressed_color">#77FF5500</color>
     <color name="mind_bottom_tools_bar_icon_color">#888888</color>
     <!--Mind End-->
+    <!--Find Start-->
+
+    <!--Find End-->
     <!--Search Bar Start-->
     <color name="search_bar_bg_color">#EEEEEE</color>
     <color name="search_bar_cancel_btn_text_color">#333333</color>
@@ -106,7 +109,7 @@
     <color name="viewer_activity_bg">#000000</color>
     <color name="viewer_text_bg">#FFFFFF</color>
     <!--Viewer End-->
-
+    <color name="find_content_title_text_color">#333333</color>
     <!--Common Dialog Start-->
     <color name="dialog_bg_line_color">#AAAAAA</color>
     <color name="dialog_title_text_color">#222222</color>

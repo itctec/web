@@ -64,4 +64,8 @@
     <string name="dialog_positive_btn_text">Sure</string>
     <string name="dialog_positive_save_btn_text">Save</string>
     <string name="dialog_negative_btn_text">Cancel</string>
+
+    <string name="find_hot_search_title_text">Today Hot Search</string>
+    <string name="find_hot_search_more_text">More Hot</string>
+    <string name="find_hot_search_history_title_text">Search History</string>
 </resources>

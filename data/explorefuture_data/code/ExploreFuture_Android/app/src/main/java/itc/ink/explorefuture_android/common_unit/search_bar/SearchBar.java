@@ -162,6 +162,20 @@ public class SearchBar extends ConstraintLayout {
                 sqLiteDBHelper.getReadableDatabase().execSQL(sqlStr, new String[]{textView.getText().toString().trim(), simpleDateFormat.format(new Date())});
 
                 Toast.makeText(getContext(), textView.getText().toString() + "被搜索", Toast.LENGTH_SHORT).show();
+
+                String sqlQueryStr = "select * from tb_search_history where search_content like '%" + searchBarEdit.getText().toString() + "%' order by search_datetime desc";
+                Cursor cursor = sqLiteDBHelper.getReadableDatabase().rawQuery(sqlQueryStr, new String[]{});
+
+                mSearchHistoryListData.clear();
+                while (cursor.moveToNext()) {
+                    mSearchHistoryListData.add(cursor.getString(1));
+                }
+
+                if (mSearchHistoryListData.size() > 0) {
+                    mSearchHistoryListData.add(getContext().getString(R.string.search_clear_history_text));
+                }
+
+                mHistoryDataAdapter.notifyDataSetChanged();
             }
             return false;
         }

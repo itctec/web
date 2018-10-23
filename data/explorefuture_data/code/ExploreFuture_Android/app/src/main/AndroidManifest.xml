@@ -56,6 +56,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/DefActivityTheme"
             android:windowSoftInputMode="adjustResize"/>
+        <activity
+            android:name=".login.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DefActivityTheme" />
 
         <!--Tencent Bugly Update-->
         <activity

@@ -1,5 +1,7 @@
 package itc.ink.explorefuture_android.sort.mode;
 
+import android.content.Context;
+
 /**
  * Created by yangwenjiang on 2018/9/16.
  */
@@ -31,7 +33,7 @@ public class DataLoad {
         /**
          * 准备数据数据
          */
-        boolean prepareData();
+        boolean prepareData(Context mContext);
 
         /**
          * 加载Sort数据

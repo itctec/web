@@ -10,12 +10,19 @@ import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateMode;
 import itc.ink.explorefuture_android.common_unit.mind_recyclerview.mode.MindListDataMode;
+import itc.ink.explorefuture_android.login.LoginStateInstance;
 import itc.ink.explorefuture_android.recommend.attention_fragment.mode.mode_recommend.RecommendListDataMode;
 
 
@@ -28,9 +35,33 @@ public class DefResDataLoader implements DataLoad.OutService {
     private final String JSON_DATA_KEY_RECOMMEND="array_recommend";
     private final String JSON_DATA_KEY_ATTENTION="array_attention";
 
+    private String RECOMMEND_ATTENTION_JSON_DATA_STR = "";
+
     @Override
-    public boolean prepareData() {
-        if(DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR==null||DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR.trim().equals("")){
+    public boolean prepareData(Context mContext) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        File localDataFile = new File(mContext.getFilesDir(), DataUpdateMode.RECOMMEND_ATTENTION_LOCAL_DATA_FILE_NAME.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE, LoginStateInstance.getInstance().getId()));
+        BufferedReader bufferedReader;
+        if (localDataFile.exists()) {
+            try {
+                InputStream inputStream = new FileInputStream(localDataFile);
+                bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+                String catchStr;
+                while ((catchStr = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(catchStr);
+                }
+                RECOMMEND_ATTENTION_JSON_DATA_STR = stringBuilder.toString();
+
+                inputStream.close();
+                bufferedReader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        if(RECOMMEND_ATTENTION_JSON_DATA_STR==null||RECOMMEND_ATTENTION_JSON_DATA_STR.trim().equals("")){
             return false;
         }else {
             return true;
@@ -41,7 +72,7 @@ public class DefResDataLoader implements DataLoad.OutService {
     public Object loadRecommendData() {
         ArrayList<RecommendListDataMode> recommendDataArray;
 
-        JsonReader jsonReader = new JsonReader(new StringReader(DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR));
+        JsonReader jsonReader = new JsonReader(new StringReader(RECOMMEND_ATTENTION_JSON_DATA_STR));
         jsonReader.setLenient(true);
         JsonParser jsonParser = new JsonParser();
         JsonElement jsonElement = jsonParser.parse(jsonReader);
@@ -58,7 +89,7 @@ public class DefResDataLoader implements DataLoad.OutService {
     public Object loadAttentionData() {
         ArrayList<MindListDataMode> attentionDataArray;
 
-        JsonReader jsonReader = new JsonReader(new StringReader(DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR));
+        JsonReader jsonReader = new JsonReader(new StringReader(RECOMMEND_ATTENTION_JSON_DATA_STR));
         jsonReader.setLenient(true);
         JsonParser jsonParser = new JsonParser();
         JsonElement jsonElement = jsonParser.parse(jsonReader);

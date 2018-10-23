@@ -17,6 +17,7 @@ import itc.ink.explorefuture_android.app.activity.MainActivity;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateMode;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateUtil;
+import itc.ink.explorefuture_android.login.LoginStateInstance;
 
 
 /**
@@ -24,11 +25,13 @@ import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateUtil;
  */
 
 public class NoDataFragment extends Fragment {
+    private LoginStateInstance loginStateInstance;
     private Button refreshDataBtn;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        loginStateInstance=LoginStateInstance.getInstance();
     }
 
     @Nullable
@@ -56,11 +59,6 @@ public class NoDataFragment extends Fragment {
                     DataUpdateMode.RECOMMEND_HANDPICK_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
                     DataUpdateMode.RECOMMEND_HANDPICK_LOCAL_DATA_FILE_NAME);
             dataUpdateList.add(recommend_Handpick_Data_UpdateMode);
-            DataUpdateMode recommend_Attention_Data_UpdateMode=new DataUpdateMode(DataUpdateMode.ACCOUNT_UPDATE_DATETIME_FILE_URL.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE, ExploreFutureApplication.TEMP_ACCOUNT),
-                    DataUpdateMode.ACCOUNT_ATTENTION_DATA_FILE_URL.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE,ExploreFutureApplication.TEMP_ACCOUNT),
-                    DataUpdateMode.ACCOUNT_ATTENTION_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
-                    DataUpdateMode.RECOMMEND_ATTENTION_LOCAL_DATA_FILE_NAME);
-            dataUpdateList.add(recommend_Attention_Data_UpdateMode);
             DataUpdateMode recommend_Mind_Hottest_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
                     DataUpdateMode.RECOMMEND_MIND_HOTTEST_DATA_FILE_URL,
                     DataUpdateMode.RECOMMEND_MIND_HOTTEST_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
@@ -76,21 +74,29 @@ public class NoDataFragment extends Fragment {
                     DataUpdateMode.SORT_ALL_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
                     DataUpdateMode.SORT_ALL_LOCAL_DATA_FILE_NAME);
             dataUpdateList.add(sort_Data_UpdateMode);
-            DataUpdateMode mind_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.ACCOUNT_UPDATE_DATETIME_FILE_URL.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE, ExploreFutureApplication.TEMP_ACCOUNT),
-                    DataUpdateMode.ACCOUNT_MIND_DATA_FILE_URL.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE, ExploreFutureApplication.TEMP_ACCOUNT),
-                    DataUpdateMode.ACCOUNT_MIND_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
-                    DataUpdateMode.MIND_LOCAL_DATA_FILE_NAME);
-            dataUpdateList.add(mind_Data_UpdateMode);
             DataUpdateMode find_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
                     DataUpdateMode.FIND_DATA_FILE_URL,
                     DataUpdateMode.FIND_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
                     DataUpdateMode.FIND_LOCAL_DATA_FILE_NAME);
             dataUpdateList.add(find_Data_UpdateMode);
-            DataUpdateMode mine_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.ACCOUNT_UPDATE_DATETIME_FILE_URL.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE, ExploreFutureApplication.TEMP_ACCOUNT),
-                    DataUpdateMode.ACCOUNT_MINE_DATA_FILE_URL.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE, ExploreFutureApplication.TEMP_ACCOUNT),
-                    DataUpdateMode.ACCOUNT_MINE_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
-                    DataUpdateMode.MINE_LOCAL_DATA_FILE_NAME);
-            dataUpdateList.add(mine_Data_UpdateMode);
+
+            if(loginStateInstance.getLogin_state().equals(LoginStateInstance.STATE_ONLINE)){
+                DataUpdateMode recommend_Attention_Data_UpdateMode=new DataUpdateMode(DataUpdateMode.ACCOUNT_UPDATE_DATETIME_FILE_URL.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE, loginStateInstance.getId()),
+                        DataUpdateMode.ACCOUNT_ATTENTION_DATA_FILE_URL.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE,loginStateInstance.getId()),
+                        DataUpdateMode.ACCOUNT_ATTENTION_DATA_NEWEST_UPDATE_DATE_TIME_KEY.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE,loginStateInstance.getId()),
+                        DataUpdateMode.RECOMMEND_ATTENTION_LOCAL_DATA_FILE_NAME.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE,loginStateInstance.getId()));
+                dataUpdateList.add(recommend_Attention_Data_UpdateMode);
+                DataUpdateMode mind_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.ACCOUNT_UPDATE_DATETIME_FILE_URL.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE, loginStateInstance.getId()),
+                        DataUpdateMode.ACCOUNT_MIND_DATA_FILE_URL.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE, loginStateInstance.getId()),
+                        DataUpdateMode.ACCOUNT_MIND_DATA_NEWEST_UPDATE_DATE_TIME_KEY.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE,loginStateInstance.getId()),
+                        DataUpdateMode.MIND_LOCAL_DATA_FILE_NAME.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE,loginStateInstance.getId()));
+                dataUpdateList.add(mind_Data_UpdateMode);
+                DataUpdateMode mine_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.ACCOUNT_UPDATE_DATETIME_FILE_URL.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE, loginStateInstance.getId()),
+                        DataUpdateMode.ACCOUNT_MINE_DATA_FILE_URL.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE, loginStateInstance.getId()),
+                        DataUpdateMode.ACCOUNT_MINE_DATA_NEWEST_UPDATE_DATE_TIME_KEY.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE,loginStateInstance.getId()),
+                        DataUpdateMode.MINE_LOCAL_DATA_FILE_NAME.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE,loginStateInstance.getId()));
+                dataUpdateList.add(mine_Data_UpdateMode);
+            }
 
             DataUpdateUtil dataUpdateUtil=new DataUpdateUtil(getActivity(),dataUpdateList, MainActivity.mHandler);
             dataUpdateUtil.updateData();

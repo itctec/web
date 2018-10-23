@@ -71,4 +71,7 @@
 
     <string name="mine_fans_count_text"> %1$s Fans</string>
     <string name="mine_attention_count_text"> %1$s Attention</string>
+
+    <string name="app_login_btn_text">Login</string>
+    <string name="app_offline_tip_text">You are not logged in, please log in first</string>
 </resources>

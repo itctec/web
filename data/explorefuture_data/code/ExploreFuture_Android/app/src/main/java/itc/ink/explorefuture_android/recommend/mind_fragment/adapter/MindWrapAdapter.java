@@ -19,6 +19,12 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.youth.banner.Banner;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -237,7 +243,7 @@ public class MindWrapAdapter extends RecyclerView.Adapter<MindWrapAdapter.Wrappe
                         DataUpdateMode.RECOMMEND_MIND_HOTTEST_LOCAL_DATA_FILE_NAME);
             }
 
-            String resultStr = DataUpdateUtil.updateData(recommendMindDataUpdateMode);
+            String resultStr = DataUpdateUtil.updateData(getContext(),recommendMindDataUpdateMode);
             return resultStr;
         }
 
@@ -249,16 +255,16 @@ public class MindWrapAdapter extends RecyclerView.Adapter<MindWrapAdapter.Wrappe
                     case DataUpdateUtil.UPDATE_RESULT_NEWEST_ALREADY:
                         Toast.makeText(getContext(), "暂无更新", Toast.LENGTH_SHORT).show();
                         if (SharedPreferenceUtil.getString(RECOMMEND_MIND_TAB_KEY).equals(RECOMMEND_MIND_VALUE_NEWEST)) {
-                            showDataStr = DataUpdateMode.RECOMMEND_MIND_NEWEST_JSON_DATA_STR;
+                            showDataStr = loadLocalData(getContext(),DataUpdateMode.RECOMMEND_MIND_NEWEST_LOCAL_DATA_FILE_NAME);
                         } else {
-                            showDataStr = DataUpdateMode.RECOMMEND_MIND_HOTTEST_JSON_DATA_STR;
+                            showDataStr = loadLocalData(getContext(),DataUpdateMode.RECOMMEND_MIND_HOTTEST_LOCAL_DATA_FILE_NAME);
                         }
                         break;
                     case DataUpdateUtil.UPDATE_RESULT_FAILED:
                         if (SharedPreferenceUtil.getString(RECOMMEND_MIND_TAB_KEY).equals(RECOMMEND_MIND_VALUE_NEWEST)) {
-                            showDataStr = DataUpdateMode.RECOMMEND_MIND_NEWEST_JSON_DATA_STR;
+                            showDataStr = loadLocalData(getContext(),DataUpdateMode.RECOMMEND_MIND_NEWEST_LOCAL_DATA_FILE_NAME);
                         } else {
-                            showDataStr = DataUpdateMode.RECOMMEND_MIND_HOTTEST_JSON_DATA_STR;
+                            showDataStr = loadLocalData(getContext(),DataUpdateMode.RECOMMEND_MIND_HOTTEST_LOCAL_DATA_FILE_NAME);
                         }
                         Toast.makeText(getContext(), "更新数据失败", Toast.LENGTH_SHORT).show();
                         break;
@@ -285,6 +291,30 @@ public class MindWrapAdapter extends RecyclerView.Adapter<MindWrapAdapter.Wrappe
                 mMindDataAdapter.notifyDataSetChanged();
             }
         }
+
+        private String loadLocalData(Context mContext,String fileName){
+            StringBuilder stringBuilder = new StringBuilder();
+
+            File localDataFile = new File(mContext.getFilesDir(), fileName);
+            BufferedReader bufferedReader;
+            if (localDataFile.exists()) {
+                try {
+                    InputStream inputStream = new FileInputStream(localDataFile);
+                    bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+                    String catchStr;
+                    while ((catchStr = bufferedReader.readLine()) != null) {
+                        stringBuilder.append(catchStr);
+                    }
+                    inputStream.close();
+                    bufferedReader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return stringBuilder.toString();
+        }
+
     }
 
 }

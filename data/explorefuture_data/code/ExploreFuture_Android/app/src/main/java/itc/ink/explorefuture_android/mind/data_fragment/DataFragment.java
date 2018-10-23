@@ -38,7 +38,7 @@ public class DataFragment extends Fragment {
 
         mDataLoad = new DataLoad();
         //Judge Data Prepare
-        if (mDataLoad.outService.prepareData()) {
+        if (mDataLoad.outService.prepareData(getContext())) {
             mMindListData = (ArrayList<MindListDataMode>) mDataLoad.outService.loadMindData();
             //Judge Data Count
             if (mMindListData.size() >= 0) {

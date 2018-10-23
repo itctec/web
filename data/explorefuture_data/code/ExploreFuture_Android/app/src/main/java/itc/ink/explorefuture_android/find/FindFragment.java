@@ -70,7 +70,7 @@ public class FindFragment extends Fragment {
 
         mDataLoad = new DataLoad();
         //Judge Data Prepare
-        if (mDataLoad.outService.prepareData()) {
+        if (mDataLoad.outService.prepareData(getContext())) {
             mBannerListData = (ArrayList<BannerDataMode>) mDataLoad.outService.loadBannerData();
             mHotSearchListData = (ArrayList<String>) mDataLoad.outService.loadHotSearchData();
 

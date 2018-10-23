@@ -44,7 +44,7 @@ public class HandpickFragment extends Fragment {
 
         mDataLoad = new DataLoad();
         //Judge Data Prepare
-        if(mDataLoad.outService.prepareData()){
+        if(mDataLoad.outService.prepareData(getContext())){
             mBannerData = (ArrayList<BannerDataMode>) mDataLoad.outService.loadBannerData();
             mSolutionData = (ArrayList<SolutionDataMode>) mDataLoad.outService.loadSolutionData();
             mActionSubjectData = (ArrayList<ActionSubjectDataMode>) mDataLoad.outService.loadActionSubjectData();

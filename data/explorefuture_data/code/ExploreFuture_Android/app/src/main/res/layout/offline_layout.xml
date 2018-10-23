@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/app_OffLine_Image"
+        android:src="@drawable/vector_drawable_offline_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintVertical_bias="0.3"/>
+    <TextView
+        android:id="@+id/app_OffLine_Text"
+        android:text="@string/app_offline_tip_text"
+        android:textColor="@color/app_data_empty_color"
+        android:textSize="@dimen/no_data_tip_text_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/app_OffLine_Image"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+    <Button
+        android:id="@+id/app_Login_Btn"
+        android:text="@string/app_login_btn_text"
+        android:textColor="@drawable/app_refresh_btn_text_bg_selector"
+        android:textSize="@dimen/no_data_refresh_btn_text_size"
+        android:drawablePadding="5dp"
+        android:background="@drawable/app_refresh_btn_bg"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@id/app_OffLine_Text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>

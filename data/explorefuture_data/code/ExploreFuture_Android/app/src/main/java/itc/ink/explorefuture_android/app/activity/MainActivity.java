@@ -90,13 +90,13 @@ public class MainActivity extends FragmentActivity {
         navigationMineBtn = findViewById(R.id.bottom_Navigation_Mine_Btn);
         navigationMineBtn.setOnClickListener(new NavigationMineBtnClickListener());
 
+        boolean prepareDataSuccess = (new itc.ink.explorefuture_android.recommend.handpick_fragment.mode.DataLoad().outService.prepareData(MainActivity.this)) &&
+                (new itc.ink.explorefuture_android.recommend.mind_fragment.mode.DataLoad().outService.prepareData(MainActivity.this));
 
-        boolean prepareDataFail = (DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR == null || DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR.trim().equals("")) ||
-                (DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR == null || DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR.trim().equals("")) ||
-                (DataUpdateMode.RECOMMEND_MIND_HOTTEST_JSON_DATA_STR == null || DataUpdateMode.RECOMMEND_MIND_HOTTEST_JSON_DATA_STR.trim().equals("")) ||
-                (DataUpdateMode.RECOMMEND_MIND_NEWEST_JSON_DATA_STR == null || DataUpdateMode.RECOMMEND_MIND_NEWEST_JSON_DATA_STR.trim().equals(""));
-
-        if (prepareDataFail) {
+        if (prepareDataSuccess) {
+            RecommendFragment recommendFragment = new RecommendFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, recommendFragment).commit();
+        } else {
             //Update Data
             List<DataUpdateMode> dataUpdateList = new ArrayList<>();
             DataUpdateMode recommend_Handpick_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
@@ -104,11 +104,6 @@ public class MainActivity extends FragmentActivity {
                     DataUpdateMode.RECOMMEND_HANDPICK_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
                     DataUpdateMode.RECOMMEND_HANDPICK_LOCAL_DATA_FILE_NAME);
             dataUpdateList.add(recommend_Handpick_Data_UpdateMode);
-            DataUpdateMode recommend_Attention_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.ACCOUNT_UPDATE_DATETIME_FILE_URL.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE, ExploreFutureApplication.TEMP_ACCOUNT),
-                    DataUpdateMode.ACCOUNT_ATTENTION_DATA_FILE_URL.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE, ExploreFutureApplication.TEMP_ACCOUNT),
-                    DataUpdateMode.ACCOUNT_ATTENTION_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
-                    DataUpdateMode.RECOMMEND_ATTENTION_LOCAL_DATA_FILE_NAME);
-            dataUpdateList.add(recommend_Attention_Data_UpdateMode);
             DataUpdateMode recommend_Mind_Hottest_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
                     DataUpdateMode.RECOMMEND_MIND_HOTTEST_DATA_FILE_URL,
                     DataUpdateMode.RECOMMEND_MIND_HOTTEST_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
@@ -125,9 +120,6 @@ public class MainActivity extends FragmentActivity {
 
             NoDataFragment noDataFragment = new NoDataFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, noDataFragment).commit();
-        } else {
-            RecommendFragment recommendFragment = new RecommendFragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, recommendFragment).commit();
         }
         currentFragment = 0;
 
@@ -192,17 +184,15 @@ public class MainActivity extends FragmentActivity {
     class NavigationRecommendBtnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            boolean prepareDataFail = (DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR == null || DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR.trim().equals("")) ||
-                    (DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR == null || DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR.trim().equals("")) ||
-                    (DataUpdateMode.RECOMMEND_MIND_HOTTEST_JSON_DATA_STR == null || DataUpdateMode.RECOMMEND_MIND_HOTTEST_JSON_DATA_STR.trim().equals("") ||
-                            (DataUpdateMode.RECOMMEND_MIND_NEWEST_JSON_DATA_STR == null || DataUpdateMode.RECOMMEND_MIND_NEWEST_JSON_DATA_STR.trim().equals("")));
+            boolean prepareDataSuccess = (new itc.ink.explorefuture_android.recommend.handpick_fragment.mode.DataLoad().outService.prepareData(MainActivity.this)) &&
+                    (new itc.ink.explorefuture_android.recommend.mind_fragment.mode.DataLoad().outService.prepareData(MainActivity.this));
 
-            if (prepareDataFail) {
-                NoDataFragment noDataFragment = new NoDataFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, noDataFragment).commit();
-            } else {
+            if (prepareDataSuccess) {
                 RecommendFragment recommendFragment = new RecommendFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, recommendFragment).commit();
+            } else {
+                NoDataFragment noDataFragment = new NoDataFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, noDataFragment).commit();
             }
             currentFragment = 0;
             updateBtnState(view);
@@ -212,13 +202,13 @@ public class MainActivity extends FragmentActivity {
     class NavigationSortBtnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            boolean prepareDataFail = (DataUpdateMode.SORT_ALL_JSON_DATA_STR == null || DataUpdateMode.SORT_ALL_JSON_DATA_STR.trim().equals(""));
-            if (prepareDataFail) {
-                NoDataFragment noDataFragment = new NoDataFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, noDataFragment).commit();
-            } else {
+            boolean prepareDataSuccess=new itc.ink.explorefuture_android.sort.mode.DataLoad().outService.prepareData(MainActivity.this);
+            if (prepareDataSuccess) {
                 SortFragment sortFragment = new SortFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, sortFragment).commit();
+            } else {
+                NoDataFragment noDataFragment = new NoDataFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, noDataFragment).commit();
             }
             currentFragment = 1;
             updateBtnState(view);
@@ -238,13 +228,13 @@ public class MainActivity extends FragmentActivity {
     class NavigationFindBtnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            boolean prepareDataFail = (DataUpdateMode.FIND_JSON_DATA_STR == null || DataUpdateMode.FIND_JSON_DATA_STR.trim().equals(""));
-            if (prepareDataFail) {
-                NoDataFragment noDataFragment = new NoDataFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, noDataFragment).commit();
-            } else {
+            boolean prepareDataSuccess=new itc.ink.explorefuture_android.find.mode.DataLoad().outService.prepareData(MainActivity.this);
+            if (prepareDataSuccess) {
                 FindFragment findFragment = new FindFragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, findFragment).commit();
+            } else {
+                NoDataFragment noDataFragment = new NoDataFragment();
+                getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, noDataFragment).commit();
             }
             currentFragment = 3;
             updateBtnState(view);
@@ -261,7 +251,7 @@ public class MainActivity extends FragmentActivity {
         }
     }
 
-    static class MyHandler extends Handler {
+    class MyHandler extends Handler {
         WeakReference<MainActivity> mActivity;
 
         MyHandler(MainActivity activity) {
@@ -274,34 +264,34 @@ public class MainActivity extends FragmentActivity {
             if (msg.what == DataUpdateUtil.UPDATE_DATA_FINISH_MSG) {
                 Fragment fragment = null;
                 boolean prepareDataFail = true;
+                boolean prepareDataSuccess = false;
                 switch (currentFragment) {
                     case 0:
                         fragment = new RecommendFragment();
-                        prepareDataFail = (DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR == null || DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR.trim().equals("")) ||
-                                (DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR == null || DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR.trim().equals("")) ||
-                                (DataUpdateMode.RECOMMEND_MIND_HOTTEST_JSON_DATA_STR == null || DataUpdateMode.RECOMMEND_MIND_HOTTEST_JSON_DATA_STR.trim().equals("")) ||
-                                (DataUpdateMode.RECOMMEND_MIND_NEWEST_JSON_DATA_STR == null || DataUpdateMode.RECOMMEND_MIND_NEWEST_JSON_DATA_STR.trim().equals(""));
+                        prepareDataSuccess = (new itc.ink.explorefuture_android.recommend.handpick_fragment.mode.DataLoad().outService.prepareData(MainActivity.this)) &&
+                                (new itc.ink.explorefuture_android.recommend.mind_fragment.mode.DataLoad().outService.prepareData(MainActivity.this));
+
                         break;
                     case 1:
                         fragment = new SortFragment();
-                        prepareDataFail = (DataUpdateMode.SORT_ALL_JSON_DATA_STR == null || DataUpdateMode.SORT_ALL_JSON_DATA_STR.trim().equals(""));
+                        prepareDataSuccess=new itc.ink.explorefuture_android.sort.mode.DataLoad().outService.prepareData(MainActivity.this);
                         break;
                     case 2:
                         fragment = new MindFragment();
-                        prepareDataFail = (DataUpdateMode.MIND_JSON_DATA_STR == null || DataUpdateMode.MIND_JSON_DATA_STR.trim().equals(""));
+                        prepareDataSuccess = true;
                         break;
                     case 3:
                         fragment = new FindFragment();
-                        prepareDataFail = (DataUpdateMode.FIND_JSON_DATA_STR == null || DataUpdateMode.FIND_JSON_DATA_STR.trim().equals(""));
+                        prepareDataSuccess=new itc.ink.explorefuture_android.find.mode.DataLoad().outService.prepareData(MainActivity.this);
                         break;
                     case 4:
                         fragment = new MineFragment();
-                        prepareDataFail = (DataUpdateMode.MINE_JSON_DATA_STR == null || DataUpdateMode.MINE_JSON_DATA_STR.trim().equals(""));
+                        prepareDataSuccess = true;
                         break;
                 }
 
 
-                if (prepareDataFail) {
+                if (!prepareDataSuccess) {
                     fragment = new NoDataFragment();
                 }
 
@@ -309,8 +299,5 @@ public class MainActivity extends FragmentActivity {
             }
         }
     }
-
-    ;
-
 
 }

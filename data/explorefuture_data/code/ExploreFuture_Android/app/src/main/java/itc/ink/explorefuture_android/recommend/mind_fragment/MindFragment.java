@@ -34,7 +34,7 @@ public class MindFragment extends Fragment {
 
         DataLoad mDataLoad = new DataLoad();
         //Judge Data Prepare
-        if (mDataLoad.outService.prepareData()) {
+        if (mDataLoad.outService.prepareData(getContext())) {
             ArrayList<TopicListDataMode> mTopicListData = (ArrayList<TopicListDataMode>) mDataLoad.outService.loadTopicData();
             ArrayList<MindListDataMode> mMindListData=null;
             if(SharedPreferenceUtil.getString(MindWrapAdapter.RECOMMEND_MIND_TAB_KEY).equals(MindWrapAdapter.RECOMMEND_MIND_VALUE_NEWEST)){

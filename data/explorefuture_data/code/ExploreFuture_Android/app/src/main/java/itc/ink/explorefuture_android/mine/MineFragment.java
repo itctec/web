@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import itc.ink.explorefuture_android.app.activity.MainActivity;
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.app.utils.SQLiteDBHelper;
+import itc.ink.explorefuture_android.login.LoginStateInstance;
 
 
 /**
@@ -37,8 +39,6 @@ public class MineFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Nullable
@@ -57,10 +57,8 @@ public class MineFragment extends Fragment {
 
         SQLiteDBHelper sqLiteDBHelper = new SQLiteDBHelper(getContext(), SQLiteDBHelper.DATABASE_FILE_NAME, SQLiteDBHelper.DATABASE_VERSION);
         String sqlStr = "select * from tb_person_info where id=?";
-        Cursor cursor = sqLiteDBHelper.getReadableDatabase().rawQuery(sqlStr, new String[]{ExploreFutureApplication.TEMP_ACCOUNT});
+        Cursor cursor = sqLiteDBHelper.getReadableDatabase().rawQuery(sqlStr, new String[]{LoginStateInstance.getInstance().getId()});
         if (cursor.moveToNext()) {
-
-
             RequestOptions options = new RequestOptions();
             options.signature(new ObjectKeyCanNull(cursor.getString(cursor.getColumnIndex("personal_cover_bg_image_update_datetime"))).getObject());
             SimpleTarget<Drawable> simpleTarget = new SimpleTarget<Drawable>() {
@@ -81,6 +79,7 @@ public class MineFragment extends Fragment {
             mineAttentionCountText.setText(String.format(getResources().getString(R.string.mine_attention_count_text),cursor.getString(cursor.getColumnIndex("attention_count"))));
         }else{
             //Need ReLogin
+            Log.d("ITC","需要登录");
         }
 
 

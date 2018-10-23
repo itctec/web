@@ -38,6 +38,7 @@ import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.app.utils.DataTimeUtil;
 import itc.ink.explorefuture_android.app.utils.SQLiteDBHelper;
 import itc.ink.explorefuture_android.app.utils.SharedPreferenceUtil;
+import itc.ink.explorefuture_android.login.LoginStateInstance;
 
 /**
  * Created by yangwenjiang on 2018/9/27.
@@ -66,9 +67,6 @@ public class DataUpdateUtil {
     public void updateData() {
         threadPool = Executors.newFixedThreadPool(dataUpdateList.size());
 
-        //Prepare Local Data
-        threadPool.submit(new PrepareLocalDataToCatch());
-
         //Get Server Data
         for (int i = 0; i < dataUpdateList.size(); i++) {
             threadPool.submit(new GetUpdateRunnable(dataUpdateList.get(i)));
@@ -80,7 +78,8 @@ public class DataUpdateUtil {
         threadPool.shutdown();
     }
 
-    public static String updateData(DataUpdateMode dataUpdateMode) {
+    public static String updateData(Context mContext, DataUpdateMode dataUpdateMode) {
+        DataUpdateUtil.mContext = mContext;
         return handleUpdate(dataUpdateMode);
     }
 
@@ -104,11 +103,11 @@ public class DataUpdateUtil {
         JsonElement element = parser.parse(jsonReader);
         JsonObject rootObj = element.getAsJsonObject();
         JsonPrimitive serverUpdateDateTime = rootObj.getAsJsonPrimitive(dataUpdateMode.getDataNewestUpdateDateTimeKey());
-        String serverDateTimeStr =null;
-        if(serverUpdateDateTime!=null){
+        String serverDateTimeStr = null;
+        if (serverUpdateDateTime != null) {
             serverDateTimeStr = serverUpdateDateTime.getAsString();
-        }else{
-            serverDateTimeStr =null;
+        } else {
+            serverDateTimeStr = null;
         }
         String localDateTimeStr = SharedPreferenceUtil.getString(dataUpdateMode.getDataNewestUpdateDateTimeKey());
 
@@ -127,7 +126,7 @@ public class DataUpdateUtil {
                     dataUpdateMode.setCheckUpdateFinish(true);
                     Log.d(LOG_TAG, "当前已是最新数据!");
             }
-        } else if (serverDateTimeStr != null && (localDateTimeStr == null||localDateTimeStr.isEmpty())) {
+        } else if (serverDateTimeStr != null && (localDateTimeStr == null || localDateTimeStr.isEmpty())) {
             SharedPreferenceUtil.putString(dataUpdateMode.getDataNewestUpdateDateTimeKey(), serverDateTimeStr);
             //Update Data File
             resultStr = getRemoteData(dataUpdateMode);
@@ -135,7 +134,7 @@ public class DataUpdateUtil {
         } else {
             resultStr = UPDATE_RESULT_FAILED;
             dataUpdateMode.setCheckUpdateFinish(true);
-            Log.d(LOG_TAG, dataUpdateMode.getLocalDataFileName()+"获取数据失败!");
+            Log.d(LOG_TAG, dataUpdateMode.getLocalDataFileName() + "获取数据失败!");
         }
         return resultStr;
     }
@@ -196,7 +195,9 @@ public class DataUpdateUtil {
                 bufferedWriter.write(catchStr);
             }
             bufferedWriter.flush();
-            updateDataCatch(dataUpdateMode.getLocalDataFileName(), stringBuilder.toString());
+            if(dataUpdateMode.getLocalDataFileName().equals(DataUpdateMode.MINE_LOCAL_DATA_FILE_NAME.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE, LoginStateInstance.getInstance().getId()))){
+                updateDatabase(stringBuilder.toString());
+            }
             Log.d(LOG_TAG, dataUpdateMode.getLocalDataFileName() + "数据保存成功！");
 
             bufferedReader.close();
@@ -213,85 +214,61 @@ public class DataUpdateUtil {
         return stringBuilder.toString();
     }
 
-    private static void updateDataCatch(String localDataFileName, String dataStr) {
-        switch (localDataFileName) {
-            case DataUpdateMode.RECOMMEND_HANDPICK_LOCAL_DATA_FILE_NAME:
-                DataUpdateMode.RECOMMEND_HANDPICK_JSON_DATA_STR = dataStr;
-                break;
-            case DataUpdateMode.RECOMMEND_ATTENTION_LOCAL_DATA_FILE_NAME:
-                DataUpdateMode.RECOMMEND_ATTENTION_JSON_DATA_STR = dataStr;
-                break;
-            case DataUpdateMode.RECOMMEND_MIND_HOTTEST_LOCAL_DATA_FILE_NAME:
-                DataUpdateMode.RECOMMEND_MIND_HOTTEST_JSON_DATA_STR = dataStr;
-                break;
-            case DataUpdateMode.RECOMMEND_MIND_NEWEST_LOCAL_DATA_FILE_NAME:
-                DataUpdateMode.RECOMMEND_MIND_NEWEST_JSON_DATA_STR = dataStr;
-                break;
-            case DataUpdateMode.SORT_ALL_LOCAL_DATA_FILE_NAME:
-                DataUpdateMode.SORT_ALL_JSON_DATA_STR = dataStr;
-                break;
-            case DataUpdateMode.MIND_LOCAL_DATA_FILE_NAME:
-                DataUpdateMode.MIND_JSON_DATA_STR = dataStr;
-                break;
-            case DataUpdateMode.FIND_LOCAL_DATA_FILE_NAME:
-                DataUpdateMode.FIND_JSON_DATA_STR = dataStr;
-                break;
-            case DataUpdateMode.MINE_LOCAL_DATA_FILE_NAME:
-                //Json Phrase Data Str
-                JsonReader jsonReader = new JsonReader(new StringReader(dataStr));
-                jsonReader.setLenient(true);
-                JsonParser parser = new JsonParser();
-                JsonElement element = parser.parse(jsonReader);
-                JsonObject rootObj = element.getAsJsonObject();
-                JsonPrimitive jsonPrimitive_id = rootObj.getAsJsonPrimitive("id");
-                String str_id =jsonPrimitive_id.getAsString();
-                JsonPrimitive jsonPrimitive_nickname = rootObj.getAsJsonPrimitive("nickname");
-                String str_nickname =jsonPrimitive_nickname.getAsString();
-                JsonPrimitive jsonPrimitive_personalized_signature = rootObj.getAsJsonPrimitive("personalized_signature");
-                String str_personalized_signature =jsonPrimitive_personalized_signature.getAsString();
-                JsonPrimitive jsonPrimitive_fans_count = rootObj.getAsJsonPrimitive("fans_count");
-                String str_fans_count =jsonPrimitive_fans_count.getAsString();
-                JsonPrimitive jsonPrimitive_attention_count = rootObj.getAsJsonPrimitive("attention_count");
-                String str_attention_count =jsonPrimitive_attention_count.getAsString();
-                JsonPrimitive jsonPrimitive_head_portrait_image_url = rootObj.getAsJsonPrimitive("head_portrait_image_url");
-                String str_head_portrait_image_url =jsonPrimitive_head_portrait_image_url.getAsString();
-                JsonPrimitive jsonPrimitive_head_portrait_image_update_datetime = rootObj.getAsJsonPrimitive("head_portrait_image_update_datetime");
-                String str_head_portrait_image_update_datetime =jsonPrimitive_head_portrait_image_update_datetime.getAsString();
-                JsonPrimitive jsonPrimitive_personal_cover_bg_image_url = rootObj.getAsJsonPrimitive("personal_cover_bg_image_url");
-                String str_personal_cover_bg_image_url =jsonPrimitive_personal_cover_bg_image_url.getAsString();
-                JsonPrimitive jsonPrimitive_personal_cover_bg_image_update_datetime = rootObj.getAsJsonPrimitive("personal_cover_bg_image_update_datetime");
-                String str_personal_cover_bg_image_update_datetime =jsonPrimitive_personal_cover_bg_image_update_datetime.getAsString();
+    private static void updateDatabase(String dataStr) {
+        JsonReader jsonReader = new JsonReader(new StringReader(dataStr));
+        jsonReader.setLenient(true);
+        JsonParser parser = new JsonParser();
+        JsonElement element = parser.parse(jsonReader);
+        JsonObject rootObj = element.getAsJsonObject();
+        JsonPrimitive jsonPrimitive_id = rootObj.getAsJsonPrimitive("id");
+        String str_id = jsonPrimitive_id.getAsString();
+        JsonPrimitive jsonPrimitive_nickname = rootObj.getAsJsonPrimitive("nickname");
+        String str_nickname = jsonPrimitive_nickname.getAsString();
+        JsonPrimitive jsonPrimitive_personalized_signature = rootObj.getAsJsonPrimitive("personalized_signature");
+        String str_personalized_signature = jsonPrimitive_personalized_signature.getAsString();
+        JsonPrimitive jsonPrimitive_fans_count = rootObj.getAsJsonPrimitive("fans_count");
+        String str_fans_count = jsonPrimitive_fans_count.getAsString();
+        JsonPrimitive jsonPrimitive_attention_count = rootObj.getAsJsonPrimitive("attention_count");
+        String str_attention_count = jsonPrimitive_attention_count.getAsString();
+        JsonPrimitive jsonPrimitive_head_portrait_image_url = rootObj.getAsJsonPrimitive("head_portrait_image_url");
+        String str_head_portrait_image_url = jsonPrimitive_head_portrait_image_url.getAsString();
+        JsonPrimitive jsonPrimitive_head_portrait_image_update_datetime = rootObj.getAsJsonPrimitive("head_portrait_image_update_datetime");
+        String str_head_portrait_image_update_datetime = jsonPrimitive_head_portrait_image_update_datetime.getAsString();
+        JsonPrimitive jsonPrimitive_personal_cover_bg_image_url = rootObj.getAsJsonPrimitive("personal_cover_bg_image_url");
+        String str_personal_cover_bg_image_url = jsonPrimitive_personal_cover_bg_image_url.getAsString();
+        JsonPrimitive jsonPrimitive_personal_cover_bg_image_update_datetime = rootObj.getAsJsonPrimitive("personal_cover_bg_image_update_datetime");
+        String str_personal_cover_bg_image_update_datetime = jsonPrimitive_personal_cover_bg_image_update_datetime.getAsString();
 
 
-                if(str_id.equals(ExploreFutureApplication.TEMP_ACCOUNT)){
-                    SQLiteDBHelper sqLiteDBHelper = new SQLiteDBHelper(mContext, SQLiteDBHelper.DATABASE_FILE_NAME, SQLiteDBHelper.DATABASE_VERSION);
-                    String sqlStr = "select * from tb_person_info where id=?";
-                    SQLiteDatabase sqLiteDatabase=sqLiteDBHelper.getReadableDatabase();
-                    Cursor cursor = sqLiteDatabase.rawQuery(sqlStr, new String[]{str_id});
+        if (str_id.equals(LoginStateInstance.getInstance().getId())) {
+            Log.d(LOG_TAG, "测试点1");
+            SQLiteDBHelper sqLiteDBHelper = new SQLiteDBHelper(mContext, SQLiteDBHelper.DATABASE_FILE_NAME, SQLiteDBHelper.DATABASE_VERSION);
+            String sqlStr = "select * from tb_person_info where id=?";
+            SQLiteDatabase sqLiteDatabase = sqLiteDBHelper.getReadableDatabase();
+            Cursor cursor = sqLiteDatabase.rawQuery(sqlStr, new String[]{str_id});
 
-                    ContentValues contentValues=new ContentValues();
-                    contentValues.put("nickname",str_nickname);
-                    contentValues.put("personalized_signature",str_personalized_signature);
-                    contentValues.put("fans_count",str_fans_count);
-                    contentValues.put("attention_count",str_attention_count);
-                    contentValues.put("head_portrait_image_url",str_head_portrait_image_url);
-                    contentValues.put("head_portrait_image_update_datetime",str_head_portrait_image_update_datetime);
-                    contentValues.put("personal_cover_bg_image_url",str_personal_cover_bg_image_url);
-                    contentValues.put("personal_cover_bg_image_update_datetime",str_personal_cover_bg_image_update_datetime);
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("nickname", str_nickname);
+            contentValues.put("personalized_signature", str_personalized_signature);
+            contentValues.put("fans_count", str_fans_count);
+            contentValues.put("attention_count", str_attention_count);
+            contentValues.put("head_portrait_image_url", str_head_portrait_image_url);
+            contentValues.put("head_portrait_image_update_datetime", str_head_portrait_image_update_datetime);
+            contentValues.put("personal_cover_bg_image_url", str_personal_cover_bg_image_url);
+            contentValues.put("personal_cover_bg_image_update_datetime", str_personal_cover_bg_image_update_datetime);
 
-                    if (cursor.moveToNext()) {
-                        sqLiteDatabase.update("tb_person_info",contentValues,"id=?",new String[]{str_id});
-                    }else {
-                        contentValues.put("id",str_id);
-                        contentValues.put("login_state","logged");
-                        sqLiteDatabase.insert("tb_person_info",null,contentValues);
-                    }
-                    sqLiteDatabase.close();
-                    sqLiteDBHelper.close();
-                }else{
-                    Log.d(LOG_TAG,"账号匹配错误");
-                }
-                break;
+            if (cursor.moveToNext()) {
+                Log.d(LOG_TAG, "测试点2");
+                sqLiteDatabase.update("tb_person_info", contentValues, "id=?", new String[]{str_id});
+            } else {
+                Log.d(LOG_TAG, "测试点3");
+                contentValues.put("id", str_id);
+                sqLiteDatabase.insert("tb_person_info", null, contentValues);
+            }
+            sqLiteDatabase.close();
+            sqLiteDBHelper.close();
+        } else {
+            Log.d(LOG_TAG, "账号匹配错误");
         }
     }
 
@@ -307,7 +284,6 @@ public class DataUpdateUtil {
             //Get Update DateTime File From Server
             handleUpdate(dataUpdateMode);
         }
-
 
     }
 
@@ -342,38 +318,6 @@ public class DataUpdateUtil {
                     break;
                 }
 
-            }
-        }
-    }
-
-    private class PrepareLocalDataToCatch implements Runnable {
-        @Override
-        public void run() {
-            StringBuilder stringBuilder = new StringBuilder();
-
-            for (int i = 0; i < dataUpdateList.size(); i++) {
-                stringBuilder.delete(0, stringBuilder.length());
-                DataUpdateMode dataUpdateMode = dataUpdateList.get(i);
-                File localDataFile = new File(mContext.getFilesDir(), dataUpdateMode.getLocalDataFileName());
-                BufferedReader bufferedReader;
-                if(localDataFile.exists()){
-                    try {
-                        InputStream inputStream = new FileInputStream(localDataFile);
-                        bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-
-                        String catchStr;
-                        while ((catchStr = bufferedReader.readLine()) != null) {
-                            stringBuilder.append(catchStr);
-                        }
-
-                        updateDataCatch(dataUpdateMode.getLocalDataFileName(), stringBuilder.toString());
-
-                        inputStream.close();
-                        bufferedReader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
             }
         }
     }

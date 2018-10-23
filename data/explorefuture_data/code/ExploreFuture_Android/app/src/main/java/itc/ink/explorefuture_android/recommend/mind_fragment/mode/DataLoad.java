@@ -33,7 +33,7 @@ public class DataLoad {
         /**
          * 准备数据数据
          */
-        boolean prepareData();
+        boolean prepareData(Context mContext);
 
         /**
          * 加载Topic数据

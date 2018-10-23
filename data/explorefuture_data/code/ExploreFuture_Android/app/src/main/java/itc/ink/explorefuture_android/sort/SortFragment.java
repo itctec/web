@@ -86,7 +86,7 @@ public class SortFragment extends Fragment {
         mDataLoad = new DataLoad();
 
         //Judge Data Prepare
-        if (mDataLoad.outService.prepareData()) {
+        if (mDataLoad.outService.prepareData(getContext())) {
             mSortListData = (ArrayList<SortListDataMode>) mDataLoad.outService.loadSortData();
             if (mSortListData.size() >= 0) {
                 mSortDataAdapter = new SortDataAdapter(getActivity(), mSortListData,new ContentItemMoreClickCallBack());
@@ -228,7 +228,7 @@ public class SortFragment extends Fragment {
                     DataUpdateMode.SORT_ALL_DATA_NEWEST_UPDATE_DATE_TIME_KEY.replace("_all_", "_" + sort_id + "_"),
                     DataUpdateMode.SORT_ALL_LOCAL_DATA_FILE_NAME.replace("_all_", "_" + sort_id + "_"));
 
-            String resultStr = DataUpdateUtil.updateData(sortDataUpdateMode);
+            String resultStr = DataUpdateUtil.updateData(getContext(),sortDataUpdateMode);
 
             if (resultStr != null && !resultStr.isEmpty()) {
                 switch (resultStr) {

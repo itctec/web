@@ -1,6 +1,9 @@
 package itc.ink.explorefuture_android.app.utils.dataupdate;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -33,6 +36,7 @@ import java.util.concurrent.Executors;
 import itc.ink.explorefuture_android.app.activity.MainActivity;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.app.utils.DataTimeUtil;
+import itc.ink.explorefuture_android.app.utils.SQLiteDBHelper;
 import itc.ink.explorefuture_android.app.utils.SharedPreferenceUtil;
 
 /**
@@ -131,7 +135,7 @@ public class DataUpdateUtil {
         } else {
             resultStr = UPDATE_RESULT_FAILED;
             dataUpdateMode.setCheckUpdateFinish(true);
-            Log.d(LOG_TAG, "获取数据失败!");
+            Log.d(LOG_TAG, dataUpdateMode.getLocalDataFileName()+"获取数据失败!");
         }
         return resultStr;
     }
@@ -231,6 +235,62 @@ public class DataUpdateUtil {
                 break;
             case DataUpdateMode.FIND_LOCAL_DATA_FILE_NAME:
                 DataUpdateMode.FIND_JSON_DATA_STR = dataStr;
+                break;
+            case DataUpdateMode.MINE_LOCAL_DATA_FILE_NAME:
+                //Json Phrase Data Str
+                JsonReader jsonReader = new JsonReader(new StringReader(dataStr));
+                jsonReader.setLenient(true);
+                JsonParser parser = new JsonParser();
+                JsonElement element = parser.parse(jsonReader);
+                JsonObject rootObj = element.getAsJsonObject();
+                JsonPrimitive jsonPrimitive_id = rootObj.getAsJsonPrimitive("id");
+                String str_id =jsonPrimitive_id.getAsString();
+                JsonPrimitive jsonPrimitive_nickname = rootObj.getAsJsonPrimitive("nickname");
+                String str_nickname =jsonPrimitive_nickname.getAsString();
+                JsonPrimitive jsonPrimitive_personalized_signature = rootObj.getAsJsonPrimitive("personalized_signature");
+                String str_personalized_signature =jsonPrimitive_personalized_signature.getAsString();
+                JsonPrimitive jsonPrimitive_fans_count = rootObj.getAsJsonPrimitive("fans_count");
+                String str_fans_count =jsonPrimitive_fans_count.getAsString();
+                JsonPrimitive jsonPrimitive_attention_count = rootObj.getAsJsonPrimitive("attention_count");
+                String str_attention_count =jsonPrimitive_attention_count.getAsString();
+                JsonPrimitive jsonPrimitive_head_portrait_image_url = rootObj.getAsJsonPrimitive("head_portrait_image_url");
+                String str_head_portrait_image_url =jsonPrimitive_head_portrait_image_url.getAsString();
+                JsonPrimitive jsonPrimitive_head_portrait_image_update_datetime = rootObj.getAsJsonPrimitive("head_portrait_image_update_datetime");
+                String str_head_portrait_image_update_datetime =jsonPrimitive_head_portrait_image_update_datetime.getAsString();
+                JsonPrimitive jsonPrimitive_personal_cover_bg_image_url = rootObj.getAsJsonPrimitive("personal_cover_bg_image_url");
+                String str_personal_cover_bg_image_url =jsonPrimitive_personal_cover_bg_image_url.getAsString();
+                JsonPrimitive jsonPrimitive_personal_cover_bg_image_update_datetime = rootObj.getAsJsonPrimitive("personal_cover_bg_image_update_datetime");
+                String str_personal_cover_bg_image_update_datetime =jsonPrimitive_personal_cover_bg_image_update_datetime.getAsString();
+
+
+                if(str_id.equals(ExploreFutureApplication.TEMP_ACCOUNT)){
+                    SQLiteDBHelper sqLiteDBHelper = new SQLiteDBHelper(mContext, SQLiteDBHelper.DATABASE_FILE_NAME, SQLiteDBHelper.DATABASE_VERSION);
+                    String sqlStr = "select * from tb_person_info where id=?";
+                    SQLiteDatabase sqLiteDatabase=sqLiteDBHelper.getReadableDatabase();
+                    Cursor cursor = sqLiteDatabase.rawQuery(sqlStr, new String[]{str_id});
+
+                    ContentValues contentValues=new ContentValues();
+                    contentValues.put("nickname",str_nickname);
+                    contentValues.put("personalized_signature",str_personalized_signature);
+                    contentValues.put("fans_count",str_fans_count);
+                    contentValues.put("attention_count",str_attention_count);
+                    contentValues.put("head_portrait_image_url",str_head_portrait_image_url);
+                    contentValues.put("head_portrait_image_update_datetime",str_head_portrait_image_update_datetime);
+                    contentValues.put("personal_cover_bg_image_url",str_personal_cover_bg_image_url);
+                    contentValues.put("personal_cover_bg_image_update_datetime",str_personal_cover_bg_image_update_datetime);
+
+                    if (cursor.moveToNext()) {
+                        sqLiteDatabase.update("tb_person_info",contentValues,"id=?",new String[]{str_id});
+                    }else {
+                        contentValues.put("id",str_id);
+                        contentValues.put("login_state","logged");
+                        sqLiteDatabase.insert("tb_person_info",null,contentValues);
+                    }
+                    sqLiteDatabase.close();
+                    sqLiteDBHelper.close();
+                }else{
+                    Log.d(LOG_TAG,"账号匹配错误");
+                }
                 break;
         }
     }

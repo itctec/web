@@ -97,6 +97,8 @@
     <!--Find Start-->
     <dimen name="find_content_title_text_size">16dp</dimen>
     <!--Find End-->
+    <!--Mine Start-->
+    <!--Mine End-->
     <!--Search Bar Start-->
     <dimen name="search_bar_cancel_btn_text_size">14dp</dimen>
     <dimen name="search_bar_edit_text_size">13dp</dimen>

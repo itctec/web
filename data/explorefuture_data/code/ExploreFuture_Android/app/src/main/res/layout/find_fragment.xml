@@ -19,12 +19,21 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintDimensionRatio="8:3"/>
-
+    <android.support.constraint.Guideline
+        android:id="@+id/find_Status_Bar_Horizontal_Guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintGuide_begin="@dimen/app_status_bar_height" />
     <itc.ink.explorefuture_android.common_unit.search_bar.SearchBar
         android:id="@+id/find_Top_Search_Bar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/app_status_bar_height"/>
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/find_Status_Bar_Horizontal_Guideline"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
     <TextView
         android:id="@+id/find_Hot_Search_Title"
         android:text="@string/find_hot_search_title_text"

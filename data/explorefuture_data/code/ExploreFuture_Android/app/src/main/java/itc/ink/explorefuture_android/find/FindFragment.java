@@ -127,6 +127,14 @@ public class FindFragment extends Fragment {
         super.onPause();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (sqLiteDBHelper != null) {
+            sqLiteDBHelper.close();
+        }
+    }
+
     private void initSearchHistoryData(){
 
         sqLiteDBHelper = new SQLiteDBHelper(getContext(), SQLiteDBHelper.DATABASE_FILE_NAME, SQLiteDBHelper.DATABASE_VERSION);

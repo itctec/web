@@ -122,11 +122,14 @@ public class MainActivity extends FragmentActivity {
 
             DataUpdateUtil dataUpdateUtil = new DataUpdateUtil(MainActivity.this, dataUpdateList, mHandler);
             dataUpdateUtil.updateData();
+
+            NoDataFragment noDataFragment = new NoDataFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, noDataFragment).commit();
         } else {
             RecommendFragment recommendFragment = new RecommendFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, recommendFragment).commit();
-            currentFragment = 0;
         }
+        currentFragment = 0;
 
     }
 
@@ -251,14 +254,8 @@ public class MainActivity extends FragmentActivity {
     class NavigationMineBtnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            boolean prepareDataFail = (DataUpdateMode.MINE_JSON_DATA_STR == null || DataUpdateMode.MINE_JSON_DATA_STR.trim().equals(""));
-            if (prepareDataFail) {
-                NoDataFragment noDataFragment = new NoDataFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, noDataFragment).commit();
-            } else {
-                MineFragment mineFragment = new MineFragment();
-                getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, mineFragment).commit();
-            }
+            MineFragment mineFragment = new MineFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.app_Fragment_Container, mineFragment).commit();
             currentFragment = 4;
             updateBtnState(view);
         }

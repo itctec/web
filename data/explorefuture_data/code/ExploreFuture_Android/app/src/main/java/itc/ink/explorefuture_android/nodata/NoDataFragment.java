@@ -86,6 +86,11 @@ public class NoDataFragment extends Fragment {
                     DataUpdateMode.FIND_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
                     DataUpdateMode.FIND_LOCAL_DATA_FILE_NAME);
             dataUpdateList.add(find_Data_UpdateMode);
+            DataUpdateMode mine_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.ACCOUNT_UPDATE_DATETIME_FILE_URL.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE, ExploreFutureApplication.TEMP_ACCOUNT),
+                    DataUpdateMode.ACCOUNT_MINE_DATA_FILE_URL.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE, ExploreFutureApplication.TEMP_ACCOUNT),
+                    DataUpdateMode.ACCOUNT_MINE_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
+                    DataUpdateMode.MINE_LOCAL_DATA_FILE_NAME);
+            dataUpdateList.add(mine_Data_UpdateMode);
 
             DataUpdateUtil dataUpdateUtil=new DataUpdateUtil(getActivity(),dataUpdateList, MainActivity.mHandler);
             dataUpdateUtil.updateData();

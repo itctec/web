@@ -18,6 +18,7 @@ public class DataUpdateMode {
     public static final String SORT_ALL_DATA_NEWEST_UPDATE_DATE_TIME_KEY="sort_all_data_newest_update_date_time";
     public static final String ACCOUNT_MIND_DATA_NEWEST_UPDATE_DATE_TIME_KEY="mind_data_newest_update_date_time";
     public static final String FIND_DATA_NEWEST_UPDATE_DATE_TIME_KEY="find_data_newest_update_date_time";
+    public static final String ACCOUNT_MINE_DATA_NEWEST_UPDATE_DATE_TIME_KEY="mine_data_newest_update_date_time";
 
     //Data File Remote Url
     public static final String RECOMMEND_HANDPICK_DATA_FILE_URL = "http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/data.json";
@@ -27,6 +28,7 @@ public class DataUpdateMode {
     public static final String SORT_ALL_DATA_FILE_URL = "http://www.itc.ink/data/explorefuture_data/app/sort/all/data.json";
     public static final String ACCOUNT_MIND_DATA_FILE_URL = "http://www.itc.ink/data/explorefuture_data/account/account_id_need_replace/mind/data.json";
     public static final String FIND_DATA_FILE_URL = "http://www.itc.ink/data/explorefuture_data/app/find/data.json";
+    public static final String ACCOUNT_MINE_DATA_FILE_URL = "http://www.itc.ink/data/explorefuture_data/account/account_id_need_replace/information/data.json";
 
 
     //Local Data File Name

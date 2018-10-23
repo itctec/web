@@ -179,8 +179,13 @@ public class DataUpdateUtil {
         StringBuilder stringBuilder = new StringBuilder();
         try {
             URL dataFileUrl = new URL(dataUpdateMode.getRemoteDataFileUrl());
-            File saveFile = new File(mContext.getFilesDir(), dataUpdateMode.getLocalDataFileName());
-
+            Log.d("ITC","测试点->"+mContext.getFilesDir());
+            String filePath="/"+dataUpdateMode.getAccountID();
+            File saveFile = new File(mContext.getFilesDir()+filePath, dataUpdateMode.getLocalDataFileName());
+            File fileParent = saveFile.getParentFile();
+            if(!fileParent.exists()){
+                fileParent.mkdirs();
+            }
             urlConnection = (HttpURLConnection) dataFileUrl.openConnection();
             urlConnection.setConnectTimeout(3 * 1000);
             urlConnection.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
@@ -195,7 +200,7 @@ public class DataUpdateUtil {
                 bufferedWriter.write(catchStr);
             }
             bufferedWriter.flush();
-            if(dataUpdateMode.getLocalDataFileName().equals(DataUpdateMode.MINE_LOCAL_DATA_FILE_NAME.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE, LoginStateInstance.getInstance().getId()))){
+            if((!dataUpdateMode.getAccountID().trim().equals(""))&&(dataUpdateMode.getAccountID().equals(LoginStateInstance.getInstance().getId()))){
                 updateDatabase(stringBuilder.toString());
             }
             Log.d(LOG_TAG, dataUpdateMode.getLocalDataFileName() + "数据保存成功！");
@@ -241,7 +246,6 @@ public class DataUpdateUtil {
 
 
         if (str_id.equals(LoginStateInstance.getInstance().getId())) {
-            Log.d(LOG_TAG, "测试点1");
             SQLiteDBHelper sqLiteDBHelper = new SQLiteDBHelper(mContext, SQLiteDBHelper.DATABASE_FILE_NAME, SQLiteDBHelper.DATABASE_VERSION);
             String sqlStr = "select * from tb_person_info where id=?";
             SQLiteDatabase sqLiteDatabase = sqLiteDBHelper.getReadableDatabase();
@@ -258,10 +262,8 @@ public class DataUpdateUtil {
             contentValues.put("personal_cover_bg_image_update_datetime", str_personal_cover_bg_image_update_datetime);
 
             if (cursor.moveToNext()) {
-                Log.d(LOG_TAG, "测试点2");
                 sqLiteDatabase.update("tb_person_info", contentValues, "id=?", new String[]{str_id});
             } else {
-                Log.d(LOG_TAG, "测试点3");
                 contentValues.put("id", str_id);
                 sqLiteDatabase.insert("tb_person_info", null, contentValues);
             }

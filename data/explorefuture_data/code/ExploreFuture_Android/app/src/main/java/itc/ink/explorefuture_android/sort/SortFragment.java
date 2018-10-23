@@ -54,6 +54,7 @@ import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateMode;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateUtil;
 import itc.ink.explorefuture_android.common_unit.scrollar_navigation.ScrollableNavigationBar;
 import itc.ink.explorefuture_android.common_unit.search_bar.SearchBar;
+import itc.ink.explorefuture_android.login.LoginStateInstance;
 import itc.ink.explorefuture_android.recommend.attention_fragment.adapter.AttentionWrapAdapter;
 import itc.ink.explorefuture_android.sort.adapter.SearchHistoryDataAdapter;
 import itc.ink.explorefuture_android.sort.adapter.SortDataAdapter;
@@ -226,7 +227,8 @@ public class SortFragment extends Fragment {
             DataUpdateMode sortDataUpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
                     DataUpdateMode.SORT_ALL_DATA_FILE_URL.replace("/all/", "/" + sort_id + "/"),
                     DataUpdateMode.SORT_ALL_DATA_NEWEST_UPDATE_DATE_TIME_KEY.replace("_all_", "_" + sort_id + "_"),
-                    DataUpdateMode.SORT_ALL_LOCAL_DATA_FILE_NAME.replace("_all_", "_" + sort_id + "_"));
+                    DataUpdateMode.SORT_ALL_LOCAL_DATA_FILE_NAME.replace("_all_", "_" + sort_id + "_"),
+                    LoginStateInstance.getInstance().getId());
 
             String resultStr = DataUpdateUtil.updateData(getContext(),sortDataUpdateMode);
 

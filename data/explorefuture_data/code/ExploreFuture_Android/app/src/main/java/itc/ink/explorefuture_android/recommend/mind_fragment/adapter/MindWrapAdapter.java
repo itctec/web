@@ -37,6 +37,7 @@ import itc.ink.explorefuture_android.common_unit.mind_recyclerview.mode.MindList
 import itc.ink.explorefuture_android.app.utils.SharedPreferenceUtil;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateMode;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateUtil;
+import itc.ink.explorefuture_android.login.LoginStateInstance;
 import itc.ink.explorefuture_android.recommend.mind_fragment.adapter.implement.TopicDelegateImplement;
 import itc.ink.explorefuture_android.recommend.mind_fragment.mode.mode_topic.TopicListDataMode;
 
@@ -235,12 +236,14 @@ public class MindWrapAdapter extends RecyclerView.Adapter<MindWrapAdapter.Wrappe
                 recommendMindDataUpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
                         DataUpdateMode.RECOMMEND_MIND_NEWEST_DATA_FILE_URL,
                         DataUpdateMode.RECOMMEND_MIND_NEWEST_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
-                        DataUpdateMode.RECOMMEND_MIND_NEWEST_LOCAL_DATA_FILE_NAME);
+                        DataUpdateMode.RECOMMEND_MIND_NEWEST_LOCAL_DATA_FILE_NAME,
+                        LoginStateInstance.getInstance().getId());
             } else {
                 recommendMindDataUpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
                         DataUpdateMode.RECOMMEND_MIND_HOTTEST_DATA_FILE_URL,
                         DataUpdateMode.RECOMMEND_MIND_HOTTEST_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
-                        DataUpdateMode.RECOMMEND_MIND_HOTTEST_LOCAL_DATA_FILE_NAME);
+                        DataUpdateMode.RECOMMEND_MIND_HOTTEST_LOCAL_DATA_FILE_NAME,
+                        LoginStateInstance.getInstance().getId());
             }
 
             String resultStr = DataUpdateUtil.updateData(getContext(),recommendMindDataUpdateMode);

@@ -117,8 +117,8 @@ public class MindFragment extends Fragment {
 
     private boolean prepareData(Context mContext) {
         StringBuilder stringBuilder = new StringBuilder();
-
-        File localDataFile = new File(mContext.getFilesDir(), DataUpdateMode.MIND_LOCAL_DATA_FILE_NAME.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE, LoginStateInstance.getInstance().getId()));
+        String filePath="/"+ LoginStateInstance.getInstance().getId();
+        File localDataFile = new File(mContext.getFilesDir()+filePath, DataUpdateMode.MIND_LOCAL_DATA_FILE_NAME.replace(DataUpdateMode.ACCOUNT_ID_NEED_REPLACE, LoginStateInstance.getInstance().getId()));
         BufferedReader bufferedReader;
         if (localDataFile.exists()) {
             try {

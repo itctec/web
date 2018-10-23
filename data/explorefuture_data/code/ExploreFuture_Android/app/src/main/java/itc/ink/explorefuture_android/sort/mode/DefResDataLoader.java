@@ -23,6 +23,7 @@ import java.util.List;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateMode;
 import itc.ink.explorefuture_android.common_unit.mind_recyclerview.mode.MindListDataMode;
+import itc.ink.explorefuture_android.login.LoginStateInstance;
 import itc.ink.explorefuture_android.sort.mode.mode_sort.SortListDataMode;
 
 
@@ -39,7 +40,6 @@ public class DefResDataLoader implements DataLoad.OutService {
     @Override
     public boolean prepareData(Context mContext) {
         StringBuilder stringBuilder = new StringBuilder();
-
         File localDataFile = new File(mContext.getFilesDir(), DataUpdateMode.SORT_ALL_LOCAL_DATA_FILE_NAME);
         BufferedReader bufferedReader;
         if (localDataFile.exists()) {

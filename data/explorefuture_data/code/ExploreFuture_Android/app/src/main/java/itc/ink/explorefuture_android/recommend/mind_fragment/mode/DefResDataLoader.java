@@ -23,6 +23,7 @@ import java.util.List;
 import itc.ink.explorefuture_android.common_unit.mind_recyclerview.mode.MindListDataMode;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateMode;
+import itc.ink.explorefuture_android.login.LoginStateInstance;
 import itc.ink.explorefuture_android.recommend.mind_fragment.mode.mode_topic.TopicListDataMode;
 
 
@@ -53,7 +54,6 @@ public class DefResDataLoader implements DataLoad.OutService {
 
     private String loadLocalData(Context mContext,String fileName){
         StringBuilder stringBuilder = new StringBuilder();
-
         File localDataFile = new File(mContext.getFilesDir(), fileName);
         BufferedReader bufferedReader;
         if (localDataFile.exists()) {

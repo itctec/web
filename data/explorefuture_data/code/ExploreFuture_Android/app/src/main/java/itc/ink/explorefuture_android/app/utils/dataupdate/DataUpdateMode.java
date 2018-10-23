@@ -33,29 +33,31 @@ public class DataUpdateMode {
 
     //Local Data File Name
     public static final String RECOMMEND_HANDPICK_LOCAL_DATA_FILE_NAME = "recommend_handpick_data.json";
-    public static final String RECOMMEND_ATTENTION_LOCAL_DATA_FILE_NAME = "account_id_need_replace_recommend_attention_data.json";
+    public static final String RECOMMEND_ATTENTION_LOCAL_DATA_FILE_NAME = "recommend_attention_data.json";
     public static final String RECOMMEND_MIND_HOTTEST_LOCAL_DATA_FILE_NAME = "recommend_mind_data_hottest.json";
     public static final String RECOMMEND_MIND_NEWEST_LOCAL_DATA_FILE_NAME = "recommend_mind_data_newest.json";
     public static final String SORT_ALL_LOCAL_DATA_FILE_NAME = "sort_all_data.json";
-    public static final String MIND_LOCAL_DATA_FILE_NAME = "account_id_need_replace_mind_data.json";
+    public static final String MIND_LOCAL_DATA_FILE_NAME = "mind_data.json";
     public static final String FIND_LOCAL_DATA_FILE_NAME = "find_data.json";
-    public static final String MINE_LOCAL_DATA_FILE_NAME = "account_id_need_replace_mine_data.json";
+    public static final String MINE_LOCAL_DATA_FILE_NAME = "mine_data.json";
 
     private String updateDatetimeFileUrl="";
     private String remoteDataFileUrl="";
     private String dataNewestUpdateDateTimeKey="";
     private String localDataFileName="";
+    private String accountID="";
 
     private boolean checkUpdateFinish=false;
 
     public DataUpdateMode() {
     }
 
-    public DataUpdateMode(String updateDatetimeFileUrl, String remoteDataFileUrl, String dataNewestUpdateDateTimeKey, String localDataFileName) {
+    public DataUpdateMode(String updateDatetimeFileUrl, String remoteDataFileUrl, String dataNewestUpdateDateTimeKey, String localDataFileName, String accountID) {
         this.updateDatetimeFileUrl = updateDatetimeFileUrl;
         this.remoteDataFileUrl = remoteDataFileUrl;
         this.dataNewestUpdateDateTimeKey = dataNewestUpdateDateTimeKey;
         this.localDataFileName = localDataFileName;
+        this.accountID = accountID;
     }
 
     @Override
@@ -65,6 +67,7 @@ public class DataUpdateMode {
                 ", remoteDataFileUrl='" + remoteDataFileUrl + '\'' +
                 ", dataNewestUpdateDateTimeKey='" + dataNewestUpdateDateTimeKey + '\'' +
                 ", localDataFileName='" + localDataFileName + '\'' +
+                ", accountID='" + accountID + '\'' +
                 ", checkUpdateFinish=" + checkUpdateFinish +
                 '}';
     }
@@ -81,8 +84,8 @@ public class DataUpdateMode {
         return remoteDataFileUrl;
     }
 
-    public void setRemoteDataFileUrl(String dataFileUrl) {
-        this.remoteDataFileUrl = dataFileUrl;
+    public void setRemoteDataFileUrl(String remoteDataFileUrl) {
+        this.remoteDataFileUrl = remoteDataFileUrl;
     }
 
     public String getDataNewestUpdateDateTimeKey() {
@@ -99,6 +102,14 @@ public class DataUpdateMode {
 
     public void setLocalDataFileName(String localDataFileName) {
         this.localDataFileName = localDataFileName;
+    }
+
+    public String getAccountID() {
+        return accountID;
+    }
+
+    public void setAccountID(String accountID) {
+        this.accountID = accountID;
     }
 
     public boolean isCheckUpdateFinish() {

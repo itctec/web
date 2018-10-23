@@ -28,6 +28,7 @@ import itc.ink.explorefuture_android.app.utils.StatusBarUtil;
 import itc.ink.explorefuture_android.app.utils.permission.DynamicPermission;
 import itc.ink.explorefuture_android.common_unit.common_dialog.CommonDialog;
 import itc.ink.explorefuture_android.find.FindFragment;
+import itc.ink.explorefuture_android.login.LoginStateInstance;
 import itc.ink.explorefuture_android.mind.MindFragment;
 import itc.ink.explorefuture_android.mind.edit_activity.MindEditActivity;
 import itc.ink.explorefuture_android.mine.MineFragment;
@@ -38,6 +39,7 @@ import itc.ink.explorefuture_android.sort.SortFragment;
 public class MainActivity extends FragmentActivity {
     private final String LOG_TAG = ExploreFutureApplication.LOG_TAG + "MainActivity";
     private final String TENCENT_BUGLY_APPID = "267157272d";
+    private LoginStateInstance loginStateInstance;
 
     public static MyHandler mHandler;
 
@@ -58,6 +60,7 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        loginStateInstance=LoginStateInstance.getInstance();
 
         //StatusBar Style
         StatusBarUtil.setStatusBarFullTransparent(this);
@@ -102,17 +105,20 @@ public class MainActivity extends FragmentActivity {
             DataUpdateMode recommend_Handpick_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
                     DataUpdateMode.RECOMMEND_HANDPICK_DATA_FILE_URL,
                     DataUpdateMode.RECOMMEND_HANDPICK_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
-                    DataUpdateMode.RECOMMEND_HANDPICK_LOCAL_DATA_FILE_NAME);
+                    DataUpdateMode.RECOMMEND_HANDPICK_LOCAL_DATA_FILE_NAME,
+                    "");
             dataUpdateList.add(recommend_Handpick_Data_UpdateMode);
             DataUpdateMode recommend_Mind_Hottest_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
                     DataUpdateMode.RECOMMEND_MIND_HOTTEST_DATA_FILE_URL,
                     DataUpdateMode.RECOMMEND_MIND_HOTTEST_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
-                    DataUpdateMode.RECOMMEND_MIND_HOTTEST_LOCAL_DATA_FILE_NAME);
+                    DataUpdateMode.RECOMMEND_MIND_HOTTEST_LOCAL_DATA_FILE_NAME,
+                    "");
             dataUpdateList.add(recommend_Mind_Hottest_Data_UpdateMode);
             DataUpdateMode recommend_Mind_Newest_Data_UpdateMode = new DataUpdateMode(DataUpdateMode.APP_UPDATE_DATETIME_FILE_URL,
                     DataUpdateMode.RECOMMEND_MIND_NEWEST_DATA_FILE_URL,
                     DataUpdateMode.RECOMMEND_MIND_NEWEST_DATA_NEWEST_UPDATE_DATE_TIME_KEY,
-                    DataUpdateMode.RECOMMEND_MIND_NEWEST_LOCAL_DATA_FILE_NAME);
+                    DataUpdateMode.RECOMMEND_MIND_NEWEST_LOCAL_DATA_FILE_NAME,
+                    "");
             dataUpdateList.add(recommend_Mind_Newest_Data_UpdateMode);
 
             DataUpdateUtil dataUpdateUtil = new DataUpdateUtil(MainActivity.this, dataUpdateList, mHandler);

@@ -55,6 +55,8 @@
             android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:shadowColor="@color/app_text_shadow_color_light"
+            android:shadowRadius="15"
             app:layout_constraintTop_toBottomOf="@id/mine_Status_Bar_Horizontal_Guideline"
             app:layout_constraintRight_toRightOf="parent"/>
         <android.support.constraint.Guideline
@@ -62,20 +64,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.415" />
+            app:layout_constraintGuide_percent="0.405" />
         <android.support.constraint.Guideline
             android:id="@+id/mine_HeadPortrait_Vertical_Guideline_Two"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.585" />
+            app:layout_constraintGuide_percent="0.595" />
         <ImageView
             android:id="@+id/mine_HeadPortrait_Image"
             android:background="@drawable/app_head_portrait_place_image"
             android:scaleType="centerCrop"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@id/mine_Status_Bar_Horizontal_Guideline"
             app:layout_constraintLeft_toRightOf="@id/mine_HeadPortrait_Vertical_Guideline_One"
             app:layout_constraintRight_toLeftOf="@id/mine_HeadPortrait_Vertical_Guideline_Two"
@@ -83,11 +85,11 @@
         <TextView
             android:id="@+id/mine_Nickname_Text"
             android:text="昵称"
-            android:textColor="#FFFFFF"
+            android:textColor="#333333"
             android:textSize="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:shadowColor="@color/app_text_shadow_color_dark"
+            android:shadowColor="@color/app_text_shadow_color_light"
             android:shadowRadius="15"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -98,11 +100,11 @@
         <TextView
             android:id="@+id/mine_Personalized_Signature_Text"
             android:text="个性签名"
-            android:textColor="#FFFFFF"
+            android:textColor="#333333"
             android:textSize="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:shadowColor="@color/app_text_shadow_color_dark"
+            android:shadowColor="@color/app_text_shadow_color_light"
             android:shadowRadius="15"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
@@ -113,22 +115,22 @@
         <TextView
             android:id="@+id/mine_Fans_Count_Text"
             android:text="@string/mine_fans_count_text"
-            android:textColor="#FFFFFF"
+            android:textColor="#333333"
             android:textSize="12dp"
             android:paddingTop="10dp"
             android:paddingBottom="7dp"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:paddingRight="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:shadowColor="@color/app_text_shadow_color_dark"
+            android:shadowColor="@color/app_text_shadow_color_light"
             android:shadowRadius="15"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"/>
         <TextView
             android:id="@+id/mine_Attention_Count_Text"
             android:text="@string/mine_attention_count_text"
-            android:textColor="#FFFFFF"
+            android:textColor="#333333"
             android:textSize="12dp"
             android:paddingTop="10dp"
             android:paddingBottom="7dp"
@@ -136,7 +138,7 @@
             android:paddingRight="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:shadowColor="@color/app_text_shadow_color_dark"
+            android:shadowColor="@color/app_text_shadow_color_light"
             android:shadowRadius="15"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/mine_Fans_Count_Text"/>

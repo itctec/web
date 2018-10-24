@@ -116,21 +116,25 @@ public class DataUpdateUtil {
             int compareResult = DataTimeUtil.dateTimeCompare(serverDateTimeStr, localDateTimeStr, simpleDateFormat);
             switch (compareResult) {
                 case 1:
-                    SharedPreferenceUtil.putString(dataUpdateMode.getDataNewestUpdateDateTimeKey(), serverDateTimeStr);
                     //Update Data File
+                    Log.d(LOG_TAG, dataUpdateMode.getLocalDataFileName() +"通过比较时间更新数据!");
                     resultStr = getRemoteData(dataUpdateMode);
-                    Log.d(LOG_TAG, "通过比较时间更新数据!");
+                    if (resultStr!=null&&!resultStr.isEmpty()){
+                        SharedPreferenceUtil.putString(dataUpdateMode.getDataNewestUpdateDateTimeKey(), serverDateTimeStr);
+                    }
                     break;
                 default:
                     resultStr = UPDATE_RESULT_NEWEST_ALREADY;
                     dataUpdateMode.setCheckUpdateFinish(true);
-                    Log.d(LOG_TAG, "当前已是最新数据!");
+                    Log.d(LOG_TAG, dataUpdateMode.getLocalDataFileName() +"当前已是最新数据!");
             }
         } else if (serverDateTimeStr != null && (localDateTimeStr == null || localDateTimeStr.isEmpty())) {
-            SharedPreferenceUtil.putString(dataUpdateMode.getDataNewestUpdateDateTimeKey(), serverDateTimeStr);
             //Update Data File
+            Log.d(LOG_TAG, dataUpdateMode.getLocalDataFileName() +"首次更新数据!");
             resultStr = getRemoteData(dataUpdateMode);
-            Log.d(LOG_TAG, "首次更新数据!");
+            if (resultStr!=null&&!resultStr.isEmpty()){
+                SharedPreferenceUtil.putString(dataUpdateMode.getDataNewestUpdateDateTimeKey(), serverDateTimeStr);
+            }
         } else {
             resultStr = UPDATE_RESULT_FAILED;
             dataUpdateMode.setCheckUpdateFinish(true);
@@ -179,7 +183,6 @@ public class DataUpdateUtil {
         StringBuilder stringBuilder = new StringBuilder();
         try {
             URL dataFileUrl = new URL(dataUpdateMode.getRemoteDataFileUrl());
-            Log.d("ITC","测试点->"+mContext.getFilesDir());
             String filePath="/"+dataUpdateMode.getAccountID();
             File saveFile = new File(mContext.getFilesDir()+filePath, dataUpdateMode.getLocalDataFileName());
             File fileParent = saveFile.getParentFile();
@@ -197,15 +200,20 @@ public class DataUpdateUtil {
             String catchStr;
             while ((catchStr = bufferedReader.readLine()) != null) {
                 stringBuilder.append(catchStr);
-                bufferedWriter.write(catchStr);
+                if(!dataUpdateMode.getLocalDataFileName().equals(DataUpdateMode.MINE_LOCAL_DATA_FILE_NAME)){
+                    bufferedWriter.write(catchStr);
+                    bufferedWriter.flush();
+                }
             }
-            bufferedWriter.flush();
-            if((!dataUpdateMode.getAccountID().trim().equals(""))&&(dataUpdateMode.getAccountID().equals(LoginStateInstance.getInstance().getId()))){
+            if((dataUpdateMode.getLocalDataFileName().equals(DataUpdateMode.MINE_LOCAL_DATA_FILE_NAME))&&
+                    (!dataUpdateMode.getAccountID().trim().equals(""))&&
+                    (dataUpdateMode.getAccountID().equals(LoginStateInstance.getInstance().getId()))){
                 updateDatabase(stringBuilder.toString());
             }
             Log.d(LOG_TAG, dataUpdateMode.getLocalDataFileName() + "数据保存成功！");
 
             bufferedReader.close();
+            bufferedWriter.close();
             inputStream.close();
             outputStream.close();
         } catch (Exception e) {

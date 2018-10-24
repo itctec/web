@@ -1,7 +1,10 @@
 package itc.ink.explorefuture_android.login;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import itc.ink.explorefuture_android.R;
+import itc.ink.explorefuture_android.app.utils.SQLiteDBHelper;
 import itc.ink.explorefuture_android.app.utils.StatusBarUtil;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateMode;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateUtil;
@@ -25,12 +29,12 @@ import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateUtil;
  */
 
 public class LoginActivity extends Activity {
-    public static MyHandler mHandler;
+    private MyHandler mHandler;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mHandler = new MyHandler(this);
+        mHandler = new MyHandler();
 
         //StatusBar Style
         StatusBarUtil.setStatusBarFullTransparent(this);
@@ -44,10 +48,14 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View view) {
                 //Login
+                String id="0000000001";
+                String password="123456";
                 LoginStateInstance loginStateInstance=LoginStateInstance.getInstance();
-                loginStateInstance.setId("0000000001");
-                loginStateInstance.setPassword("123456");
+                loginStateInstance.setId(id);
+                loginStateInstance.setPassword(password);
                 loginStateInstance.setLogin_state(LoginStateInstance.STATE_ONLINE);
+
+                updateDatabase(id,password,LoginStateInstance.STATE_ONLINE);
 
                 //Update Data
                 List<DataUpdateMode> dataUpdateList=new ArrayList<>();
@@ -75,15 +83,29 @@ public class LoginActivity extends Activity {
         });
     }
 
-    class MyHandler extends Handler {
-        WeakReference<LoginActivity> mActivity;
+    private void updateDatabase(String id,String password,String login_state){
+        SQLiteDBHelper sqLiteDBHelper = new SQLiteDBHelper(LoginActivity.this, SQLiteDBHelper.DATABASE_FILE_NAME, SQLiteDBHelper.DATABASE_VERSION);
+        String sqlStr = "select * from tb_login_info where id=?";
+        SQLiteDatabase sqLiteDatabase = sqLiteDBHelper.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery(sqlStr, new String[]{id});
 
-        MyHandler(LoginActivity activity) {
-            mActivity = new WeakReference<LoginActivity>(activity);
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("password", password);
+        contentValues.put("login_state", login_state);
+
+        if (cursor.moveToNext()) {
+            sqLiteDatabase.update("tb_login_info", contentValues, "id=?", new String[]{id});
+        } else {
+            contentValues.put("id", id);
+            sqLiteDatabase.insert("tb_login_info", null, contentValues);
         }
+        sqLiteDatabase.close();
+        sqLiteDBHelper.close();
+    }
+
+    class MyHandler extends Handler {
 
         public void handleMessage(Message msg) {
-            LoginActivity theActivity = mActivity.get();
 
             if (msg.what == DataUpdateUtil.UPDATE_DATA_FINISH_MSG) {
                 setResult(RESULT_OK);

@@ -99,6 +99,12 @@
 
     <!--Find End-->
     <!--Mine Start-->
+    <color name="mine_interaction_text_color">#222222</color>
+    <color name="mine_order_text_color">#FF5500</color>
+    <color name="mine_earnings_text_color">#5588FF</color>
+    <color name="mine_divider_line_color">#DDDDDD</color>
+    <color name="mine_text_color_gray">#888888</color>
+    <color name="mine_earnings_value_text_color">#FF0000</color>
     <!--Mine End-->
     <!--Search Bar Start-->
     <color name="search_bar_bg_color">#EEEEEE</color>

@@ -74,4 +74,19 @@
 
     <string name="app_login_btn_text">Login</string>
     <string name="app_offline_tip_text">You are not logged in, please log in first</string>
+
+    <string name="mine_interaction_history_btn_text">History</string>
+    <string name="mine_interaction_comment_btn_text">Comment</string>
+    <string name="mine_interaction_retransmission_btn_text">Retransmission</string>
+    <string name="mine_interaction_collection_btn_text">Collection</string>
+    <string name="mine_interaction_support_btn_text">Support</string>
+    <string name="mine_order_title_text">My Order</string>
+    <string name="mine_order_title_wait_payment_text">Wait Pay</string>
+    <string name="mine_order_title_wait_shipment_text">Wait Ship</string>
+    <string name="mine_order_title_wait_get_text">Wait Get</string>
+    <string name="mine_order_title_wait_evaluate_text">Wait Evaluate</string>
+    <string name="mine_order_title_after_sale_text">After Sale</string>
+    <string name="mine_earnings_title_text">My Earnings</string>
+    <string name="mine_Total_Earnings_text">Total Earnings(RMB)</string>
+    <string name="mine_Today_Earnings_text">Today</string>
 </resources>

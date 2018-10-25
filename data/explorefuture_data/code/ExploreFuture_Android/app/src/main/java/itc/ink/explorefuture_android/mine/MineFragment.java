@@ -20,7 +20,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -38,6 +40,8 @@ import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.app.utils.SQLiteDBHelper;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateMode;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateUtil;
+import itc.ink.explorefuture_android.common_unit.view.AppInnerBadge;
+import itc.ink.explorefuture_android.common_unit.view.TextViewWithIndicator;
 import itc.ink.explorefuture_android.login.LoginActivity;
 import itc.ink.explorefuture_android.login.LoginStateInstance;
 import itc.ink.explorefuture_android.mind.data_fragment.DataFragment;
@@ -51,10 +55,13 @@ import itc.ink.explorefuture_android.mind.nodata_fragment.MindNoDataFragment;
 public class MineFragment extends Fragment {
     private final String LOG_TAG = ExploreFutureApplication.LOG_TAG + "MineFragment";
     private final int LOGIN_REQUEST_CODE = 0x01;
-    private LoginStateInstance loginStateInstance=LoginStateInstance.getInstance();
+    private LoginStateInstance loginStateInstance = LoginStateInstance.getInstance();
+
+    private View mineOfflineMaskView;
 
     private ConstraintLayout minePersonInfoLayout;
     private ImageView mineMessageBtn;
+    private AppInnerBadge mineMessageCountView;
     private ImageView mineSettingsBtn;
     private TextView mineLoginBtn;
     private ImageView mineHeadPortraitImage;
@@ -62,6 +69,21 @@ public class MineFragment extends Fragment {
     private TextView minePersonalizedSignatureText;
     private TextView mineFansCountText;
     private TextView mineAttentionCountText;
+
+    private TextView interactionHistoryBtn;
+    private TextView interactionCommentBtn;
+    private TextView interactionRetransmissionBtn;
+    private TextView interactionCollectionBtn;
+    private TextView interactionSupportBtn;
+
+    private TextViewWithIndicator orderWaitPayBtn;
+    private TextViewWithIndicator orderWaitShipBtn;
+    private TextViewWithIndicator orderWaitGetBtn;
+    private TextViewWithIndicator orderWaitEvaluateBtn;
+    private TextViewWithIndicator orderAfterSaleBtn;
+
+    private TextView totalEarningsValueText;
+    private TextView todayEarningsValueText;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,17 +93,52 @@ public class MineFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView=inflater.inflate(R.layout.mine_fragment,container,false);
-        minePersonInfoLayout=rootView.findViewById(R.id.mine_Person_Info_Layout);
-        mineMessageBtn=rootView.findViewById(R.id.mine_Message_Btn);
-        mineSettingsBtn=rootView.findViewById(R.id.mine_Settings_Btn);
-        mineLoginBtn=rootView.findViewById(R.id.mine_Login_Btn);
+        View rootView = inflater.inflate(R.layout.mine_fragment, container, false);
+        minePersonInfoLayout = rootView.findViewById(R.id.mine_Person_Info_Layout);
+        mineMessageBtn = rootView.findViewById(R.id.mine_Message_Btn);
+        mineMessageBtn.setOnClickListener(new MineMessageBtnClickListener());
+        mineMessageCountView = rootView.findViewById(R.id.mine_Message_Count_View);
+        mineMessageCountView.setOnClickListener(new MineMessageBtnClickListener());
+        mineSettingsBtn = rootView.findViewById(R.id.mine_Settings_Btn);
+        mineSettingsBtn.setOnClickListener(new MineSettingsBtnClickListener());
+        mineLoginBtn = rootView.findViewById(R.id.mine_Login_Btn);
         mineLoginBtn.setOnClickListener(new MineLoginBtnClickListener());
-        mineHeadPortraitImage=rootView.findViewById(R.id.mine_HeadPortrait_Image);
-        mineNicknameText=rootView.findViewById(R.id.mine_Nickname_Text);
-        minePersonalizedSignatureText=rootView.findViewById(R.id.mine_Personalized_Signature_Text);
-        mineFansCountText=rootView.findViewById(R.id.mine_Fans_Count_Text);
-        mineAttentionCountText=rootView.findViewById(R.id.mine_Attention_Count_Text);
+        mineHeadPortraitImage = rootView.findViewById(R.id.mine_HeadPortrait_Image);
+        mineNicknameText = rootView.findViewById(R.id.mine_Nickname_Text);
+        minePersonalizedSignatureText = rootView.findViewById(R.id.mine_Personalized_Signature_Text);
+        mineFansCountText = rootView.findViewById(R.id.mine_Fans_Count_Text);
+        mineFansCountText.setOnClickListener(new MineFansCountTextClickListener());
+        mineAttentionCountText = rootView.findViewById(R.id.mine_Attention_Count_Text);
+        mineAttentionCountText.setOnClickListener(new MineAttentionCountTextClickListener());
+
+        mineOfflineMaskView = rootView.findViewById(R.id.mine_Offline_Mask_View);
+
+        InteractionBtnClickListener interactionBtnClickListener = new InteractionBtnClickListener();
+        interactionHistoryBtn = rootView.findViewById(R.id.mine_Interaction_History_Btn);
+        interactionHistoryBtn.setOnClickListener(interactionBtnClickListener);
+        interactionCommentBtn = rootView.findViewById(R.id.mine_Interaction_Comment_Btn);
+        interactionCommentBtn.setOnClickListener(interactionBtnClickListener);
+        interactionRetransmissionBtn = rootView.findViewById(R.id.mine_Interaction_Retransmission_Btn);
+        interactionRetransmissionBtn.setOnClickListener(interactionBtnClickListener);
+        interactionCollectionBtn = rootView.findViewById(R.id.mine_Interaction_Collection_Btn);
+        interactionCollectionBtn.setOnClickListener(interactionBtnClickListener);
+        interactionSupportBtn = rootView.findViewById(R.id.mine_Interaction_Support_Btn);
+        interactionSupportBtn.setOnClickListener(interactionBtnClickListener);
+
+        OrderBtnClickListener orderBtnClickListener = new OrderBtnClickListener();
+        orderWaitPayBtn = rootView.findViewById(R.id.mine_Order_Wait_Payment_Btn);
+        orderWaitPayBtn.setOnClickListener(orderBtnClickListener);
+        orderWaitShipBtn = rootView.findViewById(R.id.mine_Order_Wait_Shipment_Btn);
+        orderWaitShipBtn.setOnClickListener(orderBtnClickListener);
+        orderWaitGetBtn = rootView.findViewById(R.id.mine_Order_Wait_Get_Btn);
+        orderWaitGetBtn.setOnClickListener(orderBtnClickListener);
+        orderWaitEvaluateBtn = rootView.findViewById(R.id.mine_Order_Wait_Evaluate_Btn);
+        orderWaitEvaluateBtn.setOnClickListener(orderBtnClickListener);
+        orderAfterSaleBtn = rootView.findViewById(R.id.mine_Order_After_Sale_Btn);
+        orderAfterSaleBtn.setOnClickListener(orderBtnClickListener);
+
+        totalEarningsValueText = rootView.findViewById(R.id.mine_Total_Earnings_Value);
+        todayEarningsValueText = rootView.findViewById(R.id.mine_Today_Earnings_Value);
 
         updateLayout();
 
@@ -96,13 +153,13 @@ public class MineFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == LOGIN_REQUEST_CODE&& resultCode == Activity.RESULT_OK) {
+        if (requestCode == LOGIN_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             updateLayout();
         }
     }
 
-    private void updateLayout(){
-        if(loginStateInstance.getLogin_state().equals(LoginStateInstance.STATE_ONLINE)){
+    private void updateLayout() {
+        if (loginStateInstance.getLogin_state().equals(LoginStateInstance.STATE_ONLINE)) {
             SQLiteDBHelper sqLiteDBHelper = new SQLiteDBHelper(getContext(), SQLiteDBHelper.DATABASE_FILE_NAME, SQLiteDBHelper.DATABASE_VERSION);
             String sqlStr = "select * from tb_person_info where id=?";
             Cursor cursor = sqLiteDBHelper.getReadableDatabase().rawQuery(sqlStr, new String[]{LoginStateInstance.getInstance().getId()});
@@ -122,32 +179,148 @@ public class MineFragment extends Fragment {
                 options.transform(new GlideCircleWithBorder(1, Color.parseColor("#ccffffff")));
                 Glide.with(getContext()).load(cursor.getString(cursor.getColumnIndex("head_portrait_image_url"))).apply(options).into(mineHeadPortraitImage);
 
+                mineMessageBtn.setClickable(true);
+                mineMessageCountView.setCount(7);
                 mineLoginBtn.setVisibility(View.GONE);
                 mineSettingsBtn.setVisibility(View.VISIBLE);
                 mineNicknameText.setText(cursor.getString(cursor.getColumnIndex("nickname")));
                 minePersonalizedSignatureText.setText(cursor.getString(cursor.getColumnIndex("personalized_signature")));
-                mineFansCountText.setText(String.format(getResources().getString(R.string.mine_fans_count_text),cursor.getString(cursor.getColumnIndex("fans_count"))));
-                mineAttentionCountText.setText(String.format(getResources().getString(R.string.mine_attention_count_text),cursor.getString(cursor.getColumnIndex("attention_count"))));
-            }else{
-                Log.d(LOG_TAG,"加载数据失败");
+                mineFansCountText.setClickable(true);
+                mineFansCountText.setText(String.format(getResources().getString(R.string.mine_fans_count_text), cursor.getString(cursor.getColumnIndex("fans_count"))));
+                mineAttentionCountText.setClickable(true);
+                mineAttentionCountText.setText(String.format(getResources().getString(R.string.mine_attention_count_text), cursor.getString(cursor.getColumnIndex("attention_count"))));
+
+                mineOfflineMaskView.setVisibility(View.GONE);
+
+                interactionHistoryBtn.setClickable(true);
+                interactionCommentBtn.setClickable(true);
+                interactionRetransmissionBtn.setClickable(true);
+                interactionCollectionBtn.setClickable(true);
+                interactionSupportBtn.setClickable(true);
+
+                orderWaitPayBtn.setClickable(true);
+                orderWaitShipBtn.setClickable(true);
+                orderWaitGetBtn.setClickable(true);
+                orderWaitGetBtn.showIndicator(true);
+                orderWaitEvaluateBtn.setClickable(true);
+                orderWaitEvaluateBtn.showIndicator(true);
+                orderAfterSaleBtn.setClickable(true);
+            } else {
+                Log.d(LOG_TAG, "加载数据失败");
             }
-        }else{
+        } else {
             minePersonInfoLayout.setBackgroundResource(R.drawable.picture_place_image);
+            mineMessageBtn.setClickable(false);
+            mineMessageCountView.setCount(0);
+            mineMessageCountView.setVisibility(View.GONE);
             mineSettingsBtn.setVisibility(View.GONE);
             mineLoginBtn.setVisibility(View.VISIBLE);
 
             mineNicknameText.setText(getString(R.string.app_offline_tip_text));
             minePersonalizedSignatureText.setText("");
-            mineFansCountText.setText(String.format(getResources().getString(R.string.mine_fans_count_text),"0"));
-            mineAttentionCountText.setText(String.format(getResources().getString(R.string.mine_attention_count_text),"0"));
+            mineFansCountText.setText(String.format(getResources().getString(R.string.mine_fans_count_text), "0"));
+            mineFansCountText.setClickable(false);
+            mineAttentionCountText.setText(String.format(getResources().getString(R.string.mine_attention_count_text), "0"));
+            mineAttentionCountText.setClickable(false);
+
+            mineOfflineMaskView.setVisibility(View.VISIBLE);
+
+            interactionHistoryBtn.setClickable(false);
+            interactionCommentBtn.setClickable(false);
+            interactionRetransmissionBtn.setClickable(false);
+            interactionCollectionBtn.setClickable(false);
+            interactionSupportBtn.setClickable(false);
+
+            orderWaitPayBtn.setClickable(false);
+            orderWaitShipBtn.setClickable(false);
+            orderWaitGetBtn.setClickable(false);
+            orderWaitEvaluateBtn.setClickable(false);
+            orderAfterSaleBtn.setClickable(false);
+
+            totalEarningsValueText.setText("00.00");
+            todayEarningsValueText.setText("00.00");
         }
     }
 
-    class MineLoginBtnClickListener implements View.OnClickListener{
+    class MineMessageBtnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            Intent intent=new Intent(getContext(), LoginActivity.class);
-            startActivityForResult(intent,LOGIN_REQUEST_CODE);
+            Toast.makeText(getContext(), "消息按钮被点击", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    class MineLoginBtnClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(getContext(), LoginActivity.class);
+            startActivityForResult(intent, LOGIN_REQUEST_CODE);
+        }
+    }
+
+    class MineSettingsBtnClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(getContext(), "设置按钮被点击", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    class MineFansCountTextClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(getContext(), "粉丝数量被点击", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    class MineAttentionCountTextClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(getContext(), "关注数量被点击", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    class InteractionBtnClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.mine_Interaction_History_Btn:
+                    Toast.makeText(getContext(), "历史按钮被点击", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.mine_Interaction_Comment_Btn:
+                    Toast.makeText(getContext(), "评论按钮被点击", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.mine_Interaction_Retransmission_Btn:
+                    Toast.makeText(getContext(), "转发按钮被点击", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.mine_Interaction_Collection_Btn:
+                    Toast.makeText(getContext(), "收藏按钮被点击", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.mine_Interaction_Support_Btn:
+                    Toast.makeText(getContext(), "支持按钮被点击", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    }
+
+    class OrderBtnClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.mine_Order_Wait_Payment_Btn:
+                    Toast.makeText(getContext(), "待付款按钮被点击", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.mine_Order_Wait_Shipment_Btn:
+                    Toast.makeText(getContext(), "待发货按钮被点击", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.mine_Order_Wait_Get_Btn:
+                    Toast.makeText(getContext(), "待收货按钮被点击", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.mine_Order_Wait_Evaluate_Btn:
+                    Toast.makeText(getContext(), "待评价按钮被点击", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.mine_Order_After_Sale_Btn:
+                    Toast.makeText(getContext(), "售后按钮被点击", Toast.LENGTH_SHORT).show();
+                    break;
+            }
         }
     }
 

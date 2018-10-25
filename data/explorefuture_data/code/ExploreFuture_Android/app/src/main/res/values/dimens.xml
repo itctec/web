@@ -98,6 +98,9 @@
     <dimen name="find_content_title_text_size">16dp</dimen>
     <!--Find End-->
     <!--Mine Start-->
+    <dimen name="mine_interaction_text_size">12dp</dimen>
+    <dimen name="mine_item_bg_line_width">1px</dimen>
+    <dimen name="mine_earnings_value_text_size">18dp</dimen>
     <!--Mine End-->
     <!--Search Bar Start-->
     <dimen name="search_bar_cancel_btn_text_size">14dp</dimen>

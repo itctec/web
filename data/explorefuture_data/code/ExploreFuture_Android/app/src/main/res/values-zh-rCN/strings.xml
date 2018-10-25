@@ -74,4 +74,19 @@
 
     <string name="app_login_btn_text">登录</string>
     <string name="app_offline_tip_text">您还未登录，请先登录</string>
+
+    <string name="mine_interaction_history_btn_text">足迹</string>
+    <string name="mine_interaction_comment_btn_text">评论</string>
+    <string name="mine_interaction_retransmission_btn_text">转发</string>
+    <string name="mine_interaction_collection_btn_text">收藏</string>
+    <string name="mine_interaction_support_btn_text">支持</string>
+    <string name="mine_order_title_text">我的订单</string>
+    <string name="mine_order_title_wait_payment_text">待付款</string>
+    <string name="mine_order_title_wait_shipment_text">待发货</string>
+    <string name="mine_order_title_wait_get_text">待收货</string>
+    <string name="mine_order_title_wait_evaluate_text">待评价</string>
+    <string name="mine_order_title_after_sale_text">售后</string>
+    <string name="mine_earnings_title_text">我的收益</string>
+    <string name="mine_Total_Earnings_text">总收益（元）</string>
+    <string name="mine_Today_Earnings_text">今日</string>
 </resources>

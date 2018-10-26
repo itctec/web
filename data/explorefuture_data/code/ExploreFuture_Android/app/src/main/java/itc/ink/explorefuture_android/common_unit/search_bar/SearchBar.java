@@ -24,7 +24,6 @@ import java.util.Date;
 
 import itc.ink.explorefuture_android.R;
 import itc.ink.explorefuture_android.app.utils.SQLiteDBHelper;
-import itc.ink.explorefuture_android.sort.adapter.SearchHistoryDataAdapter;
 
 /**
  * Created by yangwenjiang on 2018/10/19.
@@ -67,8 +66,8 @@ public class SearchBar extends ConstraintLayout {
         searchBarClearBtn.setOnClickListener(new SearchBarClearBtnClickListener());
         searchBarCancelBtn = findViewById(R.id.search_Bar_Cancel_Btn);
         searchBarCancelBtn.setOnClickListener(new SearchBarCancelBtnClickListener());
-        searchHistoryLayout = findViewById(R.id.sort_Search_History_Layout);
-        searchHistoryRecyclerView = findViewById(R.id.sort_Search_History_RecyclerView);
+        searchHistoryLayout = findViewById(R.id.search_History_Layout);
+        searchHistoryRecyclerView = findViewById(R.id.search_History_RecyclerView);
         RecyclerView.LayoutManager historyRvLayoutManager = new LinearLayoutManager(getContext());
         searchHistoryRecyclerView.setLayoutManager(historyRvLayoutManager);
     }
@@ -108,6 +107,8 @@ public class SearchBar extends ConstraintLayout {
 
                 if (mSearchHistoryListData.size() > 0) {
                     mSearchHistoryListData.add(getContext().getString(R.string.search_clear_history_text));
+                }else{
+                    mSearchHistoryListData.add(getContext().getString(R.string.search_history_empty_text));
                 }
 
                 mHistoryDataAdapter.notifyDataSetChanged();
@@ -141,6 +142,8 @@ public class SearchBar extends ConstraintLayout {
 
             if (mSearchHistoryListData.size() > 0) {
                 mSearchHistoryListData.add(getContext().getString(R.string.search_clear_history_text));
+            }else{
+                mSearchHistoryListData.add(getContext().getString(R.string.search_history_empty_text));
             }
 
             mHistoryDataAdapter.notifyDataSetChanged();
@@ -173,6 +176,8 @@ public class SearchBar extends ConstraintLayout {
 
                 if (mSearchHistoryListData.size() > 0) {
                     mSearchHistoryListData.add(getContext().getString(R.string.search_clear_history_text));
+                }else{
+                    mSearchHistoryListData.add(getContext().getString(R.string.search_history_empty_text));
                 }
 
                 mHistoryDataAdapter.notifyDataSetChanged();

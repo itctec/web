@@ -37,6 +37,7 @@
     <string name="search_bar_cancel_btn_text">Cancel</string>
     <string name="search_bar_keyboard_enter_text">Search</string>
     <string name="search_clear_history_text">Clean Search History</string>
+    <string name="search_history_empty_text">No search records are currently available</string>
 
     <string name="sort_navigation_all_text">All</string>
     <string name="sort_level_one_title_more_text">more</string>
@@ -89,4 +90,11 @@
     <string name="mine_earnings_title_text">My Earnings</string>
     <string name="mine_Total_Earnings_text">Total Earnings(RMB)</string>
     <string name="mine_Today_Earnings_text">Today</string>
+
+    <string name="login_activity_top_navigation_help_btn_text">Help</string>
+    <string name="login_activity_id_edit_hint_text">PhoneNumber/UserID/Email</string>
+    <string name="login_activity_password_edit_hint_text">Password</string>
+    <string name="login_activity_id_edit_keyboard_enter_text">Next</string>
+    <string name="login_activity_password_edit_keyboard_enter_text">Finish</string>
+    <string name="login_activity_forget_password_btn_text">Forget Password</string>
 </resources>

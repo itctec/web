@@ -8,8 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,12 +33,11 @@ import java.util.ArrayList;
 import itc.ink.explorefuture_android.R;
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
 import itc.ink.explorefuture_android.app.utils.SQLiteDBHelper;
-import itc.ink.explorefuture_android.common_unit.mind_recyclerview.adapter.MindDataAdapter;
 import itc.ink.explorefuture_android.common_unit.search_bar.SearchBar;
 import itc.ink.explorefuture_android.find.adapter.HotSearchListDataAdapter;
 import itc.ink.explorefuture_android.find.mode.DataLoad;
 import itc.ink.explorefuture_android.find.mode.mode_banner.BannerDataMode;
-import itc.ink.explorefuture_android.sort.adapter.SearchHistoryDataAdapter;
+import itc.ink.explorefuture_android.common_unit.search_bar.SearchHistoryDataAdapter;
 
 
 /**
@@ -147,6 +144,8 @@ public class FindFragment extends Fragment {
 
         if (mSearchHistoryListData.size() > 0) {
             mSearchHistoryListData.add(getContext().getString(R.string.search_clear_history_text));
+        }else{
+            mSearchHistoryListData.add(getContext().getString(R.string.search_history_empty_text));
         }
     }
 

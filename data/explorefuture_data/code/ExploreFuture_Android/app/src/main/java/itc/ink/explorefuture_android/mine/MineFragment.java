@@ -41,6 +41,7 @@ import itc.ink.explorefuture_android.app.utils.SQLiteDBHelper;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateMode;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateUtil;
 import itc.ink.explorefuture_android.common_unit.view.AppInnerBadge;
+import itc.ink.explorefuture_android.common_unit.view.EarningsBightView;
 import itc.ink.explorefuture_android.common_unit.view.TextViewWithIndicator;
 import itc.ink.explorefuture_android.login.LoginActivity;
 import itc.ink.explorefuture_android.login.LoginStateInstance;
@@ -84,6 +85,7 @@ public class MineFragment extends Fragment {
 
     private TextView totalEarningsValueText;
     private TextView todayEarningsValueText;
+    private EarningsBightView earningsBightView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -139,6 +141,7 @@ public class MineFragment extends Fragment {
 
         totalEarningsValueText = rootView.findViewById(R.id.mine_Total_Earnings_Value);
         todayEarningsValueText = rootView.findViewById(R.id.mine_Today_Earnings_Value);
+        earningsBightView = rootView.findViewById(R.id.mine_Earnings_Bight_View);
 
         updateLayout();
 
@@ -180,6 +183,7 @@ public class MineFragment extends Fragment {
                 Glide.with(getContext()).load(cursor.getString(cursor.getColumnIndex("head_portrait_image_url"))).apply(options).into(mineHeadPortraitImage);
 
                 mineMessageBtn.setClickable(true);
+                mineMessageCountView.setVisibility(View.VISIBLE);
                 mineMessageCountView.setCount(7);
                 mineLoginBtn.setVisibility(View.GONE);
                 mineSettingsBtn.setVisibility(View.VISIBLE);
@@ -205,6 +209,18 @@ public class MineFragment extends Fragment {
                 orderWaitEvaluateBtn.setClickable(true);
                 orderWaitEvaluateBtn.showIndicator(true);
                 orderAfterSaleBtn.setClickable(true);
+
+                totalEarningsValueText.setText("2798.53");
+                todayEarningsValueText.setText("178.64");
+                ArrayList<Float> earningsData=new ArrayList<>();
+                earningsData.add(56.73f);
+                earningsData.add(28.59f);
+                earningsData.add(103.00f);
+                earningsData.add(78.65f);
+                earningsData.add(127.84f);
+                earningsData.add(88.25f);
+                earningsData.add(178.64f);
+                earningsBightView.updateData(earningsData);
             } else {
                 Log.d(LOG_TAG, "加载数据失败");
             }
@@ -239,6 +255,15 @@ public class MineFragment extends Fragment {
 
             totalEarningsValueText.setText("00.00");
             todayEarningsValueText.setText("00.00");
+            ArrayList<Float> earningsData=new ArrayList<>();
+            earningsData.add(00.00f);
+            earningsData.add(00.00f);
+            earningsData.add(00.00f);
+            earningsData.add(00.00f);
+            earningsData.add(00.00f);
+            earningsData.add(00.00f);
+            earningsData.add(00.00f);
+            earningsBightView.updateData(earningsData);
         }
     }
 

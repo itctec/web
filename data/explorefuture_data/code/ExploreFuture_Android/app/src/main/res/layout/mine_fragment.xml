@@ -7,11 +7,10 @@
         android:id="@+id/mine_Person_Info_Layout"
         android:background="@drawable/picture_place_image"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintDimensionRatio="15:7">
+        app:layout_constraintRight_toRightOf="parent">
         <android.support.constraint.Guideline
             android:id="@+id/mine_Status_Bar_Horizontal_Guideline"
             android:layout_width="wrap_content"
@@ -72,13 +71,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.405" />
+            app:layout_constraintGuide_percent="0.41" />
         <android.support.constraint.Guideline
             android:id="@+id/mine_HeadPortrait_Vertical_Guideline_Two"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.595" />
+            app:layout_constraintGuide_percent="0.59" />
         <ImageView
             android:id="@+id/mine_HeadPortrait_Image"
             android:background="@drawable/app_head_portrait_place_image"
@@ -125,7 +124,7 @@
             android:text="@string/mine_fans_count_text"
             android:textColor="#333333"
             android:textSize="12dp"
-            android:paddingTop="10dp"
+            android:paddingTop="15dp"
             android:paddingBottom="7dp"
             android:paddingLeft="10dp"
             android:paddingRight="5dp"
@@ -133,14 +132,14 @@
             android:layout_height="wrap_content"
             android:shadowColor="@color/app_text_shadow_color_light"
             android:shadowRadius="15"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mine_Personalized_Signature_Text"
             app:layout_constraintLeft_toLeftOf="parent"/>
         <TextView
             android:id="@+id/mine_Attention_Count_Text"
             android:text="@string/mine_attention_count_text"
             android:textColor="#333333"
             android:textSize="12dp"
-            android:paddingTop="10dp"
+            android:paddingTop="15dp"
             android:paddingBottom="7dp"
             android:paddingLeft="5dp"
             android:paddingRight="10dp"
@@ -148,17 +147,16 @@
             android:layout_height="wrap_content"
             android:shadowColor="@color/app_text_shadow_color_light"
             android:shadowRadius="15"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mine_Personalized_Signature_Text"
             app:layout_constraintLeft_toRightOf="@id/mine_Fans_Count_Text"/>
     </android.support.constraint.ConstraintLayout>
     <android.support.constraint.ConstraintLayout
         android:id="@+id/mine_Interaction_Layout"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/mine_Person_Info_Layout"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintDimensionRatio="7:1">
+        app:layout_constraintRight_toRightOf="parent">
         <TextView
             android:id="@+id/mine_Interaction_History_Btn"
             android:text="@string/mine_interaction_history_btn_text"
@@ -168,9 +166,8 @@
             android:gravity="center"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/app_mind_content_content_item_divider_line_width"
+            android:layout_marginTop="7dp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/mine_Interaction_Comment_Btn"/>
         <TextView
@@ -182,9 +179,8 @@
             android:gravity="center"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/app_mind_content_content_item_divider_line_width"
+            android:layout_marginTop="7dp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/mine_Interaction_History_Btn"
             app:layout_constraintRight_toLeftOf="@+id/mine_Interaction_Retransmission_Btn"/>
         <TextView
@@ -196,9 +192,8 @@
             android:gravity="center"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/app_mind_content_content_item_divider_line_width"
+            android:layout_marginTop="7dp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/mine_Interaction_Comment_Btn"
             app:layout_constraintRight_toLeftOf="@+id/mine_Interaction_Collection_Btn"/>
         <TextView
@@ -210,9 +205,8 @@
             android:gravity="center"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/app_mind_content_content_item_divider_line_width"
+            android:layout_marginTop="7dp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/mine_Interaction_Retransmission_Btn"
             app:layout_constraintRight_toLeftOf="@+id/mine_Interaction_Support_Btn"/>
         <TextView
@@ -224,9 +218,8 @@
             android:gravity="center"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/app_mind_content_content_item_divider_line_width"
+            android:layout_marginTop="7dp"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/mine_Interaction_Collection_Btn"
             app:layout_constraintRight_toRightOf="parent"/>
         <View
@@ -234,18 +227,18 @@
             android:background="@color/app_mind_content_item_divider_line_color"
             android:layout_width="0dp"
             android:layout_height="@dimen/app_mind_content_content_item_divider_line_width"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="7dp"
+            app:layout_constraintTop_toBottomOf="@id/mine_Interaction_History_Btn"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"/>
     </android.support.constraint.ConstraintLayout>
     <android.support.constraint.ConstraintLayout
         android:id="@+id/mine_Order_Layout"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/mine_Interaction_Layout"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintDimensionRatio="80:17">
+        app:layout_constraintRight_toRightOf="parent">
         <TextView
             android:id="@+id/mine_Order_Title"
             android:text="@string/mine_order_title_text"
@@ -253,8 +246,8 @@
             android:textSize="15dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
             android:layout_marginLeft="5dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"/>
@@ -267,9 +260,8 @@
             android:gravity="center"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/app_mind_content_content_item_divider_line_width"
+            android:layout_marginTop="7dp"
             app:layout_constraintTop_toBottomOf="@id/mine_Order_Title"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/mine_Order_Wait_Shipment_Btn"/>
         <itc.ink.explorefuture_android.common_unit.view.TextViewWithIndicator
@@ -281,9 +273,8 @@
             android:gravity="center"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/app_mind_content_content_item_divider_line_width"
+            android:layout_marginTop="7dp"
             app:layout_constraintTop_toBottomOf="@id/mine_Order_Title"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/mine_Order_Wait_Payment_Btn"
             app:layout_constraintRight_toLeftOf="@+id/mine_Order_Wait_Get_Btn"/>
         <itc.ink.explorefuture_android.common_unit.view.TextViewWithIndicator
@@ -295,9 +286,8 @@
             android:gravity="center"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/app_mind_content_content_item_divider_line_width"
+            android:layout_marginTop="7dp"
             app:layout_constraintTop_toBottomOf="@id/mine_Order_Title"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/mine_Order_Wait_Shipment_Btn"
             app:layout_constraintRight_toLeftOf="@+id/mine_Order_Wait_Evaluate_Btn"/>
         <itc.ink.explorefuture_android.common_unit.view.TextViewWithIndicator
@@ -309,9 +299,8 @@
             android:gravity="center"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/app_mind_content_content_item_divider_line_width"
+            android:layout_marginTop="7dp"
             app:layout_constraintTop_toBottomOf="@id/mine_Order_Title"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/mine_Order_Wait_Get_Btn"
             app:layout_constraintRight_toLeftOf="@+id/mine_Order_After_Sale_Btn"/>
         <itc.ink.explorefuture_android.common_unit.view.TextViewWithIndicator
@@ -323,9 +312,8 @@
             android:gravity="center"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/app_mind_content_content_item_divider_line_width"
+            android:layout_marginTop="7dp"
             app:layout_constraintTop_toBottomOf="@id/mine_Order_Title"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/mine_Order_Wait_Evaluate_Btn"
             app:layout_constraintRight_toRightOf="parent"/>
         <View
@@ -333,7 +321,8 @@
             android:background="@color/app_mind_content_item_divider_line_color"
             android:layout_width="0dp"
             android:layout_height="@dimen/app_mind_content_content_item_divider_line_width"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="7dp"
+            app:layout_constraintTop_toBottomOf="@id/mine_Order_Wait_Payment_Btn"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"/>
     </android.support.constraint.ConstraintLayout>
@@ -352,8 +341,8 @@
             android:textSize="15dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
             android:layout_marginLeft="5dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"/>
@@ -370,12 +359,11 @@
             app:layout_constraintLeft_toLeftOf="parent"/>
         <TextView
             android:id="@+id/mine_Total_Earnings_Value"
-            android:text="2798.53"
+            android:text="00.00"
             android:textColor="@color/mine_earnings_value_text_color"
             android:textSize="@dimen/mine_earnings_value_text_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
             app:layout_constraintBottom_toTopOf="@+id/mine_Earnings_Horizontal_Divider_Line"
             app:layout_constraintLeft_toRightOf="@id/mine_Total_Earnings"/>
         <TextView
@@ -391,7 +379,7 @@
             app:layout_constraintRight_toRightOf="parent"/>
         <TextView
             android:id="@+id/mine_Today_Earnings_Value"
-            android:text="178.64"
+            android:text="00.00"
             android:textColor="@color/mine_earnings_value_text_color"
             android:textSize="@dimen/mine_interaction_text_size"
             android:layout_width="wrap_content"
@@ -412,8 +400,11 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintVertical_bias="0.2"/>
         <itc.ink.explorefuture_android.common_unit.view.EarningsBightView
+            android:id="@+id/mine_Earnings_Bight_View"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             app:layout_constraintTop_toBottomOf="@id/mine_Earnings_Horizontal_Divider_Line"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

@@ -109,7 +109,6 @@
     <dimen name="search_history_text_size">12dp</dimen>
     <!--Search Bar End-->
     <!--Common Dialog Start-->
-    <dimen name="dialog_width">1px</dimen>
     <dimen name="dialog_bg_line_width">1px</dimen>
     <dimen name="dialog_title_text_size">15dp</dimen>
     <dimen name="dialog_content_text_size">13dp</dimen>

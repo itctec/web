@@ -6,6 +6,7 @@
 
     <TextView
         android:id="@+id/find_Hot_Search_Item"
+        android:textColor="#555555"
         android:textSize="10dp"
         android:background="@color/app_picture_place_image_bg"
         android:gravity="center"

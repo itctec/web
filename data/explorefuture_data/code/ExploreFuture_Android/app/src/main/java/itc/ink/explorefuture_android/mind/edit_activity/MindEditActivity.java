@@ -7,6 +7,7 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,6 +22,7 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
@@ -32,6 +34,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -73,6 +76,8 @@ public class MindEditActivity extends Activity {
     private final int ZHI_HU_GET_VIDEO_REQUEST_CODE = 0x03;
     private final int L_FILE_PICKER_GET_FILE_REQUEST_CODE = 0x04;
 
+    private ConstraintLayout activityLayout;
+
     private EditText mindEditText;
     private RecyclerView mindImageRecyclerView;
     private ArrayList<MindEditImageListDataMode> imageDataList = new ArrayList<>();
@@ -100,6 +105,16 @@ public class MindEditActivity extends Activity {
         StatusBarUtil.setAndroidNativeLightStatusBar(this, true);
 
         setContentView(R.layout.mind_edit_activity);
+
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        int statusBarHeight=0;
+        if (resourceId > 0) {
+            statusBarHeight = getResources().getDimensionPixelSize(resourceId);
+        }
+        activityLayout=findViewById(R.id.mind_Edit_Activity_Layout);
+        FrameLayout.LayoutParams activityLayoutParams=(FrameLayout.LayoutParams)activityLayout.getLayoutParams();
+        activityLayoutParams.topMargin=(int)(getResources().getDimension(R.dimen.app_status_bar_height)-statusBarHeight);
+        activityLayout.setLayoutParams(activityLayoutParams);
 
         //Navigation Bar
         ImageView closeBtn = findViewById(R.id.mind_Edit_Top_Navigation_Close_Btn);

@@ -1,6 +1,7 @@
 package itc.ink.explorefuture_android.common_unit.view;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -49,8 +50,12 @@ public class TextViewWithIndicator extends AppCompatTextView {
         super.onDraw(canvas);
 
         if(showIndicator){
-            canvas.drawCircle(canvasWidth/2+40+7,7,7,paint);
+            canvas.drawCircle(canvasWidth/2+40+dp2px(3),dp2px(3),dp2px(3),paint);
         }
+    }
+
+    private float dp2px(int dp){
+        return Resources.getSystem().getDisplayMetrics().density *dp;
     }
 
     public void showIndicator(boolean showIndicator){

@@ -2,9 +2,10 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mind_Edit_Activity_Layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/app_status_bar_height"
+    android:fitsSystemWindows="true"
     tools:context=".mind.edit_activity.MindEditActivity">
 
     <include
@@ -98,6 +99,7 @@
         android:textColor="#888888"
         android:drawableLeft="@drawable/vector_drawable_file_icon"
         android:drawablePadding="2dp"
+        android:gravity="center_vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"

@@ -1,29 +1,29 @@
 {
   "array_banner": [
     {
-      "id":"",
+      "id":"a_01_01_s_00001",
       "imageurl":"http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/banner/banner_1.png",
       "image_update_datetime":"2018-09-26 12:02"
     },
     {
-      "id":"",
+      "id":"a_01_01_s_00002",
       "imageurl":"http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/banner/banner_2.png",
       "image_update_datetime":"2018-09-26 12:00"
     },
     {
-      "id":"",
+      "id":"a_01_01_s_00003",
       "imageurl":"http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/banner/banner_3.png",
       "image_update_datetime":"2018-09-26 12:00"
     },
     {
-      "id":"",
+      "id":"a_01_01_s_00004",
       "imageurl":"http://www.itc.ink/data/explorefuture_data/app/recommend/handpick/banner/banner_4.png",
       "image_update_datetime":"2018-09-26 12:00"
     }
   ],
   "array_solution": [
     {
-      "id":"",
+      "id":"a_01_01",
       "title": "消遣欢旅",
       "summary": "进入查看更多",
       "imageurl": "",
@@ -36,7 +36,7 @@
       "gif_update_datetime":"2018-09-26 12:00"
     },
     {
-      "id":"",
+      "id":"a_01_02",
       "title": "健康构筑",
       "summary": "构筑健康生活方案",
       "imageurl": "",
@@ -49,7 +49,7 @@
       "gif_update_datetime":""
     },
     {
-      "id":"",
+      "id":"a_01_03",
       "title": "牛人进化",
       "summary": "多维度塑造牛人",
       "imageurl": "",
@@ -62,7 +62,7 @@
       "gif_update_datetime":""
     },
     {
-      "id":"",
+      "id":"a_01_04",
       "title": "探寻真我",
       "summary": "创造价值 实现自我",
       "imageurl": "",
@@ -75,7 +75,7 @@
       "gif_update_datetime":""
     },
     {
-      "id":"",
+      "id":"a_01_01_s_00001",
       "title": "数据可视化",
       "summary": "把握关键，从数据中获取价值信息",
       "imageurl": "",

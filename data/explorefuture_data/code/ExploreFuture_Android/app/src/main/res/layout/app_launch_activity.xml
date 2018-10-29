@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/app_launch_activity_bg"
-    android:fitsSystemWindows="true"
+    android:layout_marginTop="@dimen/app_status_bar_height"
     tools:context="itc.ink.explorefuture_android.app.activity.GuideActivity">
 
 </android.support.constraint.ConstraintLayout>

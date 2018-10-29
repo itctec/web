@@ -135,6 +135,7 @@ public class EarningsBightView extends View {
         this.earningsData = earningsData;
 
         minValue = Math.min(earningsData.get(0), earningsData.get(1));
+        maxValue = Math.max(earningsData.get(0), earningsData.get(1));
         for (int i = 0; i < earningsData.size(); i++) {
             minValue = Math.min(minValue, earningsData.get(i));
             maxValue = Math.max(maxValue, earningsData.get(i));

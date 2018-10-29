@@ -47,6 +47,7 @@ import itc.ink.explorefuture_android.login.LoginActivity;
 import itc.ink.explorefuture_android.login.LoginStateInstance;
 import itc.ink.explorefuture_android.mind.data_fragment.DataFragment;
 import itc.ink.explorefuture_android.mind.nodata_fragment.MindNoDataFragment;
+import itc.ink.explorefuture_android.mine.settings.SettingsMainActivity;
 
 
 /**
@@ -149,6 +150,12 @@ public class MineFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        updateLayout();
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
     }
@@ -183,7 +190,6 @@ public class MineFragment extends Fragment {
                 Glide.with(getContext()).load(cursor.getString(cursor.getColumnIndex("head_portrait_image_url"))).apply(options).into(mineHeadPortraitImage);
 
                 mineMessageBtn.setClickable(true);
-                mineMessageCountView.setVisibility(View.VISIBLE);
                 mineMessageCountView.setCount(7);
                 mineLoginBtn.setVisibility(View.GONE);
                 mineSettingsBtn.setVisibility(View.VISIBLE);
@@ -224,11 +230,16 @@ public class MineFragment extends Fragment {
             } else {
                 Log.d(LOG_TAG, "加载数据失败");
             }
+
+            sqLiteDBHelper.close();
         } else {
             minePersonInfoLayout.setBackgroundResource(R.drawable.picture_place_image);
+            RequestOptions options = new RequestOptions();
+            options.circleCrop();
+            Glide.with(getContext()).load(R.drawable.app_head_portrait_place_image).apply(options).into(mineHeadPortraitImage);
+
             mineMessageBtn.setClickable(false);
             mineMessageCountView.setCount(0);
-            mineMessageCountView.setVisibility(View.GONE);
             mineSettingsBtn.setVisibility(View.GONE);
             mineLoginBtn.setVisibility(View.VISIBLE);
 
@@ -250,7 +261,9 @@ public class MineFragment extends Fragment {
             orderWaitPayBtn.setClickable(false);
             orderWaitShipBtn.setClickable(false);
             orderWaitGetBtn.setClickable(false);
+            orderWaitGetBtn.showIndicator(false);
             orderWaitEvaluateBtn.setClickable(false);
+            orderWaitEvaluateBtn.showIndicator(false);
             orderAfterSaleBtn.setClickable(false);
 
             totalEarningsValueText.setText("00.00");
@@ -285,7 +298,8 @@ public class MineFragment extends Fragment {
     class MineSettingsBtnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            Toast.makeText(getContext(), "设置按钮被点击", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getContext(), SettingsMainActivity.class);
+            startActivity(intent);
         }
     }
 

@@ -88,8 +88,18 @@
     <string name="mine_order_title_wait_evaluate_text">Wait Evaluate</string>
     <string name="mine_order_title_after_sale_text">After Sale</string>
     <string name="mine_earnings_title_text">My Earnings</string>
-    <string name="mine_Total_Earnings_text">Total Earnings(RMB)</string>
-    <string name="mine_Today_Earnings_text">Today</string>
+    <string name="mine_total_earnings_text">Total Earnings(RMB)</string>
+    <string name="mine_today_earnings_text">Today</string>
+    <string name="settings_main_top_navigation_title_text">Settings</string>
+    <string name="settings_main_receive_address_text">My Receive Address</string>
+    <string name="settings_main_real_name_authentication_text">Real Name Authentication</string>
+    <string name="settings_main_account_safe_text">Account Safe</string>
+    <string name="settings_main_pay_settings_text">Pay Settings</string>
+    <string name="settings_main_bind_account_text">Bind Account</string>
+    <string name="settings_main_clean_catch_text">Clean Catch</string>
+    <string name="settings_main_help_center_text">Help Center</string>
+    <string name="settings_main_about_text">About APP</string>
+    <string name="settings_main_logout_btn_text">Exit Login</string>
 
     <string name="login_activity_top_navigation_help_btn_text">Help</string>
     <string name="login_activity_id_edit_hint_text">PhoneNumber/UserID/Email</string>
@@ -97,4 +107,8 @@
     <string name="login_activity_id_edit_keyboard_enter_text">Next</string>
     <string name="login_activity_password_edit_keyboard_enter_text">Finish</string>
     <string name="login_activity_forget_password_btn_text">Forget Password</string>
+    <string name="login_activity_sms_login_btn_text">SMS Login</string>
+    <string name="login_activity_new_user_register_btn_text">New User Register</string>
+
+    <string name="content_details_top_navigation_title_text">Details</string>
 </resources>

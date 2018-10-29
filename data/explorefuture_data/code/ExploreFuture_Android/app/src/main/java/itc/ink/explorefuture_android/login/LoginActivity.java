@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +13,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -20,30 +22,41 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
 import itc.ink.explorefuture_android.R;
+import itc.ink.explorefuture_android.app.app_level.GlideCircleWithBorder;
+import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
+import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.app.utils.SQLiteDBHelper;
 import itc.ink.explorefuture_android.app.utils.SharedPreferenceUtil;
 import itc.ink.explorefuture_android.app.utils.StatusBarUtil;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateMode;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateUtil;
+import itc.ink.explorefuture_android.mine.settings.SettingsMainActivity;
 
 /**
  * Created by yangwenjiang on 2018/10/23.
  */
 
 public class LoginActivity extends Activity {
+    private final String LOG_TAG = ExploreFutureApplication.LOG_TAG + "LoginActivity";
     private final String KEY_PASSWORD_VISIBLE="password_visible";
     private ImageView closeBtn;
     private TextView helpBtn;
-
+    private ImageView headPortraitImage;
     private EditText idEdit;
     private EditText passwordEdit;
     private ImageView passwordHideBtn;
+    private TextView forgetPasswordBtn;
     private Button loginBtn;
+    private TextView smsLoginBtn;
+    private TextView registerBtn;
 
     private MyHandler mHandler;
 
@@ -63,7 +76,9 @@ public class LoginActivity extends Activity {
         closeBtn.setOnClickListener(new CloseBtnClickListener());
         helpBtn=findViewById(R.id.login_Activity_Top_Navigation_Help_Btn);
         helpBtn.setOnClickListener(new HelpBtnClickListener());
+        headPortraitImage=findViewById(R.id.login_Activity_HeadPortrait_Image);
         idEdit=findViewById(R.id.login_Activity_ID_Edit);
+        idEdit.setOnFocusChangeListener(new IdEditFocusChangeListener());
         passwordEdit=findViewById(R.id.login_Activity_Password_Edit);
         passwordHideBtn=findViewById(R.id.login_Activity_Password_Hide_Btn);
         if(SharedPreferenceUtil.getBoolean(KEY_PASSWORD_VISIBLE,false)){
@@ -74,9 +89,15 @@ public class LoginActivity extends Activity {
             passwordEdit.setInputType(InputType.TYPE_CLASS_TEXT |InputType.TYPE_TEXT_VARIATION_PASSWORD);
         }
         passwordHideBtn.setOnClickListener(new PasswordHideBtnClickListener());
-
+        forgetPasswordBtn=findViewById(R.id.login_Activity_Forget_Password_Btn);
+        forgetPasswordBtn.setOnClickListener(new ForgetPasswordBtnClickListener());
         loginBtn=findViewById(R.id.login_Activity_Login_Btn);
         loginBtn.setOnClickListener(new LoginBtnClickListener());
+        smsLoginBtn=findViewById(R.id.login_Activity_SMS_Login_Btn);
+        smsLoginBtn.setOnClickListener(new SmsLoginBtnClickListener());
+
+        registerBtn=findViewById(R.id.login_Activity_New_User_Register_Btn);
+        registerBtn.setOnClickListener(new RegisterBtnClickListener());
     }
 
     private void updateDatabase(String id,String password,String login_state){
@@ -113,6 +134,28 @@ public class LoginActivity extends Activity {
         }
     }
 
+    class IdEditFocusChangeListener implements View.OnFocusChangeListener{
+        @Override
+        public void onFocusChange(View view, boolean b) {
+            if (!b){
+                SQLiteDBHelper sqLiteDBHelper = new SQLiteDBHelper(LoginActivity.this, SQLiteDBHelper.DATABASE_FILE_NAME, SQLiteDBHelper.DATABASE_VERSION);
+                String sqlStr = "select * from tb_person_info where id=?";
+                Cursor cursor = sqLiteDBHelper.getReadableDatabase().rawQuery(sqlStr, new String[]{idEdit.getText().toString().trim()});
+                if (cursor.moveToNext()) {
+                    RequestOptions options = new RequestOptions();
+                    options.signature(new ObjectKeyCanNull(cursor.getString(cursor.getColumnIndex("head_portrait_image_update_datetime"))).getObject());
+                    options.circleCrop();
+                    options.transform(new GlideCircleWithBorder(1, Color.parseColor("#5588FF")));
+                    Glide.with(LoginActivity.this).load(cursor.getString(cursor.getColumnIndex("head_portrait_image_url"))).apply(options).into(headPortraitImage);
+
+                } else {
+                    Log.d(LOG_TAG, "加载数据失败");
+                }
+                sqLiteDBHelper.close();
+            }
+        }
+    }
+
     class PasswordHideBtnClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
@@ -125,6 +168,27 @@ public class LoginActivity extends Activity {
                 SharedPreferenceUtil.putBoolean(KEY_PASSWORD_VISIBLE,true);
                 passwordEdit.setInputType(InputType.TYPE_CLASS_TEXT);
             }
+        }
+    }
+
+    class ForgetPasswordBtnClickListener implements View.OnClickListener{
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(LoginActivity.this,"忘记密码按钮被点击",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    class SmsLoginBtnClickListener implements View.OnClickListener{
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(LoginActivity.this,"短信验证码登录按钮被点击",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    class RegisterBtnClickListener implements View.OnClickListener{
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(LoginActivity.this,"新用户注册按钮被点击",Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -39,7 +39,6 @@ public class AppInnerBadge extends View {
         super(context, attrs, defStyleAttr);
 
         paint.setAntiAlias(true);
-        paint.setColor(Color.argb(150,255,0,0));
         paint.setStrokeWidth(1);
     }
 
@@ -54,6 +53,7 @@ public class AppInnerBadge extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        paint.setColor(Color.argb(150,255,0,0));
         paint.setTextSize(canvasHeight-6);
         canvas.drawRoundRect(1,1,canvasWidth,canvasHeight,canvasHeight/2,canvasHeight/2,paint);
 
@@ -66,8 +66,11 @@ public class AppInnerBadge extends View {
 
     public void setCount(int count){
         if (count<=0){
+            this.count=count;
+            invalidate();
             this.setVisibility(View.GONE);
         }else{
+            this.setVisibility(View.VISIBLE);
             this.count=count;
             invalidate();
         }

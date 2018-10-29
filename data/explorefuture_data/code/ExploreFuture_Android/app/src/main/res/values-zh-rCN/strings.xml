@@ -88,8 +88,18 @@
     <string name="mine_order_title_wait_evaluate_text">待评价</string>
     <string name="mine_order_title_after_sale_text">售后</string>
     <string name="mine_earnings_title_text">我的收益</string>
-    <string name="mine_Total_Earnings_text">总收益（元）</string>
-    <string name="mine_Today_Earnings_text">今日</string>
+    <string name="mine_total_earnings_text">总收益（元）</string>
+    <string name="mine_today_earnings_text">今日</string>
+    <string name="settings_main_top_navigation_title_text">设置</string>
+    <string name="settings_main_receive_address_text">我的收货地址</string>
+    <string name="settings_main_real_name_authentication_text">实名认证</string>
+    <string name="settings_main_account_safe_text">账户安全</string>
+    <string name="settings_main_pay_settings_text">支付设置</string>
+    <string name="settings_main_bind_account_text">关联账号</string>
+    <string name="settings_main_clean_catch_text">缓存清理</string>
+    <string name="settings_main_help_center_text">帮助中心</string>
+    <string name="settings_main_about_text">关于探路未来APP</string>
+    <string name="settings_main_logout_btn_text">退出登录</string>
 
     <string name="login_activity_top_navigation_help_btn_text">帮助</string>
     <string name="login_activity_id_edit_hint_text">手机号/用户名/邮箱</string>
@@ -97,4 +107,8 @@
     <string name="login_activity_id_edit_keyboard_enter_text">下一项</string>
     <string name="login_activity_password_edit_keyboard_enter_text">完成</string>
     <string name="login_activity_forget_password_btn_text">忘记密码</string>
+    <string name="login_activity_sms_login_btn_text">短信验证码登录</string>
+    <string name="login_activity_new_user_register_btn_text">新用户注册</string>
+
+    <string name="content_details_top_navigation_title_text">详情</string>
 </resources>

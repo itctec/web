@@ -1,6 +1,7 @@
 package itc.ink.explorefuture_android.recommend.handpick_fragment.adapter.implement;
 
 import android.content.Context;
+import android.content.Intent;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
+import itc.ink.explorefuture_android.common_unit.content_details.ContentDetailsActivity;
 import itc.ink.explorefuture_android.recommend.handpick_fragment.adapter.HandPickWrapperAdapter;
 import itc.ink.explorefuture_android.recommend.handpick_fragment.mode.mode_banner.BannerDataMode;
 
@@ -42,17 +44,22 @@ public class BannerDelegateImplement implements HandPickWrapperAdapter.DelegateI
         mHolder.handpickBanner.setBannerAnimation(Transformer.Default);
         mHolder.handpickBanner.isAutoPlay(true);
         mHolder.handpickBanner.setIndicatorGravity(BannerConfig.RIGHT).start();
-        mHolder.handpickBanner.setOnBannerListener(new ChoicenessBannerClickListener());
+        mHolder.handpickBanner.setOnBannerListener(new HandpickBannerClickListener((ArrayList<BannerDataMode>) mData));
     }
 
-    class ChoicenessBannerClickListener implements OnBannerListener {
+    class HandpickBannerClickListener implements OnBannerListener {
+        private ArrayList<BannerDataMode> mData;
+
+        public HandpickBannerClickListener(ArrayList<BannerDataMode> mData) {
+            this.mData = mData;
+        }
 
         @Override
         public void OnBannerClick(int position) {
-            Toast.makeText(getContext(), "HandpickBanner" + position + "被点击", Toast.LENGTH_SHORT).show();
+            Intent intent =new Intent(getContext(), ContentDetailsActivity.class);
+            intent.putExtra("content_id",mData.get(position).getId());
+            getContext().startActivity(intent);
         }
-
-
     }
 
     private class MyLoader extends ImageLoader {

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
@@ -18,16 +17,15 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import itc.ink.explorefuture_android.R;
-import itc.ink.explorefuture_android.app.activity.MainActivity;
 import itc.ink.explorefuture_android.app.utils.StatusBarUtil;
 import itc.ink.explorefuture_android.common_unit.common_dialog.CommonDialog;
-import itc.ink.explorefuture_android.mind.edit_activity.MindEditActivity;
 
 /**
  * Created by yangwenjiang on 2018/10/29.
  */
 
 public class ContentDetailsActivity extends Activity {
+    public static final String KEY_CONTENT_ID="content_id";
     private ImageView backBtn;
     private WebView contentWebView;
     private ProgressBar contentLoadingProgressBar;
@@ -42,8 +40,9 @@ public class ContentDetailsActivity extends Activity {
         StatusBarUtil.setAndroidNativeLightStatusBar(this, true);
 
         Intent intent = getIntent();
-        String content_id = intent.getStringExtra("content_id");
-        String content_url = "";
+        String content_id = intent.getStringExtra(KEY_CONTENT_ID);
+        Toast.makeText(ContentDetailsActivity.this,"ID:"+content_id,Toast.LENGTH_SHORT).show();
+        String content_url = "http://www.itc.ink";
         if (content_id != null && !content_id.isEmpty()) {
             switch (content_id) {
                 case "a_01_01_s_00001":

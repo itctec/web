@@ -111,4 +111,9 @@
     <string name="login_activity_new_user_register_btn_text">New User Register</string>
 
     <string name="content_details_top_navigation_title_text">Details</string>
+
+    <string name="mind_list_item_comment_count_text">Comment %1$s item</string>
+    <string name="mind_details_bottom_bar_retransmission_btn_text">Retransmission</string>
+    <string name="mind_details_bottom_bar_comment_btn_text">Comment</string>
+    <string name="mind_details_bottom_bar_accept_btn_text">Accept</string>
 </resources>

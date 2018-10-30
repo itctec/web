@@ -1,6 +1,7 @@
 package itc.ink.explorefuture_android.recommend.handpick_fragment.adapter.implement;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.view.View;
 import android.widget.Toast;
@@ -13,6 +14,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
+import itc.ink.explorefuture_android.common_unit.content_details.ContentDetailsActivity;
 import itc.ink.explorefuture_android.recommend.handpick_fragment.adapter.HandPickWrapperAdapter;
 import itc.ink.explorefuture_android.recommend.handpick_fragment.mode.mode_solution.SolutionDataMode;
 
@@ -39,7 +41,10 @@ public class SolutionDelegateImplement implements HandPickWrapperAdapter.Delegat
         RequestOptions options = new RequestOptions();
 
         mHolder.solutionRecommendTopTextView.setOnClickListener(new SolutionRecommendTopTextViewClickListener());
-        mHolder.solutionSortOneLayout.setOnClickListener(new SolutionSortOneLayoutClickListener());
+
+        SolutionSortClickListener solutionSortClickListener=new SolutionSortClickListener();
+        mHolder.solutionSortOneLayout.setTag(solutionData.get(0).getId());
+        mHolder.solutionSortOneLayout.setOnClickListener(solutionSortClickListener);
         mHolder.solutionSortOneTitleTextView.setText(solutionData.get(0).getTitle());
         mHolder.solutionSortOneSummaryTextView.setText(solutionData.get(0).getSummary());
         options.signature(new ObjectKeyCanNull(solutionData.get(0).getImage_left_update_datetime()).getObject());
@@ -47,7 +52,8 @@ public class SolutionDelegateImplement implements HandPickWrapperAdapter.Delegat
         options.signature(new ObjectKeyCanNull(solutionData.get(0).getImage_right_update_datetime()).getObject());
         Glide.with(mContext).load(solutionData.get(0).getImageurl_right()).apply(options).into(mHolder.solutionSortOneRightImageImageView);
 
-        mHolder.solutionSortTwoLayout.setOnClickListener(new SolutionSortTwoLayoutClickListener());
+        mHolder.solutionSortTwoLayout.setTag(solutionData.get(1).getId());
+        mHolder.solutionSortTwoLayout.setOnClickListener(solutionSortClickListener);
         mHolder.solutionSortTwoTitleTextView.setText(solutionData.get(1).getTitle());
         mHolder.solutionSortTwoSummaryTextView.setText(solutionData.get(1).getSummary());
         options.signature(new ObjectKeyCanNull(solutionData.get(1).getImage_left_update_datetime()).getObject());
@@ -55,7 +61,8 @@ public class SolutionDelegateImplement implements HandPickWrapperAdapter.Delegat
         options.signature(new ObjectKeyCanNull(solutionData.get(1).getImage_right_update_datetime()).getObject());
         Glide.with(mContext).load(solutionData.get(1).getImageurl_right()).apply(options).into(mHolder.solutionSortTwoRightImageImageView);
 
-        mHolder.solutionSortThreeLayout.setOnClickListener(new SolutionSortThreeLayoutClickListener());
+        mHolder.solutionSortThreeLayout.setTag(solutionData.get(2).getId());
+        mHolder.solutionSortThreeLayout.setOnClickListener(solutionSortClickListener);
         mHolder.solutionSortThreeTitleTextView.setText(solutionData.get(2).getTitle());
         mHolder.solutionSortThreeSummaryTextView.setText(solutionData.get(2).getSummary());
         options.signature(new ObjectKeyCanNull(solutionData.get(2).getImage_left_update_datetime()).getObject());
@@ -63,7 +70,8 @@ public class SolutionDelegateImplement implements HandPickWrapperAdapter.Delegat
         options.signature(new ObjectKeyCanNull(solutionData.get(2).getImage_right_update_datetime()).getObject());
         Glide.with(mContext).load(solutionData.get(2).getImageurl_right()).apply(options).into(mHolder.solutionSortThreeRightImageImageView);
 
-        mHolder.solutionSortFourLayout.setOnClickListener(new SolutionSortFourLayoutClickListener());
+        mHolder.solutionSortFourLayout.setTag(solutionData.get(3).getId());
+        mHolder.solutionSortFourLayout.setOnClickListener(solutionSortClickListener);
         mHolder.solutionSortFourTitleTextView.setText(solutionData.get(3).getTitle());
         mHolder.solutionSortFourSummaryTextView.setText(solutionData.get(3).getSummary());
         options.signature(new ObjectKeyCanNull(solutionData.get(3).getImage_left_update_datetime()).getObject());
@@ -71,45 +79,54 @@ public class SolutionDelegateImplement implements HandPickWrapperAdapter.Delegat
         options.signature(new ObjectKeyCanNull(solutionData.get(3).getImage_right_update_datetime()).getObject());
         Glide.with(mContext).load(solutionData.get(3).getImageurl_right()).apply(options).into(mHolder.solutionSortFourRightImageImageView);
 
-        mHolder.solutionSubjectOneLayout.setOnClickListener(new SolutionSubjectOneLayoutClickListener());
+        SolutionClickListener solutionClickListener=new SolutionClickListener();
+        mHolder.solutionSubjectOneLayout.setTag(solutionData.get(4).getId());
+        mHolder.solutionSubjectOneLayout.setOnClickListener(solutionClickListener);
         options.signature(new ObjectKeyCanNull(solutionData.get(4).getGif_update_datetime()).getObject());
         Glide.with(mContext).load(solutionData.get(4).getGifurl()).apply(options).into(mHolder.solutionSubjectOneGifImageView);
         mHolder.solutionSubjectOneTitleTextView.setText(solutionData.get(4).getTitle());
         mHolder.solutionSubjectOneSummaryTextView.setText(solutionData.get(4).getSummary());
 
-        mHolder.solutionOneLayout.setOnClickListener(new SolutionOneLayoutClickListener());
+        mHolder.solutionOneLayout.setTag(solutionData.get(5).getId());
+        mHolder.solutionOneLayout.setOnClickListener(solutionClickListener);
         options.signature(new ObjectKeyCanNull(solutionData.get(5).getImage_update_datetime()).getObject());
         Glide.with(mContext).load(solutionData.get(5).getImageurl()).apply(options).into(mHolder.solutionOneImageImageView);
         mHolder.solutionOneTitleTextView.setText(solutionData.get(5).getTitle());
         mHolder.solutionOneSummaryTextView.setText(solutionData.get(5).getSummary());
 
-        mHolder.solutionTwoLayout.setOnClickListener(new SolutionTwoLayoutClickListener());
+        mHolder.solutionTwoLayout.setTag(solutionData.get(6).getId());
+        mHolder.solutionTwoLayout.setOnClickListener(solutionClickListener);
         options.signature(new ObjectKeyCanNull(solutionData.get(6).getImage_update_datetime()).getObject());
         Glide.with(mContext).load(solutionData.get(6).getImageurl()).apply(options).into(mHolder.solutionTwoImageImageView);
         mHolder.solutionTwoTitleTextView.setText(solutionData.get(6).getTitle());
         mHolder.solutionTwoSummaryTextView.setText(solutionData.get(6).getSummary());
 
-        mHolder.solutionThreeLayout.setOnClickListener(new SolutionThreeLayoutClickListener());
+        mHolder.solutionThreeLayout.setTag(solutionData.get(7).getId());
+        mHolder.solutionThreeLayout.setOnClickListener(solutionClickListener);
         options.signature(new ObjectKeyCanNull(solutionData.get(7).getImage_update_datetime()).getObject());
         Glide.with(mContext).load(solutionData.get(7).getImageurl()).apply(options).into(mHolder.solutionThreeImageImageView);
         mHolder.solutionThreeTitleTextView.setText(solutionData.get(7).getTitle());
         mHolder.solutionThreeSummaryTextView.setText(solutionData.get(7).getSummary());
 
-        mHolder.solutionFourLayout.setOnClickListener(new SolutionFourLayoutClickListener());
+        mHolder.solutionFourLayout.setTag(solutionData.get(8).getId());
+        mHolder.solutionFourLayout.setOnClickListener(solutionClickListener);
         options.signature(new ObjectKeyCanNull(solutionData.get(8).getImage_update_datetime()).getObject());
         Glide.with(mContext).load(solutionData.get(8).getImageurl()).apply(options).into(mHolder.solutionFourImageImageView);
         mHolder.solutionFourTitleTextView.setText(solutionData.get(8).getTitle());
         mHolder.solutionFourSummaryTextView.setText(solutionData.get(8).getSummary());
 
-        mHolder.solutionSimpleOneLayout.setOnClickListener(new SolutionSimpleOneLayoutClickListener());
+        mHolder.solutionSimpleOneLayout.setTag(solutionData.get(9).getId());
+        mHolder.solutionSimpleOneLayout.setOnClickListener(solutionClickListener);
         mHolder.solutionSimpleOneTitleTextView.setText(solutionData.get(9).getTitle());
         mHolder.solutionSimpleOneSummaryTextView.setText(solutionData.get(9).getSummary());
 
-        mHolder.solutionSimpleTwoLayout.setOnClickListener(new SolutionSimpleTwoLayoutClickListener());
+        mHolder.solutionSimpleTwoLayout.setTag(solutionData.get(10).getId());
+        mHolder.solutionSimpleTwoLayout.setOnClickListener(solutionClickListener);
         mHolder.solutionSimpleTwoTitleTextView.setText(solutionData.get(10).getTitle());
         mHolder.solutionSimpleTwoSummaryTextView.setText(solutionData.get(10).getSummary());
 
-        mHolder.solutionSimpleThreeLayout.setOnClickListener(new SolutionSimpleThreeLayoutClickListener());
+        mHolder.solutionSimpleThreeLayout.setTag(solutionData.get(11).getId());
+        mHolder.solutionSimpleThreeLayout.setOnClickListener(solutionClickListener);
         mHolder.solutionSimpleThreeTitleTextView.setText(solutionData.get(11).getTitle());
         mHolder.solutionSimpleThreeSummaryTextView.setText(solutionData.get(11).getSummary());
     }
@@ -121,109 +138,22 @@ public class SolutionDelegateImplement implements HandPickWrapperAdapter.Delegat
         }
     }
 
-    class SolutionSortOneLayoutClickListener implements View.OnClickListener{
+    class SolutionSortClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(getContext(),"方案类别1被点击",Toast.LENGTH_SHORT).show();
+            String sort_id=(String) view.getTag();
+            Toast.makeText(getContext(),"方案类别"+sort_id+"被点击",Toast.LENGTH_SHORT).show();
         }
     }
 
-    class SolutionSortTwoLayoutClickListener implements View.OnClickListener{
+    class SolutionClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(getContext(),"方案类别2被点击",Toast.LENGTH_SHORT).show();
+            String content_id=(String) view.getTag();
+            Intent intent =new Intent(getContext(), ContentDetailsActivity.class);
+            intent.putExtra(ContentDetailsActivity.KEY_CONTENT_ID,content_id);
+            getContext().startActivity(intent);
         }
     }
 
-    class SolutionSortThreeLayoutClickListener implements View.OnClickListener{
-        @Override
-        public void onClick(View view) {
-            Toast.makeText(getContext(),"方案类别3被点击",Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    class SolutionSortFourLayoutClickListener implements View.OnClickListener{
-        @Override
-        public void onClick(View view) {
-            Toast.makeText(getContext(),"方案类别4被点击",Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    class SolutionSubjectOneLayoutClickListener implements View.OnClickListener{
-        @Override
-        public void onClick(View view) {
-            Toast.makeText(getContext(),"专题方案被点击",Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    class SolutionSubjectOneVideoVideoViewErrorListener implements MediaPlayer.OnErrorListener{
-        private VideoView mVideoView;
-        public SolutionSubjectOneVideoVideoViewErrorListener(VideoView mVideoView) {
-            this.mVideoView=mVideoView;
-        }
-
-        @Override
-        public boolean onError(MediaPlayer mediaPlayer, int i, int i1) {
-            mVideoView.stopPlayback();
-            Toast.makeText(getContext(),"方案专题视频无法播放",Toast.LENGTH_SHORT).show();
-            return true;
-        }
-    }
-
-    class SolutionSubjectOneVideoVideoViewCompletionListener implements  MediaPlayer.OnCompletionListener{
-        @Override
-        public void onCompletion(MediaPlayer mediaPlayer) {
-            mediaPlayer.start();
-            mediaPlayer.setLooping(true);
-        }
-    }
-
-    class SolutionOneLayoutClickListener implements View.OnClickListener{
-        @Override
-        public void onClick(View view) {
-            Toast.makeText(getContext(),"方案1被点击",Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    class SolutionTwoLayoutClickListener implements View.OnClickListener{
-        @Override
-        public void onClick(View view) {
-            Toast.makeText(getContext(),"方案2被点击",Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    class SolutionThreeLayoutClickListener implements View.OnClickListener{
-        @Override
-        public void onClick(View view) {
-            Toast.makeText(getContext(),"方案3被点击",Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    class SolutionFourLayoutClickListener implements View.OnClickListener{
-        @Override
-        public void onClick(View view) {
-            Toast.makeText(getContext(),"方案4被点击",Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    class SolutionSimpleOneLayoutClickListener implements View.OnClickListener{
-        @Override
-        public void onClick(View view) {
-            Toast.makeText(getContext(),"方案5被点击",Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    class SolutionSimpleTwoLayoutClickListener implements View.OnClickListener{
-        @Override
-        public void onClick(View view) {
-            Toast.makeText(getContext(),"方案6被点击",Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    class SolutionSimpleThreeLayoutClickListener implements View.OnClickListener{
-        @Override
-        public void onClick(View view) {
-            Toast.makeText(getContext(),"方案7被点击",Toast.LENGTH_SHORT).show();
-        }
-    }
 }

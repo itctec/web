@@ -1,6 +1,7 @@
 package itc.ink.explorefuture_android.sort.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -39,6 +40,7 @@ import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.app.utils.SharedPreferenceUtil;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateMode;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateUtil;
+import itc.ink.explorefuture_android.common_unit.content_details.ContentDetailsActivity;
 import itc.ink.explorefuture_android.common_unit.mind_recyclerview.mode.MindListDataMode;
 import itc.ink.explorefuture_android.recommend.attention_fragment.mode.mode_recommend.RecommendListDataMode;
 import itc.ink.explorefuture_android.sort.SortFragment;
@@ -91,13 +93,17 @@ public class SortDataAdapter extends RecyclerView.Adapter<SortDataAdapter.VH> {
             holder.sortLevelTitleMoreTextView.setVisibility(View.GONE);
         }
 
-        holder.sortRecommendLeftProductLayout.setOnClickListener(new SortRecommendLeftProductLayoutClickListener(sortListDataItem.getProduct_left_id()));
+        SortRecommendProductClickListener sortRecommendProductClickListener =new SortRecommendProductClickListener();
+
+        holder.sortRecommendLeftProductLayout.setTag(sortListDataItem.getProduct_left_id());
+        holder.sortRecommendLeftProductLayout.setOnClickListener(sortRecommendProductClickListener);
         options.signature(new ObjectKeyCanNull(sortListDataItem.getProduct_left_image_update_datetime()).getObject());
         Glide.with(getContext()).load(sortListDataItem.getProduct_left_image_url()).apply(options).into(holder.sortRecommendLeftProductImageImageView);
         holder.sortRecommendLeftProductTitleTextView.setText(sortListDataItem.getProduct_left_title());
         holder.sortRecommendLeftProductSummaryTextView.setText(sortListDataItem.getProduct_left_summary());
 
-        holder.sortRecommendRightProductLayout.setOnClickListener(new SortRecommendRightProductLayoutClickListener(sortListDataItem.getProduct_right_id()));
+        holder.sortRecommendRightProductLayout.setTag(sortListDataItem.getProduct_right_id());
+        holder.sortRecommendRightProductLayout.setOnClickListener(sortRecommendProductClickListener);
         options.signature(new ObjectKeyCanNull(sortListDataItem.getProduct_right_image_update_datetime()).getObject());
         Glide.with(getContext()).load(sortListDataItem.getProduct_right_image_url()).apply(options).into(holder.sortRecommendRightProductImageImageView);
         holder.sortRecommendRightProductTitleTextView.setText(sortListDataItem.getProduct_right_title());
@@ -174,29 +180,13 @@ public class SortDataAdapter extends RecyclerView.Adapter<SortDataAdapter.VH> {
         }
     }
 
-    class SortRecommendLeftProductLayoutClickListener implements View.OnClickListener {
-        private String product_left_id;
-
-        public SortRecommendLeftProductLayoutClickListener(String product_left_id) {
-            this.product_left_id = product_left_id;
-        }
-
+    class SortRecommendProductClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            Toast.makeText(getContext(), product_left_id + "被点击", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    class SortRecommendRightProductLayoutClickListener implements View.OnClickListener {
-        private String product_right_id;
-
-        public SortRecommendRightProductLayoutClickListener(String product_right_id) {
-            this.product_right_id = product_right_id;
-        }
-
-        @Override
-        public void onClick(View view) {
-            Toast.makeText(getContext(), product_right_id + "被点击", Toast.LENGTH_SHORT).show();
+            String content_id = (String) view.getTag();
+            Intent intent = new Intent(getContext(), ContentDetailsActivity.class);
+            intent.putExtra(ContentDetailsActivity.KEY_CONTENT_ID, content_id);
+            getContext().startActivity(intent);
         }
     }
 

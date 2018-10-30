@@ -1,5 +1,6 @@
 package itc.ink.explorefuture_android.common_unit.mind_recyclerview.mode;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  * Created by yangwenjiang on 2018/9/28.
  */
 
-public class MindListDataMode {
+public class MindListDataMode implements Serializable{
     public static final String STATE_UN_RELEASE="UN_RELEASE";
     public static final String STATE_COMPACTED="COMPACTED";
     private String id="";

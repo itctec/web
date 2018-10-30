@@ -26,6 +26,7 @@
 -keep class itc.ink.explorefuture_android.recommend.mind_fragment.mode** { *; }
 -keep class itc.ink.explorefuture_android.sort.mode** { *; }
 -keep class itc.ink.explorefuture_android.find.mode** { *; }
+-keep class itc.ink.explorefuture_android.common_unit.mind_details.mode** { *; }
 
 -keep class itc.ink.explorefuture_android.common_unit.mind_recyclerview.mode** { *; }
 

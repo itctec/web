@@ -21,6 +21,7 @@ import java.util.List;
 import itc.ink.explorefuture_android.R;
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
+import itc.ink.explorefuture_android.common_unit.content_details.ContentDetailsActivity;
 import itc.ink.explorefuture_android.common_unit.image_view.ImageViewerActivity;
 import itc.ink.explorefuture_android.sort.mode.mode_sort.SubSortListDataMode;
 
@@ -32,6 +33,7 @@ public class SubSortDataAdapter extends RecyclerView.Adapter<SubSortDataAdapter.
     private final static String LOG_TAG = ExploreFutureApplication.LOG_TAG + "Adapter";
     private WeakReference<Context> mWeakContextReference;
     private List<SubSortListDataMode> mData;
+    private SubSortClickListener subSortClickListener=new SubSortClickListener();
 
     public SubSortDataAdapter(Context mContext, List<SubSortListDataMode> mData) {
         this.mWeakContextReference = new WeakReference<>(mContext);
@@ -55,7 +57,8 @@ public class SubSortDataAdapter extends RecyclerView.Adapter<SubSortDataAdapter.
     public void onBindViewHolder(VH holder, final int position) {
         SubSortListDataMode subSortListDataMode=mData.get(position);
 
-        holder.subSortLayout.setOnClickListener(new SubSortLayoutClickListener(subSortListDataMode.getSort_id()));
+        holder.subSortLayout.setTag(subSortListDataMode.getSort_id());
+        holder.subSortLayout.setOnClickListener(subSortClickListener);
         holder.subSortTitleTextView.setText(subSortListDataMode.getSort_title());
         holder.subSortSummaryTextView.setText(subSortListDataMode.getSort_summary());
 
@@ -91,16 +94,13 @@ public class SubSortDataAdapter extends RecyclerView.Adapter<SubSortDataAdapter.
         }
     }
 
-    class SubSortLayoutClickListener implements View.OnClickListener{
-        private String sort_id;
-
-        public SubSortLayoutClickListener(String sort_id) {
-            this.sort_id = sort_id;
-        }
-
+    class SubSortClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(getContext(),sort_id+"被点击",Toast.LENGTH_SHORT).show();
+            String content_id = (String) view.getTag();
+            Intent intent = new Intent(getContext(), ContentDetailsActivity.class);
+            intent.putExtra(ContentDetailsActivity.KEY_CONTENT_ID, content_id);
+            getContext().startActivity(intent);
         }
     }
 

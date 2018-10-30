@@ -57,7 +57,7 @@ public class BannerDelegateImplement implements HandPickWrapperAdapter.DelegateI
         @Override
         public void OnBannerClick(int position) {
             Intent intent =new Intent(getContext(), ContentDetailsActivity.class);
-            intent.putExtra("content_id",mData.get(position).getId());
+            intent.putExtra(ContentDetailsActivity.KEY_CONTENT_ID,mData.get(position).getId());
             getContext().startActivity(intent);
         }
     }

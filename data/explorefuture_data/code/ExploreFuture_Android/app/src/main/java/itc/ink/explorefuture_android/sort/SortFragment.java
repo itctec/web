@@ -210,7 +210,7 @@ public class SortFragment extends Fragment {
                     DataUpdateMode.SORT_ALL_DATA_FILE_URL.replace("/all/", "/" + sort_id + "/"),
                     DataUpdateMode.SORT_ALL_DATA_NEWEST_UPDATE_DATE_TIME_KEY.replace("_all_", "_" + sort_id + "_"),
                     DataUpdateMode.SORT_ALL_LOCAL_DATA_FILE_NAME.replace("_all_", "_" + sort_id + "_"),
-                    LoginStateInstance.getInstance().getId());
+                    "");
 
             String resultStr = DataUpdateUtil.updateData(getContext(),sortDataUpdateMode);
 

@@ -1,6 +1,7 @@
 package itc.ink.explorefuture_android.recommend.handpick_fragment.adapter.adapter_action;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 import itc.ink.explorefuture_android.R;
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
+import itc.ink.explorefuture_android.common_unit.content_details.ContentDetailsActivity;
 import itc.ink.explorefuture_android.recommend.handpick_fragment.adapter.HandPickWrapperAdapter;
 import itc.ink.explorefuture_android.recommend.handpick_fragment.mode.mode_action.ActionListDataModel;
 
@@ -26,6 +28,7 @@ import itc.ink.explorefuture_android.recommend.handpick_fragment.mode.mode_actio
 public class ActionDataAdapter extends RecyclerView.Adapter<ActionDataAdapter.VH>{
     private WeakReference<Context> mWeakContextReference;
     private List<ActionListDataModel> mData;
+    private ItemClickListener itemClickListener=new ItemClickListener();
 
     public ActionDataAdapter(Context mContext, List<ActionListDataModel> mData) {
         this.mWeakContextReference = new WeakReference<>(mContext);
@@ -56,12 +59,8 @@ public class ActionDataAdapter extends RecyclerView.Adapter<ActionDataAdapter.VH
         RequestOptions options = new RequestOptions()
                 .signature(new ObjectKeyCanNull(actionDataItem.getImage_update_datetime()).getObject());
         Glide.with(getContext()).load(actionDataItem.getImageurl()).apply(options).into(holder.actionImageImageView);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(),actionDataItem.getTitle()+"被点击",Toast.LENGTH_SHORT).show();
-            }
-        });
+        holder.itemView.setTag(mData.get(position).getId());
+        holder.itemView.setOnClickListener(itemClickListener);
     }
 
     @Override
@@ -84,6 +83,16 @@ public class ActionDataAdapter extends RecyclerView.Adapter<ActionDataAdapter.VH
             actionSiteTextView = view.findViewById(R.id.recommend_Handpick_Action_ListItem_Site);
             actionSummaryTextView = view.findViewById(R.id.recommend_Handpick_Action_ListItem_Summary);
             actionImageImageView = view.findViewById(R.id.recommend_Handpick_Action_ListItem_Image);
+        }
+    }
+
+    class ItemClickListener implements View.OnClickListener{
+        @Override
+        public void onClick(View view) {
+            String content_id = (String) view.getTag();
+            Intent intent = new Intent(getContext(), ContentDetailsActivity.class);
+            intent.putExtra(ContentDetailsActivity.KEY_CONTENT_ID, content_id);
+            getContext().startActivity(intent);
         }
     }
 }

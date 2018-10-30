@@ -3,6 +3,7 @@ package itc.ink.explorefuture_android.common_unit.mind_recyclerview.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.v4.content.ContextCompat;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import itc.ink.explorefuture_android.R;
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
+import itc.ink.explorefuture_android.common_unit.mind_details.MindDetailsActivity;
 import itc.ink.explorefuture_android.common_unit.video_view.VideoViewerActivity;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.common_unit.mind_recyclerview.mode.MindListDataMode;
@@ -82,7 +84,9 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
         } else {
             holder.mindItemContentText.setText(mindListDataItem.getContent_text());
         }
-        holder.mindItemContentText.setOnClickListener(new AttentionItemContentTextClickListener(mindListDataItem.getId()));
+
+        holder.mindItemContentText.setTag(mindListDataItem);
+        holder.mindItemContentText.setOnClickListener(new AttentionItemContentTextClickListener());
 
         holder.mindItemContentMediaLayout.removeAllViews();
         if (mindListDataItem.getImage_url_list().size() > 0 && mindListDataItem.getImage_url_list().size() <= 9) {
@@ -226,15 +230,12 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
     }
 
     class AttentionItemContentTextClickListener implements View.OnClickListener {
-        private String ID = "";
-
-        public AttentionItemContentTextClickListener(String ID) {
-            this.ID = ID;
-        }
-
         @Override
         public void onClick(View view) {
-            Toast.makeText(getContext(), ID + "文本内容被点击", Toast.LENGTH_SHORT).show();
+            MindListDataMode mindListDataItem=(MindListDataMode)view.getTag();
+            Intent intent=new Intent(getContext(), MindDetailsActivity.class);
+            intent.putExtra(MindDetailsActivity.KEY_MIND_ITEM,mindListDataItem);
+            getContext().startActivity(intent);
         }
     }
 

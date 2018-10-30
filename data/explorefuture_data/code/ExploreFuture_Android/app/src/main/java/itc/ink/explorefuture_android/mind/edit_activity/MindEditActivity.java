@@ -50,6 +50,7 @@ import com.zhihu.matisse.internal.entity.CaptureStrategy;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -61,6 +62,8 @@ import itc.ink.explorefuture_android.app.utils.MyGlideEngine;
 import itc.ink.explorefuture_android.app.utils.StatusBarUtil;
 import itc.ink.explorefuture_android.app.utils.permission.DynamicPermission;
 import itc.ink.explorefuture_android.common_unit.common_dialog.CommonDialog;
+import itc.ink.explorefuture_android.common_unit.mind_details.MindDetailsActivity;
+import itc.ink.explorefuture_android.common_unit.mind_recyclerview.mode.MindListDataMode;
 import itc.ink.explorefuture_android.common_unit.video_view.VideoViewerActivity;
 import itc.ink.explorefuture_android.mind.edit_activity.adapter.MindEditImageDataAdapter;
 import itc.ink.explorefuture_android.mind.edit_activity.mode.MindEditImageListDataMode;
@@ -99,6 +102,9 @@ public class MindEditActivity extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Intent intent = getIntent();
+        MindListDataMode mindListDataItem = (MindListDataMode) intent.getSerializableExtra(MindDetailsActivity.KEY_MIND_ITEM);
+
         //StatusBar Style
         StatusBarUtil.setStatusBarFullTransparent(this);
         //StatusBar Text And Icon Style
@@ -107,13 +113,13 @@ public class MindEditActivity extends Activity {
         setContentView(R.layout.mind_edit_activity);
 
         int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-        int statusBarHeight=0;
+        int statusBarHeight = 0;
         if (resourceId > 0) {
             statusBarHeight = getResources().getDimensionPixelSize(resourceId);
         }
-        activityLayout=findViewById(R.id.mind_Edit_Activity_Layout);
-        FrameLayout.LayoutParams activityLayoutParams=(FrameLayout.LayoutParams)activityLayout.getLayoutParams();
-        activityLayoutParams.topMargin=(int)(getResources().getDimension(R.dimen.app_status_bar_height)-statusBarHeight);
+        activityLayout = findViewById(R.id.mind_Edit_Activity_Layout);
+        FrameLayout.LayoutParams activityLayoutParams = (FrameLayout.LayoutParams) activityLayout.getLayoutParams();
+        activityLayoutParams.topMargin = (int) (getResources().getDimension(R.dimen.app_status_bar_height) - statusBarHeight);
         activityLayout.setLayoutParams(activityLayoutParams);
 
         //Navigation Bar
@@ -128,10 +134,26 @@ public class MindEditActivity extends Activity {
 
         //Edit Content
         mindEditText = findViewById(R.id.mind_Edit_EditText);
+        if (mindListDataItem != null) {
+            mindEditText.setText(mindListDataItem.getContent_text());
+        }
         mindEditText.requestFocus();
         mindEditText.addTextChangedListener(new MindEditTextChangeListener());
 
-        imageDataList.add(mindEditImageListDataAddBtnItem);
+        if (mindListDataItem != null) {
+            if (mindListDataItem.getImage_url_list().size() > 0) {
+                for (String imageUrl : mindListDataItem.getImage_url_list()) {
+                    MindEditImageListDataMode mindEditImageItem = new MindEditImageListDataMode(imageUrl, true);
+                    imageDataList.add(mindEditImageItem);
+                }
+                if (imageDataList.size() < 9) {
+                    imageDataList.add(mindEditImageListDataAddBtnItem);
+                }
+            }
+        } else {
+            imageDataList.add(mindEditImageListDataAddBtnItem);
+        }
+
         mindImageRecyclerView = findViewById(R.id.mind_Edit_RecyclerView);
         contentRvAdapter = new MindEditImageDataAdapter(MindEditActivity.this, imageDataList, mindEditText.getText().toString(), new MindEditImageListDataAddBtnItemClickCallBack());
         mindImageRecyclerView.setAdapter(contentRvAdapter);
@@ -148,13 +170,24 @@ public class MindEditActivity extends Activity {
         mindVideoFrameView.setOnClickListener(new MindVideoFrameViewClickListener());
         mindVideoFrameViewDeleteBtn = findViewById(R.id.mind_Edit_Video_Frame_View_Delete_Btn);
         mindVideoFrameViewDeleteBtn.setOnClickListener(new MindVideoFrameViewDeleteBtnClickListener());
+        if (mindListDataItem != null) {
+            if (mindListDataItem.getVideo_url() != null && !mindListDataItem.getVideo_url().isEmpty()) {
+                imageDataList.clear();
+                imageDataList.add(mindEditImageListDataAddBtnItem);
+                contentRvAdapter.notifyDataSetChanged();
+
+                mindImageRecyclerView.setVisibility(View.GONE);
+                videoUriStr = mindListDataItem.getVideo_url();
+                getNetVideoThumb(mindListDataItem.getVideo_url(),true);
+            }
+        }
 
         mindAttachment = findViewById(R.id.mind_Edit_Attachment);
         mindAttachmentDeleteBtn = findViewById(R.id.mind_Edit_Attachment_Delete_Btn);
         mindAttachmentDeleteBtn.setOnClickListener(new MindAttachmentDeleteBtnClickListener());
 
-        mindEditCharCountText=findViewById(R.id.mind_Edit_Char_Count_Text);
-        mindEditCharCountText.setText(mindEditText.getText().toString().length()+"/280");
+        mindEditCharCountText = findViewById(R.id.mind_Edit_Char_Count_Text);
+        mindEditCharCountText.setText(mindEditText.getText().toString().length() + "/280");
 
 
         //ToolsBar
@@ -170,7 +203,7 @@ public class MindEditActivity extends Activity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        switch (keyCode){
+        switch (keyCode) {
             case KeyEvent.KEYCODE_BACK:
                 saveDataWhenClose();
                 break;
@@ -182,7 +215,7 @@ public class MindEditActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if ((requestCode == ZHI_HU_GET_IMAGE_REQUEST_CODE || requestCode == ZHI_HU_TAKE_PHOTO_REQUEST_CODE) && resultCode == RESULT_OK) {
-            videoUriStr=null;
+            videoUriStr = null;
             mindVideoFrameView.setVisibility(View.GONE);
             mindVideoFrameViewDeleteBtn.setVisibility(View.GONE);
             mindImageRecyclerView.setVisibility(View.VISIBLE);
@@ -211,7 +244,7 @@ public class MindEditActivity extends Activity {
             List<Uri> selectedImage = Matisse.obtainResult(data);
             if (selectedImage.size() > 0 && selectedImage.get(0) != null) {
                 videoUriStr = GetPathFromUri4kitkat.getPath(MindEditActivity.this, selectedImage.get(0));
-                mindVideoFrameView.setImageBitmap(getVideoThumb(videoUriStr));
+                mindVideoFrameView.setImageBitmap(getVideoThumb(videoUriStr,false));
             }
         } else if (requestCode == L_FILE_PICKER_GET_FILE_REQUEST_CODE && resultCode == RESULT_OK) {
             List<String> fileList = data.getStringArrayListExtra(Constant.RESULT_INFO);
@@ -273,9 +306,37 @@ public class MindEditActivity extends Activity {
         }
     }
 
-    private Bitmap getVideoThumb(String path) {
+    private void getNetVideoThumb(final String path, final boolean isUrl) {
+        new Thread(){
+            Bitmap bitmap;
+            @Override
+            public void run() {
+                super.run();
+                bitmap=getVideoThumb(path,isUrl);
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(bitmap!=null){
+                            mindVideoFrameView.setVisibility(View.VISIBLE);
+                            mindVideoFrameViewDeleteBtn.setVisibility(View.VISIBLE);
+                            mindVideoFrameView.setImageBitmap(bitmap);
+                            bitmap=null;
+                        }
+                    }
+                });
+            }
+        }.start();
+
+    }
+
+    private Bitmap getVideoThumb(String path,boolean isUrl) {
         MediaMetadataRetriever media = new MediaMetadataRetriever();
-        media.setDataSource(path);
+        if(isUrl){
+            media.setDataSource(path,new HashMap());
+        }else{
+            media.setDataSource(path);
+        }
         Bitmap frameBitmap = media.getFrameAtTime();
         Bitmap tempBitmap = Bitmap.createBitmap(frameBitmap.getWidth(), frameBitmap.getHeight(), Bitmap.Config.RGB_565);
         Canvas canvas = new Canvas(tempBitmap);
@@ -287,12 +348,12 @@ public class MindEditActivity extends Activity {
         return tempBitmap;
     }
 
-    private void saveDataWhenClose(){
-        if(mindEditText.getText().toString().length()!=0||imageDataList.size()>1||videoUriStr!=null||attachmentFilePath!=null){
+    private void saveDataWhenClose() {
+        if (mindEditText.getText().toString().length() != 0 || imageDataList.size() > 1 || videoUriStr != null || attachmentFilePath != null) {
             new CommonDialog(MindEditActivity.this, getString(R.string.mind_edit_tip_close_dialog_content_text), new CommonDialog.OnCloseListener() {
                 @Override
                 public void onClick(Dialog dialog, boolean confirm) {
-                    if(confirm){
+                    if (confirm) {
 
                     }
                     dialog.dismiss();
@@ -308,7 +369,7 @@ public class MindEditActivity extends Activity {
                     .setNegativeButton(getString(R.string.dialog_negative_btn_text))
                     .setPositiveButton(getString(R.string.dialog_positive_save_btn_text))
                     .show();
-        }else{
+        } else {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             boolean isOpen = imm.isActive();
             if (isOpen) {
@@ -350,7 +411,7 @@ public class MindEditActivity extends Activity {
         }
     }
 
-    class MindEditTextChangeListener implements TextWatcher{
+    class MindEditTextChangeListener implements TextWatcher {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -358,7 +419,7 @@ public class MindEditActivity extends Activity {
 
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            mindEditCharCountText.setText(charSequence.length()+"/280");
+            mindEditCharCountText.setText(charSequence.length() + "/280");
         }
 
         @Override
@@ -380,7 +441,7 @@ public class MindEditActivity extends Activity {
     class MindVideoFrameViewDeleteBtnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            videoUriStr=null;
+            videoUriStr = null;
             mindVideoFrameView.setVisibility(View.GONE);
             mindVideoFrameViewDeleteBtn.setVisibility(View.GONE);
             mindImageRecyclerView.setVisibility(View.VISIBLE);
@@ -409,7 +470,7 @@ public class MindEditActivity extends Activity {
                 new CommonDialog(MindEditActivity.this, getString(R.string.mind_edit_tip_add_picture_confirm_dialog_content_text), new CommonDialog.OnCloseListener() {
                     @Override
                     public void onClick(Dialog dialog, boolean confirm) {
-                        if(confirm){
+                        if (confirm) {
                             Set<MimeType> mimeTypes = new HashSet<>();
                             mimeTypes.add(MimeType.JPEG);
                             mimeTypes.add(MimeType.PNG);
@@ -437,7 +498,7 @@ public class MindEditActivity extends Activity {
                 new CommonDialog(MindEditActivity.this, getString(R.string.mind_edit_tip_add_picture_confirm_dialog_content_text), new CommonDialog.OnCloseListener() {
                     @Override
                     public void onClick(Dialog dialog, boolean confirm) {
-                        if(confirm){
+                        if (confirm) {
                             Set<MimeType> mimeTypes = new HashSet<>();
                             mimeTypes.add(MimeType.JPEG);
                             mimeTypes.add(MimeType.PNG);
@@ -464,7 +525,7 @@ public class MindEditActivity extends Activity {
                 new CommonDialog(MindEditActivity.this, getString(R.string.mind_edit_tip_add_video_confirm_dialog_content_text), new CommonDialog.OnCloseListener() {
                     @Override
                     public void onClick(Dialog dialog, boolean confirm) {
-                        if(confirm){
+                        if (confirm) {
                             Set<MimeType> mimeTypes = new HashSet<>();
                             mimeTypes.add(MimeType.MP4);
                             addMedia(mimeTypes, false, ZHI_HU_GET_VIDEO_REQUEST_CODE);

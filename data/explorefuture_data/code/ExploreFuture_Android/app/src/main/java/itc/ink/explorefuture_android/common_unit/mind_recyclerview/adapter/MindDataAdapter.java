@@ -30,6 +30,7 @@ import itc.ink.explorefuture_android.common_unit.mind_details.MindDetailsActivit
 import itc.ink.explorefuture_android.common_unit.video_view.VideoViewerActivity;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.common_unit.mind_recyclerview.mode.MindListDataMode;
+import itc.ink.explorefuture_android.mind.edit_activity.MindEditActivity;
 
 /**
  * Created by yangwenjiang on 2018/9/14.
@@ -64,7 +65,7 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
         MindListDataMode mindListDataItem = mMindListData.get(position);
 
         String personId = mindListDataItem.getId().split("_")[0];
-        holder.mindItemHeaderLayout.setOnClickListener(new AttentionItemHeaderLayoutClickListener(personId));
+        holder.mindItemHeaderLayout.setOnClickListener(new MindItemHeaderLayoutClickListener(personId));
 
         RequestOptions options = new RequestOptions()
                 .signature(new ObjectKeyCanNull(mindListDataItem.getHead_portrait_image_update_datetime()).getObject())
@@ -86,7 +87,7 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
         }
 
         holder.mindItemContentText.setTag(mindListDataItem);
-        holder.mindItemContentText.setOnClickListener(new AttentionItemContentTextClickListener());
+        holder.mindItemContentText.setOnClickListener(new MindItemContentTextClickListener());
 
         holder.mindItemContentMediaLayout.removeAllViews();
         if (mindListDataItem.getImage_url_list().size() > 0 && mindListDataItem.getImage_url_list().size() <= 9) {
@@ -110,11 +111,11 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
             holder.mindItemReleaseBtn.setVisibility(View.GONE);
 
             holder.mindItemAcceptNumText.setText(mindListDataItem.getAccept_num());
-            holder.mindItemAcceptNumText.setOnClickListener(new AttentionItemAcceptNumTextClickListener(mindListDataItem.getId()));
+            holder.mindItemAcceptNumText.setOnClickListener(new MindItemAcceptNumTextClickListener(mindListDataItem.getId()));
             holder.mindItemCommentNumText.setText(mindListDataItem.getComment_num());
-            holder.mindItemCommentNumText.setOnClickListener(new AttentionItemCommentNumTextClickListener(mindListDataItem.getId()));
+            holder.mindItemCommentNumText.setOnClickListener(new MindItemCommentNumTextClickListener(mindListDataItem.getId()));
             holder.mindItemRetransmissionNumText.setText(mindListDataItem.getRetransmission_num());
-            holder.mindItemRetransmissionNumText.setOnClickListener(new AttentionItemRetransmissionNumTextClickListener(mindListDataItem.getId()));
+            holder.mindItemRetransmissionNumText.setOnClickListener(new MindItemRetransmissionNumTextClickListener(mindListDataItem.getId()));
         }
 
 
@@ -216,10 +217,10 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
         }
     }
 
-    class AttentionItemHeaderLayoutClickListener implements View.OnClickListener {
+    class MindItemHeaderLayoutClickListener implements View.OnClickListener {
         private String PersonId = "";
 
-        public AttentionItemHeaderLayoutClickListener(String PersonId) {
+        public MindItemHeaderLayoutClickListener(String PersonId) {
             this.PersonId = PersonId;
         }
 
@@ -229,13 +230,19 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
         }
     }
 
-    class AttentionItemContentTextClickListener implements View.OnClickListener {
+    class MindItemContentTextClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             MindListDataMode mindListDataItem=(MindListDataMode)view.getTag();
-            Intent intent=new Intent(getContext(), MindDetailsActivity.class);
-            intent.putExtra(MindDetailsActivity.KEY_MIND_ITEM,mindListDataItem);
-            getContext().startActivity(intent);
+            if(mindListDataItem.getRelease_state().equals(MindListDataMode.STATE_UN_RELEASE)){
+                Intent intent = new Intent(getContext(), MindEditActivity.class);
+                intent.putExtra(MindDetailsActivity.KEY_MIND_ITEM,mindListDataItem);
+                getContext().startActivity(intent);
+            }else{
+                Intent intent=new Intent(getContext(), MindDetailsActivity.class);
+                intent.putExtra(MindDetailsActivity.KEY_MIND_ITEM,mindListDataItem);
+                getContext().startActivity(intent);
+            }
         }
     }
 
@@ -257,10 +264,10 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
         }
     }
 
-    class AttentionItemAcceptNumTextClickListener implements View.OnClickListener {
+    class MindItemAcceptNumTextClickListener implements View.OnClickListener {
         private String ID = "";
 
-        public AttentionItemAcceptNumTextClickListener(String ID) {
+        public MindItemAcceptNumTextClickListener(String ID) {
             this.ID = ID;
         }
 
@@ -270,10 +277,10 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
         }
     }
 
-    class AttentionItemCommentNumTextClickListener implements View.OnClickListener {
+    class MindItemCommentNumTextClickListener implements View.OnClickListener {
         private String ID = "";
 
-        public AttentionItemCommentNumTextClickListener(String ID) {
+        public MindItemCommentNumTextClickListener(String ID) {
             this.ID = ID;
         }
 
@@ -283,10 +290,10 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
         }
     }
 
-    class AttentionItemRetransmissionNumTextClickListener implements View.OnClickListener {
+    class MindItemRetransmissionNumTextClickListener implements View.OnClickListener {
         private String ID = "";
 
-        public AttentionItemRetransmissionNumTextClickListener(String ID) {
+        public MindItemRetransmissionNumTextClickListener(String ID) {
             this.ID = ID;
         }
 

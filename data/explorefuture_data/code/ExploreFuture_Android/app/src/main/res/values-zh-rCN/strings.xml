@@ -114,6 +114,6 @@
 
     <string name="mind_list_item_comment_count_text">评论 %1$s 条</string>
     <string name="mind_details_bottom_bar_retransmission_btn_text">转发</string>
-    <string name="mind_details_bottom_bar_comment_btn_text">转发</string>
-    <string name="mind_details_bottom_bar_accept_btn_text">转发</string>
+    <string name="mind_details_bottom_bar_comment_btn_text">评论</string>
+    <string name="mind_details_bottom_bar_accept_btn_text">赞</string>
 </resources>

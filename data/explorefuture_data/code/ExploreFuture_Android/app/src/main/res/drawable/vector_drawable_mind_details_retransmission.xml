@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android" android:viewportWidth="1042"
-    android:viewportHeight="1024" android:width="15dp" android:height="15dp">
+    android:viewportHeight="1024" android:width="15dp" android:height="14dp">
     <path android:fillColor="@color/mine_interaction_text_color"
         android:pathData="M91.614557 611.099019l814.398238 0L91.614557 611.099019 91.614557 611.099019zM91.614557 611.099019" />
     <path android:fillColor="@color/mine_interaction_text_color"

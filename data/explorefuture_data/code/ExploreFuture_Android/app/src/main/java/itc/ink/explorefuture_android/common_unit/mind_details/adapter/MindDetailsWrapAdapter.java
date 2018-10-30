@@ -61,7 +61,7 @@ public class MindDetailsWrapAdapter extends RecyclerView.Adapter<MindDetailsWrap
     public ArrayList<CommentDataMode> commentDataArray=new ArrayList<>();
     public MindCommentDataAdapter mMindCommentDataAdapter;
 
-    private MindItemCollectionBtnClickListener mindItemCollectionBtnClickListener=new MindItemCollectionBtnClickListener();
+    private MindItemCollectionBtnClickListener mindDetailsCollectionBtnClickListener=new MindItemCollectionBtnClickListener();
 
     public MindDetailsWrapAdapter(Context mContext, MindListDataMode mindListDataItem) {
         this.mWeakContextReference = new WeakReference<>(mContext);
@@ -96,26 +96,26 @@ public class MindDetailsWrapAdapter extends RecyclerView.Adapter<MindDetailsWrap
     public void onBindViewHolder(WrapperVH holder, final int position) {
         if (position == 0) {
             String personId = mindListDataItem.getId().split("_")[0];
-            holder.mindItemHeaderLayout.setOnClickListener(new AttentionItemHeaderLayoutClickListener(personId));
+            holder.mindDetailsHeaderLayout.setOnClickListener(new AttentionItemHeaderLayoutClickListener(personId));
 
             RequestOptions options = new RequestOptions()
                     .signature(new ObjectKeyCanNull(mindListDataItem.getHead_portrait_image_update_datetime()).getObject())
                     .circleCrop();
-            Glide.with(getContext()).load(mindListDataItem.getHead_portrait_image_url()).apply(options).into(holder.mindItemHeadPortrait);
-            holder.mindItemName.setText(mindListDataItem.getName());
-            holder.mindItemDatetime.setText(mindListDataItem.getDatetime());
-            holder.mindItemCollectionBtn.setTag(mindListDataItem.getId());
-            holder.mindItemCollectionBtn.setOnClickListener(mindItemCollectionBtnClickListener);
+            Glide.with(getContext()).load(mindListDataItem.getHead_portrait_image_url()).apply(options).into(holder.mindDetailsHeadPortrait);
+            holder.mindDetailsName.setText(mindListDataItem.getName());
+            holder.mindDetailsDatetime.setText(mindListDataItem.getDatetime());
+            holder.mindDetailsCollectionBtn.setTag(mindListDataItem.getId());
+            holder.mindDetailsCollectionBtn.setOnClickListener(mindDetailsCollectionBtnClickListener);
 
             if (mindListDataItem.getContent_text().trim().equals("")) {
-                holder.mindItemContentText.setText(R.string.recommend_mind_content_empty_text);
+                holder.mindDetailsContentText.setText(R.string.recommend_mind_content_empty_text);
             } else {
-                holder.mindItemContentText.setText(mindListDataItem.getContent_text());
+                holder.mindDetailsContentText.setText(mindListDataItem.getContent_text());
             }
 
-            holder.mindItemContentText.setTag(mindListDataItem);
+            holder.mindDetailsContentText.setTag(mindListDataItem);
 
-            holder.mindItemContentMediaLayout.removeAllViews();
+            holder.mindDetailsContentMediaLayout.removeAllViews();
             if (mindListDataItem.getImage_url_list().size() > 0 && mindListDataItem.getImage_url_list().size() <= 9) {
                 addPicToLayout(holder, mindListDataItem.getImage_url_list(), mindListDataItem.getContent_text());
             } else if (mindListDataItem.getImage_url_list().size() > 9) {
@@ -124,7 +124,7 @@ public class MindDetailsWrapAdapter extends RecyclerView.Adapter<MindDetailsWrap
                 addVideoToLayout(holder, mindListDataItem.getVideo_url(), mindListDataItem.getContent_text());
             }
 
-            holder.mindItemCommentCountText.setText(String.format(getContext().getResources().getString(R.string.mind_list_item_comment_count_text), mindListDataItem.getComment_num()));
+            holder.mindDetailsCommentCountText.setText(String.format(getContext().getResources().getString(R.string.mind_list_item_comment_count_text), mindListDataItem.getComment_num()));
         } else {
             holder.commentRecyclerView.setFocusableInTouchMode(false);
             if (holder.commentRecyclerView.getAdapter() == null) {
@@ -152,16 +152,16 @@ public class MindDetailsWrapAdapter extends RecyclerView.Adapter<MindDetailsWrap
         DividerItemDecoration dividerItemDecorationTwo = new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL);
         dividerItemDecorationTwo.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.mind_image_divider_vertical));
         imageRecyclerView.addItemDecoration(dividerItemDecorationTwo);
-        holder.mindItemContentMediaLayout.addView(imageRecyclerView);
+        holder.mindDetailsContentMediaLayout.addView(imageRecyclerView);
 
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.constrainWidth(imageRecyclerView.getId(), ConstraintSet.MATCH_CONSTRAINT);
         constraintSet.constrainHeight(imageRecyclerView.getId(), ConstraintSet.WRAP_CONTENT);
-        constraintSet.connect(imageRecyclerView.getId(), ConstraintSet.TOP, holder.mindItemContentText.getId(), ConstraintSet.BOTTOM);
+        constraintSet.connect(imageRecyclerView.getId(), ConstraintSet.TOP, holder.mindDetailsContentText.getId(), ConstraintSet.BOTTOM);
         constraintSet.connect(imageRecyclerView.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT);
         constraintSet.connect(imageRecyclerView.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT);
 
-        constraintSet.applyTo(holder.mindItemContentMediaLayout);
+        constraintSet.applyTo(holder.mindDetailsContentMediaLayout);
     }
 
     private void addVideoToLayout(WrapperVH holder, String videoUrl, String contentText) {
@@ -174,12 +174,12 @@ public class MindDetailsWrapAdapter extends RecyclerView.Adapter<MindDetailsWrap
         ConstraintSet constraintSet = new ConstraintSet();
         constraintSet.constrainWidth(rootView.getId(), ConstraintSet.MATCH_CONSTRAINT);
         constraintSet.constrainHeight(rootView.getId(), ConstraintSet.WRAP_CONTENT);
-        constraintSet.connect(rootView.getId(), ConstraintSet.TOP, holder.mindItemContentText.getId(), ConstraintSet.BOTTOM);
+        constraintSet.connect(rootView.getId(), ConstraintSet.TOP, holder.mindDetailsContentText.getId(), ConstraintSet.BOTTOM);
         constraintSet.connect(rootView.getId(), ConstraintSet.LEFT, ConstraintSet.PARENT_ID, ConstraintSet.LEFT);
         constraintSet.connect(rootView.getId(), ConstraintSet.RIGHT, ConstraintSet.PARENT_ID, ConstraintSet.RIGHT);
 
-        holder.mindItemContentMediaLayout.addView(rootView);
-        constraintSet.applyTo(holder.mindItemContentMediaLayout);
+        holder.mindDetailsContentMediaLayout.addView(rootView);
+        constraintSet.applyTo(holder.mindDetailsContentMediaLayout);
     }
 
 
@@ -199,14 +199,14 @@ public class MindDetailsWrapAdapter extends RecyclerView.Adapter<MindDetailsWrap
 
     public class WrapperVH extends RecyclerView.ViewHolder {
         /*MIND_ITEM*/
-        private ConstraintLayout mindItemHeaderLayout;
-        private ImageView mindItemHeadPortrait;
-        private TextView mindItemName;
-        private TextView mindItemDatetime;
-        private ImageView mindItemCollectionBtn;
-        private TextView mindItemContentText;
-        private ConstraintLayout mindItemContentMediaLayout;
-        private TextView mindItemCommentCountText;
+        private ConstraintLayout mindDetailsHeaderLayout;
+        private ImageView mindDetailsHeadPortrait;
+        private TextView mindDetailsName;
+        private TextView mindDetailsDatetime;
+        private ImageView mindDetailsCollectionBtn;
+        private TextView mindDetailsContentText;
+        private ConstraintLayout mindDetailsContentMediaLayout;
+        private TextView mindDetailsCommentCountText;
 
         /*Attention Item*/
         public RecyclerView commentRecyclerView;
@@ -214,14 +214,14 @@ public class MindDetailsWrapAdapter extends RecyclerView.Adapter<MindDetailsWrap
         public WrapperVH(View view, ITEM_TYPE item_type) {
             super(view);
             if (item_type == ITEM_TYPE.MIND_ITEM) {
-                mindItemHeaderLayout = view.findViewById(R.id.mind_ListItem_Header_Layout);
-                mindItemHeadPortrait = view.findViewById(R.id.mind_ListItem_HeadPortrait);
-                mindItemName = view.findViewById(R.id.mind_ListItem_Name);
-                mindItemDatetime = view.findViewById(R.id.mind_ListItem_Datetime);
-                mindItemCollectionBtn = view.findViewById(R.id.mind_Details_Collection_Btn);
-                mindItemContentText = view.findViewById(R.id.mind_ListItem_Content_Text);
-                mindItemContentMediaLayout = view.findViewById(R.id.mind_ListItem_Content_Media_Layout);
-                mindItemCommentCountText = view.findViewById(R.id.mind_ListItem_Comment_Count);
+                mindDetailsHeaderLayout = view.findViewById(R.id.mind_Details_Header_Layout);
+                mindDetailsHeadPortrait = view.findViewById(R.id.mind_Details_HeadPortrait);
+                mindDetailsName = view.findViewById(R.id.mind_Details_Name);
+                mindDetailsDatetime = view.findViewById(R.id.mind_Details_Datetime);
+                mindDetailsCollectionBtn = view.findViewById(R.id.mind_Details_Collection_Btn);
+                mindDetailsContentText = view.findViewById(R.id.mind_Details_Content_Text);
+                mindDetailsContentMediaLayout = view.findViewById(R.id.mind_Details_Content_Media_Layout);
+                mindDetailsCommentCountText = view.findViewById(R.id.mind_Details_Comment_Count);
             } else {
                 commentRecyclerView = view.findViewById(R.id.mind_Details_Comment_RecyclerView);
             }

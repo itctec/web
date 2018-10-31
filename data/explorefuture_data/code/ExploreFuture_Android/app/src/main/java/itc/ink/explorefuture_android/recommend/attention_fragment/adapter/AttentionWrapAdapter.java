@@ -51,7 +51,7 @@ public class AttentionWrapAdapter extends RecyclerView.Adapter<AttentionWrapAdap
             View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recommend_attention_fragment_recommend_item, parent, false);
             return new WrapperVH(rootView, ITEM_TYPE.RECOMMEND_LIST);
         } else {
-            View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recommend_attention_fragment_attention_item, parent, false);
+            View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.common_unit_mind_recycler_layout, parent, false);
             return new WrapperVH(rootView, ITEM_TYPE.ATTENTION_LIST);
         }
     }
@@ -107,7 +107,7 @@ public class AttentionWrapAdapter extends RecyclerView.Adapter<AttentionWrapAdap
                 recommendUpdateThemBtn = view.findViewById(R.id.recommend_Attention_Recommend_Header_Update_Text);
                 recommendRecyclerView = view.findViewById(R.id.recommend_Attention_Recommend_RecyclerView);
             } else {
-                mindRecyclerView = view.findViewById(R.id.recommend_Attention_Mind_RecyclerView);
+                mindRecyclerView = view.findViewById(R.id.common_Unit_Mind_RecyclerView);
             }
         }
     }

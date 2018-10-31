@@ -124,7 +124,7 @@ public class MindDetailsWrapAdapter extends RecyclerView.Adapter<MindDetailsWrap
                 addVideoToLayout(holder, mindListDataItem.getVideo_url(), mindListDataItem.getContent_text());
             }
 
-            holder.mindDetailsCommentCountText.setText(String.format(getContext().getResources().getString(R.string.mind_list_item_comment_count_text), mindListDataItem.getComment_num()));
+            holder.mindDetailsCommentCountText.setText(String.format(getContext().getResources().getString(R.string.mind_details_comment_count_text), mindListDataItem.getComment_num()));
         } else {
             holder.commentRecyclerView.setFocusableInTouchMode(false);
             if (holder.commentRecyclerView.getAdapter() == null) {

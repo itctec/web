@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/app_status_bar_height"
+    android:background="@color/app_def_theme_activity_bg"
+    tools:context=".common_unit.topic_details.TopicDetailsActivity">
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/topic_Details_Top_Navigation"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/topic_Details_Top_Navigation_Bottom_Horizontal_Guideline"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/topic_Details_Top_Navigation_Back_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="5dp"
+            android:src="@drawable/vector_drawable_back_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/topic_Details_Top_Navigation_Title_Text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/topic_details_top_navigation_title_text"
+            android:textColor="@color/app_top_navigation_text_selected_color"
+            android:textSize="@dimen/app_top_navigation_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/topic_Details_Top_Navigation_BottomLine"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/app_navigation_bg_line_width"
+            android:background="@color/app_navigation_bg_line_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/topic_Details_Top_Navigation_Bottom_Horizontal_Guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/app_top_navigation_height" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/topic_Details_RecyclerView"
+        android:overScrollMode="never"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/topic_Details_Top_Navigation_Bottom_Horizontal_Guideline"
+        app:layout_constraintBottom_toTopOf="@+id/topic_Details_Start_View_Point_Btn"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <Button
+        android:id="@+id/topic_Details_Start_View_Point_Btn"
+        android:text="@string/topic_details_start_view_point_btn_text"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/start_view_point_btn_bg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintDimensionRatio="10:1"/>
+
+</android.support.constraint.ConstraintLayout>

@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recommend_Attention_Mind_RecyclerView"
+        android:id="@+id/common_Unit_Mind_RecyclerView"
         android:overScrollMode="never"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

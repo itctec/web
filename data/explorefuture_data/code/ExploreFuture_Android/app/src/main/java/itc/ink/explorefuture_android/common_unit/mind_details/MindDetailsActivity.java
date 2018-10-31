@@ -6,11 +6,14 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -71,12 +74,40 @@ public class MindDetailsActivity extends Activity {
         contentRecyclerView.setAdapter(mindDetailsWrapAdapter);
         contentRvLayoutManager = new LinearLayoutManager(this);
         contentRecyclerView.setLayoutManager(contentRvLayoutManager);
+
+        ConstraintLayout retransmissionBtn=findViewById(R.id.mind_Details_Bottom_Bar_Retransmission_Btn);
+        retransmissionBtn.setOnClickListener(new RetransmissionBtnClickListener());
+        ConstraintLayout commentBtn=findViewById(R.id.mind_Details_Bottom_Bar_Comment_Btn);
+        commentBtn.setOnClickListener(new CommentBtnClickListener());
+        ConstraintLayout acceptBtn=findViewById(R.id.mind_Details_Bottom_Bar_Accept_Btn);
+        acceptBtn.setOnClickListener(new AcceptBtnClickListener());
     }
 
     class BackBtnClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
             finish();
+        }
+    }
+
+    class RetransmissionBtnClickListener implements View.OnClickListener{
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(MindDetailsActivity.this,"转发按钮被点击",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    class CommentBtnClickListener implements View.OnClickListener{
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(MindDetailsActivity.this,"评论按钮被点击",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    class AcceptBtnClickListener implements View.OnClickListener{
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(MindDetailsActivity.this,"赞按钮被点击",Toast.LENGTH_SHORT).show();
         }
     }
 

@@ -11,44 +11,69 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
-    <TextView
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/mind_Details_Bottom_Bar_Retransmission_Btn"
-        android:text="@string/mind_details_bottom_bar_retransmission_btn_text"
-        android:textSize="12dp"
-        android:textColor="#555555"
-        android:drawablePadding="5dp"
-        android:drawableLeft="@drawable/vector_drawable_mind_details_retransmission"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/mind_Details_Bottom_Bar_Top_Line"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/mind_Details_Bottom_Bar_Comment_Btn"/>
-    <TextView
+        app:layout_constraintRight_toLeftOf="@+id/mind_Details_Bottom_Bar_Comment_Btn">
+        <TextView
+            android:text="@string/mind_details_bottom_bar_retransmission_btn_text"
+            android:textSize="12dp"
+            android:textColor="#555555"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/vector_drawable_mind_details_retransmission"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/mind_Details_Bottom_Bar_Comment_Btn"
-        android:text="@string/mind_details_bottom_bar_comment_btn_text"
-        android:textSize="12dp"
-        android:textColor="#555555"
-        android:drawablePadding="5dp"
-        android:drawableLeft="@drawable/vector_drawable_mind_details_comment"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/mind_Details_Bottom_Bar_Top_Line"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/mind_Details_Bottom_Bar_Retransmission_Btn"
-        app:layout_constraintRight_toLeftOf="@+id/mind_Details_Bottom_Bar_Accept_Btn"/>
-    <TextView
+        app:layout_constraintRight_toLeftOf="@+id/mind_Details_Bottom_Bar_Accept_Btn">
+        <TextView
+            android:text="@string/mind_details_bottom_bar_comment_btn_text"
+            android:textSize="12dp"
+            android:textColor="#555555"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/vector_drawable_mind_details_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/mind_Details_Bottom_Bar_Accept_Btn"
-        android:text="@string/mind_details_bottom_bar_accept_btn_text"
-        android:textSize="12dp"
-        android:textColor="#555555"
-        android:drawablePadding="5dp"
-        android:drawableLeft="@drawable/vector_drawable_mind_details_accept"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/mind_Details_Bottom_Bar_Top_Line"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/mind_Details_Bottom_Bar_Comment_Btn"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent">
+        <TextView
+            android:text="@string/mind_details_bottom_bar_accept_btn_text"
+            android:textSize="12dp"
+            android:textColor="#555555"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/vector_drawable_mind_details_accept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
+
 
 </android.support.constraint.ConstraintLayout>

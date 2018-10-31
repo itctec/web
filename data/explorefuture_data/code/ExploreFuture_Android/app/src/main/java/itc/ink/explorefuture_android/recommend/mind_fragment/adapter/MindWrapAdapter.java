@@ -81,7 +81,7 @@ public class MindWrapAdapter extends RecyclerView.Adapter<MindWrapAdapter.Wrappe
             View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recommend_mind_fragment_mind_top_navigation, parent, false);
             return new WrapperVH(rootView, ITEM_TYPE.SORT_NAVIGATION);
         } else {
-            View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recommend_attention_fragment_attention_item, parent, false);
+            View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.common_unit_mind_recycler_layout, parent, false);
             return new WrapperVH(rootView, ITEM_TYPE.MIND_LIST);
         }
     }
@@ -147,7 +147,7 @@ public class MindWrapAdapter extends RecyclerView.Adapter<MindWrapAdapter.Wrappe
                 newestBtn = view.findViewById(R.id.mind_Sort_Top_Navigation_Newest_Btn);
                 navigationIndicator = view.findViewById(R.id.mind_Sort_Top_Navigation_Indicator);
             } else {
-                mindRecyclerView = view.findViewById(R.id.recommend_Attention_Mind_RecyclerView);
+                mindRecyclerView = view.findViewById(R.id.common_Unit_Mind_RecyclerView);
             }
         }
     }

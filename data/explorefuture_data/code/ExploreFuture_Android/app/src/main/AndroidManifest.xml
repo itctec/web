@@ -69,6 +69,14 @@
             android:screenOrientation="portrait"
             android:theme="@style/DefActivityTheme"/>
         <activity
+            android:name=".common_unit.topic_details.TopicDetailsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DefActivityTheme"/>
+        <activity
+            android:name=".common_unit.person_details.PersonDetailsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DefActivityTheme"/>
+        <activity
             android:name=".login.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DefActivityTheme" />

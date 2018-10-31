@@ -99,7 +99,7 @@
         app:layout_constraintRight_toRightOf="parent"/>
     <TextView
         android:id="@+id/mind_Details_Comment_Count"
-        android:text="@string/mind_list_item_comment_count_text"
+        android:text="@string/mind_details_comment_count_text"
         android:textColor="#333333"
         android:textSize="14dp"
         android:layout_width="wrap_content"

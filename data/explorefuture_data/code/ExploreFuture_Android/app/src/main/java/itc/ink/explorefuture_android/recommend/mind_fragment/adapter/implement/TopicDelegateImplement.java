@@ -1,6 +1,7 @@
 package itc.ink.explorefuture_android.recommend.mind_fragment.adapter.implement;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
+import itc.ink.explorefuture_android.common_unit.topic_details.TopicDetailsActivity;
 import itc.ink.explorefuture_android.recommend.handpick_fragment.mode.mode_banner.BannerDataMode;
 import itc.ink.explorefuture_android.recommend.mind_fragment.adapter.MindWrapAdapter;
 import itc.ink.explorefuture_android.recommend.mind_fragment.mode.mode_topic.TopicListDataMode;
@@ -44,13 +46,21 @@ public class TopicDelegateImplement implements MindWrapAdapter.DelegateInterface
         mHolder.topicBanner.setBannerAnimation(Transformer.Default);
         mHolder.topicBanner.isAutoPlay(true);
         mHolder.topicBanner.setIndicatorGravity(BannerConfig.RIGHT).start();
-        mHolder.topicBanner.setOnBannerListener(new TopicBannerClickListener());
+        mHolder.topicBanner.setOnBannerListener(new TopicBannerClickListener((ArrayList<TopicListDataMode>) mData));
     }
 
     class TopicBannerClickListener implements OnBannerListener {
+        private ArrayList<TopicListDataMode> mData;
+
+        public TopicBannerClickListener(ArrayList<TopicListDataMode> mData) {
+            this.mData = mData;
+        }
+
         @Override
         public void OnBannerClick(int position) {
-            Toast.makeText(getContext(), "TopicBanner" + position + "被点击", Toast.LENGTH_SHORT).show();
+            Intent intent =new Intent(getContext(), TopicDetailsActivity.class);
+            intent.putExtra(TopicDetailsActivity.KEY_TOPIC_ITEM,mData.get(position));
+            getContext().startActivity(intent);
         }
     }
 

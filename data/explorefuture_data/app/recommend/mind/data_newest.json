@@ -2,11 +2,15 @@
   "array_topic": [
     {
       "id":"0000000001",
+      "title":"你喜欢喝橙汁吗",
+      "summary":"喝橙汁有很多好处，也有很多坏处，你的观点是什么？",
       "image_url":"http://www.itc.ink/data/explorefuture_data/app/recommend/mind/topic/topic_1.png",
       "image_update_datetime":"2018-09-26 12:00"
     },
     {
-      "id":"0000000001",
+      "id":"0000000002",
+      "title":"绘图风格大讨论",
+      "summary":"除了书本上跟你讲过的风格，还有哪些是大家私藏已久？",
       "image_url":"http://www.itc.ink/data/explorefuture_data/app/recommend/mind/topic/topic_2.png",
       "image_update_datetime":"2018-09-26 12:00"
     }

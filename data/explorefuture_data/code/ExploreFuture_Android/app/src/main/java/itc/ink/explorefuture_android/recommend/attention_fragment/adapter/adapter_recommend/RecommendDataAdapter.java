@@ -55,7 +55,7 @@ public class RecommendDataAdapter extends RecyclerView.Adapter<RecommendDataAdap
     public void onBindViewHolder(VH holder, final int position) {
         final RecommendListDataMode recommendListDataItem = mData.get(position);
 
-        holder.recommendItemLayout.setOnClickListener(new RecommendItemLayoutClickListener(recommendListDataItem.getId()));
+        holder.recommendItemLayout.setOnClickListener(new RecommendItemLayoutClickListener(recommendListDataItem));
 
         RequestOptions options = new RequestOptions()
                 .signature(new ObjectKeyCanNull(recommendListDataItem.getImage_update_datetime()).getObject())
@@ -98,17 +98,16 @@ public class RecommendDataAdapter extends RecyclerView.Adapter<RecommendDataAdap
     }
 
     class RecommendItemLayoutClickListener implements View.OnClickListener{
-        private String ID="";
+        private RecommendListDataMode recommendListDataItem;
 
-        public RecommendItemLayoutClickListener(String ID) {
-            this.ID = ID;
+        public RecommendItemLayoutClickListener(RecommendListDataMode recommendListDataItem) {
+            this.recommendListDataItem = recommendListDataItem;
         }
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(getContext(),ID+"被点击",Toast.LENGTH_SHORT).show();
             Intent intent=new Intent(getContext(), PersonDetailsActivity.class);
-            intent.putExtra(PersonDetailsActivity.KEY_ID,ID);
+            intent.putExtra(PersonDetailsActivity.KEY_PERSON_ITEM,recommendListDataItem);
             getContext().startActivity(intent);
         }
     }

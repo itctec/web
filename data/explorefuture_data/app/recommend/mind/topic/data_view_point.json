@@ -7,6 +7,10 @@
       "accept_num":"78",
       "oppose_num":"126",
       "comment_num":"28",
+      "view_point_author_id":"0000000001",
+      "view_point_author_nickname":"探路未来",
+      "view_point_author_head_portrait_image_url":"http://www.itc.ink/data/explorefuture_data/account/0000000003/information/head_portrait.png",
+      "view_point_author_head_portrait_image_update_datetime":"2018-09-30 08:00",
       "cover_image_url":"http://www.itc.ink/data/explorefuture_data/app/recommend/mind/topic/view_point/one.jpg",
       "cover_image_update_datetime":"2018-09-30 08:01"
     },
@@ -16,7 +20,11 @@
       "content":"哈哈，大家好，这是我的观点内容，欢迎大家来吐槽",
       "accept_num":"55",
       "oppose_num":"23",
-      "comment_num":"10"
+      "comment_num":"10",
+      "view_point_author_id":"0000000001",
+      "view_point_author_nickname":"探路未来",
+      "view_point_author_head_portrait_image_url":"http://www.itc.ink/data/explorefuture_data/account/0000000003/information/head_portrait.png",
+      "view_point_author_head_portrait_image_update_datetime":"2018-09-30 08:00"
     },
     {
       "id":"0000000003",
@@ -24,7 +32,11 @@
       "content":"哈哈，大家好，这是我的观点内容，欢迎大家来吐槽",
       "accept_num":"44",
       "oppose_num":"123",
-      "comment_num":"23"
+      "comment_num":"23",
+      "view_point_author_id":"0000000001",
+      "view_point_author_nickname":"探路未来",
+      "view_point_author_head_portrait_image_url":"http://www.itc.ink/data/explorefuture_data/account/0000000003/information/head_portrait.png",
+      "view_point_author_head_portrait_image_update_datetime":"2018-09-30 08:00"
     },
     {
       "id":"0000000004",
@@ -33,6 +45,10 @@
       "accept_num":"78",
       "oppose_num":"126",
       "comment_num":"28",
+      "view_point_author_id":"0000000001",
+      "view_point_author_nickname":"探路未来",
+      "view_point_author_head_portrait_image_url":"http://www.itc.ink/data/explorefuture_data/account/0000000003/information/head_portrait.png",
+      "view_point_author_head_portrait_image_update_datetime":"2018-09-30 08:00",
       "cover_image_url":"http://www.itc.ink/data/explorefuture_data/app/recommend/mind/topic/view_point/one.jpg",
       "cover_image_update_datetime":"2018-09-30 08:01"
     },
@@ -43,6 +59,10 @@
       "accept_num":"78",
       "oppose_num":"126",
       "comment_num":"28",
+      "view_point_author_id":"0000000001",
+      "view_point_author_nickname":"探路未来",
+      "view_point_author_head_portrait_image_url":"http://www.itc.ink/data/explorefuture_data/account/0000000003/information/head_portrait.png",
+      "view_point_author_head_portrait_image_update_datetime":"2018-09-30 08:00",
       "cover_image_url":"http://www.itc.ink/data/explorefuture_data/app/recommend/mind/topic/view_point/three.jpg",
       "cover_image_update_datetime":"2018-09-30 08:00"
     },
@@ -52,7 +72,11 @@
       "content":"哈哈，大家好，这是我的观点内容，欢迎大家来吐槽",
       "accept_num":"78",
       "oppose_num":"126",
-      "comment_num":"28"
+      "comment_num":"28",
+      "view_point_author_id":"0000000001",
+      "view_point_author_nickname":"探路未来",
+      "view_point_author_head_portrait_image_url":"http://www.itc.ink/data/explorefuture_data/account/0000000003/information/head_portrait.png",
+      "view_point_author_head_portrait_image_update_datetime":"2018-09-30 08:00"
     },
     {
       "id":"0000000007",
@@ -61,6 +85,10 @@
       "accept_num":"78",
       "oppose_num":"126",
       "comment_num":"28",
+      "view_point_author_id":"0000000001",
+      "view_point_author_nickname":"探路未来",
+      "view_point_author_head_portrait_image_url":"http://www.itc.ink/data/explorefuture_data/account/0000000003/information/head_portrait.png",
+      "view_point_author_head_portrait_image_update_datetime":"2018-09-30 08:00",
       "cover_image_url":"http://www.itc.ink/data/explorefuture_data/app/recommend/mind/topic/view_point/one.jpg",
       "cover_image_update_datetime":"2018-09-30 08:01"
     },
@@ -71,6 +99,10 @@
       "accept_num":"78",
       "oppose_num":"126",
       "comment_num":"28",
+      "view_point_author_id":"0000000001",
+      "view_point_author_nickname":"探路未来",
+      "view_point_author_head_portrait_image_url":"http://www.itc.ink/data/explorefuture_data/account/0000000003/information/head_portrait.png",
+      "view_point_author_head_portrait_image_update_datetime":"2018-09-30 08:00",
       "cover_image_url":"http://www.itc.ink/data/explorefuture_data/app/recommend/mind/topic/view_point/two.jpg",
       "cover_image_update_datetime":"2018-09-30 08:00"
     },
@@ -81,6 +113,10 @@
       "accept_num":"78",
       "oppose_num":"126",
       "comment_num":"28",
+      "view_point_author_id":"0000000001",
+      "view_point_author_nickname":"探路未来",
+      "view_point_author_head_portrait_image_url":"http://www.itc.ink/data/explorefuture_data/account/0000000003/information/head_portrait.png",
+      "view_point_author_head_portrait_image_update_datetime":"2018-09-30 08:00",
       "cover_image_url":"http://www.itc.ink/data/explorefuture_data/app/recommend/mind/topic/view_point/two.jpg",
       "cover_image_update_datetime":"2018-09-30 08:00"
     },
@@ -90,7 +126,11 @@
       "content":"哈哈，大家好，这是我的观点内容，欢迎大家来吐槽",
       "accept_num":"78",
       "oppose_num":"126",
-      "comment_num":"28"
+      "comment_num":"28",
+      "view_point_author_id":"0000000001",
+      "view_point_author_nickname":"探路未来",
+      "view_point_author_head_portrait_image_url":"http://www.itc.ink/data/explorefuture_data/account/0000000003/information/head_portrait.png",
+      "view_point_author_head_portrait_image_update_datetime":"2018-09-30 08:00"
     }
   ]
 }

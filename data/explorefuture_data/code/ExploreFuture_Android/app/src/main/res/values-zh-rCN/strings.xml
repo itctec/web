@@ -46,7 +46,7 @@
     <string name="mind_no_data_text">空空如也\n开启自己的第一个未来构想吧！</string>
     <string name="mind_no_data_start_mind_btn_text">创建构想</string>
     <string name="mind_list_item_release_btn_text">发布</string>
-    <string name="mind_edit_top_navigation_title_text">创建构想</string>
+    <string name="mind_edit_top_navigation_title_text">编辑构想</string>
     <string name="mind_edit_top_navigation_save_btn_text">保存</string>
     <string name="mind_edit_top_navigation_release_btn_text">发布</string>
     <string name="mind_edit_hint_text">在这里写下你的想法</string>
@@ -120,4 +120,19 @@
     <string name="topic_details_top_navigation_title_text">话题详情</string>
     <string name="topic_details_view_point_title_text">相关观点</string>
     <string name="topic_details_start_view_point_btn_text">发起观点</string>
+
+    <string name="person_details_top_navigation_title_text">%1$s的主页</string>
+
+    <string name="view_point_edit_top_navigation_title_text">编辑观点</string>
+    <string name="view_point_title_edit_hint_text">标题</string>
+    <string name="view_point_content_edit_hint_text">在这里写下你的观点</string>
+    <string name="view_point_add_cover_image_tip_text">点此添加封面图片</string>
+    <string name="view_point_edit_release_dialog_content_text">标题和内容不能为空，请将内容补充完整后再发布！</string>
+
+    <string name="view_point_details_top_navigation_title_text">观点详情</string>
+    <string name="view_point_details_author_name_text">观点作者：%1$s</string>
+    <string name="view_point_details_release_datetime_text">发布时间：%1$s</string>
+    <string name="view_point_details_bottom_bar_accept_btn_text">认可</string>
+    <string name="view_point_details_bottom_bar_oppose_btn_text">反对</string>
+    <string name="view_point_details_bottom_bar_comment_btn_text">评论</string>
 </resources>

@@ -1,6 +1,7 @@
 package itc.ink.explorefuture_android.common_unit.topic_details.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,7 +21,9 @@ import itc.ink.explorefuture_android.R;
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.common_unit.mind_details.mode.CommentDataMode;
+import itc.ink.explorefuture_android.common_unit.topic_details.ViewPointDetailsActivity;
 import itc.ink.explorefuture_android.common_unit.topic_details.mode.ViewPointDataMode;
+import itc.ink.explorefuture_android.recommend.mind_fragment.mode.mode_topic.TopicListDataMode;
 
 /**
  * Created by yangwenjiang on 2018/9/14.
@@ -29,12 +32,14 @@ import itc.ink.explorefuture_android.common_unit.topic_details.mode.ViewPointDat
 public class TopicViewPointDataAdapter extends RecyclerView.Adapter<TopicViewPointDataAdapter.VH> {
     private final static String LOG_TAG = "TopicViewPointDataAdapter";
     private WeakReference<Context> mWeakContextReference;
+    private TopicListDataMode topicListDataItem;
     private List<ViewPointDataMode> mData;
 
     private ItemViewClickListener itemViewClickListener=new ItemViewClickListener();
 
-    public TopicViewPointDataAdapter(Context mContext, List<ViewPointDataMode> mData) {
+    public TopicViewPointDataAdapter(Context mContext, TopicListDataMode topicListDataItem,List<ViewPointDataMode> mData) {
         this.mWeakContextReference = new WeakReference<>(mContext);
+        this.topicListDataItem=topicListDataItem;
         this.mData = mData;
     }
 
@@ -68,7 +73,7 @@ public class TopicViewPointDataAdapter extends RecyclerView.Adapter<TopicViewPoi
         holder.viewPointAcceptNumText.setText(viewPointDataItem.getAccept_num());
         holder.viewPointOpposeNumText.setText(viewPointDataItem.getOppose_num());
         holder.viewPointCommentNumText.setText(viewPointDataItem.getComment_num());
-        holder.itemView.setTag(viewPointDataItem.getId());
+        holder.itemView.setTag(viewPointDataItem);
         holder.itemView.setOnClickListener(itemViewClickListener);
     }
 
@@ -100,8 +105,11 @@ public class TopicViewPointDataAdapter extends RecyclerView.Adapter<TopicViewPoi
     class ItemViewClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            String id_Str=(String)view.getTag();
-            Toast.makeText(getContext(),id_Str+"被点击",Toast.LENGTH_SHORT).show();
+            ViewPointDataMode viewPointDataItem=(ViewPointDataMode)view.getTag();
+            Intent intent=new Intent(getContext(), ViewPointDetailsActivity.class);
+            intent.putExtra(ViewPointDetailsActivity.KEY_TOPIC_ITEM,topicListDataItem);
+            intent.putExtra(ViewPointDetailsActivity.KEY_VIEW_POINT_ITEM,viewPointDataItem);
+            getContext().startActivity(intent);
         }
     }
 

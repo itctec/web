@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by yangwenjiang on 2018/9/28.
  */
 
-public class RecommendListDataMode implements Serializable{
+public class RecommendListDataMode{
     private String id="";
     private String name="昵称";
     private String summary="简介";

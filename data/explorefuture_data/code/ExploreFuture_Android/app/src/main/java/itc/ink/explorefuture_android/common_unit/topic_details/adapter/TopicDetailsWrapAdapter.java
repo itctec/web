@@ -57,7 +57,7 @@ public class TopicDetailsWrapAdapter extends RecyclerView.Adapter<TopicDetailsWr
         this.mWeakContextReference = new WeakReference<>(mContext);
         this.topicListDataItem=topicListDataItem;
 
-        mTopicViewPointDataAdapter=new TopicViewPointDataAdapter(getContext(),viewPointDataArray);
+        mTopicViewPointDataAdapter=new TopicViewPointDataAdapter(getContext(),topicListDataItem,viewPointDataArray);
 
         //Get Comment Data
         UpdateAsyncTask updateAsyncTask = new UpdateAsyncTask(getContext());

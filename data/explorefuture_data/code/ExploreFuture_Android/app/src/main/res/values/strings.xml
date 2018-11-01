@@ -46,7 +46,7 @@
     <string name="mind_no_data_text">Absolutely Empty\nStart your first mind of the future!</string>
     <string name="mind_no_data_start_mind_btn_text">Create Mind</string>
     <string name="mind_list_item_release_btn_text">Release</string>
-    <string name="mind_edit_top_navigation_title_text">Create Mind</string>
+    <string name="mind_edit_top_navigation_title_text">Edit Mind</string>
     <string name="mind_edit_top_navigation_save_btn_text">Save</string>
     <string name="mind_edit_top_navigation_release_btn_text">Release</string>
     <string name="mind_edit_hint_text">Write your mind here</string>
@@ -120,4 +120,19 @@
     <string name="topic_details_top_navigation_title_text">Topic Details</string>
     <string name="topic_details_view_point_title_text">The Point Views</string>
     <string name="topic_details_start_view_point_btn_text">Start View Point</string>
+
+    <string name="person_details_top_navigation_title_text">%1$s\'s Homepage</string>
+
+    <string name="view_point_edit_top_navigation_title_text">Edit View Point</string>
+    <string name="view_point_title_edit_hint_text">Title</string>
+    <string name="view_point_content_edit_hint_text">Write your view point here</string>
+    <string name="view_point_add_cover_image_tip_text">Click here to add cover image</string>
+    <string name="view_point_edit_release_dialog_content_text">The title and content cannot be empty. Please complete the content before publishing!</string>
+
+    <string name="view_point_details_top_navigation_title_text">View Point Details</string>
+    <string name="view_point_details_author_name_text">View Point Author:%1$s</string>
+    <string name="view_point_details_release_datetime_text">Release Datetime:%1$s</string>
+    <string name="view_point_details_bottom_bar_accept_btn_text">Accept</string>
+    <string name="view_point_details_bottom_bar_oppose_btn_text">Oppose</string>
+    <string name="view_point_details_bottom_bar_comment_btn_text">Comment</string>
 </resources>

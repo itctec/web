@@ -41,13 +41,12 @@ import java.util.List;
 import itc.ink.explorefuture_android.R;
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
-import itc.ink.explorefuture_android.common_unit.mind_details.MindDetailsActivity;
 import itc.ink.explorefuture_android.common_unit.mind_details.mode.CommentDataMode;
-import itc.ink.explorefuture_android.common_unit.mind_recyclerview.adapter.MindDataAdapter;
 import itc.ink.explorefuture_android.common_unit.mind_recyclerview.adapter.MindItemImageDataAdapter;
 import itc.ink.explorefuture_android.common_unit.mind_recyclerview.mode.MindListDataMode;
+import itc.ink.explorefuture_android.common_unit.person_details.PersonDetailsActivity;
+import itc.ink.explorefuture_android.common_unit.person_details.mode.SimplePersonInfoDataMode;
 import itc.ink.explorefuture_android.common_unit.video_view.VideoViewerActivity;
-import itc.ink.explorefuture_android.recommend.attention_fragment.adapter.adapter_recommend.RecommendDataAdapter;
 
 /**
  * Created by yangwenjiang on 2018/9/14.
@@ -59,7 +58,7 @@ public class MindDetailsWrapAdapter extends RecyclerView.Adapter<MindDetailsWrap
 
     private MindListDataMode mindListDataItem;
     public ArrayList<CommentDataMode> commentDataArray=new ArrayList<>();
-    public MindCommentDataAdapter mMindCommentDataAdapter;
+    public CommentDataAdapter mMindCommentDataAdapter;
 
     private MindItemCollectionBtnClickListener mindDetailsCollectionBtnClickListener=new MindItemCollectionBtnClickListener();
 
@@ -67,7 +66,7 @@ public class MindDetailsWrapAdapter extends RecyclerView.Adapter<MindDetailsWrap
         this.mWeakContextReference = new WeakReference<>(mContext);
         this.mindListDataItem=mindListDataItem;
 
-        mMindCommentDataAdapter=new MindCommentDataAdapter(getContext(),commentDataArray);
+        mMindCommentDataAdapter=new CommentDataAdapter(getContext(),commentDataArray);
 
         //Get Comment Data
         UpdateAsyncTask updateAsyncTask = new UpdateAsyncTask(getContext());
@@ -96,7 +95,11 @@ public class MindDetailsWrapAdapter extends RecyclerView.Adapter<MindDetailsWrap
     public void onBindViewHolder(WrapperVH holder, final int position) {
         if (position == 0) {
             String personId = mindListDataItem.getId().split("_")[0];
-            holder.mindDetailsHeaderLayout.setOnClickListener(new AttentionItemHeaderLayoutClickListener(personId));
+            SimplePersonInfoDataMode simplePersonInfoData=new SimplePersonInfoDataMode(personId,
+                    mindListDataItem.getName(),
+                    mindListDataItem.getHead_portrait_image_url(),
+                    mindListDataItem.getHead_portrait_image_update_datetime());
+            holder.mindDetailsHeaderLayout.setOnClickListener(new MindItemHeaderLayoutClickListener(simplePersonInfoData));
 
             RequestOptions options = new RequestOptions()
                     .signature(new ObjectKeyCanNull(mindListDataItem.getHead_portrait_image_update_datetime()).getObject())
@@ -123,9 +126,8 @@ public class MindDetailsWrapAdapter extends RecyclerView.Adapter<MindDetailsWrap
             } else if (!(mindListDataItem.getVideo_url() == null || mindListDataItem.getVideo_url().trim().equals(""))) {
                 addVideoToLayout(holder, mindListDataItem.getVideo_url(), mindListDataItem.getContent_text());
             }
-
-            holder.mindDetailsCommentCountText.setText(String.format(getContext().getResources().getString(R.string.mind_details_comment_count_text), mindListDataItem.getComment_num()));
         } else {
+            holder.mindDetailsCommentCountText.setText(String.format(getContext().getResources().getString(R.string.mind_details_comment_count_text), mindListDataItem.getComment_num()));
             holder.commentRecyclerView.setFocusableInTouchMode(false);
             if (holder.commentRecyclerView.getAdapter() == null) {
                 holder.commentRecyclerView.setAdapter(mMindCommentDataAdapter);
@@ -206,9 +208,9 @@ public class MindDetailsWrapAdapter extends RecyclerView.Adapter<MindDetailsWrap
         private ImageView mindDetailsCollectionBtn;
         private TextView mindDetailsContentText;
         private ConstraintLayout mindDetailsContentMediaLayout;
-        private TextView mindDetailsCommentCountText;
 
-        /*Attention Item*/
+        /*Comment Item*/
+        private TextView mindDetailsCommentCountText;
         public RecyclerView commentRecyclerView;
 
         public WrapperVH(View view, ITEM_TYPE item_type) {
@@ -221,8 +223,8 @@ public class MindDetailsWrapAdapter extends RecyclerView.Adapter<MindDetailsWrap
                 mindDetailsCollectionBtn = view.findViewById(R.id.mind_Details_Collection_Btn);
                 mindDetailsContentText = view.findViewById(R.id.mind_Details_Content_Text);
                 mindDetailsContentMediaLayout = view.findViewById(R.id.mind_Details_Content_Media_Layout);
-                mindDetailsCommentCountText = view.findViewById(R.id.mind_Details_Comment_Count);
             } else {
+                mindDetailsCommentCountText = view.findViewById(R.id.mind_Details_Comment_Count);
                 commentRecyclerView = view.findViewById(R.id.mind_Details_Comment_RecyclerView);
             }
         }
@@ -234,16 +236,18 @@ public class MindDetailsWrapAdapter extends RecyclerView.Adapter<MindDetailsWrap
     }
 
 
-    class AttentionItemHeaderLayoutClickListener implements View.OnClickListener {
-        private String PersonId = "";
+    class MindItemHeaderLayoutClickListener implements View.OnClickListener {
+        private SimplePersonInfoDataMode simplePersonInfoData;
 
-        public AttentionItemHeaderLayoutClickListener(String PersonId) {
-            this.PersonId = PersonId;
+        public MindItemHeaderLayoutClickListener(SimplePersonInfoDataMode simplePersonInfoData) {
+            this.simplePersonInfoData = simplePersonInfoData;
         }
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(getContext(), PersonId + "被点击", Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(getContext(), PersonDetailsActivity.class);
+            intent.putExtra(PersonDetailsActivity.KEY_PERSON_INFO_ITEM,simplePersonInfoData);
+            getContext().startActivity(intent);
         }
     }
 

@@ -76,10 +76,13 @@ public class MindDetailsActivity extends Activity {
         contentRecyclerView.setLayoutManager(contentRvLayoutManager);
 
         ConstraintLayout retransmissionBtn=findViewById(R.id.mind_Details_Bottom_Bar_Retransmission_Btn);
+        retransmissionBtn.setTag(mindListDataItem.getId());
         retransmissionBtn.setOnClickListener(new RetransmissionBtnClickListener());
         ConstraintLayout commentBtn=findViewById(R.id.mind_Details_Bottom_Bar_Comment_Btn);
+        commentBtn.setTag(mindListDataItem.getId());
         commentBtn.setOnClickListener(new CommentBtnClickListener());
         ConstraintLayout acceptBtn=findViewById(R.id.mind_Details_Bottom_Bar_Accept_Btn);
+        acceptBtn.setTag(mindListDataItem.getId());
         acceptBtn.setOnClickListener(new AcceptBtnClickListener());
     }
 
@@ -93,21 +96,24 @@ public class MindDetailsActivity extends Activity {
     class RetransmissionBtnClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(MindDetailsActivity.this,"转发按钮被点击",Toast.LENGTH_SHORT).show();
+            String id_Str=(String)view.getTag();
+            Toast.makeText(MindDetailsActivity.this,id_Str+"被转发",Toast.LENGTH_SHORT).show();
         }
     }
 
     class CommentBtnClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(MindDetailsActivity.this,"评论按钮被点击",Toast.LENGTH_SHORT).show();
+            String id_Str=(String)view.getTag();
+            Toast.makeText(MindDetailsActivity.this,id_Str+"被评论",Toast.LENGTH_SHORT).show();
         }
     }
 
     class AcceptBtnClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(MindDetailsActivity.this,"赞按钮被点击",Toast.LENGTH_SHORT).show();
+            String id_Str=(String)view.getTag();
+            Toast.makeText(MindDetailsActivity.this,id_Str+"被赞",Toast.LENGTH_SHORT).show();
         }
     }
 

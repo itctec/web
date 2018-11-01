@@ -17,6 +17,7 @@ import android.widget.Toast;
 import itc.ink.explorefuture_android.R;
 import itc.ink.explorefuture_android.app.utils.StatusBarUtil;
 import itc.ink.explorefuture_android.common_unit.person_details.adapter.PersonDetailsWrapAdapter;
+import itc.ink.explorefuture_android.common_unit.person_details.mode.SimplePersonInfoDataMode;
 import itc.ink.explorefuture_android.recommend.attention_fragment.mode.mode_recommend.RecommendListDataMode;
 import itc.ink.explorefuture_android.recommend.mind_fragment.mode.mode_topic.TopicListDataMode;
 
@@ -25,7 +26,7 @@ import itc.ink.explorefuture_android.recommend.mind_fragment.mode.mode_topic.Top
  */
 
 public class PersonDetailsActivity extends Activity {
-    public static final String KEY_PERSON_ITEM="person_item";
+    public static final String KEY_PERSON_INFO_ITEM="person_info_item";
 
     private View topNavigationBarBg;
     private TextView topNavigationBarTitle;
@@ -41,8 +42,8 @@ public class PersonDetailsActivity extends Activity {
 
 
         Intent intent=getIntent();
-        RecommendListDataMode personItem=(RecommendListDataMode)intent.getSerializableExtra(KEY_PERSON_ITEM);
-        Toast.makeText(this, "ID:" + personItem.getId(), Toast.LENGTH_SHORT).show();
+        SimplePersonInfoDataMode personInfoItem=(SimplePersonInfoDataMode)intent.getSerializableExtra(KEY_PERSON_INFO_ITEM);
+        Toast.makeText(this, "ID:" + personInfoItem.getId(), Toast.LENGTH_SHORT).show();
 
         //StatusBar Style
         StatusBarUtil.setStatusBarFullTransparent(this);
@@ -54,14 +55,14 @@ public class PersonDetailsActivity extends Activity {
         topNavigationBarBg = findViewById(R.id.person_Details_Top_Navigation_Bg);
         topNavigationBarBg.setOnClickListener(null);
         topNavigationBarTitle = findViewById(R.id.person_Details_Top_Navigation_Title_Text);
-        topNavigationBarTitle.setText(personItem.getName()+"的主页");
+        topNavigationBarTitle.setText(String.format(getResources().getString(R.string.person_details_top_navigation_title_text), personInfoItem.getNickname()));
         topNavigationBarBottomLine = findViewById(R.id.person_Details_Top_Navigation_BottomLine);
 
         ImageView backBtn = findViewById(R.id.person_Details_Top_Navigation_Back_Btn);
         backBtn.setOnClickListener(new BackBtnClickListener());
 
         contentRecyclerView = findViewById(R.id.person_Details_RecyclerView);
-        personDetailsWrapAdapter = new PersonDetailsWrapAdapter(this, personItem.getId());
+        personDetailsWrapAdapter = new PersonDetailsWrapAdapter(this, personInfoItem.getId());
         contentRecyclerView.setAdapter(personDetailsWrapAdapter);
         contentRvLayoutManager = new LinearLayoutManager(this);
         contentRecyclerView.setLayoutManager(contentRvLayoutManager);

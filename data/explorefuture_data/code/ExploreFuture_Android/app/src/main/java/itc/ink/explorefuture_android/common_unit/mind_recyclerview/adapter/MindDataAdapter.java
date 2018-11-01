@@ -27,6 +27,8 @@ import java.util.List;
 import itc.ink.explorefuture_android.R;
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
 import itc.ink.explorefuture_android.common_unit.mind_details.MindDetailsActivity;
+import itc.ink.explorefuture_android.common_unit.person_details.PersonDetailsActivity;
+import itc.ink.explorefuture_android.common_unit.person_details.mode.SimplePersonInfoDataMode;
 import itc.ink.explorefuture_android.common_unit.video_view.VideoViewerActivity;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.common_unit.mind_recyclerview.mode.MindListDataMode;
@@ -65,7 +67,11 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
         MindListDataMode mindListDataItem = mMindListData.get(position);
 
         String personId = mindListDataItem.getId().split("_")[0];
-        holder.mindItemHeaderLayout.setOnClickListener(new MindItemHeaderLayoutClickListener(personId));
+        SimplePersonInfoDataMode simplePersonInfoData=new SimplePersonInfoDataMode(personId,
+                mindListDataItem.getName(),
+                mindListDataItem.getHead_portrait_image_url(),
+                mindListDataItem.getHead_portrait_image_update_datetime());
+        holder.mindItemHeaderLayout.setOnClickListener(new MindItemHeaderLayoutClickListener(simplePersonInfoData));
 
         RequestOptions options = new RequestOptions()
                 .signature(new ObjectKeyCanNull(mindListDataItem.getHead_portrait_image_update_datetime()).getObject())
@@ -218,15 +224,18 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
     }
 
     class MindItemHeaderLayoutClickListener implements View.OnClickListener {
-        private String PersonId = "";
+        private SimplePersonInfoDataMode simplePersonInfoData;
 
-        public MindItemHeaderLayoutClickListener(String PersonId) {
-            this.PersonId = PersonId;
+        public MindItemHeaderLayoutClickListener(SimplePersonInfoDataMode simplePersonInfoData) {
+            this.simplePersonInfoData = simplePersonInfoData;
         }
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(getContext(), PersonId + "被点击", Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(getContext(), PersonDetailsActivity.class);
+            intent.putExtra(PersonDetailsActivity.KEY_PERSON_INFO_ITEM,simplePersonInfoData);
+            getContext().startActivity(intent);
+
         }
     }
 

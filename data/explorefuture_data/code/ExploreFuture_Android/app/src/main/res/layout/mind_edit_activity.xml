@@ -121,7 +121,7 @@
         app:layout_constraintLeft_toRightOf="@id/mind_Edit_Attachment"/>
     <TextView
         android:id="@+id/mind_Edit_Char_Count_Text"
-        android:text="27/280"
+        android:text="0/280"
         android:textSize="15dp"
         android:textColor="#888888"
         android:layout_width="wrap_content"

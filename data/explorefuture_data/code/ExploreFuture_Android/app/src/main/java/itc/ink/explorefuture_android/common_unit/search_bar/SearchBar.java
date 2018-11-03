@@ -1,7 +1,10 @@
 package itc.ink.explorefuture_android.common_unit.search_bar;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.res.TypedArray;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +27,8 @@ import java.util.Date;
 
 import itc.ink.explorefuture_android.R;
 import itc.ink.explorefuture_android.app.utils.SQLiteDBHelper;
+import itc.ink.explorefuture_android.common_unit.content_list.ContentListActivity;
+import itc.ink.explorefuture_android.common_unit.search_result.SearchResultActivity;
 
 /**
  * Created by yangwenjiang on 2018/10/19.
@@ -41,6 +46,8 @@ public class SearchBar extends ConstraintLayout {
 
     private SQLiteDBHelper sqLiteDBHelper;
 
+    private int searchType=0;
+
     private OutCallBack outCallBack;
 
     public SearchBar(Context context) {
@@ -54,11 +61,20 @@ public class SearchBar extends ConstraintLayout {
     public SearchBar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SearchBar);
+        String hintText="";
+        if (typedArray != null) {
+            searchType=typedArray.getInt(R.styleable.SearchBar_type,0);
+            hintText=typedArray.getString(R.styleable.SearchBar_search_box_hint);
+            typedArray.recycle();
+        }
+
         LayoutInflater.from(context).inflate(R.layout.common_unit_search_bar, this);
 
         //Search Bar
         searchBarLayout = findViewById(R.id.search_Bar_Layout);
         searchBarEdit = findViewById(R.id.search_Bar_Edit);
+        searchBarEdit.setHint(hintText);
         searchBarEdit.addTextChangedListener(new SearchBarEditTextWatcher());
         searchBarEdit.setOnFocusChangeListener(new SearchBarEditFocusChangedListener());
         searchBarEdit.setOnEditorActionListener(new SearchBarEditActionListener());
@@ -164,7 +180,16 @@ public class SearchBar extends ConstraintLayout {
                 String sqlStr = "insert or replace into tb_search_history values(null,?,?)";
                 sqLiteDBHelper.getReadableDatabase().execSQL(sqlStr, new String[]{textView.getText().toString().trim(), simpleDateFormat.format(new Date())});
 
-                Toast.makeText(getContext(), textView.getText().toString() + "被搜索", Toast.LENGTH_SHORT).show();
+                //Search Result Activity
+                if(searchType==0){
+                    Intent intent =new Intent(getContext(), ContentListActivity.class);
+                    intent.putExtra(ContentListActivity.KEY_SORT_TITLE,textView.getText().toString());
+                    getContext().startActivity(intent);
+                }else{
+                    Intent intent =new Intent(getContext(), SearchResultActivity.class);
+                    intent.putExtra(SearchResultActivity.KEY_SEARCH_TITLE,textView.getText().toString());
+                    getContext().startActivity(intent);
+                }
 
                 String sqlQueryStr = "select * from tb_search_history where search_content like '%" + searchBarEdit.getText().toString() + "%' order by search_datetime desc";
                 Cursor cursor = sqLiteDBHelper.getReadableDatabase().rawQuery(sqlQueryStr, new String[]{});

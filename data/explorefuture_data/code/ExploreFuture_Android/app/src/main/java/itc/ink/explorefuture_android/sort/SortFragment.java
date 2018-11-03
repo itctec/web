@@ -1,6 +1,7 @@
 package itc.ink.explorefuture_android.sort;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -50,6 +51,7 @@ import itc.ink.explorefuture_android.sort.mode.mode_sort.SortListDataMode;
  */
 
 public class SortFragment extends Fragment {
+    public static final int CODE_REQUEST_SEARCH_RESULT=0X01;
     public static boolean allTabNow=true;
 
     private SearchBar searchBar;
@@ -243,9 +245,7 @@ public class SortFragment extends Fragment {
                 }.getType());
 
                 mSortListData.clear();
-                for (SortListDataMode sortListDataMode : sortDataArray) {
-                    mSortListData.add(sortListDataMode);
-                }
+                mSortListData.addAll(sortDataArray);
             } else {
                 Toast.makeText(getContext(), "更新数据失败", Toast.LENGTH_SHORT).show();
                 mSortListData.clear();

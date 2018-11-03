@@ -33,11 +33,18 @@
     <string name="recommend_mind_top_mind_navigation_hottest_btn_text">HOTTEST</string>
     <string name="recommend_mind_top_mind_navigation_newest_btn_text">NEWEST</string>
 
-    <string name="search_hint_text">Search product or solution what you want</string>
+    <string name="search_product_hint_text">Search product or solution what you want</string>
+    <string name="search_any_hint_text">Search product / solution / name / mind what you want</string>
     <string name="search_bar_cancel_btn_text">Cancel</string>
     <string name="search_bar_keyboard_enter_text">Search</string>
     <string name="search_clear_history_text">Clean Search History</string>
     <string name="search_history_empty_text">No search records are currently available</string>
+    <string name="search_result_list_activity_top_navigation_title_text">\'%1$s\' search result</string>
+    <string name="search_result_list_activity_top_sort_solution_btn_text">Solution</string>
+    <string name="search_result_list_activity_top_sort_product_btn_text">Product</string>
+    <string name="search_result_list_activity_top_sort_subject_btn_text">Subject</string>
+    <string name="search_result_list_activity_top_sort_action_btn_text">Action</string>
+    <string name="search_result_list_activity_top_sort_person_btn_text">User</string>
 
     <string name="sort_navigation_all_text">All</string>
     <string name="sort_level_one_title_more_text">more</string>

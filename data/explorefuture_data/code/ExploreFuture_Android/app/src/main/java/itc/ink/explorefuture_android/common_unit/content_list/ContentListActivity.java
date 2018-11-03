@@ -6,13 +6,13 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -46,6 +46,20 @@ public class ContentListActivity extends Activity {
     public static final String KEY_SORT_ID="sort_id";
     public static final String KEY_SORT_TITLE="sort_title";
 
+    private final int RANK_STATE_DOWN=1;
+    private final int RANK_STATE_UP=2;
+    private final int RANK_STATE_NONE=0;
+    private int rankUniversalState=RANK_STATE_DOWN,rankHotState=RANK_STATE_NONE,rankSalesState=RANK_STATE_NONE,rankEvaluateState=RANK_STATE_NONE;
+    private ConstraintLayout rankUniversalBtnLayout;
+    private TextView rankUniversalBtn;
+    private ConstraintLayout rankHotBtnLayout;
+    private TextView rankHotBtn;
+    private ConstraintLayout rankSalesBtnLayout;
+    private TextView rankSalesBtn;
+    private ConstraintLayout rankEvaluateBtnLayout;
+    private TextView rankEvaluateBtn;
+    private ConstraintLayout filterBtnLayout;
+
     private RecyclerView contentRecyclerView;
     private RecyclerView.LayoutManager contentRvLayoutManager;
     private ArrayList<ContentListDataMode> contentListDataArray=new ArrayList<>();
@@ -58,7 +72,7 @@ public class ContentListActivity extends Activity {
         Intent intent=getIntent();
         String sort_id=intent.getStringExtra(KEY_SORT_ID);
         String sort_title=intent.getStringExtra(KEY_SORT_TITLE);
-        Toast.makeText(ContentListActivity.this,"Sort ID:"+sort_id+"\nSort Title:"+sort_title,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(ContentListActivity.this,"Sort ID:"+sort_id+"\nSort Title:"+sort_title,Toast.LENGTH_SHORT).show();
 
         //Get Content Data
         UpdateAsyncTask updateAsyncTask = new UpdateAsyncTask(ContentListActivity.this);
@@ -76,6 +90,21 @@ public class ContentListActivity extends Activity {
         TextView topNavigationTitle=findViewById(R.id.content_List_Activity_Top_Navigation_Title_Text);
         topNavigationTitle.setText(sort_title);
 
+        RankBtnLayoutClickListener rankBtnLayoutClickListener=new RankBtnLayoutClickListener();
+        rankUniversalBtnLayout=findViewById(R.id.content_List_Activity_Top_Rank_Universal_Btn_Layout);
+        rankUniversalBtnLayout.setOnClickListener(rankBtnLayoutClickListener);
+        rankUniversalBtn=findViewById(R.id.content_List_Activity_Top_Rank_Universal_Btn);
+        rankHotBtnLayout=findViewById(R.id.content_List_Activity_Top_Rank_Hot_Btn_Layout);
+        rankHotBtnLayout.setOnClickListener(rankBtnLayoutClickListener);
+        rankHotBtn=findViewById(R.id.content_List_Activity_Top_Rank_Hot_Btn);
+        rankSalesBtnLayout=findViewById(R.id.content_List_Activity_Top_Rank_Sales_Btn_Layout);
+        rankSalesBtnLayout.setOnClickListener(rankBtnLayoutClickListener);
+        rankSalesBtn=findViewById(R.id.content_List_Activity_Top_Rank_Sales_Btn);
+        rankEvaluateBtnLayout=findViewById(R.id.content_List_Activity_Top_Rank_Evaluate_Btn_Layout);
+        rankEvaluateBtnLayout.setOnClickListener(rankBtnLayoutClickListener);
+        rankEvaluateBtn=findViewById(R.id.content_List_Activity_Top_Rank_Evaluate_Btn);
+        filterBtnLayout=findViewById(R.id.content_List_Activity_Top_Filter_Btn_Layout);
+
         contentRecyclerView=findViewById(R.id.content_List_Activity_RecyclerView);
         contentListDataAdapter = new ContentListDataAdapter(this, contentListDataArray);
         contentRecyclerView.setAdapter(contentListDataAdapter);
@@ -87,6 +116,40 @@ public class ContentListActivity extends Activity {
         @Override
         public void onClick(View view) {
             finish();
+        }
+    }
+
+    class RankBtnLayoutClickListener implements View.OnClickListener{
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()){
+                case R.id.content_List_Activity_Top_Rank_Universal_Btn_Layout:
+                    updateBtnPaddingDrawable(rankUniversalBtn,(++rankUniversalState)%3);
+                    break;
+                case R.id.content_List_Activity_Top_Rank_Hot_Btn_Layout:
+                    updateBtnPaddingDrawable(rankHotBtn,(++rankHotState)%3);
+                    break;
+                case R.id.content_List_Activity_Top_Rank_Sales_Btn_Layout:
+                    updateBtnPaddingDrawable(rankSalesBtn,(++rankSalesState)%3);
+                    break;
+                case R.id.content_List_Activity_Top_Rank_Evaluate_Btn_Layout:
+                    updateBtnPaddingDrawable(rankEvaluateBtn,(++rankEvaluateState)%3);
+                    break;
+            }
+        }
+
+        private void updateBtnPaddingDrawable(TextView textBtn,int State){
+            switch (State){
+                case RANK_STATE_NONE:
+                    textBtn.setCompoundDrawablesWithIntrinsicBounds(null,null,getResources().getDrawable(R.drawable.vector_drawable_rank_no,null),null);
+                    break;
+                case RANK_STATE_UP:
+                    textBtn.setCompoundDrawablesWithIntrinsicBounds(null,null,getResources().getDrawable(R.drawable.vector_drawable_rank_up,null),null);
+                    break;
+                case RANK_STATE_DOWN:
+                    textBtn.setCompoundDrawablesWithIntrinsicBounds(null,null,getResources().getDrawable(R.drawable.vector_drawable_rank_down,null),null);
+                    break;
+            }
         }
     }
 
@@ -125,11 +188,12 @@ public class ContentListActivity extends Activity {
                 dataArray = gson.fromJson(contentDataJsonArray, new TypeToken<List<ContentListDataMode>>() {
                 }.getType());
 
-
                 contentListDataArray.clear();
-                for (ContentListDataMode contentListDataMode : dataArray) {
-                    contentListDataArray.add(contentListDataMode);
+
+                for (int i = 0; i < 20; i++) {
+                    contentListDataArray.addAll(dataArray);
                 }
+
                 contentListDataAdapter.notifyDataSetChanged();
             }
         }

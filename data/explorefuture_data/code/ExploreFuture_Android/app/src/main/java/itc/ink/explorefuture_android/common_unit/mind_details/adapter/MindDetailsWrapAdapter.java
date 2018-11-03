@@ -313,9 +313,7 @@ public class MindDetailsWrapAdapter extends RecyclerView.Adapter<MindDetailsWrap
                 }.getType());
 
                 commentDataArray.clear();
-                for (CommentDataMode commentDataMode : dataArray) {
-                    commentDataArray.add(commentDataMode);
-                }
+                commentDataArray.addAll(dataArray);
                 mMindCommentDataAdapter.notifyDataSetChanged();
             }
         }

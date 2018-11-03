@@ -288,9 +288,7 @@ public class MindWrapAdapter extends RecyclerView.Adapter<MindWrapAdapter.Wrappe
                 }.getType());
 
                 mMindListData.clear();
-                for (MindListDataMode mindListDataMode : mindDataArray) {
-                    mMindListData.add(mindListDataMode);
-                }
+                mMindListData.addAll(mindDataArray);
                 mMindDataAdapter.notifyDataSetChanged();
             }
         }

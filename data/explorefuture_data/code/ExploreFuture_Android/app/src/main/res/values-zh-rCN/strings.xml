@@ -33,11 +33,18 @@
     <string name="recommend_mind_top_mind_navigation_hottest_btn_text">最热</string>
     <string name="recommend_mind_top_mind_navigation_newest_btn_text">最新</string>
 
-    <string name="search_hint_text">查找你想要的产品或方案</string>
+    <string name="search_product_hint_text">查找你想要的产品或方案</string>
+    <string name="search_any_hint_text">查找方案、产品、人名或构想</string>
     <string name="search_bar_cancel_btn_text">取消</string>
     <string name="search_bar_keyboard_enter_text">搜索</string>
     <string name="search_clear_history_text">清除搜索历史</string>
     <string name="search_history_empty_text">当前没有任何搜索记录</string>
+    <string name="search_result_list_activity_top_navigation_title_text">"%1$s"的搜索结果</string>
+    <string name="search_result_list_activity_top_sort_solution_btn_text">方案</string>
+    <string name="search_result_list_activity_top_sort_product_btn_text">产品</string>
+    <string name="search_result_list_activity_top_sort_subject_btn_text">专题</string>
+    <string name="search_result_list_activity_top_sort_action_btn_text">活动</string>
+    <string name="search_result_list_activity_top_sort_person_btn_text">用户</string>
 
     <string name="sort_navigation_all_text">全部</string>
     <string name="sort_level_one_title_more_text">更多</string>

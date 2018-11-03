@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SearchBar">
+        <attr name="type">
+            <flag name="product" value="0" />
+            <flag name="any" value="1" />
+        </attr>
+        <attr name="search_box_hint" format="string" />
+    </declare-styleable>
+</resources>

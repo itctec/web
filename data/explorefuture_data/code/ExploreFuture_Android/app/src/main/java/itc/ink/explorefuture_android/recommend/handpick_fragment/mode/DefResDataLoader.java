@@ -24,6 +24,7 @@ import java.util.List;
 
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateMode;
+import itc.ink.explorefuture_android.common_unit.content_list.mode.ContentListDataMode;
 import itc.ink.explorefuture_android.login.LoginStateInstance;
 import itc.ink.explorefuture_android.recommend.handpick_fragment.mode.DataLoad;
 import itc.ink.explorefuture_android.recommend.handpick_fragment.mode.mode_action.ActionListDataModel;
@@ -165,8 +166,8 @@ public class DefResDataLoader implements DataLoad.OutService {
 
     @Override
     public Object loadInterestData() {
-        ArrayList<InterestDataModel> interestDataArray;
-        ArrayList<InterestDataModel> interestDataArrays = new ArrayList<>();
+        ArrayList<ContentListDataMode> interestDataArray;
+        ArrayList<ContentListDataMode> interestDataArrays = new ArrayList<>();
 
         JsonReader jsonReader = new JsonReader(new StringReader(RECOMMEND_HANDPICK_JSON_DATA_STR));
         jsonReader.setLenient(true);
@@ -175,7 +176,7 @@ public class DefResDataLoader implements DataLoad.OutService {
         JsonObject rootObj = jsonElement.getAsJsonObject();
         JsonArray interestListDataJsonArray = rootObj.getAsJsonArray(JSON_DATA_KEY_INTEREST_LIST);
         Gson gson = new Gson();
-        interestDataArray = gson.fromJson(interestListDataJsonArray, new TypeToken<List<InterestDataModel>>() {
+        interestDataArray = gson.fromJson(interestListDataJsonArray, new TypeToken<List<ContentListDataMode>>() {
         }.getType());
 
         for (int i = 0; i < 20; i++) {

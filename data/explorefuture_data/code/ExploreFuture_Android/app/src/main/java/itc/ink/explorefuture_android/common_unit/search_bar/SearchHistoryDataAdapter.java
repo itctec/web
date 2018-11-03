@@ -1,6 +1,7 @@
 package itc.ink.explorefuture_android.common_unit.search_bar;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import java.util.List;
 import itc.ink.explorefuture_android.R;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.app.utils.SQLiteDBHelper;
+import itc.ink.explorefuture_android.common_unit.search_result.SearchResultActivity;
 
 /**
  * Created by yangwenjiang on 2018/9/14.
@@ -96,7 +98,9 @@ public class SearchHistoryDataAdapter extends RecyclerView.Adapter<SearchHistory
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(getContext(),contentStr+"被搜索",Toast.LENGTH_SHORT).show();
+            Intent intent =new Intent(getContext(), SearchResultActivity.class);
+            intent.putExtra(SearchResultActivity.KEY_SEARCH_TITLE,contentStr);
+            getContext().startActivity(intent);
         }
     }
 

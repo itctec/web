@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:itc="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <com.youth.banner.Banner
@@ -33,7 +34,9 @@
         app:layout_constraintTop_toBottomOf="@id/find_Status_Bar_Horizontal_Guideline"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"
+        itc:type="any"
+        itc:search_box_hint="@string/search_any_hint_text"/>
     <TextView
         android:id="@+id/find_Hot_Search_Title"
         android:text="@string/find_hot_search_title_text"

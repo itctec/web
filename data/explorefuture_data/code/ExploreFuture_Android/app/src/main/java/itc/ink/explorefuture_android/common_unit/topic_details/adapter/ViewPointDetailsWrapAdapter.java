@@ -209,9 +209,7 @@ public class ViewPointDetailsWrapAdapter extends RecyclerView.Adapter<ViewPointD
                 }.getType());
 
                 commentDataArray.clear();
-                for (CommentDataMode commentDataMode : dataArray) {
-                    commentDataArray.add(commentDataMode);
-                }
+                commentDataArray.addAll(dataArray);
                 mMindCommentDataAdapter.notifyDataSetChanged();
             }
         }

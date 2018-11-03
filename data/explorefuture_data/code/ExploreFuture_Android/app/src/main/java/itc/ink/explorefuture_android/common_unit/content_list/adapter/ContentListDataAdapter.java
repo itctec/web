@@ -69,7 +69,14 @@ public class ContentListDataAdapter extends RecyclerView.Adapter<ContentListData
         holder.listItemSummary.setText(contentDataItem.getSummary());
         addContentTag(holder,contentDataItem.getTag().split(" "));
         holder.listItemSupportNum.setText(contentDataItem.getSupport_num());
-        holder.listItemPrice.setText(contentDataItem.getPrice());
+        if(contentDataItem.getPrice()!=null&&!contentDataItem.getPrice().isEmpty()){
+            holder.listItemPrice.setVisibility(View.VISIBLE);
+            holder.listItemPrice.setText(contentDataItem.getPrice());
+        }else{
+            holder.listItemPrice.setVisibility(View.GONE);
+            holder.listItemPrice.setText("00.00");
+        }
+
 
         holder.itemView.setTag(mData.get(position).getId());
         holder.itemView.setOnClickListener(itemClickListener);
@@ -85,6 +92,7 @@ public class ContentListDataAdapter extends RecyclerView.Adapter<ContentListData
         LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, UnitConversionUtil.dip2px(getContext(),12));
         layoutParams.rightMargin=UnitConversionUtil.dip2px(getContext(),10);
         layoutParams.gravity= Gravity.CENTER;
+        holder.listItemTagLayout.removeAllViews();
 
         for(String tagStr:tagArray){
             TextView tagText=new TextView(getContext());

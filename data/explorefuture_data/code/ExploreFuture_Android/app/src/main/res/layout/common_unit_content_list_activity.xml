@@ -50,14 +50,15 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/content_List_Activity_Top_Navigation">
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/content_List_Activity_Top_Rank_Universal_Btn"
+            android:id="@+id/content_List_Activity_Top_Rank_Universal_Btn_Layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/content_List_Activity_Top_Rank_Bar_BottomLine"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/content_List_Activity_Top_Rank_Hot_Btn">
+            app:layout_constraintRight_toLeftOf="@+id/content_List_Activity_Top_Rank_Hot_Btn_Layout">
             <TextView
+                android:id="@+id/content_List_Activity_Top_Rank_Universal_Btn"
                 android:text="@string/content_list_activity_top_filter_universal_btn_text"
                 android:textColor="@color/sort_top_navigation_text_selected_color"
                 android:textSize="12dp"
@@ -71,14 +72,15 @@
                 app:layout_constraintRight_toRightOf="parent"/>
         </android.support.constraint.ConstraintLayout>
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/content_List_Activity_Top_Rank_Hot_Btn"
+            android:id="@+id/content_List_Activity_Top_Rank_Hot_Btn_Layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/content_List_Activity_Top_Rank_Bar_BottomLine"
-            app:layout_constraintLeft_toRightOf="@id/content_List_Activity_Top_Rank_Universal_Btn"
-            app:layout_constraintRight_toLeftOf="@+id/content_List_Activity_Top_Rank_Sales_Btn">
+            app:layout_constraintLeft_toRightOf="@id/content_List_Activity_Top_Rank_Universal_Btn_Layout"
+            app:layout_constraintRight_toLeftOf="@+id/content_List_Activity_Top_Rank_Sales_Btn_Layout">
             <TextView
+                android:id="@+id/content_List_Activity_Top_Rank_Hot_Btn"
                 android:text="@string/content_list_activity_top_filter_hot_btn_text"
                 android:textColor="@color/sort_top_navigation_text_selected_color"
                 android:textSize="12dp"
@@ -92,14 +94,15 @@
                 app:layout_constraintRight_toRightOf="parent"/>
         </android.support.constraint.ConstraintLayout>
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/content_List_Activity_Top_Rank_Sales_Btn"
+            android:id="@+id/content_List_Activity_Top_Rank_Sales_Btn_Layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/content_List_Activity_Top_Rank_Bar_BottomLine"
-            app:layout_constraintLeft_toRightOf="@+id/content_List_Activity_Top_Rank_Hot_Btn"
-            app:layout_constraintRight_toLeftOf="@+id/content_List_Activity_Top_Rank_Evaluate_Btn">
+            app:layout_constraintLeft_toRightOf="@+id/content_List_Activity_Top_Rank_Hot_Btn_Layout"
+            app:layout_constraintRight_toLeftOf="@+id/content_List_Activity_Top_Rank_Evaluate_Btn_Layout">
             <TextView
+                android:id="@+id/content_List_Activity_Top_Rank_Sales_Btn"
                 android:text="@string/content_list_activity_top_filter_sales_btn_text"
                 android:textColor="@color/sort_top_navigation_text_selected_color"
                 android:textSize="12dp"
@@ -113,14 +116,15 @@
                 app:layout_constraintRight_toRightOf="parent"/>
         </android.support.constraint.ConstraintLayout>
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/content_List_Activity_Top_Rank_Evaluate_Btn"
+            android:id="@+id/content_List_Activity_Top_Rank_Evaluate_Btn_Layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/content_List_Activity_Top_Rank_Bar_BottomLine"
-            app:layout_constraintLeft_toRightOf="@+id/content_List_Activity_Top_Rank_Sales_Btn"
-            app:layout_constraintRight_toLeftOf="@+id/content_List_Activity_Top_Filter_Btn">
+            app:layout_constraintLeft_toRightOf="@+id/content_List_Activity_Top_Rank_Sales_Btn_Layout"
+            app:layout_constraintRight_toLeftOf="@+id/content_List_Activity_Top_Filter_Btn_Layout">
             <TextView
+                android:id="@+id/content_List_Activity_Top_Rank_Evaluate_Btn"
                 android:text="@string/content_list_activity_top_filter_evaluate_btn_text"
                 android:textColor="@color/sort_top_navigation_text_selected_color"
                 android:textSize="12dp"
@@ -134,12 +138,12 @@
                 app:layout_constraintRight_toRightOf="parent"/>
         </android.support.constraint.ConstraintLayout>
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/content_List_Activity_Top_Filter_Btn"
+            android:id="@+id/content_List_Activity_Top_Filter_Btn_Layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/content_List_Activity_Top_Rank_Bar_BottomLine"
-            app:layout_constraintLeft_toRightOf="@+id/content_List_Activity_Top_Rank_Evaluate_Btn"
+            app:layout_constraintLeft_toRightOf="@+id/content_List_Activity_Top_Rank_Evaluate_Btn_Layout"
             app:layout_constraintRight_toRightOf="parent">
             <View
                 android:layout_width="@dimen/app_navigation_bg_line_width"

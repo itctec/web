@@ -77,7 +77,7 @@ public class ProductDelegateImplement implements HandPickWrapperAdapter.Delegate
         Glide.with(mContext).load(productData.get(2).getImageurl_right()).apply(options).into(mHolder.productSubjectSortTwoRightImageImageView);
 
         mHolder.productSubjectBannerOneTitleTextView.setText(productData.get(3).getTitle());
-        mHolder.productSubjectBannerOneBanner.setOnBannerListener(new ProductSortBannerListener(productData.get(3)));
+        mHolder.productSubjectBannerOneBanner.setOnBannerListener(new ProductBannerListener(productData.get(3)));
         mHolder.productSubjectBannerOneBanner.setBannerStyle(BannerConfig.NOT_INDICATOR);
         mHolder.productSubjectBannerOneBanner.setImageLoader(new MyLoader());
         List<Map<String, String>> productSubjectBannerOneImageList = new ArrayList<Map<String, String>>();
@@ -94,7 +94,7 @@ public class ProductDelegateImplement implements HandPickWrapperAdapter.Delegate
         mHolder.productSubjectBannerOneBanner.isAutoPlay(true).start();
 
         mHolder.productSubjectBannerTwoTitleTextView.setText(productData.get(4).getTitle());
-        mHolder.productSubjectBannerTwoBanner.setOnBannerListener(new ProductSortBannerListener(productData.get(4)));
+        mHolder.productSubjectBannerTwoBanner.setOnBannerListener(new ProductBannerListener(productData.get(4)));
         mHolder.productSubjectBannerTwoBanner.setBannerStyle(BannerConfig.NOT_INDICATOR);
         mHolder.productSubjectBannerTwoBanner.setImageLoader(new MyLoader());
         List<Map<String, String>> productSubjectBannerTwoImageList = new ArrayList<Map<String, String>>();
@@ -153,18 +153,17 @@ public class ProductDelegateImplement implements HandPickWrapperAdapter.Delegate
         }
     }
 
-    class ProductSortBannerListener implements OnBannerListener{
+    class ProductBannerListener implements OnBannerListener{
         ProductDataMode productDataItem;
 
-        public ProductSortBannerListener(ProductDataMode productDataItem) {
+        public ProductBannerListener(ProductDataMode productDataItem) {
             this.productDataItem = productDataItem;
         }
 
         @Override
         public void OnBannerClick(int position) {
-            Intent intent =new Intent(getContext(), ContentListActivity.class);
-            intent.putExtra(ContentListActivity.KEY_SORT_ID,productDataItem.getId());
-            intent.putExtra(ContentListActivity.KEY_SORT_TITLE,productDataItem.getTitle());
+            Intent intent = new Intent(getContext(), ContentDetailsActivity.class);
+            intent.putExtra(ContentDetailsActivity.KEY_CONTENT_ID, productDataItem.getId());
             getContext().startActivity(intent);
         }
     }

@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:itc="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="@dimen/app_status_bar_height">
     <itc.ink.explorefuture_android.common_unit.search_bar.SearchBar
         android:id="@+id/sort_Top_Search_Bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        itc:type="product"
+        itc:search_box_hint="@string/search_product_hint_text"/>
     <android.support.constraint.Guideline
         android:id="@+id/sort_Top_Bar_Bottom_Horizontal_Guideline"
         android:layout_width="wrap_content"

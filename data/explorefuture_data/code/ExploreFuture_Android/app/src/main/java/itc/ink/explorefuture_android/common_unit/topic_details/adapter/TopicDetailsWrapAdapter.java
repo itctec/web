@@ -187,9 +187,7 @@ public class TopicDetailsWrapAdapter extends RecyclerView.Adapter<TopicDetailsWr
                 }.getType());
 
                 viewPointDataArray.clear();
-                for (ViewPointDataMode viewPointDataMode : dataArray) {
-                    viewPointDataArray.add(viewPointDataMode);
-                }
+                viewPointDataArray.addAll(dataArray);
                 mTopicViewPointDataAdapter.notifyDataSetChanged();
             }
         }

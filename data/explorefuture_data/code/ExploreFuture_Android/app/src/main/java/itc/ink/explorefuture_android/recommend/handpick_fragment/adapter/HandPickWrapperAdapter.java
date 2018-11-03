@@ -13,6 +13,7 @@ import com.youth.banner.Banner;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import itc.ink.explorefuture_android.R;
+import itc.ink.explorefuture_android.common_unit.content_list.mode.ContentListDataMode;
 import itc.ink.explorefuture_android.recommend.handpick_fragment.adapter.adapter_action.ActionDataAdapter;
 import itc.ink.explorefuture_android.recommend.handpick_fragment.adapter.adapter_interest.InterestDataAdapter;
 import itc.ink.explorefuture_android.recommend.handpick_fragment.adapter.implement.ActionSubjectDelegateImplement;
@@ -46,7 +47,7 @@ public class HandPickWrapperAdapter extends RecyclerView.Adapter<HandPickWrapper
                                   ArrayList<ActionSubjectDataMode> mActionSubjectData,
                                   ArrayList<ActionListDataModel> mActionListData,
                                   ArrayList<ProductDataMode> mProductData,
-                                  ArrayList<InterestDataModel> mInterestListData) {
+                                  ArrayList<ContentListDataMode> mInterestListData) {
         this.mWeakContextReference = new WeakReference<>(mContext);
         this.mBannerData = mBannerData;
         this.mSolutionData = mSolutionData;

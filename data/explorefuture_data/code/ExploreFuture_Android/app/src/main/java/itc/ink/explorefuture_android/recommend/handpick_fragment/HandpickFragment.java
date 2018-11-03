@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import itc.ink.explorefuture_android.R;
+import itc.ink.explorefuture_android.common_unit.content_list.mode.ContentListDataMode;
 import itc.ink.explorefuture_android.recommend.handpick_fragment.adapter.HandPickWrapperAdapter;
 import itc.ink.explorefuture_android.recommend.handpick_fragment.mode.DataLoad;
 import itc.ink.explorefuture_android.recommend.handpick_fragment.mode.mode_action.ActionListDataModel;
@@ -36,7 +37,7 @@ public class HandpickFragment extends Fragment {
     private ArrayList<ActionSubjectDataMode> mActionSubjectData;
     private ArrayList<ActionListDataModel> mActionListData;
     private ArrayList<ProductDataMode> mProductData;
-    private ArrayList<InterestDataModel> mInterestListData;
+    private ArrayList<ContentListDataMode> mInterestListData;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,7 +51,7 @@ public class HandpickFragment extends Fragment {
             mActionSubjectData = (ArrayList<ActionSubjectDataMode>) mDataLoad.outService.loadActionSubjectData();
             mActionListData = (ArrayList<ActionListDataModel>) mDataLoad.outService.loadActionListData();
             mProductData = (ArrayList<ProductDataMode>) mDataLoad.outService.loadProductData();
-            mInterestListData = (ArrayList<InterestDataModel>) mDataLoad.outService.loadInterestData();
+            mInterestListData = (ArrayList<ContentListDataMode>) mDataLoad.outService.loadInterestData();
             //Judge Data Count
             if(mBannerData.size()>=1&&
                     mSolutionData.size()>=12&&

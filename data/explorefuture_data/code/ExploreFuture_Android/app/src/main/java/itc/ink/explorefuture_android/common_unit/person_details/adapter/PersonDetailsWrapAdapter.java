@@ -214,9 +214,7 @@ public class PersonDetailsWrapAdapter extends RecyclerView.Adapter<PersonDetails
                 ArrayList<MindListDataMode> mindDataArray = gson.fromJson(mindDataJsonArray, new TypeToken<List<MindListDataMode>>() {
                 }.getType());
 
-                for (MindListDataMode mindListDataMode : mindDataArray) {
-                    mMindListData.add(mindListDataMode);
-                }
+                mMindListData.addAll(mindDataArray);
                 notifyDataSetChanged();
             }
         }

@@ -29,7 +29,7 @@
             app:layout_constraintLeft_toLeftOf="parent"/>
         <EditText
             android:id="@+id/search_Bar_Edit"
-            android:hint="@string/search_hint_text"
+            android:hint="@string/search_product_hint_text"
             android:textColorHint="@color/search_bar_edit_text_color"
             android:textSize="@dimen/search_bar_edit_text_size"
             android:textColor="@color/search_bar_edit_text_color"

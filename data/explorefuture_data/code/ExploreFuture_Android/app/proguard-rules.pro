@@ -28,6 +28,7 @@
 -keep class itc.ink.explorefuture_android.find.mode** { *; }
 -keep class itc.ink.explorefuture_android.common_unit.mind_details.mode** { *; }
 -keep class itc.ink.explorefuture_android.common_unit.topic_details.mode** { *; }
+-keep class itc.ink.explorefuture_android.common_unit.content_list.mode** { *; }
 
 -keep class itc.ink.explorefuture_android.common_unit.mind_recyclerview.mode** { *; }
 

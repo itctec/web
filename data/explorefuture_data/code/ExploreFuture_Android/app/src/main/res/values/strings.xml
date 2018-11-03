@@ -111,6 +111,11 @@
     <string name="login_activity_new_user_register_btn_text">New User Register</string>
 
     <string name="content_details_top_navigation_title_text">Details</string>
+    <string name="content_list_activity_top_navigation_title_text">Product/Solution List</string>
+    <string name="content_list_activity_top_filter_universal_btn_text">Universal</string>
+    <string name="content_list_activity_top_filter_hot_btn_text">Hot</string>
+    <string name="content_list_activity_top_filter_sales_btn_text">Sales</string>
+    <string name="content_list_activity_top_filter_evaluate_btn_text">Evaluate</string>
 
     <string name="mind_details_comment_count_text">Comment %1$s item</string>
     <string name="mind_details_bottom_bar_retransmission_btn_text">Retransmission</string>

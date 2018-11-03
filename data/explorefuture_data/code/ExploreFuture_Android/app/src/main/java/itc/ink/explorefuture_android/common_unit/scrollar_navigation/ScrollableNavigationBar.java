@@ -15,6 +15,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import itc.ink.explorefuture_android.R;
+import itc.ink.explorefuture_android.app.utils.UnitConversionUtil;
 import itc.ink.explorefuture_android.sort.mode.DataLoad;
 import itc.ink.explorefuture_android.sort.mode.mode_navigation.NavigationBarDataMode;
 import itc.ink.explorefuture_android.sort.mode.mode_sort.SortListDataMode;
@@ -50,6 +51,7 @@ public class ScrollableNavigationBar extends ConstraintLayout {
             TextView titleItemTextView = new TextView(context);
             titleItemTextView.setTag(navigationBarDataMode.getId());
             titleItemTextView.setText(navigationBarDataMode.getTitle());
+            titleItemTextView.setTextSize(13);
             titleItemTextView.setTextColor(Color.GRAY);
             titleItemTextView.setGravity(Gravity.CENTER);
             LinearLayout.LayoutParams titleItemLayoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);

@@ -22,6 +22,7 @@ import itc.ink.explorefuture_android.R;
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.common_unit.content_details.ContentDetailsActivity;
+import itc.ink.explorefuture_android.common_unit.content_list.ContentListActivity;
 import itc.ink.explorefuture_android.common_unit.image_view.ImageViewerActivity;
 import itc.ink.explorefuture_android.sort.mode.mode_sort.SubSortListDataMode;
 
@@ -57,7 +58,7 @@ public class SubSortDataAdapter extends RecyclerView.Adapter<SubSortDataAdapter.
     public void onBindViewHolder(VH holder, final int position) {
         SubSortListDataMode subSortListDataMode=mData.get(position);
 
-        holder.subSortLayout.setTag(subSortListDataMode.getSort_id());
+        holder.subSortLayout.setTag(subSortListDataMode);
         holder.subSortLayout.setOnClickListener(subSortClickListener);
         holder.subSortTitleTextView.setText(subSortListDataMode.getSort_title());
         holder.subSortSummaryTextView.setText(subSortListDataMode.getSort_summary());
@@ -97,9 +98,10 @@ public class SubSortDataAdapter extends RecyclerView.Adapter<SubSortDataAdapter.
     class SubSortClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            String content_id = (String) view.getTag();
-            Intent intent = new Intent(getContext(), ContentDetailsActivity.class);
-            intent.putExtra(ContentDetailsActivity.KEY_CONTENT_ID, content_id);
+            SubSortListDataMode subSortListDataMode= (SubSortListDataMode) view.getTag();
+            Intent intent =new Intent(getContext(), ContentListActivity.class);
+            intent.putExtra(ContentListActivity.KEY_SORT_ID,subSortListDataMode.getSort_id());
+            intent.putExtra(ContentListActivity.KEY_SORT_TITLE,subSortListDataMode.getSort_title());
             getContext().startActivity(intent);
         }
     }

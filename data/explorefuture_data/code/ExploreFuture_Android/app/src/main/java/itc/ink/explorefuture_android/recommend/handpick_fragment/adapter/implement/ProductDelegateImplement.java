@@ -21,6 +21,7 @@ import java.util.Map;
 
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
 import itc.ink.explorefuture_android.common_unit.content_details.ContentDetailsActivity;
+import itc.ink.explorefuture_android.common_unit.content_list.ContentListActivity;
 import itc.ink.explorefuture_android.recommend.handpick_fragment.adapter.HandPickWrapperAdapter;
 import itc.ink.explorefuture_android.recommend.handpick_fragment.mode.mode_product.ProductDataMode;
 
@@ -57,7 +58,7 @@ public class ProductDelegateImplement implements HandPickWrapperAdapter.Delegate
         Glide.with(mContext).load(productData.get(0).getImageurl()).apply(options).into(mHolder.productLevelAImageImageView);
 
         ProductSortClickListener productSortClickListener = new ProductSortClickListener();
-        mHolder.productSubjectSortOneLayout.setTag(productData.get(1).getId());
+        mHolder.productSubjectSortOneLayout.setTag(productData.get(1));
         mHolder.productSubjectSortOneLayout.setOnClickListener(productSortClickListener);
         mHolder.productSubjectSortOneTitleTextView.setText(productData.get(1).getTitle());
         mHolder.productSubjectSortOneSummaryTextView.setText(productData.get(1).getSummary());
@@ -66,7 +67,7 @@ public class ProductDelegateImplement implements HandPickWrapperAdapter.Delegate
         options.signature(new ObjectKeyCanNull(productData.get(1).getImage_right_update_datetime()).getObject());
         Glide.with(mContext).load(productData.get(1).getImageurl_right()).apply(options).into(mHolder.productSubjectSortOneRightImageImageView);
 
-        mHolder.productSubjectSortTwoLayout.setTag(productData.get(2).getId());
+        mHolder.productSubjectSortTwoLayout.setTag(productData.get(2));
         mHolder.productSubjectSortTwoLayout.setOnClickListener(productSortClickListener);
         mHolder.productSubjectSortTwoTitleTextView.setText(productData.get(2).getTitle());
         mHolder.productSubjectSortTwoSummaryTextView.setText(productData.get(2).getSummary());
@@ -76,7 +77,7 @@ public class ProductDelegateImplement implements HandPickWrapperAdapter.Delegate
         Glide.with(mContext).load(productData.get(2).getImageurl_right()).apply(options).into(mHolder.productSubjectSortTwoRightImageImageView);
 
         mHolder.productSubjectBannerOneTitleTextView.setText(productData.get(3).getTitle());
-        mHolder.productSubjectBannerOneBanner.setOnBannerListener(new ProductSortBannerListener(productData.get(3).getId()));
+        mHolder.productSubjectBannerOneBanner.setOnBannerListener(new ProductSortBannerListener(productData.get(3)));
         mHolder.productSubjectBannerOneBanner.setBannerStyle(BannerConfig.NOT_INDICATOR);
         mHolder.productSubjectBannerOneBanner.setImageLoader(new MyLoader());
         List<Map<String, String>> productSubjectBannerOneImageList = new ArrayList<Map<String, String>>();
@@ -93,7 +94,7 @@ public class ProductDelegateImplement implements HandPickWrapperAdapter.Delegate
         mHolder.productSubjectBannerOneBanner.isAutoPlay(true).start();
 
         mHolder.productSubjectBannerTwoTitleTextView.setText(productData.get(4).getTitle());
-        mHolder.productSubjectBannerTwoBanner.setOnBannerListener(new ProductSortBannerListener(productData.get(4).getId()));
+        mHolder.productSubjectBannerTwoBanner.setOnBannerListener(new ProductSortBannerListener(productData.get(4)));
         mHolder.productSubjectBannerTwoBanner.setBannerStyle(BannerConfig.NOT_INDICATOR);
         mHolder.productSubjectBannerTwoBanner.setImageLoader(new MyLoader());
         List<Map<String, String>> productSubjectBannerTwoImageList = new ArrayList<Map<String, String>>();
@@ -144,21 +145,27 @@ public class ProductDelegateImplement implements HandPickWrapperAdapter.Delegate
     class ProductSortClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            String sort_id = (String) view.getTag();
-            Toast.makeText(getContext(), "产品专题" + sort_id + "被点击", Toast.LENGTH_SHORT).show();
+            ProductDataMode productDataItem= (ProductDataMode) view.getTag();
+            Intent intent =new Intent(getContext(), ContentListActivity.class);
+            intent.putExtra(ContentListActivity.KEY_SORT_ID,productDataItem.getId());
+            intent.putExtra(ContentListActivity.KEY_SORT_TITLE,productDataItem.getTitle());
+            getContext().startActivity(intent);
         }
     }
 
     class ProductSortBannerListener implements OnBannerListener{
-        String sort_id="";
+        ProductDataMode productDataItem;
 
-        public ProductSortBannerListener(String sort_id) {
-            this.sort_id = sort_id;
+        public ProductSortBannerListener(ProductDataMode productDataItem) {
+            this.productDataItem = productDataItem;
         }
 
         @Override
         public void OnBannerClick(int position) {
-            Toast.makeText(getContext(), "产品专题" + sort_id + "被点击", Toast.LENGTH_SHORT).show();
+            Intent intent =new Intent(getContext(), ContentListActivity.class);
+            intent.putExtra(ContentListActivity.KEY_SORT_ID,productDataItem.getId());
+            intent.putExtra(ContentListActivity.KEY_SORT_TITLE,productDataItem.getTitle());
+            getContext().startActivity(intent);
         }
     }
 

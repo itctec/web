@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
 import itc.ink.explorefuture_android.common_unit.content_details.ContentDetailsActivity;
+import itc.ink.explorefuture_android.common_unit.content_list.ContentListActivity;
 import itc.ink.explorefuture_android.recommend.handpick_fragment.adapter.HandPickWrapperAdapter;
 import itc.ink.explorefuture_android.recommend.handpick_fragment.mode.mode_solution.SolutionDataMode;
 
@@ -43,7 +44,7 @@ public class SolutionDelegateImplement implements HandPickWrapperAdapter.Delegat
         mHolder.solutionRecommendTopTextView.setOnClickListener(new SolutionRecommendTopTextViewClickListener());
 
         SolutionSortClickListener solutionSortClickListener=new SolutionSortClickListener();
-        mHolder.solutionSortOneLayout.setTag(solutionData.get(0).getId());
+        mHolder.solutionSortOneLayout.setTag(solutionData.get(0));
         mHolder.solutionSortOneLayout.setOnClickListener(solutionSortClickListener);
         mHolder.solutionSortOneTitleTextView.setText(solutionData.get(0).getTitle());
         mHolder.solutionSortOneSummaryTextView.setText(solutionData.get(0).getSummary());
@@ -52,7 +53,7 @@ public class SolutionDelegateImplement implements HandPickWrapperAdapter.Delegat
         options.signature(new ObjectKeyCanNull(solutionData.get(0).getImage_right_update_datetime()).getObject());
         Glide.with(mContext).load(solutionData.get(0).getImageurl_right()).apply(options).into(mHolder.solutionSortOneRightImageImageView);
 
-        mHolder.solutionSortTwoLayout.setTag(solutionData.get(1).getId());
+        mHolder.solutionSortTwoLayout.setTag(solutionData.get(1));
         mHolder.solutionSortTwoLayout.setOnClickListener(solutionSortClickListener);
         mHolder.solutionSortTwoTitleTextView.setText(solutionData.get(1).getTitle());
         mHolder.solutionSortTwoSummaryTextView.setText(solutionData.get(1).getSummary());
@@ -61,7 +62,7 @@ public class SolutionDelegateImplement implements HandPickWrapperAdapter.Delegat
         options.signature(new ObjectKeyCanNull(solutionData.get(1).getImage_right_update_datetime()).getObject());
         Glide.with(mContext).load(solutionData.get(1).getImageurl_right()).apply(options).into(mHolder.solutionSortTwoRightImageImageView);
 
-        mHolder.solutionSortThreeLayout.setTag(solutionData.get(2).getId());
+        mHolder.solutionSortThreeLayout.setTag(solutionData.get(2));
         mHolder.solutionSortThreeLayout.setOnClickListener(solutionSortClickListener);
         mHolder.solutionSortThreeTitleTextView.setText(solutionData.get(2).getTitle());
         mHolder.solutionSortThreeSummaryTextView.setText(solutionData.get(2).getSummary());
@@ -70,7 +71,7 @@ public class SolutionDelegateImplement implements HandPickWrapperAdapter.Delegat
         options.signature(new ObjectKeyCanNull(solutionData.get(2).getImage_right_update_datetime()).getObject());
         Glide.with(mContext).load(solutionData.get(2).getImageurl_right()).apply(options).into(mHolder.solutionSortThreeRightImageImageView);
 
-        mHolder.solutionSortFourLayout.setTag(solutionData.get(3).getId());
+        mHolder.solutionSortFourLayout.setTag(solutionData.get(3));
         mHolder.solutionSortFourLayout.setOnClickListener(solutionSortClickListener);
         mHolder.solutionSortFourTitleTextView.setText(solutionData.get(3).getTitle());
         mHolder.solutionSortFourSummaryTextView.setText(solutionData.get(3).getSummary());
@@ -141,8 +142,11 @@ public class SolutionDelegateImplement implements HandPickWrapperAdapter.Delegat
     class SolutionSortClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            String sort_id=(String) view.getTag();
-            Toast.makeText(getContext(),"方案类别"+sort_id+"被点击",Toast.LENGTH_SHORT).show();
+            SolutionDataMode solutionDataItem=(SolutionDataMode) view.getTag();
+            Intent intent =new Intent(getContext(), ContentListActivity.class);
+            intent.putExtra(ContentListActivity.KEY_SORT_ID,solutionDataItem.getId());
+            intent.putExtra(ContentListActivity.KEY_SORT_TITLE,solutionDataItem.getTitle());
+            getContext().startActivity(intent);
         }
     }
 

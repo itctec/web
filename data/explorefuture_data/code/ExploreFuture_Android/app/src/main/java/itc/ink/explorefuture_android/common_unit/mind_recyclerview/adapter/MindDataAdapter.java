@@ -3,14 +3,12 @@ package itc.ink.explorefuture_android.common_unit.mind_recyclerview.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,8 +25,8 @@ import java.util.List;
 import itc.ink.explorefuture_android.R;
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
 import itc.ink.explorefuture_android.common_unit.mind_details.MindDetailsActivity;
-import itc.ink.explorefuture_android.common_unit.person_details.PersonDetailsActivity;
-import itc.ink.explorefuture_android.common_unit.person_details.mode.SimplePersonInfoDataMode;
+import itc.ink.explorefuture_android.common_unit.user_details.UserDetailsActivity;
+import itc.ink.explorefuture_android.common_unit.user_details.mode.SimpleUserInfoDataMode;
 import itc.ink.explorefuture_android.common_unit.video_view.VideoViewerActivity;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.common_unit.mind_recyclerview.mode.MindListDataMode;
@@ -67,8 +65,9 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
         MindListDataMode mindListDataItem = mMindListData.get(position);
 
         String personId = mindListDataItem.getId().split("_")[0];
-        SimplePersonInfoDataMode simplePersonInfoData=new SimplePersonInfoDataMode(personId,
+        SimpleUserInfoDataMode simplePersonInfoData=new SimpleUserInfoDataMode(personId,
                 mindListDataItem.getName(),
+                null,null,
                 mindListDataItem.getHead_portrait_image_url(),
                 mindListDataItem.getHead_portrait_image_update_datetime());
         holder.mindItemHeaderLayout.setOnClickListener(new MindItemHeaderLayoutClickListener(simplePersonInfoData));
@@ -224,16 +223,16 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
     }
 
     class MindItemHeaderLayoutClickListener implements View.OnClickListener {
-        private SimplePersonInfoDataMode simplePersonInfoData;
+        private SimpleUserInfoDataMode simplePersonInfoData;
 
-        public MindItemHeaderLayoutClickListener(SimplePersonInfoDataMode simplePersonInfoData) {
+        public MindItemHeaderLayoutClickListener(SimpleUserInfoDataMode simplePersonInfoData) {
             this.simplePersonInfoData = simplePersonInfoData;
         }
 
         @Override
         public void onClick(View view) {
-            Intent intent=new Intent(getContext(), PersonDetailsActivity.class);
-            intent.putExtra(PersonDetailsActivity.KEY_PERSON_INFO_ITEM,simplePersonInfoData);
+            Intent intent=new Intent(getContext(), UserDetailsActivity.class);
+            intent.putExtra(UserDetailsActivity.KEY_PERSON_INFO_ITEM,simplePersonInfoData);
             getContext().startActivity(intent);
 
         }

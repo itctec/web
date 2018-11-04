@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,13 +20,9 @@ import java.util.List;
 
 import itc.ink.explorefuture_android.R;
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
-import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.app.utils.UnitConversionUtil;
 import itc.ink.explorefuture_android.common_unit.content_details.ContentDetailsActivity;
 import itc.ink.explorefuture_android.common_unit.content_list.mode.ContentListDataMode;
-import itc.ink.explorefuture_android.common_unit.mind_details.mode.CommentDataMode;
-import itc.ink.explorefuture_android.common_unit.person_details.PersonDetailsActivity;
-import itc.ink.explorefuture_android.common_unit.person_details.mode.SimplePersonInfoDataMode;
 
 /**
  * Created by yangwenjiang on 2018/9/14.

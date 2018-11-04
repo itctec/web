@@ -21,8 +21,8 @@ import java.util.List;
 import itc.ink.explorefuture_android.R;
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
-import itc.ink.explorefuture_android.common_unit.person_details.PersonDetailsActivity;
-import itc.ink.explorefuture_android.common_unit.person_details.mode.SimplePersonInfoDataMode;
+import itc.ink.explorefuture_android.common_unit.user_details.UserDetailsActivity;
+import itc.ink.explorefuture_android.common_unit.user_details.mode.SimpleUserInfoDataMode;
 import itc.ink.explorefuture_android.recommend.attention_fragment.mode.mode_recommend.RecommendListDataMode;
 
 /**
@@ -107,12 +107,13 @@ public class RecommendDataAdapter extends RecyclerView.Adapter<RecommendDataAdap
 
         @Override
         public void onClick(View view) {
-            Intent intent=new Intent(getContext(), PersonDetailsActivity.class);
-            SimplePersonInfoDataMode simplePersonInfoData=new SimplePersonInfoDataMode(recommendListDataItem.getId(),
+            Intent intent=new Intent(getContext(), UserDetailsActivity.class);
+            SimpleUserInfoDataMode simplePersonInfoData=new SimpleUserInfoDataMode(recommendListDataItem.getId(),
                     recommendListDataItem.getName(),
+                    null,null,
                     recommendListDataItem.getImage_url(),
                     recommendListDataItem.getImage_update_datetime());
-            intent.putExtra(PersonDetailsActivity.KEY_PERSON_INFO_ITEM,simplePersonInfoData);
+            intent.putExtra(UserDetailsActivity.KEY_PERSON_INFO_ITEM,simplePersonInfoData);
             getContext().startActivity(intent);
         }
     }

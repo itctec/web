@@ -38,6 +38,12 @@ import itc.ink.explorefuture_android.app.utils.StatusBarUtil;
 import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateUtil;
 import itc.ink.explorefuture_android.common_unit.content_list.adapter.ContentListDataAdapter;
 import itc.ink.explorefuture_android.common_unit.content_list.mode.ContentListDataMode;
+import itc.ink.explorefuture_android.common_unit.mind_recyclerview.adapter.MindDataAdapter;
+import itc.ink.explorefuture_android.common_unit.mind_recyclerview.mode.MindListDataMode;
+import itc.ink.explorefuture_android.common_unit.user_details.adapter.SimpleUserDataAdapter;
+import itc.ink.explorefuture_android.common_unit.user_details.mode.SimpleUserInfoDataMode;
+import itc.ink.explorefuture_android.recommend.handpick_fragment.adapter.adapter_action.ActionDataAdapter;
+import itc.ink.explorefuture_android.recommend.handpick_fragment.mode.mode_action.ActionListDataModel;
 
 /**
  * Created by yangwenjiang on 2018/11/2.
@@ -63,8 +69,14 @@ public class SearchResultActivity extends Activity {
 
     private RecyclerView contentRecyclerView;
     private RecyclerView.LayoutManager contentRvLayoutManager;
-    private ArrayList<ContentListDataMode> contentListDataArray=new ArrayList<>();
+    private ArrayList<ContentListDataMode> contentListData=new ArrayList<>();
     private ContentListDataAdapter contentListDataAdapter;
+    private ArrayList<MindListDataMode> mMindListData = new ArrayList<>();
+    private MindDataAdapter mMindDataAdapter;
+    private ArrayList<ActionListDataModel> mActionListData=new ArrayList<>();
+    private ActionDataAdapter mActionDataAdapter;
+    private ArrayList<SimpleUserInfoDataMode> mUserListData=new ArrayList<>();
+    private SimpleUserDataAdapter mUserDataAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -114,10 +126,14 @@ public class SearchResultActivity extends Activity {
         sortPersonBtnLayout.setClickable(false);
 
         contentRecyclerView=findViewById(R.id.search_Result_List_Activity_RecyclerView);
-        contentListDataAdapter = new ContentListDataAdapter(this, contentListDataArray);
+        contentListDataAdapter = new ContentListDataAdapter(this, contentListData);
         contentRecyclerView.setAdapter(contentListDataAdapter);
         contentRvLayoutManager = new LinearLayoutManager(this);
         contentRecyclerView.setLayoutManager(contentRvLayoutManager);
+
+        mMindDataAdapter = new MindDataAdapter(SearchResultActivity.this, mMindListData);
+        mActionDataAdapter = new ActionDataAdapter(SearchResultActivity.this, mActionListData);
+        mUserDataAdapter = new SimpleUserDataAdapter(SearchResultActivity.this, mUserListData);
     }
 
     private <T> ArrayList<T> phraseStrToArray(Class<T> cls,String sourceStr, String arrayKey){
@@ -162,15 +178,12 @@ public class SearchResultActivity extends Activity {
                     updateNavigationTopBtnState(sortSolutionBtn);
                     navigationIndicator.setTranslationX((ExploreFutureApplication.screenWidth *0/5));
 
-                    if(contentListDataAdapter==null){
-                        contentListDataAdapter = new ContentListDataAdapter(SearchResultActivity.this, contentListDataArray);
-                    }
-
                     if(searchResultStr!=null&&!searchResultStr.isEmpty()){
-                        contentListDataArray.clear();
+                        contentListData.clear();
                         for (int i = 0; i < 20; i++) {
-                            contentListDataArray.addAll(phraseStrToArray(ContentListDataMode.class,searchResultStr,"array_content"));
+                            contentListData.addAll(phraseStrToArray(ContentListDataMode.class,searchResultStr,"array_solution"));
                         }
+                        contentRecyclerView.scrollToPosition(0);
                         contentListDataAdapter.notifyDataSetChanged();
                     }
 
@@ -179,18 +192,62 @@ public class SearchResultActivity extends Activity {
                 case R.id.search_Result_List_Activity_Top_Sort_Product_Btn_Layout:
                     updateNavigationTopBtnState(sortProductBtn);
                     navigationIndicator.setTranslationX((ExploreFutureApplication.screenWidth *1/5));
+
+                    if(searchResultStr!=null&&!searchResultStr.isEmpty()){
+                        contentListData.clear();
+                        for (int i = 0; i < 20; i++) {
+                            contentListData.addAll(phraseStrToArray(ContentListDataMode.class,searchResultStr,"array_product"));
+                        }
+                        contentRecyclerView.scrollToPosition(0);
+                        contentListDataAdapter.notifyDataSetChanged();
+                    }
+
+                    contentRecyclerView.setAdapter(contentListDataAdapter);
                     break;
                 case R.id.search_Result_List_Activity_Top_Sort_Mind_Btn_Layout:
                     updateNavigationTopBtnState(sortMindBtn);
                     navigationIndicator.setTranslationX((ExploreFutureApplication.screenWidth *2/5));
+
+                    if(searchResultStr!=null&&!searchResultStr.isEmpty()){
+                        mMindListData.clear();
+                        for (int i = 0; i < 20; i++) {
+                            mMindListData.addAll(phraseStrToArray(MindListDataMode.class,searchResultStr,"array_mind"));
+                        }
+                        contentRecyclerView.scrollToPosition(0);
+                        contentListDataAdapter.notifyDataSetChanged();
+                    }
+
+                    contentRecyclerView.setAdapter(mMindDataAdapter);
                     break;
                 case R.id.search_Result_List_Activity_Top_Sort_Action_Btn_Layout:
                     updateNavigationTopBtnState(sortActionBtn);
                     navigationIndicator.setTranslationX((ExploreFutureApplication.screenWidth *3/5));
+
+                    if(searchResultStr!=null&&!searchResultStr.isEmpty()){
+                        mActionListData.clear();
+                        for (int i = 0; i < 20; i++) {
+                            mActionListData.addAll(phraseStrToArray(ActionListDataModel.class,searchResultStr,"array_action"));
+                        }
+                        contentRecyclerView.scrollToPosition(0);
+                        mActionDataAdapter.notifyDataSetChanged();
+                    }
+
+                    contentRecyclerView.setAdapter(mActionDataAdapter);
                     break;
                 case R.id.search_Result_List_Activity_Top_Sort_Person_Btn_Layout:
                     updateNavigationTopBtnState(sortPersonBtn);
                     navigationIndicator.setTranslationX((ExploreFutureApplication.screenWidth *4/5));
+
+                    if(searchResultStr!=null&&!searchResultStr.isEmpty()){
+                        mUserListData.clear();
+                        for (int i = 0; i < 20; i++) {
+                            mUserListData.addAll(phraseStrToArray(SimpleUserInfoDataMode.class,searchResultStr,"array_user"));
+                        }
+                        contentRecyclerView.scrollToPosition(0);
+                        mUserDataAdapter.notifyDataSetChanged();
+                    }
+
+                    contentRecyclerView.setAdapter(mUserDataAdapter);
                     break;
             }
         }
@@ -208,9 +265,11 @@ public class SearchResultActivity extends Activity {
         @Override
         protected void onPostExecute(String s) {
             if (s != null && !s.isEmpty()) {
-                contentListDataArray.clear();
+                searchResultStr=s;
+
+                contentListData.clear();
                 for (int i = 0; i < 20; i++) {
-                    contentListDataArray.addAll(phraseStrToArray(ContentListDataMode.class,s,"array_content"));
+                    contentListData.addAll(phraseStrToArray(ContentListDataMode.class,s,"array_solution"));
                 }
                 contentListDataAdapter.notifyDataSetChanged();
 
@@ -219,6 +278,7 @@ public class SearchResultActivity extends Activity {
                 sortMindBtnLayout.setClickable(true);
                 sortActionBtnLayout.setClickable(true);
                 sortPersonBtnLayout.setClickable(true);
+
             }
         }
 

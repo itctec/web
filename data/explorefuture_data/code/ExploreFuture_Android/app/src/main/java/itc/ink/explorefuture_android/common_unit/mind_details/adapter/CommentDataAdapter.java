@@ -19,8 +19,8 @@ import itc.ink.explorefuture_android.R;
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.common_unit.mind_details.mode.CommentDataMode;
-import itc.ink.explorefuture_android.common_unit.person_details.PersonDetailsActivity;
-import itc.ink.explorefuture_android.common_unit.person_details.mode.SimplePersonInfoDataMode;
+import itc.ink.explorefuture_android.common_unit.user_details.UserDetailsActivity;
+import itc.ink.explorefuture_android.common_unit.user_details.mode.SimpleUserInfoDataMode;
 
 /**
  * Created by yangwenjiang on 2018/9/14.
@@ -52,8 +52,9 @@ public class CommentDataAdapter extends RecyclerView.Adapter<CommentDataAdapter.
     @Override
     public void onBindViewHolder(VH holder, final int position) {
         CommentDataMode commentDataItem=mData.get(position);
-        SimplePersonInfoDataMode simplePersonInfoData=new SimplePersonInfoDataMode(commentDataItem.getId(),
+        SimpleUserInfoDataMode simplePersonInfoData=new SimpleUserInfoDataMode(commentDataItem.getId(),
                 commentDataItem.getNickname(),
+                null,null,
                 commentDataItem.getHead_portrait_image_url(),
                 commentDataItem.getHead_portrait_image_update_datetime());
         RequestOptions options = new RequestOptions()
@@ -96,16 +97,16 @@ public class CommentDataAdapter extends RecyclerView.Adapter<CommentDataAdapter.
     }
 
     class PersonInfoViewClickListener implements View.OnClickListener {
-        private SimplePersonInfoDataMode simplePersonInfoData;
+        private SimpleUserInfoDataMode simplePersonInfoData;
 
-        public PersonInfoViewClickListener(SimplePersonInfoDataMode simplePersonInfoData) {
+        public PersonInfoViewClickListener(SimpleUserInfoDataMode simplePersonInfoData) {
             this.simplePersonInfoData = simplePersonInfoData;
         }
 
         @Override
         public void onClick(View view) {
-            Intent intent=new Intent(getContext(), PersonDetailsActivity.class);
-            intent.putExtra(PersonDetailsActivity.KEY_PERSON_INFO_ITEM,simplePersonInfoData);
+            Intent intent=new Intent(getContext(), UserDetailsActivity.class);
+            intent.putExtra(UserDetailsActivity.KEY_PERSON_INFO_ITEM,simplePersonInfoData);
             getContext().startActivity(intent);
         }
     }

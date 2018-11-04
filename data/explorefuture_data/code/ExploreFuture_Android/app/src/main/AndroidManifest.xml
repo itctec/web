@@ -90,7 +90,7 @@
             android:theme="@style/DefActivityTheme"
             android:windowSoftInputMode="adjustResize"/>
         <activity
-            android:name=".common_unit.person_details.PersonDetailsActivity"
+            android:name=".common_unit.user_details.UserDetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DefActivityTheme"/>
         <activity

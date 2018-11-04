@@ -44,8 +44,8 @@ import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.common_unit.mind_details.mode.CommentDataMode;
 import itc.ink.explorefuture_android.common_unit.mind_recyclerview.adapter.MindItemImageDataAdapter;
 import itc.ink.explorefuture_android.common_unit.mind_recyclerview.mode.MindListDataMode;
-import itc.ink.explorefuture_android.common_unit.person_details.PersonDetailsActivity;
-import itc.ink.explorefuture_android.common_unit.person_details.mode.SimplePersonInfoDataMode;
+import itc.ink.explorefuture_android.common_unit.user_details.UserDetailsActivity;
+import itc.ink.explorefuture_android.common_unit.user_details.mode.SimpleUserInfoDataMode;
 import itc.ink.explorefuture_android.common_unit.video_view.VideoViewerActivity;
 
 /**
@@ -95,8 +95,9 @@ public class MindDetailsWrapAdapter extends RecyclerView.Adapter<MindDetailsWrap
     public void onBindViewHolder(WrapperVH holder, final int position) {
         if (position == 0) {
             String personId = mindListDataItem.getId().split("_")[0];
-            SimplePersonInfoDataMode simplePersonInfoData=new SimplePersonInfoDataMode(personId,
+            SimpleUserInfoDataMode simplePersonInfoData=new SimpleUserInfoDataMode(personId,
                     mindListDataItem.getName(),
+                    null,null,
                     mindListDataItem.getHead_portrait_image_url(),
                     mindListDataItem.getHead_portrait_image_update_datetime());
             holder.mindDetailsHeaderLayout.setOnClickListener(new MindItemHeaderLayoutClickListener(simplePersonInfoData));
@@ -237,16 +238,16 @@ public class MindDetailsWrapAdapter extends RecyclerView.Adapter<MindDetailsWrap
 
 
     class MindItemHeaderLayoutClickListener implements View.OnClickListener {
-        private SimplePersonInfoDataMode simplePersonInfoData;
+        private SimpleUserInfoDataMode simplePersonInfoData;
 
-        public MindItemHeaderLayoutClickListener(SimplePersonInfoDataMode simplePersonInfoData) {
+        public MindItemHeaderLayoutClickListener(SimpleUserInfoDataMode simplePersonInfoData) {
             this.simplePersonInfoData = simplePersonInfoData;
         }
 
         @Override
         public void onClick(View view) {
-            Intent intent=new Intent(getContext(), PersonDetailsActivity.class);
-            intent.putExtra(PersonDetailsActivity.KEY_PERSON_INFO_ITEM,simplePersonInfoData);
+            Intent intent=new Intent(getContext(), UserDetailsActivity.class);
+            intent.putExtra(UserDetailsActivity.KEY_PERSON_INFO_ITEM,simplePersonInfoData);
             getContext().startActivity(intent);
         }
     }

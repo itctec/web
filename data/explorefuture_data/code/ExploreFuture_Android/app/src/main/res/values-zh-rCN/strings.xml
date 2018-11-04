@@ -42,7 +42,7 @@
     <string name="search_result_list_activity_top_navigation_title_text">"%1$s"的搜索结果</string>
     <string name="search_result_list_activity_top_sort_solution_btn_text">方案</string>
     <string name="search_result_list_activity_top_sort_product_btn_text">产品</string>
-    <string name="search_result_list_activity_top_sort_subject_btn_text">专题</string>
+    <string name="search_result_list_activity_top_sort_mind_btn_text">构想</string>
     <string name="search_result_list_activity_top_sort_action_btn_text">活动</string>
     <string name="search_result_list_activity_top_sort_person_btn_text">用户</string>
 

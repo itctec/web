@@ -35,6 +35,7 @@ import java.util.List;
 import itc.ink.explorefuture_android.R;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.app.utils.StatusBarUtil;
+import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateUtil;
 import itc.ink.explorefuture_android.common_unit.content_list.adapter.ContentListDataAdapter;
 import itc.ink.explorefuture_android.common_unit.content_list.mode.ContentListDataMode;
 
@@ -46,12 +47,14 @@ public class SearchResultActivity extends Activity {
     private final static String LOG_TAG ="SearchResultActivity";
     public static final String KEY_SEARCH_TITLE="search_title";
 
+    private String searchResultStr=null;
+
     private ConstraintLayout sortSolutionBtnLayout;
     private TextView sortSolutionBtn;
     private ConstraintLayout sortProductBtnLayout;
     private TextView sortProductBtn;
-    private ConstraintLayout sortSubjectBtnLayout;
-    private TextView sortSubjectBtn;
+    private ConstraintLayout sortMindBtnLayout;
+    private TextView sortMindBtn;
     private ConstraintLayout sortActionBtnLayout;
     private TextView sortActionBtn;
     private ConstraintLayout sortPersonBtnLayout;
@@ -72,7 +75,7 @@ public class SearchResultActivity extends Activity {
         //Toast.makeText(ContentListActivity.this,"Sort ID:"+sort_id+"\nSort Title:"+sort_title,Toast.LENGTH_SHORT).show();
 
         //Get Content Data
-        UpdateAsyncTask updateAsyncTask = new UpdateAsyncTask(SearchResultActivity.this);
+        UpdateAsyncTask updateAsyncTask = new UpdateAsyncTask();
         updateAsyncTask.execute();
 
         //StatusBar Style
@@ -94,9 +97,9 @@ public class SearchResultActivity extends Activity {
         sortProductBtnLayout=findViewById(R.id.search_Result_List_Activity_Top_Sort_Product_Btn_Layout);
         sortProductBtnLayout.setOnClickListener(sortBtnLayoutClickListener);
         sortProductBtn=findViewById(R.id.search_Result_List_Activity_Top_Sort_Product_Btn);
-        sortSubjectBtnLayout=findViewById(R.id.search_Result_List_Activity_Top_Sort_Subject_Btn_Layout);
-        sortSubjectBtnLayout.setOnClickListener(sortBtnLayoutClickListener);
-        sortSubjectBtn=findViewById(R.id.search_Result_List_Activity_Top_Sort_Subject_Btn);
+        sortMindBtnLayout=findViewById(R.id.search_Result_List_Activity_Top_Sort_Mind_Btn_Layout);
+        sortMindBtnLayout.setOnClickListener(sortBtnLayoutClickListener);
+        sortMindBtn=findViewById(R.id.search_Result_List_Activity_Top_Sort_Mind_Btn);
         sortActionBtnLayout=findViewById(R.id.search_Result_List_Activity_Top_Sort_Action_Btn_Layout);
         sortActionBtnLayout.setOnClickListener(sortBtnLayoutClickListener);
         sortActionBtn=findViewById(R.id.search_Result_List_Activity_Top_Sort_Action_Btn);
@@ -104,6 +107,11 @@ public class SearchResultActivity extends Activity {
         sortPersonBtnLayout.setOnClickListener(sortBtnLayoutClickListener);
         sortPersonBtn=findViewById(R.id.search_Result_List_Activity_Top_Sort_Person_Btn);
         navigationIndicator=findViewById(R.id.search_Result_List_Activity_Top_Sort_Bar_Indicator);
+        sortSolutionBtnLayout.setClickable(false);
+        sortProductBtnLayout.setClickable(false);
+        sortMindBtnLayout.setClickable(false);
+        sortActionBtnLayout.setClickable(false);
+        sortPersonBtnLayout.setClickable(false);
 
         contentRecyclerView=findViewById(R.id.search_Result_List_Activity_RecyclerView);
         contentListDataAdapter = new ContentListDataAdapter(this, contentListDataArray);
@@ -112,10 +120,27 @@ public class SearchResultActivity extends Activity {
         contentRecyclerView.setLayoutManager(contentRvLayoutManager);
     }
 
+    private <T> ArrayList<T> phraseStrToArray(Class<T> cls,String sourceStr, String arrayKey){
+        ArrayList<T> dataArray=new ArrayList<>();
+        JsonReader jsonReader = new JsonReader(new StringReader(sourceStr));
+        jsonReader.setLenient(true);
+        JsonParser jsonParser = new JsonParser();
+        JsonElement jsonElement = jsonParser.parse(jsonReader);
+        JsonObject rootObj = jsonElement.getAsJsonObject();
+        JsonArray contentDataJsonArray = rootObj.getAsJsonArray(arrayKey);
+        Gson gson = new Gson();
+
+        for (JsonElement jsonElements : contentDataJsonArray) {
+            dataArray.add(gson.fromJson(jsonElements, cls));
+        }
+
+        return  dataArray;
+    }
+
     private void updateNavigationTopBtnState(View currentActiveBtn) {
         sortSolutionBtn.setAlpha(0.5F);
         sortProductBtn.setAlpha(0.5F);
-        sortSubjectBtn.setAlpha(0.5F);
+        sortMindBtn.setAlpha(0.5F);
         sortActionBtn.setAlpha(0.5F);
         sortPersonBtn.setAlpha(0.5F);
 
@@ -136,13 +161,27 @@ public class SearchResultActivity extends Activity {
                 case R.id.search_Result_List_Activity_Top_Sort_Solution_Btn_Layout:
                     updateNavigationTopBtnState(sortSolutionBtn);
                     navigationIndicator.setTranslationX((ExploreFutureApplication.screenWidth *0/5));
+
+                    if(contentListDataAdapter==null){
+                        contentListDataAdapter = new ContentListDataAdapter(SearchResultActivity.this, contentListDataArray);
+                    }
+
+                    if(searchResultStr!=null&&!searchResultStr.isEmpty()){
+                        contentListDataArray.clear();
+                        for (int i = 0; i < 20; i++) {
+                            contentListDataArray.addAll(phraseStrToArray(ContentListDataMode.class,searchResultStr,"array_content"));
+                        }
+                        contentListDataAdapter.notifyDataSetChanged();
+                    }
+
+                    contentRecyclerView.setAdapter(contentListDataAdapter);
                     break;
                 case R.id.search_Result_List_Activity_Top_Sort_Product_Btn_Layout:
                     updateNavigationTopBtnState(sortProductBtn);
                     navigationIndicator.setTranslationX((ExploreFutureApplication.screenWidth *1/5));
                     break;
-                case R.id.search_Result_List_Activity_Top_Sort_Subject_Btn_Layout:
-                    updateNavigationTopBtnState(sortSubjectBtn);
+                case R.id.search_Result_List_Activity_Top_Sort_Mind_Btn_Layout:
+                    updateNavigationTopBtnState(sortMindBtn);
                     navigationIndicator.setTranslationX((ExploreFutureApplication.screenWidth *2/5));
                     break;
                 case R.id.search_Result_List_Activity_Top_Sort_Action_Btn_Layout:
@@ -158,83 +197,29 @@ public class SearchResultActivity extends Activity {
     }
 
     class UpdateAsyncTask extends AsyncTask<Void, Void, String> {
-        private WeakReference<Context> mWeakContextReference;
-
-        UpdateAsyncTask(Context mContext) {
-            this.mWeakContextReference = new WeakReference<>(mContext);
-        }
-
-        private Context getContext() {
-            if(mWeakContextReference.get() != null){
-                return mWeakContextReference.get();
-            }
-            return null;
-        }
 
         @Override
         protected String doInBackground(Void... params) {
-            String remoteDataFileUrl="http://www.itc.ink/data/explorefuture_data/app/sort/a/01/01/content_data.json";
-            String resultStr=getRemoteData(remoteDataFileUrl);
+            String remoteDataFileUrl="http://www.itc.ink/data/explorefuture_data/app/find/result_data.json";
+            String resultStr= DataUpdateUtil.getRemoteDataStr(remoteDataFileUrl);
             return resultStr;
         }
 
         @Override
         protected void onPostExecute(String s) {
             if (s != null && !s.isEmpty()) {
-                ArrayList<ContentListDataMode> dataArray;
-                JsonReader jsonReader = new JsonReader(new StringReader(s));
-                jsonReader.setLenient(true);
-                JsonParser jsonParser = new JsonParser();
-                JsonElement jsonElement = jsonParser.parse(jsonReader);
-                JsonObject rootObj = jsonElement.getAsJsonObject();
-                JsonArray contentDataJsonArray = rootObj.getAsJsonArray("array_content");
-                Gson gson = new Gson();
-                dataArray = gson.fromJson(contentDataJsonArray, new TypeToken<List<ContentListDataMode>>() {
-                }.getType());
-
                 contentListDataArray.clear();
-
                 for (int i = 0; i < 20; i++) {
-                    contentListDataArray.addAll(dataArray);
+                    contentListDataArray.addAll(phraseStrToArray(ContentListDataMode.class,s,"array_content"));
                 }
-
                 contentListDataAdapter.notifyDataSetChanged();
+
+                sortSolutionBtnLayout.setClickable(true);
+                sortProductBtnLayout.setClickable(true);
+                sortMindBtnLayout.setClickable(true);
+                sortActionBtnLayout.setClickable(true);
+                sortPersonBtnLayout.setClickable(true);
             }
-        }
-
-        private String getRemoteData(String remoteDataFileUrl) {
-            HttpURLConnection urlConnection = null;
-            StringBuilder stringBuilder = new StringBuilder();
-            try {
-                URL dataFileUrl = new URL(remoteDataFileUrl);
-
-                urlConnection = (HttpURLConnection) dataFileUrl.openConnection();
-                urlConnection.setConnectTimeout(3 * 1000);
-                urlConnection.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
-                InputStream inputStream = urlConnection.getInputStream();
-
-                if (!urlConnection.getContentType().contains("json")) {
-                    Log.d(LOG_TAG, "网络已被重定向，需确保网络通畅");
-                    inputStream.close();
-                    return null;
-                }
-
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                String catchStr;
-                while ((catchStr = bufferedReader.readLine()) != null) {
-                    stringBuilder.append(catchStr);
-                }
-
-                bufferedReader.close();
-                inputStream.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                if (urlConnection != null) {
-                    urlConnection.disconnect();
-                }
-            }
-            return stringBuilder.toString();
         }
 
     }

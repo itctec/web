@@ -87,7 +87,7 @@ public class DataUpdateUtil {
         String resultStr = null;
 
         //Get Update DateTime File From Server
-        String updateDateTimeStr = getUpdateStrFromServer(dataUpdateMode.getUpdateDatetimeFileUrl());
+        String updateDateTimeStr = getRemoteDataStr(dataUpdateMode.getUpdateDatetimeFileUrl());
 
         if (updateDateTimeStr == null) {
             dataUpdateMode.setCheckUpdateFinish(true);
@@ -118,7 +118,7 @@ public class DataUpdateUtil {
                 case 1:
                     //Update Data File
                     Log.d(LOG_TAG, dataUpdateMode.getLocalDataFileName() +"通过比较时间更新数据!");
-                    resultStr = getRemoteData(dataUpdateMode);
+                    resultStr = getRemoteDataFile(dataUpdateMode);
                     if (resultStr!=null&&!resultStr.isEmpty()){
                         SharedPreferenceUtil.putString(dataUpdateMode.getDataNewestUpdateDateTimeKey(), serverDateTimeStr);
                     }
@@ -131,7 +131,7 @@ public class DataUpdateUtil {
         } else if (serverDateTimeStr != null && (localDateTimeStr == null || localDateTimeStr.isEmpty())) {
             //Update Data File
             Log.d(LOG_TAG, dataUpdateMode.getLocalDataFileName() +"首次更新数据!");
-            resultStr = getRemoteData(dataUpdateMode);
+            resultStr = getRemoteDataFile(dataUpdateMode);
             if (resultStr!=null&&!resultStr.isEmpty()){
                 SharedPreferenceUtil.putString(dataUpdateMode.getDataNewestUpdateDateTimeKey(), serverDateTimeStr);
             }
@@ -143,7 +143,7 @@ public class DataUpdateUtil {
         return resultStr;
     }
 
-    private static String getUpdateStrFromServer(String updateDatetimeFileUrl) {
+    public static String getRemoteDataStr(String updateDatetimeFileUrl) {
         StringBuilder stringBuilder = new StringBuilder();
         HttpURLConnection urlConnection = null;
         try {
@@ -178,7 +178,7 @@ public class DataUpdateUtil {
         return null;
     }
 
-    private static String getRemoteData(DataUpdateMode dataUpdateMode) {
+    private static String getRemoteDataFile(DataUpdateMode dataUpdateMode) {
         HttpURLConnection urlConnection = null;
         StringBuilder stringBuilder = new StringBuilder();
         try {

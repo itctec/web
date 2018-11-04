@@ -42,7 +42,7 @@
     <string name="search_result_list_activity_top_navigation_title_text">\'%1$s\' search result</string>
     <string name="search_result_list_activity_top_sort_solution_btn_text">Solution</string>
     <string name="search_result_list_activity_top_sort_product_btn_text">Product</string>
-    <string name="search_result_list_activity_top_sort_subject_btn_text">Subject</string>
+    <string name="search_result_list_activity_top_sort_mind_btn_text">Mind</string>
     <string name="search_result_list_activity_top_sort_action_btn_text">Action</string>
     <string name="search_result_list_activity_top_sort_person_btn_text">User</string>
 

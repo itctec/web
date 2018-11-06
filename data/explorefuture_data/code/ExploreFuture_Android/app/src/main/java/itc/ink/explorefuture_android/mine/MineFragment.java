@@ -47,6 +47,7 @@ import itc.ink.explorefuture_android.login.LoginActivity;
 import itc.ink.explorefuture_android.login.LoginStateInstance;
 import itc.ink.explorefuture_android.mind.data_fragment.DataFragment;
 import itc.ink.explorefuture_android.mind.nodata_fragment.MindNoDataFragment;
+import itc.ink.explorefuture_android.mine.interaction.InteractionActivity;
 import itc.ink.explorefuture_android.mine.settings.SettingsMainActivity;
 
 
@@ -320,23 +321,25 @@ public class MineFragment extends Fragment {
     class InteractionBtnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
+            Intent intent=new Intent(getContext(), InteractionActivity.class);
             switch (view.getId()) {
                 case R.id.mine_Interaction_History_Btn:
-                    Toast.makeText(getContext(), "历史按钮被点击", Toast.LENGTH_SHORT).show();
+                    intent.putExtra(InteractionActivity.KEY_CURRENT_TAB,InteractionActivity.VALUE_TAB_HISTORY);
                     break;
                 case R.id.mine_Interaction_Comment_Btn:
-                    Toast.makeText(getContext(), "评论按钮被点击", Toast.LENGTH_SHORT).show();
+                    intent.putExtra(InteractionActivity.KEY_CURRENT_TAB,InteractionActivity.VALUE_TAB_COMMENT);
                     break;
                 case R.id.mine_Interaction_Retransmission_Btn:
-                    Toast.makeText(getContext(), "转发按钮被点击", Toast.LENGTH_SHORT).show();
+                    intent.putExtra(InteractionActivity.KEY_CURRENT_TAB,InteractionActivity.VALUE_TAB_RETRANSMISSION);
                     break;
                 case R.id.mine_Interaction_Collection_Btn:
-                    Toast.makeText(getContext(), "收藏按钮被点击", Toast.LENGTH_SHORT).show();
+                    intent.putExtra(InteractionActivity.KEY_CURRENT_TAB,InteractionActivity.VALUE_TAB_COLLECTION);
                     break;
                 case R.id.mine_Interaction_Support_Btn:
-                    Toast.makeText(getContext(), "支持按钮被点击", Toast.LENGTH_SHORT).show();
+                    intent.putExtra(InteractionActivity.KEY_CURRENT_TAB,InteractionActivity.VALUE_TAB_SUPPORT);
                     break;
             }
+            getContext().startActivity(intent);
         }
     }
 

@@ -107,6 +107,13 @@
     <string name="settings_main_help_center_text">Help Center</string>
     <string name="settings_main_about_text">About APP</string>
     <string name="settings_main_logout_btn_text">Exit Login</string>
+    <string name="mine_interaction_list_activity_top_navigation_title_text">My Interaction</string>
+    <string name="mine_interaction_list_activity_top_sort_history_btn_text">History</string>
+    <string name="mine_interaction_list_activity_top_sort_comment_btn_text">Comment</string>
+    <string name="mine_interaction_list_activity_top_sort_retransmission_btn_text">Retransmission</string>
+    <string name="mine_interaction_list_activity_top_sort_collection_btn_text">Collection</string>
+    <string name="mine_interaction_list_activity_top_sort_support_btn_text">Support</string>
+
 
     <string name="login_activity_top_navigation_help_btn_text">Help</string>
     <string name="login_activity_id_edit_hint_text">PhoneNumber/UserID/Email</string>

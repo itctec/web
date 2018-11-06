@@ -63,8 +63,8 @@ public class SearchResultActivity extends Activity {
     private TextView sortMindBtn;
     private ConstraintLayout sortActionBtnLayout;
     private TextView sortActionBtn;
-    private ConstraintLayout sortPersonBtnLayout;
-    private TextView sortPersonBtn;
+    private ConstraintLayout sortUserBtnLayout;
+    private TextView sortUserBtn;
     private View navigationIndicator;
 
     private RecyclerView contentRecyclerView;
@@ -100,7 +100,7 @@ public class SearchResultActivity extends Activity {
         ImageView backBtn=findViewById(R.id.search_Result_List_Activity_Top_Navigation_Back_Btn);
         backBtn.setOnClickListener(new BackBtnClickListener());
         TextView topNavigationTitle=findViewById(R.id.search_Result_List_Activity_Top_Navigation_Title_Text);
-        topNavigationTitle.setText(sort_title);
+        topNavigationTitle.setText(String.format(getString(R.string.search_result_list_activity_top_navigation_title_text),sort_title));
 
         SortBtnLayoutClickListener sortBtnLayoutClickListener=new SortBtnLayoutClickListener();
         sortSolutionBtnLayout=findViewById(R.id.search_Result_List_Activity_Top_Sort_Solution_Btn_Layout);
@@ -115,15 +115,15 @@ public class SearchResultActivity extends Activity {
         sortActionBtnLayout=findViewById(R.id.search_Result_List_Activity_Top_Sort_Action_Btn_Layout);
         sortActionBtnLayout.setOnClickListener(sortBtnLayoutClickListener);
         sortActionBtn=findViewById(R.id.search_Result_List_Activity_Top_Sort_Action_Btn);
-        sortPersonBtnLayout=findViewById(R.id.search_Result_List_Activity_Top_Sort_Person_Btn_Layout);
-        sortPersonBtnLayout.setOnClickListener(sortBtnLayoutClickListener);
-        sortPersonBtn=findViewById(R.id.search_Result_List_Activity_Top_Sort_Person_Btn);
+        sortUserBtnLayout=findViewById(R.id.search_Result_List_Activity_Top_Sort_User_Btn_Layout);
+        sortUserBtnLayout.setOnClickListener(sortBtnLayoutClickListener);
+        sortUserBtn=findViewById(R.id.search_Result_List_Activity_Top_Sort_User_Btn);
         navigationIndicator=findViewById(R.id.search_Result_List_Activity_Top_Sort_Bar_Indicator);
         sortSolutionBtnLayout.setClickable(false);
         sortProductBtnLayout.setClickable(false);
         sortMindBtnLayout.setClickable(false);
         sortActionBtnLayout.setClickable(false);
-        sortPersonBtnLayout.setClickable(false);
+        sortUserBtnLayout.setClickable(false);
 
         contentRecyclerView=findViewById(R.id.search_Result_List_Activity_RecyclerView);
         contentListDataAdapter = new ContentListDataAdapter(this, contentListData);
@@ -158,7 +158,7 @@ public class SearchResultActivity extends Activity {
         sortProductBtn.setAlpha(0.5F);
         sortMindBtn.setAlpha(0.5F);
         sortActionBtn.setAlpha(0.5F);
-        sortPersonBtn.setAlpha(0.5F);
+        sortUserBtn.setAlpha(0.5F);
 
         currentActiveBtn.setAlpha(1F);
     }
@@ -234,8 +234,8 @@ public class SearchResultActivity extends Activity {
 
                     contentRecyclerView.setAdapter(mActionDataAdapter);
                     break;
-                case R.id.search_Result_List_Activity_Top_Sort_Person_Btn_Layout:
-                    updateNavigationTopBtnState(sortPersonBtn);
+                case R.id.search_Result_List_Activity_Top_Sort_User_Btn_Layout:
+                    updateNavigationTopBtnState(sortUserBtn);
                     navigationIndicator.setTranslationX((ExploreFutureApplication.screenWidth *4/5));
 
                     if(searchResultStr!=null&&!searchResultStr.isEmpty()){
@@ -277,7 +277,7 @@ public class SearchResultActivity extends Activity {
                 sortProductBtnLayout.setClickable(true);
                 sortMindBtnLayout.setClickable(true);
                 sortActionBtnLayout.setClickable(true);
-                sortPersonBtnLayout.setClickable(true);
+                sortUserBtnLayout.setClickable(true);
 
             }
         }

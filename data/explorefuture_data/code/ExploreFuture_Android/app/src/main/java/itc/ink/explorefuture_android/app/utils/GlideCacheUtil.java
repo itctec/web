@@ -35,7 +35,6 @@ public class GlideCacheUtil {
                     @Override
                     public void run() {
                         Glide.get(context).clearDiskCache();
-// BusUtil.getBus().post(new GlideCacheClearSuccessEvent());
                     }
                 }).start();
             } else {
@@ -57,16 +56,6 @@ public class GlideCacheUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * 清除图片所有缓存
-     */
-    public void clearImageAllCache(Context context) {
-        clearImageDiskCache(context);
-        clearImageMemoryCache(context);
-        String ImageExternalCatchDir=context.getExternalCacheDir()+ ExternalCacheDiskCacheFactory.DEFAULT_DISK_CACHE_DIR;
-        deleteFolderFile(ImageExternalCatchDir, true);
     }
 
     /**

@@ -121,7 +121,16 @@
     <string name="mine_interaction_list_activity_top_sort_retransmission_btn_text">Retransmission</string>
     <string name="mine_interaction_list_activity_top_sort_collection_btn_text">Collection</string>
     <string name="mine_interaction_list_activity_top_sort_support_btn_text">Support</string>
-
+    <string name="mine_related_user_list_activity_top_navigation_title_text">Related User</string>
+    <string name="mine_related_user_list_activity_top_sort_fans_btn_text">Fans</string>
+    <string name="mine_related_user_list_activity_top_sort_attention_btn_text">Attention</string>
+    <string name="message_list_top_navigation_title_text">Message Center</string>
+    <string name="message_list_item_accept_title_text">Accept</string>
+    <string name="message_list_item_comment_title_text">Comment</string>
+    <string name="message_list_item_support_title_text">Support</string>
+    <string name="message_list_item_sell_title_text">Cell</string>
+    <string name="message_list_item_platform_title_text">Explore Future</string>
+    <string name="message_list_item_logistics_title_text">Logistics Notification</string>
 
     <string name="login_activity_top_navigation_help_btn_text">Help</string>
     <string name="login_activity_id_edit_hint_text">PhoneNumber/UserID/Email</string>

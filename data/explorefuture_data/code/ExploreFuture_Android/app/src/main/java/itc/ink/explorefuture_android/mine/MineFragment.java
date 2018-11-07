@@ -3,14 +3,9 @@ package itc.ink.explorefuture_android.mine;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -20,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,24 +24,20 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import itc.ink.explorefuture_android.R;
-import itc.ink.explorefuture_android.app.activity.MainActivity;
 import itc.ink.explorefuture_android.app.app_level.GlideCircleWithBorder;
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
 import itc.ink.explorefuture_android.app.utils.SQLiteDBHelper;
-import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateMode;
-import itc.ink.explorefuture_android.app.utils.dataupdate.DataUpdateUtil;
 import itc.ink.explorefuture_android.common_unit.view.AppInnerBadge;
 import itc.ink.explorefuture_android.common_unit.view.EarningsBightView;
 import itc.ink.explorefuture_android.common_unit.view.TextViewWithIndicator;
 import itc.ink.explorefuture_android.login.LoginActivity;
 import itc.ink.explorefuture_android.login.LoginStateInstance;
-import itc.ink.explorefuture_android.mind.data_fragment.DataFragment;
-import itc.ink.explorefuture_android.mind.nodata_fragment.MindNoDataFragment;
 import itc.ink.explorefuture_android.mine.interaction.InteractionActivity;
+import itc.ink.explorefuture_android.mine.message.MessageListActivity;
+import itc.ink.explorefuture_android.mine.related_user.RelatedUserActivity;
 import itc.ink.explorefuture_android.mine.settings.SettingsMainActivity;
 
 
@@ -284,7 +274,8 @@ public class MineFragment extends Fragment {
     class MineMessageBtnClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            Toast.makeText(getContext(), "消息按钮被点击", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getContext(), MessageListActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -307,14 +298,19 @@ public class MineFragment extends Fragment {
     class MineFansCountTextClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            Toast.makeText(getContext(), "粉丝数量被点击", Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(getContext(), RelatedUserActivity.class);
+            intent.putExtra(RelatedUserActivity.KEY_CURRENT_TAB,RelatedUserActivity.VALUE_TAB_FANS);
+            getContext().startActivity(intent);
+
         }
     }
 
     class MineAttentionCountTextClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            Toast.makeText(getContext(), "关注数量被点击", Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(getContext(), RelatedUserActivity.class);
+            intent.putExtra(RelatedUserActivity.KEY_CURRENT_TAB,RelatedUserActivity.VALUE_TAB_ATTENTION);
+            getContext().startActivity(intent);
         }
     }
 

@@ -56,11 +56,11 @@ public class SimpleUserDataAdapter extends RecyclerView.Adapter<SimpleUserDataAd
                 .signature(new ObjectKeyCanNull(simpleUserInfoDataItem.getHead_portrait_image_update_datetime()).getObject())
                 .circleCrop();
         Glide.with(getContext()).load(simpleUserInfoDataItem.getHead_portrait_image_url()).apply(options).into(holder.headPortrait);
-        holder.headPortrait.setOnClickListener(new UserInfoViewClickListener(simpleUserInfoDataItem));
         holder.nickname.setText(simpleUserInfoDataItem.getNickname());
-        holder.nickname.setOnClickListener(new UserInfoViewClickListener(simpleUserInfoDataItem));
         holder.personalizedSignature.setText(simpleUserInfoDataItem.getStr_personalized_signature());
         holder.fansCount.setText(String.format(getContext().getResources().getString(R.string.mine_fans_count_text),simpleUserInfoDataItem.getStr_fans_count()));
+
+        holder.itemView.setOnClickListener(new UserInfoViewClickListener(simpleUserInfoDataItem));
 
     }
 

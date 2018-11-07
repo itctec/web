@@ -65,7 +65,15 @@
             android:screenOrientation="portrait"
             android:theme="@style/DefActivityTheme"/>
         <activity
+            android:name=".mine.message.MessageListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DefActivityTheme"/>
+        <activity
             android:name=".mine.interaction.InteractionActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DefActivityTheme"/>
+        <activity
+            android:name=".mine.related_user.RelatedUserActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DefActivityTheme"/>
         <activity

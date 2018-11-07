@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -172,7 +173,7 @@ public class SettingsMainActivity extends Activity {
                 @Override
                 public void onClick(Dialog dialog, boolean confirm) {
                     if (confirm) {
-                        glideCacheUtil.clearImageDiskCache(SettingsMainActivity.this);
+                        cleanGlideCatch();
                     }
                     dialog.dismiss();
                 }
@@ -180,6 +181,22 @@ public class SettingsMainActivity extends Activity {
                     .setNegativeButton(getString(R.string.dialog_negative_btn_text))
                     .setPositiveButton(getString(R.string.dialog_positive_btn_text))
                     .show();
+        }
+
+        private void cleanGlideCatch() {
+            new Thread(){
+                @Override
+                public void run() {
+                    super.run();
+                    Glide.get(SettingsMainActivity.this).clearDiskCache();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            catchText.setText(glideCacheUtil.getCacheSize(SettingsMainActivity.this));
+                        }
+                    });
+                }
+            }.start();
         }
     }
 

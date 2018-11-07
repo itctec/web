@@ -72,10 +72,6 @@ public class InteractionActivity extends Activity {
     private MineCommentDataAdapter mMineCommentDataAdapter;
     private ArrayList<MindListDataMode> mMindListData = new ArrayList<>();
     private MindDataAdapter mMindDataAdapter;
-    private ArrayList<ActionListDataModel> mActionListData = new ArrayList<>();
-    private ActionDataAdapter mActionDataAdapter;
-    private ArrayList<SimpleUserInfoDataMode> mUserListData = new ArrayList<>();
-    private SimpleUserDataAdapter mUserDataAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -130,8 +126,6 @@ public class InteractionActivity extends Activity {
 
         mMineCommentDataAdapter = new MineCommentDataAdapter(InteractionActivity.this, mCommentListData);
         mMindDataAdapter = new MindDataAdapter(InteractionActivity.this, mMindListData);
-        mActionDataAdapter = new ActionDataAdapter(InteractionActivity.this, mActionListData);
-        mUserDataAdapter = new SimpleUserDataAdapter(InteractionActivity.this, mUserListData);
     }
 
     private void initSortNavigationBar(String tabValue) {

@@ -32,6 +32,8 @@ import itc.ink.explorefuture_android.common_unit.mind_recyclerview.adapter.MindD
 import itc.ink.explorefuture_android.common_unit.mind_recyclerview.mode.MindListDataMode;
 import itc.ink.explorefuture_android.common_unit.user_details.adapter.SimpleUserDataAdapter;
 import itc.ink.explorefuture_android.common_unit.user_details.mode.SimpleUserInfoDataMode;
+import itc.ink.explorefuture_android.mine.interaction.adapter.MineCommentDataAdapter;
+import itc.ink.explorefuture_android.mine.interaction.mode.MineCommentListDataMode;
 import itc.ink.explorefuture_android.recommend.handpick_fragment.adapter.adapter_action.ActionDataAdapter;
 import itc.ink.explorefuture_android.recommend.handpick_fragment.mode.mode_action.ActionListDataModel;
 
@@ -66,6 +68,8 @@ public class InteractionActivity extends Activity {
     private RecyclerView.LayoutManager contentRvLayoutManager;
     private ArrayList<ContentListDataMode> contentListData = new ArrayList<>();
     private ContentListDataAdapter contentListDataAdapter;
+    private ArrayList<MineCommentListDataMode> mCommentListData = new ArrayList<>();
+    private MineCommentDataAdapter mMineCommentDataAdapter;
     private ArrayList<MindListDataMode> mMindListData = new ArrayList<>();
     private MindDataAdapter mMindDataAdapter;
     private ArrayList<ActionListDataModel> mActionListData = new ArrayList<>();
@@ -124,6 +128,7 @@ public class InteractionActivity extends Activity {
         contentRvLayoutManager = new LinearLayoutManager(this);
         contentRecyclerView.setLayoutManager(contentRvLayoutManager);
 
+        mMineCommentDataAdapter = new MineCommentDataAdapter(InteractionActivity.this, mCommentListData);
         mMindDataAdapter = new MindDataAdapter(InteractionActivity.this, mMindListData);
         mActionDataAdapter = new ActionDataAdapter(InteractionActivity.this, mActionListData);
         mUserDataAdapter = new SimpleUserDataAdapter(InteractionActivity.this, mUserListData);
@@ -199,7 +204,7 @@ public class InteractionActivity extends Activity {
                     if (interactionDataStr != null && !interactionDataStr.isEmpty()) {
                         contentListData.clear();
                         for (int i = 0; i < 20; i++) {
-                            contentListData.addAll(phraseStrToArray(ContentListDataMode.class, interactionDataStr, "array_solution"));
+                            contentListData.addAll(phraseStrToArray(ContentListDataMode.class, interactionDataStr, "array_history"));
                         }
                         contentRecyclerView.scrollToPosition(0);
                         contentListDataAdapter.notifyDataSetChanged();
@@ -212,15 +217,15 @@ public class InteractionActivity extends Activity {
                     navigationIndicator.setTranslationX((ExploreFutureApplication.screenWidth * 1 / 5));
 
                     if (interactionDataStr != null && !interactionDataStr.isEmpty()) {
-                        contentListData.clear();
+                        mCommentListData.clear();
                         for (int i = 0; i < 20; i++) {
-                            contentListData.addAll(phraseStrToArray(ContentListDataMode.class, interactionDataStr, "array_product"));
+                            mCommentListData.addAll(phraseStrToArray(MineCommentListDataMode.class, interactionDataStr, "array_comment"));
                         }
                         contentRecyclerView.scrollToPosition(0);
-                        contentListDataAdapter.notifyDataSetChanged();
+                        mMineCommentDataAdapter.notifyDataSetChanged();
                     }
 
-                    contentRecyclerView.setAdapter(contentListDataAdapter);
+                    contentRecyclerView.setAdapter(mMineCommentDataAdapter);
                     break;
                 case R.id.mine_Interaction_List_Activity_Top_Sort_Retransmission_Btn_Layout:
                     updateNavigationTopBtnState(sortRetransmissionBtn);
@@ -229,7 +234,7 @@ public class InteractionActivity extends Activity {
                     if (interactionDataStr != null && !interactionDataStr.isEmpty()) {
                         mMindListData.clear();
                         for (int i = 0; i < 20; i++) {
-                            mMindListData.addAll(phraseStrToArray(MindListDataMode.class, interactionDataStr, "array_mind"));
+                            mMindListData.addAll(phraseStrToArray(MindListDataMode.class, interactionDataStr, "array_retransmission"));
                         }
                         contentRecyclerView.scrollToPosition(0);
                         contentListDataAdapter.notifyDataSetChanged();
@@ -242,30 +247,30 @@ public class InteractionActivity extends Activity {
                     navigationIndicator.setTranslationX((ExploreFutureApplication.screenWidth * 3 / 5));
 
                     if (interactionDataStr != null && !interactionDataStr.isEmpty()) {
-                        mActionListData.clear();
+                        contentListData.clear();
                         for (int i = 0; i < 20; i++) {
-                            mActionListData.addAll(phraseStrToArray(ActionListDataModel.class, interactionDataStr, "array_action"));
+                            contentListData.addAll(phraseStrToArray(ContentListDataMode.class, interactionDataStr, "array_collection"));
                         }
                         contentRecyclerView.scrollToPosition(0);
-                        mActionDataAdapter.notifyDataSetChanged();
+                        contentListDataAdapter.notifyDataSetChanged();
                     }
 
-                    contentRecyclerView.setAdapter(mActionDataAdapter);
+                    contentRecyclerView.setAdapter(contentListDataAdapter);
                     break;
                 case R.id.mine_Interaction_List_Activity_Top_Sort_Support_Btn_Layout:
                     updateNavigationTopBtnState(sortSupportBtn);
                     navigationIndicator.setTranslationX((ExploreFutureApplication.screenWidth * 4 / 5));
 
                     if (interactionDataStr != null && !interactionDataStr.isEmpty()) {
-                        mUserListData.clear();
+                        contentListData.clear();
                         for (int i = 0; i < 20; i++) {
-                            mUserListData.addAll(phraseStrToArray(SimpleUserInfoDataMode.class, interactionDataStr, "array_user"));
+                            contentListData.addAll(phraseStrToArray(ContentListDataMode.class, interactionDataStr, "array_support"));
                         }
                         contentRecyclerView.scrollToPosition(0);
-                        mUserDataAdapter.notifyDataSetChanged();
+                        contentListDataAdapter.notifyDataSetChanged();
                     }
 
-                    contentRecyclerView.setAdapter(mUserDataAdapter);
+                    contentRecyclerView.setAdapter(contentListDataAdapter);
                     break;
             }
         }
@@ -280,7 +285,7 @@ public class InteractionActivity extends Activity {
 
         @Override
         protected String doInBackground(Void... params) {
-            String remoteDataFileUrl = "http://www.itc.ink/data/explorefuture_data/app/find/result_data.json";
+            String remoteDataFileUrl = "http://www.itc.ink/data/explorefuture_data/account/0000000001/information/interaction_data.json";
             String resultStr = DataUpdateUtil.getRemoteDataStr(remoteDataFileUrl);
             return resultStr;
         }
@@ -294,47 +299,47 @@ public class InteractionActivity extends Activity {
                     case VALUE_TAB_HISTORY:
                         contentListData.clear();
                         for (int i = 0; i < 20; i++) {
-                            contentListData.addAll(phraseStrToArray(ContentListDataMode.class, s, "array_solution"));
+                            contentListData.addAll(phraseStrToArray(ContentListDataMode.class, s, "array_history"));
                         }
                         contentRecyclerView.scrollToPosition(0);
                         contentListDataAdapter.notifyDataSetChanged();
                         contentRecyclerView.setAdapter(contentListDataAdapter);
                         break;
                     case VALUE_TAB_COMMENT:
-                        contentListData.clear();
+                        mCommentListData.clear();
                         for (int i = 0; i < 20; i++) {
-                            contentListData.addAll(phraseStrToArray(ContentListDataMode.class, s, "array_product"));
+                            mCommentListData.addAll(phraseStrToArray(MineCommentListDataMode.class, s, "array_comment"));
                         }
                         contentRecyclerView.scrollToPosition(0);
-                        contentListDataAdapter.notifyDataSetChanged();
-                        contentRecyclerView.setAdapter(contentListDataAdapter);
+                        mMineCommentDataAdapter.notifyDataSetChanged();
+                        contentRecyclerView.setAdapter(mMineCommentDataAdapter);
                         break;
                     case VALUE_TAB_RETRANSMISSION:
                         mMindListData.clear();
                         for (int i = 0; i < 20; i++) {
-                            mMindListData.addAll(phraseStrToArray(MindListDataMode.class, s, "array_mind"));
+                            mMindListData.addAll(phraseStrToArray(MindListDataMode.class, s, "array_retransmission"));
                         }
                         contentRecyclerView.scrollToPosition(0);
                         contentListDataAdapter.notifyDataSetChanged();
                         contentRecyclerView.setAdapter(mMindDataAdapter);
                         break;
                     case VALUE_TAB_COLLECTION:
-                        mActionListData.clear();
+                        contentListData.clear();
                         for (int i = 0; i < 20; i++) {
-                            mActionListData.addAll(phraseStrToArray(ActionListDataModel.class, s, "array_action"));
+                            contentListData.addAll(phraseStrToArray(ContentListDataMode.class, s, "array_collection"));
                         }
                         contentRecyclerView.scrollToPosition(0);
-                        mActionDataAdapter.notifyDataSetChanged();
-                        contentRecyclerView.setAdapter(mActionDataAdapter);
+                        contentListDataAdapter.notifyDataSetChanged();
+                        contentRecyclerView.setAdapter(contentListDataAdapter);
                         break;
                     case VALUE_TAB_SUPPORT:
-                        mUserListData.clear();
+                        contentListData.clear();
                         for (int i = 0; i < 20; i++) {
-                            mUserListData.addAll(phraseStrToArray(SimpleUserInfoDataMode.class, s, "array_user"));
+                            contentListData.addAll(phraseStrToArray(ContentListDataMode.class, s, "array_support"));
                         }
                         contentRecyclerView.scrollToPosition(0);
-                        mUserDataAdapter.notifyDataSetChanged();
-                        contentRecyclerView.setAdapter(mUserDataAdapter);
+                        contentListDataAdapter.notifyDataSetChanged();
+                        contentRecyclerView.setAdapter(contentListDataAdapter);
                         break;
                 }
 

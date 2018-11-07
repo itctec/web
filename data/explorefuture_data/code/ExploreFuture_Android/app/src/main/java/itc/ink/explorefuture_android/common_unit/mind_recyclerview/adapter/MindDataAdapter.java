@@ -64,20 +64,39 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
     public void onBindViewHolder(VH holder, final int position) {
         MindListDataMode mindListDataItem = mMindListData.get(position);
 
-        String personId = mindListDataItem.getId().split("_")[0];
-        SimpleUserInfoDataMode simplePersonInfoData=new SimpleUserInfoDataMode(personId,
-                mindListDataItem.getName(),
+        String userId = "";
+        String nickname = "";
+        String datetime = "";
+        String headPortraitImageUrl = "";
+        String headPortraitImageUrlUpdateDatetime = "";
+        if(mindListDataItem.getTransfer_id()!=null&&!mindListDataItem.getTransfer_id().isEmpty()){
+            userId=mindListDataItem.getTransfer_id();
+            nickname=mindListDataItem.getTransfer_nickname();
+            datetime=mindListDataItem.getTransfer_datetime();
+            headPortraitImageUrl=mindListDataItem.getTransfer_head_portrait_image_url();
+            headPortraitImageUrlUpdateDatetime =mindListDataItem.getTransfer_head_portrait_image_update_datetime();
+            holder.mindItemTransferIcon.setVisibility(View.VISIBLE);
+        }else{
+            userId = mindListDataItem.getId().split("_")[0];
+            nickname=mindListDataItem.getName();
+            datetime=mindListDataItem.getDatetime();
+            headPortraitImageUrl=mindListDataItem.getHead_portrait_image_url();
+            headPortraitImageUrlUpdateDatetime =mindListDataItem.getHead_portrait_image_update_datetime();
+            holder.mindItemTransferIcon.setVisibility(View.GONE);
+        }
+
+        SimpleUserInfoDataMode simplePersonInfoData=new SimpleUserInfoDataMode(userId,nickname,
                 null,null,
-                mindListDataItem.getHead_portrait_image_url(),
-                mindListDataItem.getHead_portrait_image_update_datetime());
+                headPortraitImageUrl,
+                headPortraitImageUrlUpdateDatetime);
         holder.mindItemHeaderLayout.setOnClickListener(new MindItemHeaderLayoutClickListener(simplePersonInfoData));
 
         RequestOptions options = new RequestOptions()
-                .signature(new ObjectKeyCanNull(mindListDataItem.getHead_portrait_image_update_datetime()).getObject())
+                .signature(new ObjectKeyCanNull(headPortraitImageUrlUpdateDatetime).getObject())
                 .circleCrop();
-        Glide.with(getContext()).load(mindListDataItem.getHead_portrait_image_url()).apply(options).into(holder.mindItemHeadPortrait);
-        holder.mindItemName.setText(mindListDataItem.getName());
-        holder.mindItemDatetime.setText(mindListDataItem.getDatetime());
+        Glide.with(getContext()).load(headPortraitImageUrl).apply(options).into(holder.mindItemHeadPortrait);
+        holder.mindItemName.setText(nickname);
+        holder.mindItemDatetime.setText(datetime);
 
         if(mindListDataItem.getCompact_state().equals(MindListDataMode.STATE_COMPACTED)){
             holder.mindItemCompactIcon.setVisibility(View.VISIBLE);
@@ -197,6 +216,7 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
         private TextView mindItemName;
         private TextView mindItemDatetime;
         private ImageView mindItemCompactIcon;
+        private ImageView mindItemTransferIcon;
         private TextView mindItemContentText;
         private ConstraintLayout mindItemContentMediaLayout;
         private TextView mindItemAcceptNumText;
@@ -212,6 +232,7 @@ public class MindDataAdapter extends RecyclerView.Adapter<MindDataAdapter.VH> {
             mindItemName = view.findViewById(R.id.mind_ListItem_Name);
             mindItemDatetime = view.findViewById(R.id.mind_ListItem_Datetime);
             mindItemCompactIcon = view.findViewById(R.id.mind_ListItem_ComPact_Icon);
+            mindItemTransferIcon = view.findViewById(R.id.mind_ListItem_Transfer_Icon);
             mindItemContentText = view.findViewById(R.id.mind_ListItem_Content_Text);
             mindItemContentMediaLayout = view.findViewById(R.id.mind_ListItem_Content_Media_Layout);
             mindItemAcceptNumText = view.findViewById(R.id.mind_ListItem_Accept_Num);

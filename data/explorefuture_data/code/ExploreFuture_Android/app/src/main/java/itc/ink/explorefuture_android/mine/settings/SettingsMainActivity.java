@@ -1,7 +1,10 @@
 package itc.ink.explorefuture_android.mine.settings;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
@@ -10,6 +13,7 @@ import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,9 +25,12 @@ import itc.ink.explorefuture_android.R;
 import itc.ink.explorefuture_android.app.app_level.GlideCircleWithBorder;
 import itc.ink.explorefuture_android.app.app_level.ObjectKeyCanNull;
 import itc.ink.explorefuture_android.app.application.ExploreFutureApplication;
+import itc.ink.explorefuture_android.app.utils.GlideCacheUtil;
 import itc.ink.explorefuture_android.app.utils.SQLiteDBHelper;
 import itc.ink.explorefuture_android.app.utils.StatusBarUtil;
+import itc.ink.explorefuture_android.common_unit.common_dialog.CommonDialog;
 import itc.ink.explorefuture_android.login.LoginStateInstance;
+import itc.ink.explorefuture_android.mind.edit_activity.MindEditActivity;
 
 /**
  * Created by yangwenjiang on 2018/10/29.
@@ -42,9 +49,11 @@ public class SettingsMainActivity extends Activity {
     private ConstraintLayout paySettingsLayout;
     private ConstraintLayout bindAccountLayout;
     private ConstraintLayout cleanCatchLayout;
+    private TextView catchText;
     private ConstraintLayout helpCenterLayout;
     private ConstraintLayout aboutLayout;
     private TextView logoutBtn;
+    private GlideCacheUtil glideCacheUtil=new GlideCacheUtil();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,6 +85,8 @@ public class SettingsMainActivity extends Activity {
         bindAccountLayout.setOnClickListener(new BindAccountLayoutClickListener());
         cleanCatchLayout=findViewById(R.id.settings_Main_Clean_Catch_Layout);
         cleanCatchLayout.setOnClickListener(new CleanCatchLayoutClickListener());
+        catchText=findViewById(R.id.settings_Main_Catch_Text);
+        catchText.setText(glideCacheUtil.getCacheSize(SettingsMainActivity.this));
         helpCenterLayout=findViewById(R.id.settings_Main_Help_Center_Layout);
         helpCenterLayout.setOnClickListener(new HelpCenterLayoutClickListener());
         aboutLayout=findViewById(R.id.settings_Main_About_Layout);
@@ -114,7 +125,8 @@ public class SettingsMainActivity extends Activity {
     class PersonInfoLayoutClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(SettingsMainActivity.this,"个人信息被点击",Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(SettingsMainActivity.this,SettingsUserInfoActivity.class);
+            startActivity(intent);
         }
     }
 
@@ -156,7 +168,18 @@ public class SettingsMainActivity extends Activity {
     class CleanCatchLayoutClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(SettingsMainActivity.this,"清理缓存被点击",Toast.LENGTH_SHORT).show();
+            new CommonDialog(SettingsMainActivity.this, getString(R.string.settings_main_clean_catch_dialog_content_text), new CommonDialog.OnCloseListener() {
+                @Override
+                public void onClick(Dialog dialog, boolean confirm) {
+                    if (confirm) {
+                        glideCacheUtil.clearImageDiskCache(SettingsMainActivity.this);
+                    }
+                    dialog.dismiss();
+                }
+            }).setTitle(getString(R.string.dialog_title_tip_text))
+                    .setNegativeButton(getString(R.string.dialog_negative_btn_text))
+                    .setPositiveButton(getString(R.string.dialog_positive_btn_text))
+                    .show();
         }
     }
 

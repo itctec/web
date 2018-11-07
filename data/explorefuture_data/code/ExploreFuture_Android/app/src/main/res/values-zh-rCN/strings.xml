@@ -104,9 +104,17 @@
     <string name="settings_main_pay_settings_text">支付设置</string>
     <string name="settings_main_bind_account_text">关联账号</string>
     <string name="settings_main_clean_catch_text">缓存清理</string>
+    <string name="settings_main_clean_catch_dialog_content_text">缓存清理后，部分数据可能需要重新加载才能显示，确定要清理缓存吗？</string>
     <string name="settings_main_help_center_text">帮助中心</string>
     <string name="settings_main_about_text">关于探路未来APP</string>
     <string name="settings_main_logout_btn_text">退出登录</string>
+    <string name="settings_user_info_top_navigation_title_text">个人信息</string>
+    <string name="settings_user_info_change_head_portrait_image_text">更换头像</string>
+    <string name="settings_user_info_change_nickname_text">昵称</string>
+    <string name="settings_user_info_change_sex_text">性别</string>
+    <string name="settings_user_info_change_birthday_text">出生日期</string>
+    <string name="settings_user_info_change_city_text">所在城市</string>
+    <string name="settings_user_info_change_personalized_signature_text">个性签名</string>
     <string name="mine_interaction_list_activity_top_navigation_title_text">我的参与</string>
     <string name="mine_interaction_list_activity_top_sort_history_btn_text">历史</string>
     <string name="mine_interaction_list_activity_top_sort_comment_btn_text">评论</string>

@@ -20,6 +20,11 @@ public class MindListDataMode implements Serializable{
     private String accept_num="";
     private String comment_num="";
     private String retransmission_num="";
+    private String transfer_id="";
+    private String transfer_nickname="";
+    private String transfer_datetime="";
+    private String transfer_head_portrait_image_url="";
+    private String transfer_head_portrait_image_update_datetime="";
     private String head_portrait_image_url="";
     private String head_portrait_image_update_datetime="";
     private List<String> image_url_list=new ArrayList<>();
@@ -28,7 +33,7 @@ public class MindListDataMode implements Serializable{
     public MindListDataMode() {
     }
 
-    public MindListDataMode(String id, String name, String datetime, String release_state, String compact_state, String content_text, String accept_num, String comment_num, String retransmission_num, String head_portrait_image_url, String head_portrait_image_update_datetime, List<String> image_url_list, String video_url) {
+    public MindListDataMode(String id, String name, String datetime, String release_state, String compact_state, String content_text, String accept_num, String comment_num, String retransmission_num, String transfer_id, String transfer_nickname, String transfer_datetime, String transfer_head_portrait_image_url, String transfer_head_portrait_image_update_datetime, String head_portrait_image_url, String head_portrait_image_update_datetime, List<String> image_url_list, String video_url) {
         this.id = id;
         this.name = name;
         this.datetime = datetime;
@@ -38,6 +43,11 @@ public class MindListDataMode implements Serializable{
         this.accept_num = accept_num;
         this.comment_num = comment_num;
         this.retransmission_num = retransmission_num;
+        this.transfer_id = transfer_id;
+        this.transfer_nickname = transfer_nickname;
+        this.transfer_datetime = transfer_datetime;
+        this.transfer_head_portrait_image_url = transfer_head_portrait_image_url;
+        this.transfer_head_portrait_image_update_datetime = transfer_head_portrait_image_update_datetime;
         this.head_portrait_image_url = head_portrait_image_url;
         this.head_portrait_image_update_datetime = head_portrait_image_update_datetime;
         this.image_url_list = image_url_list;
@@ -46,7 +56,7 @@ public class MindListDataMode implements Serializable{
 
     @Override
     public String toString() {
-        return "MindListDataMode{" +
+        return "MineCommentListDataMode{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", datetime='" + datetime + '\'' +
@@ -56,6 +66,11 @@ public class MindListDataMode implements Serializable{
                 ", accept_num='" + accept_num + '\'' +
                 ", comment_num='" + comment_num + '\'' +
                 ", retransmission_num='" + retransmission_num + '\'' +
+                ", transfer_id='" + transfer_id + '\'' +
+                ", transfer_nickname='" + transfer_nickname + '\'' +
+                ", transfer_datetime='" + transfer_datetime + '\'' +
+                ", transfer_head_portrait_image_url='" + transfer_head_portrait_image_url + '\'' +
+                ", transfer_head_portrait_image_update_datetime='" + transfer_head_portrait_image_update_datetime + '\'' +
                 ", head_portrait_image_url='" + head_portrait_image_url + '\'' +
                 ", head_portrait_image_update_datetime='" + head_portrait_image_update_datetime + '\'' +
                 ", image_url_list=" + image_url_list +
@@ -133,6 +148,46 @@ public class MindListDataMode implements Serializable{
 
     public void setRetransmission_num(String retransmission_num) {
         this.retransmission_num = retransmission_num;
+    }
+
+    public String getTransfer_id() {
+        return transfer_id;
+    }
+
+    public void setTransfer_id(String transfer_id) {
+        this.transfer_id = transfer_id;
+    }
+
+    public String getTransfer_nickname() {
+        return transfer_nickname;
+    }
+
+    public void setTransfer_nickname(String transfer_nickname) {
+        this.transfer_nickname = transfer_nickname;
+    }
+
+    public String getTransfer_datetime() {
+        return transfer_datetime;
+    }
+
+    public void setTransfer_datetime(String transfer_datetime) {
+        this.transfer_datetime = transfer_datetime;
+    }
+
+    public String getTransfer_head_portrait_image_url() {
+        return transfer_head_portrait_image_url;
+    }
+
+    public void setTransfer_head_portrait_image_url(String transfer_head_portrait_image_url) {
+        this.transfer_head_portrait_image_url = transfer_head_portrait_image_url;
+    }
+
+    public String getTransfer_head_portrait_image_update_datetime() {
+        return transfer_head_portrait_image_update_datetime;
+    }
+
+    public void setTransfer_head_portrait_image_update_datetime(String transfer_head_portrait_image_update_datetime) {
+        this.transfer_head_portrait_image_update_datetime = transfer_head_portrait_image_update_datetime;
     }
 
     public String getHead_portrait_image_url() {

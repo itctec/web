@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/app_status_bar_height"
+    android:background="@color/app_def_theme_activity_bg"
+    tools:context=".common_unit.search_result.SearchResultActivity">
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/settings_Receive_Address_List_Activity_Top_Navigation"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/app_top_navigation_height"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/settings_Receive_Address_List_Activity_Top_Navigation_Back_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="5dp"
+            android:src="@drawable/vector_drawable_back_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/settings_Receive_Address_List_Activity_Top_Navigation_Title_Text"
+            android:maxLength="25"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/settings_receive_address_list_activity_top_navigation_title_text"
+            android:textColor="@color/app_top_navigation_text_selected_color"
+            android:textSize="@dimen/app_top_navigation_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/settings_Receive_Address_Top_Navigation_Add_Btn"
+            android:text="@string/settings_receive_address_top_navigation_add_btn_text"
+            android:textColor="#555555"
+            android:textSize="@dimen/mind_edit_top_navigation_text_size"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+        <View
+            android:id="@+id/settings_Receive_Address_List_Activity_Top_Navigation_BottomLine"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/app_navigation_bg_line_width"
+            android:background="@color/app_navigation_bg_line_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/settings_Receive_Address_List_Activity_RecyclerView"
+        android:overScrollMode="never"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/settings_Receive_Address_List_Activity_Top_Navigation"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>

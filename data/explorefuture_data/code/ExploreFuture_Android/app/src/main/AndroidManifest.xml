@@ -65,6 +65,18 @@
             android:screenOrientation="portrait"
             android:theme="@style/DefActivityTheme"/>
         <activity
+            android:name=".mine.settings.SettingsReceiveAddressActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DefActivityTheme"/>
+        <activity
+            android:name=".mine.settings.SettingsHelpCenterActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DefActivityTheme"/>
+        <activity
+            android:name=".mine.settings.SettingsAboutAppActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/DefActivityTheme"/>
+        <activity
             android:name=".mine.message.MessageListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/DefActivityTheme"/>

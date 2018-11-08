@@ -69,13 +69,15 @@ public class SettingsMainActivity extends Activity {
 
         backBtn=findViewById(R.id.settings_Main_Top_Navigation_Back_Btn);
         backBtn.setOnClickListener(new BackBtnClickListener());
+
+        ItemLayoutClickListener itemLayoutClickListener=new ItemLayoutClickListener();
         personInfoLayout=findViewById(R.id.settings_Main_Person_Info_Layout);
-        personInfoLayout.setOnClickListener(new PersonInfoLayoutClickListener());
+        personInfoLayout.setOnClickListener(itemLayoutClickListener);
         headPortraitImage=findViewById(R.id.settings_Main_HeadPortrait_Image);
         nicknameText=findViewById(R.id.settings_Main_Nickname_Text);
         idText=findViewById(R.id.settings_Main_ID_Text);
         receiveAddressLayout=findViewById(R.id.settings_Main_Receive_Address_Layout);
-        receiveAddressLayout.setOnClickListener(new ReceiveAddressLayoutClickListener());
+        receiveAddressLayout.setOnClickListener(itemLayoutClickListener);
         realNameAuthenticationLayout=findViewById(R.id.settings_Main_Real_Name_Authentication_Layout);
         realNameAuthenticationLayout.setOnClickListener(new RealNameAuthenticationLayoutClickListener());
         accountSafeLayout=findViewById(R.id.settings_Main_Account_Safe_Layout);
@@ -89,9 +91,9 @@ public class SettingsMainActivity extends Activity {
         catchText=findViewById(R.id.settings_Main_Catch_Text);
         catchText.setText(glideCacheUtil.getCacheSize(SettingsMainActivity.this));
         helpCenterLayout=findViewById(R.id.settings_Main_Help_Center_Layout);
-        helpCenterLayout.setOnClickListener(new HelpCenterLayoutClickListener());
+        helpCenterLayout.setOnClickListener(itemLayoutClickListener);
         aboutLayout=findViewById(R.id.settings_Main_About_Layout);
-        aboutLayout.setOnClickListener(new AboutLayoutClickListener());
+        aboutLayout.setOnClickListener(itemLayoutClickListener);
         logoutBtn=findViewById(R.id.settings_Main_Logout_Btn);
         logoutBtn.setOnClickListener(new LogoutBtnClickListener());
 
@@ -123,20 +125,6 @@ public class SettingsMainActivity extends Activity {
         }
     }
 
-    class PersonInfoLayoutClickListener implements View.OnClickListener{
-        @Override
-        public void onClick(View view) {
-            Intent intent=new Intent(SettingsMainActivity.this,SettingsUserInfoActivity.class);
-            startActivity(intent);
-        }
-    }
-
-    class ReceiveAddressLayoutClickListener implements View.OnClickListener{
-        @Override
-        public void onClick(View view) {
-            Toast.makeText(SettingsMainActivity.this,"收货地址被点击",Toast.LENGTH_SHORT).show();
-        }
-    }
 
     class RealNameAuthenticationLayoutClickListener implements View.OnClickListener{
         @Override
@@ -200,17 +188,25 @@ public class SettingsMainActivity extends Activity {
         }
     }
 
-    class HelpCenterLayoutClickListener implements View.OnClickListener{
+    class ItemLayoutClickListener implements View.OnClickListener{
         @Override
         public void onClick(View view) {
-            Toast.makeText(SettingsMainActivity.this,"帮助中心被点击",Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    class AboutLayoutClickListener implements View.OnClickListener{
-        @Override
-        public void onClick(View view) {
-            Toast.makeText(SettingsMainActivity.this,"关于APP被点击",Toast.LENGTH_SHORT).show();
+            Intent intent=null;
+            switch (view.getId()){
+                case R.id.settings_Main_Person_Info_Layout:
+                    intent=new Intent(SettingsMainActivity.this,SettingsUserInfoActivity.class);
+                    break;
+                case R.id.settings_Main_Receive_Address_Layout:
+                    intent=new Intent(SettingsMainActivity.this,SettingsReceiveAddressActivity.class);
+                    break;
+                case R.id.settings_Main_Help_Center_Layout:
+                    intent=new Intent(SettingsMainActivity.this,SettingsHelpCenterActivity.class);
+                    break;
+                case R.id.settings_Main_About_Layout:
+                    intent=new Intent(SettingsMainActivity.this,SettingsAboutAppActivity.class);
+                    break;
+            }
+            startActivity(intent);
         }
     }
 

@@ -30,6 +30,8 @@
 -keep class itc.ink.explorefuture_android.common_unit.topic_details.mode** { *; }
 -keep class itc.ink.explorefuture_android.common_unit.content_list.mode** { *; }
 -keep class itc.ink.explorefuture_android.common_unit.user_details.mode** { *; }
+-keep class itc.ink.explorefuture_android.mine.interaction.mode** { *; }
+-keep class itc.ink.explorefuture_android.mine.settings.mode** { *; }
 
 -keep class itc.ink.explorefuture_android.common_unit.mind_recyclerview.mode** { *; }
 

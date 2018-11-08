@@ -115,6 +115,13 @@
     <string name="settings_user_info_change_birthday_text">出生日期</string>
     <string name="settings_user_info_change_city_text">所在城市</string>
     <string name="settings_user_info_change_personalized_signature_text">个性签名</string>
+    <string name="settings_receive_address_list_activity_top_navigation_title_text">收货地址设置</string>
+    <string name="settings_receive_address_top_navigation_add_btn_text">添加</string>
+    <string name="settings_help_center_list_activity_top_navigation_title_text">帮助中心</string>
+    <string name="settings_about_app_top_navigation_title_text">关于探路未来</string>
+    <string name="settings_about_app_copyright_text">版权信息</string>
+    <string name="settings_about_app_service_agreement_text">探路未来平台服务条款</string>
+    <string name="settings_about_app_privacy_policy_text">隐私政策</string>
     <string name="mine_interaction_list_activity_top_navigation_title_text">我的参与</string>
     <string name="mine_interaction_list_activity_top_sort_history_btn_text">历史</string>
     <string name="mine_interaction_list_activity_top_sort_comment_btn_text">评论</string>

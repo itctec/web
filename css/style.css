@@ -806,7 +806,7 @@ i.fa.fa-pencil {
 .blog-left-right-top{
     float: left;
     width: 72%;
-    margin-left: 1em;
+    margin-left: 0em;
 }
 .blog-left-right-top h4 {
     color: #000000;
